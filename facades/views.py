@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+#----------------------------------------------------------------------------------------------
+def HomePage(request):
+    print("--------------------------")
+    return render(request,'facades/landing.html')
+#----------------------------------------------------------------------------------------------
