@@ -1,0 +1,14 @@
+from django.urls import path
+from .views import *
+
+
+app_name = 'orders'
+
+urlpatterns = [
+    path('create/',order_create,name='order_create'),
+    path('<int:order_id>/',detail, name='detail'),
+    path('apply/<int:order_id>/',coupon_apply,name='coupon_apply'),
+    #Zarin pal
+    # path('request/<int:order_id>/<int:price>', send_request, name='request'),
+    # path('verify/', verify , name='verify'),
+]
