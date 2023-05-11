@@ -16,7 +16,8 @@ INSTALLED_APPS = [
 
 
 INSTALLED_APPS += [
-    'facades'
+    'facades',
+    'stuff',
 ]
 
 MIDDLEWARE = [
