@@ -9,23 +9,23 @@ def user_login(request):
         form = UserLoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(request,email=cd['email'],password=cd['password'])
+            user = authenticate(request,phoneNumber=cd['phoneNumber'],password=cd['password'])
             if user is not None:
                 login(request,user)
                 messages.success(request,'you logged in successfully','success')
-                return redirect('shop:home')
+                # return redirect('shop:home')
             else:
                 messages.error(request,'username or password is wrong','alert')
     else:
         form = UserLoginForm
-    return render(request,'accounts/login.html',{'form':form})
+    # return render(request,'accounts/login.html',{'form':form})
 
 
 #------------------------------------------------------------------------------------------------
 def user_logout(request):
     logout(request)
     messages.success(request,'you logged out successfully','success')
-    return redirect('shop:home')
+    # return redirect('shop:home')
 
 
 #------------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ def user_register(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = User.objects.create_user(cd['email'],cd['full_name'],cd['password'])
+            user = User.objects.create_user(cd['phoneNumber'],cd['full_name'],cd['password'])
             user.save()
             messages.success(request,'you registered successfully','success')
             return redirect('shop:home')

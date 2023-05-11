@@ -5,8 +5,7 @@ from .managers import *
 # ----------------------------------------------------------------------------------------------------------------------------
 class User(AbstractBaseUser):
     phoneNumber = models.CharField(unique=True, max_length=11)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
+    full_name = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 

@@ -33,8 +33,8 @@ class Product(models.Model):
     class Meta:
         ordering = ('name',)
 
-    # def get_absolute_url(self):
-    #     return reverse('shop:product_detail',args=[self.slug,])
+    def get_absolute_url(self):
+        return reverse('stuff:product_detail',args=[self.slug,])
 
 
     def __str__(self):
