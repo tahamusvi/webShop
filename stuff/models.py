@@ -23,6 +23,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,unique=True)
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
+    image2 = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
     description = models.TextField()
     price = models.IntegerField()
     available = models.BooleanField(default=True)
@@ -32,8 +33,8 @@ class Product(models.Model):
     class Meta:
         ordering = ('name',)
 
-    def get_absolute_url(self):
-        return reverse('shop:product_detail',args=[self.slug,])
+    # def get_absolute_url(self):
+    #     return reverse('shop:product_detail',args=[self.slug,])
 
 
     def __str__(self):
