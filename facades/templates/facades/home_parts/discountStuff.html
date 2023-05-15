@@ -64,10 +64,11 @@
 
                 <div class="product product-11 text-center">
                     <figure class="product-media">
+                      <span class="product-label label-sale">{{product.discount}}% </span>
                         <a href="{{product.get_absolute_url}}">
                             <img src="{{product.image.url}}" alt="تصویر محصول"
                                 class="product-image">
-                            <img src="{{product.image.url}}" alt="تصویر محصول"
+                            <img src="{{product.image2.url}}" alt="تصویر محصول"
                                 class="product-image-hover">
                         </a>
 
@@ -81,6 +82,9 @@
                         <h3 class="product-title text-center"><a href="product.html">{{product.name}}</a>
                         </h3>
                         <!-- End .product-title -->
+                        <div class="product-price">
+                            <strike>{{product.price}}  تومان</strike>
+                            </div>
                         <div class="product-price">
                             {{product.discounted_price}} تومان
                         </div><!-- End .product-price -->
