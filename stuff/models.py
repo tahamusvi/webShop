@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
+from datetime import timedelta
 #-----------------------------------------------------------------------------------
 class Category(models.Model):
     sub_category = models.ForeignKey('self',on_delete=models.CASCADE, related_name='scategory',null=True,blank=True)
@@ -42,6 +44,11 @@ class Product(models.Model):
     @property
     def discounted_price(self):
         return int(((self.price)*(100-self.discount))/100)
+
+
+    @property
+    def is_new(self):
+        return True if(timezone.now().day - self.updated.day <= 1) else False
 
 
     def __str__(self):
