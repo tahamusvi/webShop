@@ -30,11 +30,18 @@ class Product(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
+    discount = models.IntegerField()
+    discounted = models.BooleanField(default=False)
+
     class Meta:
         ordering = ('name',)
 
     def get_absolute_url(self):
         return reverse('stuff:product_detail',args=[self.slug,])
+
+    @property
+    def discounted_price(self):
+        return int(((self.price)*(100-self.discount))/100)
 
 
     def __str__(self):
