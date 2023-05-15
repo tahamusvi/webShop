@@ -1,0 +1,75 @@
+{% load static %}
+
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+<div class="mobile-menu-container">
+    <div class="mobile-menu-wrapper">
+        <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+        <form action="#" method="get" class="mobile-search">
+            <label for="mobile-search" class="sr-only">جستجو</label>
+            <input type="search" class="form-control" name="mobile-search" id="mobile-search"
+                placeholder="جستجو در ..." required>
+            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+        </form>
+
+        <ul class="nav nav-pills-mobile nav-border-anim" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab"
+                    role="tab" aria-controls="mobile-menu-tab" aria-selected="true">منو</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab"
+                    aria-controls="mobile-cats-tab" aria-selected="false">دسته بندی ها</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel"
+                aria-labelledby="mobile-menu-link">
+                <nav class="mobile-nav">
+                    <ul class="mobile-menu">
+                        <li class="active">
+                            <a href="index-1.html">خانه</a>
+
+                            <ul>
+                                <li><a href="index-1.html">01 - فروشگاه مبلمان</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="category.html">فروشگاه</a>
+                            <ul>
+                                <li><a href="category-list.html">فروشگاه لیست</a></li>
+
+                                <li><a href="category-boxed.html"><span>فروشگاه با حالت بسته بدون سایدبار<span
+                                                class="tip tip-hot">ویژه</span></span></a></li>
+
+                                <li><a href="product-category-fullwidth.html"><span>دسته بندی محصولات تمام عرض<span
+                                                class="tip tip-new">جدید</span></span></a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav><!-- End .mobile-nav -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
+                <nav class="mobile-cats-nav">
+                    <ul class="mobile-cats-menu">
+
+                        <li><a class="mobile-cats-lead" href="#">پیشنهاد روزانه</a></li>
+                        <li><a class="mobile-cats-lead" href="#">هدیه</a></li>
+
+                    </ul><!-- End .mobile-cats-menu -->
+                </nav><!-- End .mobile-cats-nav -->
+            </div><!-- .End .tab-pane -->
+        </div><!-- End .tab-content -->
+
+        <div class="social-icons">
+            <a href="#" class="social-icon" target="_blank" title="اینستاگرام"><i class="icon-instagram"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="یوتیوب"><i class="icon-youtube"></i></a>
+        </div><!-- End .social-icons -->
+    </div><!-- End .mobile-menu-wrapper -->
+</div><!-- End .mobile-menu-container -->
