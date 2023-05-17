@@ -32,7 +32,7 @@ class Product(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
-    discount = models.IntegerField()
+    discount = models.IntegerField(null=True,blank=True)
     discounted = models.BooleanField(default=False)
 
     class Meta:
@@ -48,7 +48,7 @@ class Product(models.Model):
 
     @property
     def is_new(self):
-        return True if(timezone.now().day - self.updated.day <= 1) else False
+        return True if(timezone.now().day - self.updated.day <= 15) else False
 
 
     def __str__(self):

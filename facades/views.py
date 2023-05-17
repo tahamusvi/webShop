@@ -10,8 +10,8 @@ def HomePage(request):
 
     # New stuff in website
     news = Product.objects.filter(available=True)
-    news_list = [s.id for s in news if s.is_new]
-    print(news_list)
+    news_list = [s.id for s in news if s.is_new][0:8]
+
     news = news.filter(id__in=news_list)
 
 
