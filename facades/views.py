@@ -15,11 +15,12 @@ def HomePage(request):
 
     # Categories
     Categories = Category.objects.filter(is_sub=False)[0:4]
+    allCategories = Category.objects.filter(is_sub=False)
 
 
 
 
 
     # return render(request,'facades/landing.html')
-    return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,})
+    return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,'allCategories': allCategories})
 #----------------------------------------------------------------------------------------------

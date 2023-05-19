@@ -21,3 +21,9 @@ def product_detail(request, slug,id):
 
 
     return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested}) #,'form':form
+#-----------------------------------------------------------------------------------
+def Category_detail(request,slug,id):
+    category = get_object_or_404(Category, id=id)
+    products = category.products.all()
+
+    return render(request,'stuff/category.html',{'products': products,'category':category}) 

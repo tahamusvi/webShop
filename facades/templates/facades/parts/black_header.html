@@ -210,6 +210,17 @@
                         </li>
 
 
+                        {% for cat in allCategories %}
+
+                        <li>
+                            <a href="{{cat.get_absolute_url}}">{{cat.name}}</a>
+                        </li>
+
+                        {% endfor %}
+
+
+
+
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-center -->
