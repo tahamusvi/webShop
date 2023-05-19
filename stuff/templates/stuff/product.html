@@ -399,11 +399,13 @@
                                   <a href="{{s.get_absolute_url}}" class="active">
                                       <img src="{{s.image2.url}}" alt="product desc">
                                   </a>
-                                  {% if s.image3 %}
+                                  {% if s.image3 != None %}
                                   <a href="{{s.get_absolute_url}}" class="active">
-                                      <img src="{{s.image2.url}}" alt="product desc">
+                                      <img src="{{s.image3.url}}" alt="product desc">
                                   </a>
-                                  {% end if %}
+                                  {% else %}
+                                  {% endif %}
+
 
 
 
