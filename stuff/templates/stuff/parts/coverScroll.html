@@ -1,0 +1,43 @@
+{% load static %}
+
+
+<div class="category-banners-slider owl-carousel owl-simple owl-nav-inside"
+    data-toggle="owl" data-owl-options='{
+        "nav": false,
+        "rtl": true,
+"responsive": {
+            "768": {
+                "nav": true
+            }
+        }
+    }'>
+    <div class="banner banner-poster">
+
+        <a href="#">
+            <img src="{% static 'stuff/images/banners/7.jpg' %}" alt="بنر">
+        </a>
+
+        <div class="banner-content banner-content-right">
+            <h3 class="banner-subtitle"><a href="#">پیشنهاد شگفت انگیز</a></h3>
+            <!-- End .banner-subtitle -->
+            <h2 class="banner-title" dir="rtl"><a href="#">تلویزیون های 4K با کیفیت بالا</a>
+            </h2>
+            <!-- End .banner-title -->
+            <a href="#" class="banner-link">خرید <i class="icon-long-arrow-left"></i></a>
+        </div><!-- End .banner-content -->
+    </div><!-- End .banner -->
+
+    <div class="banner banner-poster">
+        <a href="#">
+            <img src="{% static 'stuff/images/banners/8.jpg' %}" alt="بنر">
+        </a>
+
+        <div class="banner-content">
+            <h3 class="banner-subtitle"><a href="#">تخفیف های هفتگی</a></h3>
+            <!-- End .banner-subtitle -->
+            <h2 class="banner-title"><a href="#">اپل و لوازم جانبی</a></h2>
+            <!-- End .banner-title -->
+            <a href="#" class="banner-link">خرید <i class="icon-long-arrow-left"></i></a>
+        </div><!-- End .banner-content -->
+    </div><!-- End .banner -->
+</div><!-- End .owl-carousel -->

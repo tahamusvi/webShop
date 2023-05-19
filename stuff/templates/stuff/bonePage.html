@@ -1,0 +1,73 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}{% include 'facades/parts/css.html' %}
+<link rel="stylesheet" href="{% static 'facades/css/plugins/nouislider/nouislider.css' %}">
+<link rel="stylesheet" href="{% static 'facades/css/skins/skin-demo-13.css' %}">
+<link rel="stylesheet" href="{% static 'facades/css/demos/demo-13.css' %}">
+{% endblock %}
+
+
+{% block main %}
+
+
+
+    <main class="main">
+
+      <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+          <div class="container">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
+                  <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">لوازم الکترونیکی</li>
+              </ol>
+          </div><!-- End .container -->
+      </nav><!-- End .breadcrumb-nav -->
+
+      <div class="page-content">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-9 col-xl-4-5col">
+
+
+                      {% include 'stuff/parts/coverScroll.html' %}
+
+                      <div class="mb-3"></div><!-- End .mb-3 -->
+
+
+
+                      <div class="mb-3 mb-lg-5"></div><!-- End .mb-3 mb-lg-5 -->
+
+
+
+                      <div class="mb-2"></div><!-- End .mb-2 -->
+
+
+                      {% include 'stuff/parts/stuffs.html' %}
+
+
+                      <div class="mb-4"></div><!-- End .mb-4 -->
+
+
+
+
+
+                  </div><!-- End .col-lg-9 -->
+
+                  {% include 'stuff/parts/rightbar.html' %}
+
+
+
+
+              </div><!-- End .row -->
+          </div><!-- End .container -->
+      </div><!-- End .page-content -->
+
+
+
+
+
+      </main>
+
+
+{% endblock %}

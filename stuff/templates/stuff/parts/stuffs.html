@@ -1,0 +1,94 @@
+<div class="toolbox">
+    <div class="toolbox-left">
+        <div class="toolbox-info">
+            10 محصول پیدا شد
+        </div><!-- End .toolbox-info -->
+    </div><!-- End .toolbox-left -->
+
+    <div class="toolbox-right">
+        <div class="toolbox-sort">
+            <label for="sortby">مرتب سازی بر اساس : </label>
+            <div class="select-custom">
+                <select name="sortby" id="sortby" class="form-control">
+                    <option value="popularity" selected="selected">محبوب ترین</option>
+                    <option value="rating">جدیدترین</option>
+                    <option value="date">تاریخ</option>
+                </select>
+            </div>
+        </div><!-- End .toolbox-sort -->
+    </div><!-- End .toolbox-right -->
+</div><!-- End .toolbox -->
+
+
+
+<div class="products mb-3">
+    <div class="row">
+
+        {% for product in products %}
+        <div class="col-6 col-md-4 col-xl-3">
+            <div class="product">
+              <figure class="product-media">
+                  <a href="{{product.get_absolute_url}}">
+                      <img src="{{product.image.url}}"
+                          alt="تصویر محصول" class="product-image">
+                      <img src="{{product.image2.url}}"
+                          alt="تصویر محصول" class="product-image-hover">
+                  </a>
+
+                  <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist "><span>افزودن به
+                              لیست علاقه مندی</span></a>
+                  </div><!-- End .product-action-vertical -->
+
+                    <div class="product-action">
+                        <a href="#" class="btn-product btn-cart"
+                            title="افزودن به سبد خرید"><span>افزودن به سبد خرید</span></a>
+                    </div><!-- End .product-action -->
+                </figure><!-- End .product-media -->
+
+                <div class="product-body">
+                    <div class="product-cat">
+                        <a href="#">لواز جانبی</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">سیستم صوتی هوشمند </a>
+                    </h3>
+                    <!-- End .product-title -->
+                    <div class="product-price">
+                        399,000 تومان
+                    </div><!-- End .product-price -->
+                    <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" style="width: 80%;"></div>
+                            <!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        <span class="ratings-text">( 12 بازدید )</span>
+                    </div><!-- End .rating-container -->
+                </div><!-- End .product-body -->
+            </div><!-- End .product -->
+        </div><!-- End .col-sm-6 col-md-4 col-xl-3 -->
+        {% endfor %}
+
+
+
+    </div><!-- End .row -->
+</div><!-- End .products -->
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1"
+                aria-disabled="true">
+                <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>قبلی
+            </a>
+        </li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item-total">از 2</li>
+        <li class="page-item">
+            <a class="page-link page-link-next" href="#" aria-label="Next">
+                بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+            </a>
+        </li>
+    </ul>
+</nav>
