@@ -26,6 +26,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200,unique=True)
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
     image2 = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
+    image3 = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
     description = models.TextField()
     price = models.IntegerField()
     available = models.BooleanField(default=True)
@@ -39,7 +40,7 @@ class Product(models.Model):
         ordering = ('name',)
 
     def get_absolute_url(self):
-        return reverse('stuff:product_detail',args=[self.slug,])
+        return reverse('stuff:product_detail',args=[self.slug,self.id])
 
     @property
     def discounted_price(self):

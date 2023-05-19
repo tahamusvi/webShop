@@ -11,7 +11,13 @@ from .models import *
 #         products = products.filter(category=category)
 #     return render(request,'shop/home.html',{'products':products,'category':categories})
 #-----------------------------------------------------------------------------------
-def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=slug)
+def product_detail(request, slug,id):
+    product = get_object_or_404(Product, id=id)
     # form = CartAddForm()
-    return render(request,'facades/landing.html',{'product': product,}) #,'form':form
+
+    category = product.category.all()[0]
+    print(category)
+    Suggested = category.products.all()[0:4]
+
+
+    return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested}) #,'form':form
