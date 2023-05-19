@@ -33,7 +33,7 @@ class Product(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
-    discount = models.IntegerField(null=True,blank=True)
+    discount = models.IntegerField(null=True,blank=True,default=0)
     discounted = models.BooleanField(default=False)
 
     class Meta:
