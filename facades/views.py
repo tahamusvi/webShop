@@ -19,7 +19,10 @@ def HomePage(request):
 
 
     #wishlist
-    wishlistAmount = request.user.wishlist.all().count()
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+
 
 
 

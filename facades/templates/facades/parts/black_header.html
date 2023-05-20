@@ -39,6 +39,8 @@
 
               <!-- Status Login -->
 
+              {% if request.user.is_authenticated %}
+
               <div class="wishlist">
                             <a href="{% url 'stuff:showWishList' %}" title="لیست محصولات مورد علاقه شما">
                                 <div class="icon">
@@ -48,17 +50,6 @@
                                 <p>مورد علاقه</p>
                             </a>
                   </div>
-
-                <div class="wishlist">
-                    <a href="wishlist.html" title="Login">
-                        <div class="icon">
-                            <i class="icon-user"></i>
-                            <!-- <span class="wishlist-count badge">New</span> -->
-                        </div>
-                        <p>ورود</p>
-                    </a>
-                </div><!-- End .compare-dropdown -->
-
 
                 <!-- Status Logined -->
 
@@ -128,6 +119,18 @@
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdown-menu -->
                 </div><!-- End .cart-dropdown -->
+
+              {% else %}
+              <div class="wishlist">
+                  <a href="#signin-modal" data-toggle="modal" title="Login">
+                      <div class="icon">
+                          <i class="icon-user"></i>
+                          <!-- <span class="wishlist-count badge">New</span> -->
+                      </div>
+                      <p>ورود</p>
+                  </a>
+              </div><!-- End .compare-dropdown -->
+                {% endif %}
 
 
 
