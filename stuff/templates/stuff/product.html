@@ -19,17 +19,7 @@
                       <li class="breadcrumb-item active" aria-current="page">پیش فرض</li>
                   </ol>
 
-                  <nav class="product-pager mr-auto" aria-label="Product">
-                      <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
-                          <i class="icon-angle-right"></i>
-                          <span>قبلی</span>
-                      </a>
 
-                      <a class="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
-                          <span>بعدی</span>
-                          <i class="icon-angle-left"></i>
-                      </a>
-                  </nav><!-- End .pager-nav -->
               </div><!-- End .container -->
           </nav><!-- End .breadcrumb-nav -->
 
@@ -99,12 +89,12 @@
                                       {{product.discounted_price}} تومان
                                   </div><!-- End .product-price -->
 
-                                  <div class="product-content">
+                                  <!-- <div class="product-content">
                                       <p> {{product.description}}
                                       </p>
-                                  </div><!-- End .product-content -->
+                                  </div> -->
 
-                                  <div class="details-filter-row details-row-size">
+                                  <!-- <div class="details-filter-row details-row-size">
                                       <label>رنگ : </label>
 
                                       <div class="product-nav product-nav-thumbs">
@@ -114,10 +104,12 @@
                                           <a href="#">
                                               <img src="assets/images/products/single/2-thumb.jpg" alt="product desc">
                                           </a>
-                                      </div><!-- End .product-nav -->
-                                  </div><!-- End .details-filter-row -->
+                                      </div>
+                                  </div> -->
 
-                                  <div class="details-filter-row details-row-size">
+
+
+                                  <!-- <div class="details-filter-row details-row-size">
                                       <label for="size">سایز : </label>
                                       <div class="select-custom">
                                           <select name="size" id="size" class="form-control">
@@ -127,10 +119,14 @@
                                               <option value="l">بزرگ (Large)</option>
                                               <option value="xl">خیلی بزرگ (XLarge)</option>
                                           </select>
-                                      </div><!-- End .select-custom -->
+                                      </div><!-- End .select-custom --> -->
 
-                                      <a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>
-                                  </div><!-- End .details-filter-row -->
+                                      <!-- <a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>
+                                  </div><!-- End .details-filter-row --> -->
+
+
+
+
 
                                   <div class="details-filter-row details-row-size">
                                       <label for="qty">تعداد : </label>
@@ -156,12 +152,14 @@
                                   <div class="product-details-footer">
                                       <div class="product-cat text-center">
                                           <span>دسته بندی : </span>
-                                          <a href="#">زنانه</a>،
-                                          <a href="#">لباس</a>،
-                                          <a href="#">زرد</a>
+                                        {% for cati in product.category.all %}
+                                          <a href="{{cati.get_absolute_url}}"> {{cati.name}} </a>
+                                          {% endfor %}
                                       </div><!-- End .product-cat -->
 
-                                      <div class="social-icons social-icons-sm">
+
+
+                                      <!-- <div class="social-icons social-icons-sm">
                                           <span class="social-label">اشتراک گذاری : </span>
                                           <a href="#" class="social-icon" title="فیسبوک" target="_blank"><i
                                                   class="icon-facebook-f"></i></a>
@@ -171,7 +169,10 @@
                                                   class="icon-instagram"></i></a>
                                           <a href="#" class="social-icon" title="پینترست" target="_blank"><i
                                                   class="icon-pinterest"></i></a>
-                                      </div>
+                                      </div> -->
+
+
+
                                   </div><!-- End .product-details-footer -->
                               </div><!-- End .product-details -->
                           </div><!-- End .col-md-6 -->
@@ -190,39 +191,21 @@
                                   role="tab" aria-controls="product-info-tab" aria-selected="false">اطلاعات بیشتر</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" id="product-shipping-link" data-toggle="tab"
-                                  href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab"
-                                  aria-selected="false">ارسال و بازگشت</a>
-                          </li>
-                          <li class="nav-item">
                               <a class="nav-link" id="product-review-link" data-toggle="tab"
                                   href="#product-review-tab" role="tab" aria-controls="product-review-tab"
                                   aria-selected="false">نظرات (2)</a>
                           </li>
                       </ul>
                       <div class="tab-content">
+
                           <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
                               aria-labelledby="product-desc-link">
                               <div class="product-desc-content">
                                   <h3>اطلاعات محصول</h3>
-                                  <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
-                                      سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
-                                      ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم
-                                      ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی
-                                      نامفهوم. </p>
-                                  <ul>
-                                      <li>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </li>
-                                      <li>لورم ایپسوم متن ساختگی با تولید سادگی.</li>
-                                      <li>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم</li>
-                                  </ul>
-
-                                  <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
-                                      سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن
-                                      ساختگی با تولید سادگی نامفهوم، لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم
-                                      ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی
-                                      نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم. </p>
+                                  <p>{{product.description}}</p>
                               </div><!-- End .product-desc-content -->
                           </div><!-- .End .tab-pane -->
+
                           <div class="tab-pane fade" id="product-info-tab" role="tabpanel"
                               aria-labelledby="product-info-link">
                               <div class="product-desc-content">
@@ -246,19 +229,7 @@
                                   <p>تک سایز</p>
                               </div><!-- End .product-desc-content -->
                           </div><!-- .End .tab-pane -->
-                          <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
-                              aria-labelledby="product-shipping-link">
-                              <div class="product-desc-content">
-                                  <h3>ارسال و بازگشت</h3>
-                                  <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
-                                      سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
-                                      ساختگی با تولید سادگی نامفهوم<br>
-                                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
-                                      سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن
-                                      ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.</a>
-                                  </p>
-                              </div><!-- End .product-desc-content -->
-                          </div><!-- .End .tab-pane -->
+
                           <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
                               aria-labelledby="product-review-link">
                               <div class="reviews">
@@ -322,6 +293,7 @@
                                   </div><!-- End .review -->
                               </div><!-- End .نظر -->
                           </div><!-- .End .tab-pane -->
+
                       </div><!-- End .tab-content -->
                   </div><!-- End .product-details-tab -->
 

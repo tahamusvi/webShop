@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 from .managers import *
+from stuff.models import *
 
 # ----------------------------------------------------------------------------------------------------------------------------
 class User(AbstractBaseUser):
@@ -12,15 +13,18 @@ class User(AbstractBaseUser):
     code = models.IntegerField(blank=True,null=True)
 
 
+    wishlist = models.ManyToManyField(Product)
+
+
 
     USERNAME_FIELD = 'phoneNumber'
     objects = MyUserManager()
 
     def __str__(self):
-        return str(self.phoneNumber) + " - " + str(self.firstName) + " " + str(self.lastName)
+        return str(self.phoneNumber) + " - " + str(self.full_name)
 
-    def full_name(self):
-        return str(self.firstName) + " " + str(self.lastName)
+    # def full_name(self):
+    #     return str(self.full_name) + " " + str(self.lastName)
 
     def has_perm(self, perm, obj=None):
         return True

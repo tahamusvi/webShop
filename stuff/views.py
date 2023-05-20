@@ -19,12 +19,17 @@ def product_detail(request, slug,id):
     print(category)
     Suggested = category.products.all()[0:4]
 
+    allCategories = Category.objects.filter(is_sub=False)
 
-    return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested}) #,'form':form
+
+    return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,'allCategories': allCategories}) #,'form':form
 #-----------------------------------------------------------------------------------
 def Category_detail(request,slug,id):
     print("--------------------")
     category = get_object_or_404(Category, id=id)
     products = category.products.all()
 
-    return render(request,'stuff/bonePage.html',{'products': products,'category':category})
+
+    allCategories = Category.objects.filter(is_sub=False)
+
+    return render(request,'stuff/bonePage.html',{'products': products,'category':category,'allCategories': allCategories})
