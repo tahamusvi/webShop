@@ -8,4 +8,6 @@ urlpatterns = [
     path('logout/',user_logout, name='logout'),
     path('register/',user_register, name='register'),
 
+
+    path('AddToWish/<int:id>/',AddToWish, name='AddToWish'),
 ]

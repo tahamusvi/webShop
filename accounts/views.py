@@ -3,7 +3,8 @@ from .forms import *
 from  django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
 from .models import User
-
+from django.shortcuts import render,get_object_or_404
+#------------------------------------------------------------------------------------------------
 def user_login(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
@@ -29,7 +30,6 @@ def user_logout(request):
 
 
 #------------------------------------------------------------------------------------------------
-
 def user_register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -44,3 +44,11 @@ def user_register(request):
     else:
         form = UserRegistrationForm
     return render(request,'accounts/register.html',{'form':form})
+#------------------------------------------------------------------------------------------------
+def AddToWish(request, id):
+    item = get_object_or_404(Product, id=id)
+
+    request.user.wishlist.add(item)
+
+    # return redirect('stuff:product_detail',item.slug,item.id)
+    return redirect(request.META.get('HTTP_REFERER'))
