@@ -18,9 +18,13 @@ def HomePage(request):
     allCategories = Category.objects.filter(is_sub=False)
 
 
+    #wishlist
+    wishlistAmount = request.user.wishlist.all().count()
+
+
 
 
 
     # return render(request,'facades/landing.html')
-    return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,'allCategories': allCategories})
+    return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,'allCategories': allCategories,'wishlistAmount':wishlistAmount})
 #----------------------------------------------------------------------------------------------

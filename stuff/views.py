@@ -33,3 +33,8 @@ def Category_detail(request,slug,id):
     allCategories = Category.objects.filter(is_sub=False)
 
     return render(request,'stuff/bonePage.html',{'products': products,'category':category,'allCategories': allCategories})
+#-----------------------------------------------------------------------------------
+def showWishList(request):
+    allCategories = Category.objects.filter(is_sub=False)
+    products = request.user.wishlist.all()
+    return render(request,'stuff/bonePage.html',{'products': products,'allCategories': allCategories})

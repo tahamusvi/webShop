@@ -39,8 +39,18 @@
 
               <!-- Status Login -->
 
+              <div class="wishlist">
+                            <a href="{% url 'stuff:showWishList' %}" title="لیست محصولات مورد علاقه شما">
+                                <div class="icon">
+                                    <i class="icon-heart-o"></i>
+                                    <span class="wishlist-count badge">{{wishlistAmount}}</span>
+                                </div>
+                                <p>مورد علاقه</p>
+                            </a>
+                  </div>
+
                 <div class="wishlist">
-                    <a href="wishlist.html" title="لیست محصولات مورد علاقه شما">
+                    <a href="wishlist.html" title="Login">
                         <div class="icon">
                             <i class="icon-user"></i>
                             <!-- <span class="wishlist-count badge">New</span> -->
