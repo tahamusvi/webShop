@@ -16,19 +16,20 @@
                                 }
                             }
                         }'>
+                        {% for cover in covers %}
                         <div class="intro-slide">
                             <figure class="slide-image">
                                 <picture>
                                     <source media="(max-width: 480px)"
                                         srcset="assets/images/slider/slide-1-480w.jpg">
-                                    <img src="{% static 'facades/images/slider/slide-1.jpg' %}" alt="Image Desc">
+                                    <img src="{{cover.image.url}}" alt="Image Desc">
                                 </picture>
                             </figure><!-- End .slide-image -->
 
                             <div class="intro-content">
-                                <h3 class="intro-subtitle">مجموعه پر فروش</h3>
+                                <h3 class="intro-subtitle">{{cover.smallTitle}}</h3>
                                 <!-- End .h3 intro-subtitle -->
-                                <h1 class="intro-title">مبلمان<br>اتاق نشیمن</h1>
+                                <h1 class="intro-title">{{cover.bigTitle}}</h1>
                                 <!-- End .intro-title -->
 
                                 <a href="category.html" class="btn btn-outline-white">
@@ -37,50 +38,12 @@
                                 </a>
                             </div><!-- End .intro-content -->
                         </div><!-- End .intro-slide -->
+                        {% endfor %}
 
-                        <div class="intro-slide">
-                            <figure class="slide-image">
-                                <picture>
-                                    <source media="(max-width: 480px)"
-                                        srcset="assets/images/slider/slide-2-480w.jpg">
-                                    <img src="{% static 'facades/images/slider/slide-2.jpg' %}" alt="Image Desc">
-                                </picture>
-                            </figure><!-- End .slide-image -->
 
-                            <div class="intro-content">
-                                <h3 class="intro-subtitle">اخبار و اطلاعیه</h3>
-                                <!-- End .h3 intro-subtitle -->
-                                <h1 class="intro-title">کالاهای جدید</h1><!-- End .intro-title -->
-
-                                <a href="category.html" class="btn btn-outline-white">
-                                    <i class="icon-long-arrow-left"></i>
-                                    <span>خرید</span>
-                                </a>
-                            </div><!-- End .intro-content -->
-                        </div><!-- End .intro-slide -->
-
-                        <div class="intro-slide">
-                            <figure class="slide-image">
-                                <picture>
-                                    <source media="(max-width: 480px)"
-                                        srcset="assets/images/slider/slide-3-480w.jpg">
-                                    <img src="{% static 'facades/images/slider/slide-3.jpg' %}" alt="Image Desc">
-                                </picture>
-                            </figure><!-- End .slide-image -->
-
-                            <div class="intro-content">
-                                <h3 class="intro-subtitle">مبل بیرون از منزل</h3>
-                                <!-- End .h3 intro-subtitle -->
-                                <h1 class="intro-title">مبلمان <br>بیرون از منزل</h1>
-                                <!-- End .intro-title -->
-
-                                <a href="category.html" class="btn btn-outline-white">
-                                    <i class="icon-long-arrow-left"></i>
-                                    <span>خرید</span>
-                                </a>
-                            </div><!-- End .intro-content -->
-                        </div><!-- End .intro-slide -->
                     </div><!-- End .intro-slider owl-carousel owl-simple -->
+
+
 
                     <span class="slider-loader"></span><!-- End .slider-loader -->
                 </div><!-- End .intro-slider-container -->

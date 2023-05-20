@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from stuff.models import Product,Category
+from .models import *
 
 
 #----------------------------------------------------------------------------------------------
@@ -24,10 +25,13 @@ def HomePage(request):
         wishlistAmount = request.user.wishlist.all().count()
 
 
+    #Covers
+    covers = Cover.objects.all()
 
 
 
 
     # return render(request,'facades/landing.html')
-    return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,'allCategories': allCategories,'wishlistAmount':wishlistAmount})
+    return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'covers':covers})
 #----------------------------------------------------------------------------------------------
