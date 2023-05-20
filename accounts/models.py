@@ -13,7 +13,7 @@ class User(AbstractBaseUser):
     code = models.IntegerField(blank=True,null=True)
 
 
-    wishlist = models.ManyToManyField(Product)
+    wishlist = models.ManyToManyField(Product,null=True,blank=True)
 
 
 
