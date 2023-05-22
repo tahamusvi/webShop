@@ -14,12 +14,12 @@ def user_login(request):
             if user is not None:
                 login(request,user)
                 messages.success(request,'you logged in successfully','success')
-                return redirect('facades:home')
+                return redirect(request.META.get('HTTP_REFERER'))
             else:
                 messages.error(request,'username or password is wrong','alert')
     else:
         form = UserLoginForm
-    return redirect('facades:home')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 #------------------------------------------------------------------------------------------------

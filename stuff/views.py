@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from .models import *
+from accounts.forms import *
 # from cart.forms import CartAddForm
 
 
@@ -22,7 +23,8 @@ def product_detail(request, slug,id):
     allCategories = Category.objects.filter(is_sub=False)
 
 
-    return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,'allCategories': allCategories}) #,'form':form
+    return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
+    'allCategories': allCategories}) #,'form':form
 #-----------------------------------------------------------------------------------
 def Category_detail(request,slug,id):
     print("--------------------")
@@ -32,7 +34,16 @@ def Category_detail(request,slug,id):
 
     allCategories = Category.objects.filter(is_sub=False)
 
-    return render(request,'stuff/bonePage.html',{'products': products,'category':category,'allCategories': allCategories})
+    #forms
+    form = UserLoginForm
+
+    #wishlist
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+
+    return render(request,'stuff/bonePage.html',{'products': products,'category':category,
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'form':form})
 #-----------------------------------------------------------------------------------
 def showWishList(request):
     allCategories = Category.objects.filter(is_sub=False)
