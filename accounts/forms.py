@@ -3,8 +3,8 @@ from .models import *
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 #------------------------------------------------------------------------------------------------
 class UserLoginForm(forms.Form):
-    email = forms.EmailField(max_length=40,widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'email'}))
-    password = forms.CharField(max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'password'}))
+    phoneNumber = forms.CharField(label="شماره تلفن",max_length=40,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'۰۹۱۲۳۴۵۶۷۸۹'}))
+    password = forms.CharField(label="گذرواژه",max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':''}))
 #------------------------------------------------------------------------------------------------
 
 class UserCreationForm(forms.ModelForm):

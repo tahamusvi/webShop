@@ -14,12 +14,12 @@ def user_login(request):
             if user is not None:
                 login(request,user)
                 messages.success(request,'you logged in successfully','success')
-                # return redirect('shop:home')
+                return redirect('facades:home')
             else:
                 messages.error(request,'username or password is wrong','alert')
     else:
         form = UserLoginForm
-    # return render(request,'accounts/login.html',{'form':form})
+    return redirect('facades:home')
 
 
 #------------------------------------------------------------------------------------------------

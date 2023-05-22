@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from stuff.models import Product,Category
 from .models import *
-
+from accounts.forms import *
 
 #----------------------------------------------------------------------------------------------
 def HomePage(request):
@@ -28,10 +28,13 @@ def HomePage(request):
     #Covers
     covers = Cover.objects.all()
 
+    #forms
+    form = UserLoginForm
+
 
 
 
     # return render(request,'facades/landing.html')
     return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'covers':covers})
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'covers':covers,'form':form})
 #----------------------------------------------------------------------------------------------
