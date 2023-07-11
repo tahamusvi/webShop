@@ -23,8 +23,15 @@ def product_detail(request, slug,id):
     allCategories = Category.objects.filter(is_sub=False)
 
 
+
+    #wishlist
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+
+
     return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
-    'allCategories': allCategories}) #,'form':form
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount}) #,'form':form
 #-----------------------------------------------------------------------------------
 def Category_detail(request,slug,id):
     print("--------------------")
