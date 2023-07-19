@@ -13,7 +13,7 @@ class User(AbstractBaseUser):
     code = models.IntegerField(blank=True,null=True)
 
 
-    wishlist = models.ManyToManyField(Product,null=True,blank=True)
+    wishlist = models.ManyToManyField(Product,blank=True)
 
 
 
@@ -39,3 +39,15 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 # ----------------------------------------------------------------------------------------------------------------------------
+class comment(models.Model):
+    user = models.ManyToManyField(User,related_name="comments")
+    Product = models.ManyToManyField(Product,related_name="comments")
+    description = models.TextField()
+    created = models.DateField(auto_now_add=True)
+    rating = models.IntegerField(default=0) 
+    parent_comment = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+
+
+
+    def __str__(self):
+        return f"{self.user} - {self.Product}" 
