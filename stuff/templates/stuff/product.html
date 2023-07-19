@@ -280,10 +280,10 @@
                                                     <p>{{cm.text}}</p>
                                                 </div><!-- End .review-content -->
                                                 <div class="review-action">
-                                                    <a href="#"><i class="icon-thumbs-up"></i>مثبت ({{cm.likes}})</a>
+                                                    <a href="{% url 'accounts:LikeComment' cm.id %}"><i class="icon-thumbs-up"></i>مثبت ({{cm.likes.count}})</a>
+
                                                     
-                                                    
-                                                    <a href="#"><i class="icon-thumbs-down"></i>منفی ({{cm.dislikes}})</a>
+                                                    <a href="{% url 'accounts:DisLikeComment' cm.id %}"><i class="icon-thumbs-down"></i>منفی ({{cm.dislikes.count}})</a>
                                                 </div><!-- End .review-action -->
                                             </div><!-- End .col-auto -->
                                         </div><!-- End .row -->

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import *
 from  django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
-from .models import User
+from .models import *
 from django.shortcuts import render,get_object_or_404
 #------------------------------------------------------------------------------------------------
 def user_login(request):
@@ -55,3 +55,25 @@ def AddToWish(request, id):
         return redirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect("accounts:login")
+#------------------------------------------------------------------------------------------------
+def LikeComment(request, id):
+    if(request.user.is_authenticated):
+        comment = get_object_or_404(Comment, id=id)
+
+        comment.likes.add(request.user)
+
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect("accounts:login")
+#------------------------------------------------------------------------------------------------
+def DisLikeComment(request, id):
+    if(request.user.is_authenticated):
+        comment = get_object_or_404(Comment, id=id)
+
+        comment.dislikes.add(request.user)
+        
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect("accounts:login")
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
