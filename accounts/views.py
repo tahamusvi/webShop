@@ -61,6 +61,8 @@ def LikeComment(request, id):
         comment = get_object_or_404(Comment, id=id)
 
         comment.likes.add(request.user)
+        comment.dislikes.remove(request.user)
+        
 
         return redirect(request.META.get('HTTP_REFERER'))
     else:
@@ -71,6 +73,7 @@ def DisLikeComment(request, id):
         comment = get_object_or_404(Comment, id=id)
 
         comment.dislikes.add(request.user)
+        comment.likes.remove(request.user)
         
         return redirect(request.META.get('HTTP_REFERER'))
     else:
