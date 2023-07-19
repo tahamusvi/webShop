@@ -42,9 +42,14 @@ class User(AbstractBaseUser):
 class comment(models.Model):
     user = models.ManyToManyField(User,related_name="comments")
     Product = models.ManyToManyField(Product,related_name="comments")
-    description = models.TextField()
+    text = models.TextField()
     created = models.DateField(auto_now_add=True)
+
     rating = models.IntegerField(default=0) 
+    likes = models.IntegerField(default=0) 
+    dislikes = models.IntegerField(default=0) 
+
+
     parent_comment = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
 
