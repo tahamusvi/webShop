@@ -46,9 +46,12 @@ def user_register(request):
     return render(request,'accounts/register.html',{'form':form})
 #------------------------------------------------------------------------------------------------
 def AddToWish(request, id):
-    item = get_object_or_404(Product, id=id)
+    if(request.user.is_authenticated):
+        item = get_object_or_404(Product, id=id)
 
-    request.user.wishlist.add(item)
+        request.user.wishlist.add(item)
 
-    # return redirect('stuff:product_detail',item.slug,item.id)
-    return redirect(request.META.get('HTTP_REFERER'))
+        # return redirect('stuff:product_detail',item.slug,item.id)
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect("accounts:login")

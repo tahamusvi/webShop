@@ -2,7 +2,11 @@
 {% load static %}
 
 
-{% block css %}{% include 'facades/parts/css.html' %}{% endblock %}
+{% block css %}
+
+{% include 'facades/parts/css.html' %}
+
+{% endblock %}
 
 
 {% block main %}
@@ -119,10 +123,10 @@
                                               <option value="l">بزرگ (Large)</option>
                                               <option value="xl">خیلی بزرگ (XLarge)</option>
                                           </select>
-                                      </div><!-- End .select-custom --> -->
+                                      </div> -->
 
                                       <!-- <a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>
-                                  </div><!-- End .details-filter-row --> -->
+                                  </div> -->
 
 
 
@@ -137,16 +141,36 @@
                                   </div><!-- End .details-filter-row -->
 
                                   <div class="product-details-action">
-                                      <a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+                                      
 
+                                        
+                                      {% if user.is_authenticated %}
+                                      <a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
                                       <div class="details-action-wrapper">
+                                        
                                           <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product btn-wishlist"
                                               title="لیست علاقه مندی"><span>افزودن
                                                   به
                                                   علاقه مندی</span></a>
-                                          <a href="#" class="btn-product btn-compare" title="مقایسه"><span>افزودن به
-                                                  لیست مقایسه</span></a>
+
+                                                    <!-- <a href="#" class="btn-product btn-compare" title="مقایسه"><span>افزودن به
+                                                  لیست مقایسه</span></a> -->
                                       </div><!-- End .details-action-wrapper -->
+                                        {% else %}
+                                        <a href="#signin-modal" data-toggle="modal" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+                                        <div class="details-action-wrapper">
+                                        <a href="#signin-modal" data-toggle="modal" class="btn-product btn-wishlist"
+                                        title="لیست علاقه مندی"><span>افزودن
+                                            به
+                                            علاقه مندی</span></a>
+
+                                              <!-- <a href="#" class="btn-product btn-compare" title="مقایسه"><span>افزودن به
+                                                  لیست مقایسه</span></a> -->
+                                        </div><!-- End .details-action-wrapper -->
+                                        {% endif %}
+
+
+                                        
                                   </div><!-- End .product-details-action -->
 
                                   <div class="product-details-footer">

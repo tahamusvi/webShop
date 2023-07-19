@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from .models import *
 from accounts.forms import *
+from accounts.forms import UserLoginForm
 # from cart.forms import CartAddForm
 
 
@@ -13,6 +14,7 @@ from accounts.forms import *
 #     return render(request,'shop/home.html',{'products':products,'category':categories})
 #-----------------------------------------------------------------------------------
 def product_detail(request, slug,id):
+    form = UserLoginForm
     product = get_object_or_404(Product, id=id)
     # form = CartAddForm()
 
@@ -31,7 +33,7 @@ def product_detail(request, slug,id):
 
 
     return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount}) #,'form':form
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'form':form}) 
 #-----------------------------------------------------------------------------------
 def Category_detail(request,slug,id):
     print("--------------------")
