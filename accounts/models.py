@@ -46,12 +46,12 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     rating = models.IntegerField(default=0)
-    likes = models.ManyToManyField(User, related_name='liked_comments')
-    dislikes = models.ManyToManyField(User, related_name='disliked_comments')
+    likes = models.ManyToManyField(User, related_name='liked_comments', null=True, blank=True)
+    dislikes = models.ManyToManyField(User, related_name='disliked_comments', null=True, blank=True)
 
     parent_comment = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
     def __str__(self):
-        return f"{self.user.username} - {self.product.name}"
+        return f"{self.user.full_name} - {self.product.name}"
 
 
