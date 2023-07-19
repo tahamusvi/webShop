@@ -39,20 +39,19 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 # ----------------------------------------------------------------------------------------------------------------------------
-class comment(models.Model):
-    user = models.ManyToManyField(User,related_name="comments")
-    Product = models.ManyToManyField(Product,related_name="comments")
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
     text = models.TextField()
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
-    rating = models.IntegerField(default=0) 
-    likes = models.IntegerField(default=0) 
-    dislikes = models.IntegerField(default=0) 
-
+    rating = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name='liked_comments')
+    dislikes = models.ManyToManyField(User, related_name='disliked_comments')
 
     parent_comment = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
-
-
     def __str__(self):
-        return f"{self.user} - {self.Product}" 
+        return f"{self.user.username} - {self.product.name}"
+
+
