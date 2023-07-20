@@ -48,20 +48,22 @@
 
                 <div class="product-body">
                     <div class="product-cat">
-                        <a href="#">لواز جانبی</a>
+                        {% for cat in product.category.all %}
+                        <a href="{{cat.url}}">{{cat.name}} </a>
+                        {% endfor %}
                     </div><!-- End .product-cat -->
-                    <h3 class="product-title"><a href="product.html">سیستم صوتی هوشمند </a>
+                    <h3 class="product-title"><a href="product.html">{{product.name}}</a>
                     </h3>
                     <!-- End .product-title -->
                     <div class="product-price">
-                        399,000 تومان
+                        {{product.discounted_price}} تومان
                     </div><!-- End .product-price -->
                     <div class="ratings-container">
                         <div class="ratings">
                             <div class="ratings-val" style="width: 80%;"></div>
                             <!-- End .ratings-val -->
                         </div><!-- End .ratings -->
-                        <span class="ratings-text">( 12 بازدید )</span>
+                        <span class="ratings-text">( {{product.comments.count}} دیدگاه )</span>
                     </div><!-- End .rating-container -->
                 </div><!-- End .product-body -->
             </div><!-- End .product -->
