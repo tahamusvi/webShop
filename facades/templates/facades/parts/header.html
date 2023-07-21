@@ -164,12 +164,12 @@
                 <div class="header-search">
                     <a href="#" class="search-toggle" role="button" title="جستجو"><i
                             class="icon-search"></i></a>
-                    <form action="#" method="get">
-                        <div class="header-search-wrapper">
-                            <label for="q" class="sr-only">جستجو</label>
-                            <input type="search" class="form-control" name="q" id="q"
-                                placeholder="جستجوی محصول ..." required>
-                        </div><!-- End .header-search-wrapper -->
+                    <form action="{% url 'stuff:product_search' %}" method="GET" class="header-search">
+                                <div class="header-search-wrapper">
+                                  <label for="query" class="sr-only">جستجو</label>
+                                  <input type="search" class="form-control" name="query" id="query" placeholder="جستجوی محصول ..." required>
+                                </div><!-- End .header-search-wrapper -->
+                                <button type="submit" class="search-toggle" title="جستجو"><i class="icon-search"></i></button>
                     </form>
                 </div><!-- End .header-search -->
 

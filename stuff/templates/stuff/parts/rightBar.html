@@ -55,61 +55,17 @@
             <div class="collapse show" id="widget-4">
                 <div class="widget-body">
                     <div class="filter-items">
-                        <div class="filter-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="brand-1">
-                                <label class="custom-control-label" for="brand-1">نکست</label>
-                            </div><!-- End .custom-checkbox -->
-                        </div><!-- End .filter-item -->
-
+                        
+                        {% for brand in brands.all %}
                         <div class="filter-item">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input"
                                     id="brand-2">
-                                <label class="custom-control-label" for="brand-2">ریور ایسلند</label>
+                                <label class="custom-control-label" for="brand-2">{{brand.name}}</label>
                             </div><!-- End .custom-checkbox -->
                         </div><!-- End .filter-item -->
-
-                        <div class="filter-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="brand-3">
-                                <label class="custom-control-label" for="brand-3">جیوکس</label>
-                            </div><!-- End .custom-checkbox -->
-                        </div><!-- End .filter-item -->
-
-                        <div class="filter-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="brand-4">
-                                <label class="custom-control-label" for="brand-4">نیو بالانس</label>
-                            </div><!-- End .custom-checkbox -->
-                        </div><!-- End .filter-item -->
-
-                        <div class="filter-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="brand-5">
-                                <label class="custom-control-label" for="brand-5">یو جی جی</label>
-                            </div><!-- End .custom-checkbox -->
-                        </div><!-- End .filter-item -->
-
-                        <div class="filter-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="brand-6">
-                                <label class="custom-control-label" for="brand-6">اف اند اف</label>
-                            </div><!-- End .custom-checkbox -->
-                        </div><!-- End .filter-item -->
-
-                        <div class="filter-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="brand-7">
-                                <label class="custom-control-label" for="brand-7">نایکی</label>
-                            </div><!-- End .custom-checkbox -->
-                        </div><!-- End .filter-item -->
+                        {% endfor %}
+                        
 
                     </div><!-- End .filter-items -->
                 </div><!-- End .widget-body -->

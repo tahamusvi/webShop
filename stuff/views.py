@@ -57,4 +57,24 @@ def Category_detail(request,id):
 def showWishList(request):
     allCategories = Category.objects.filter(is_sub=False)
     products = request.user.wishlist.all()
-    return render(request,'stuff/bonePage.html',{'products': products,'allCategories': allCategories})
+    brands = Brand.objects.all()
+
+
+    #wishlist
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+
+    return render(request,'stuff/bonePage.html',{'products': products,'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
+#-----------------------------------------------------------------------------------
+from django.db.models import Q
+def product_search(request,query):
+
+    products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    context = {
+        'query': query,
+        'products': products,
+    }
+    return render(request, 'stuff/product_search.html', context)
+
