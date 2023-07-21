@@ -1,4 +1,4 @@
-/* Demo 13 Homepage 13 */
+/* Demo 13 Homepage 13        555cfa        */ 
 .header.header-10.header-intro-clearance .dropdown.category-dropdown .dropdown-toggle {
   padding-right: 2rem;
   color: #fff;
@@ -36,26 +36,26 @@
 
 .header.header-10.header-intro-clearance .header-bottom .menu>li>a:hover,
 .header.header-10.header-intro-clearance .header-bottom .menu>li>a:focus {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .header.header-10.header-intro-clearance .header-bottom .menu>li>a:hover::before,
 .header.header-10.header-intro-clearance .header-bottom .menu>li>a:focus::before {
-  background-color: #bf9900;
+  background-color: #555cfa;
 }
 
 .header.header-10.header-intro-clearance .header-bottom .menu>li:hover>a,
 .header.header-10.header-intro-clearance .header-bottom .menu>li:focus>a,
 .header.header-10.header-intro-clearance .header-bottom .menu>li.active>a,
 .header.header-10.header-intro-clearance .header-bottom .menu>li.show>a {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .header.header-10.header-intro-clearance .header-bottom .menu>li:hover>a::before,
 .header.header-10.header-intro-clearance .header-bottom .menu>li:focus>a::before,
 .header.header-10.header-intro-clearance .header-bottom .menu>li.active>a::before,
 .header.header-10.header-intro-clearance .header-bottom .menu>li.show>a::before {
-  background-color: #bf9900;
+  background-color: #555cfa;
 }
 
 .header.header-10.header-intro-clearance .header-search-extended {
@@ -91,7 +91,7 @@
 
 .header.header-10.header-intro-clearance .wishlist-link:hover .wishlist-txt,
 .header.header-10.header-intro-clearance .wishlist-link:focus .wishlist-txt {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .header.header-10.header-intro-clearance .compare-dropdown {
@@ -104,7 +104,7 @@
 
 .header.header-10.header-intro-clearance .compare-dropdown:hover .compare-txt,
 .header.header-10.header-intro-clearance .compare-dropdown:focus .compare-txt {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .header.header-10.header-intro-clearance .cart-dropdown {
@@ -120,7 +120,7 @@
 
 .header.header-10.header-intro-clearance .cart-dropdown:hover .cart-txt,
 .header.header-10.header-intro-clearance .cart-dropdown:focus .cart-txt {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .header.header-10.header-intro-clearance .compare-dropdown [class*='count'],
@@ -326,7 +326,7 @@
 }
 
 .cat-block:hover .cat-block-title {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .banner {
@@ -446,7 +446,7 @@
 .btn-product-icon {
   border-radius: 50%;
   background-color: #fff;
-  border: 0.1rem solid #bf9900;
+  border: 0.1rem solid #555cfa;
 }
 
 .btn-product-icon span {
@@ -456,12 +456,12 @@
 
 .btn-product-icon:hover,
 .btn-product-icon:focus {
-  background-color: #bf9900;
+  background-color: #555cfa;
 }
 
 .btn-product-icon:hover span,
 .btn-product-icon:focus span {
-  background-color: #bf9900;
+  background-color: #555cfa;
 }
 
 .product-action {
@@ -473,11 +473,11 @@
 .btn-product {
   padding-top: 1.05rem;
   padding-bottom: 1.05rem;
-  color: #bf9900;
+  color: #555cfa;
   background-color: transparent;
   text-transform: uppercase;
   border-radius: .2rem;
-  border: 0.1rem solid #bf9900;
+  border: 0.1rem solid #555cfa;
 }
 
 .btn-product:before {
@@ -485,7 +485,7 @@
 }
 
 .btn-product span {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .btn-product:before {
@@ -496,8 +496,8 @@
 .btn-product:hover,
 .btn-product:focus {
   color: #fff;
-  background-color: #bf9900;
-  border-color: #bf9900;
+  background-color: #555cfa;
+  border-color: #555cfa;
 }
 
 .btn-product:hover span,
@@ -534,7 +534,7 @@
 
 .product-countdown {
   border-radius: .2rem;
-  background-color: #bf9900;
+  background-color: #555cfa;
   left: 2rem;
   right: 2rem;
   bottom: 0;
@@ -722,7 +722,7 @@
 }
 
 .footer .widget-about-info a {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .footer .footer-middle {
@@ -846,7 +846,7 @@
   position: relative;
   display: block;
   padding: 0;
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .widget-categories h5 a:before {
@@ -868,7 +868,7 @@
 
 .widget-categories h5 a.collapsed:hover,
 .widget-categories h5 a.collapsed:focus {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .widget-categories h5 a.collapsed:before {
@@ -900,7 +900,7 @@
 
 .widget-categories ul a:hover,
 .widget-categories ul a:focus {
-  color: #bf9900;
+  color: #555cfa;
 }
 
 .banner-poster .banner-content {
