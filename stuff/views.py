@@ -68,13 +68,15 @@ def showWishList(request):
     return render(request,'stuff/bonePage.html',{'products': products,'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
 #-----------------------------------------------------------------------------------
 from django.db.models import Q
-def product_search(request,query):
+from urllib.parse import quote
 
+def product_search(request):
+    query = request.GET.get('q')
+    encoded_query = quote(query)
     products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-
     context = {
         'query': query,
         'products': products,
     }
-    return render(request, 'stuff/product_search.html', context)
+    return render(request, 'stuff/bonePage.html', context)
 
