@@ -4,98 +4,42 @@
 <aside class="col-lg-3 col-xl-5col order-lg-first">
     <div class="sidebar sidebar-shop">
         <div class="widget widget-categories">
-            <h3 class="widget-title">لوازم الکترونیکی</h3><!-- End .widget-title -->
+            <h3 class="widget-title">دسته بندی ها</h3><!-- End .widget-title -->
 
             <div class="widget-body">
                 <div class="accordion" id="widget-cat-acc">
-                    <div class="acc-item">
-                        <h5>
-                            <a role="button" data-toggle="collapse" href="#collapse-1"
-                                aria-expanded="true" aria-controls="collapse-1">
-                                کامپیوتر و لپ تاپ
-                            </a>
-                        </h5>
-                        <div id="collapse-1" class="collapse show"
-                            data-parent="#widget-cat-acc">
-                            <div class="collapse-wrap">
-                                <ul>
-                                    <li><a href="#">دسکتاپ</a></li>
-                                    <li><a href="#">مانیتور</a></li>
-                                    <li><a href="#">لپ تاپ</a></li>
-                                    <li><a href="#">آی پد و تب لت</a></li>
-                                    <li><a href="#">فضای ذخیره سازی</a></li>
-                                    <li><a href="#">پرینتر</a></li>
-                                    <li><a href="#">لوازم جانبی کامپیوتر</a></li>
-                                </ul>
-                            </div><!-- End .collapse-wrap -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .acc-item -->
 
+                    {% for category in allCategories %}
+                    {% if not category.sub %}
                     <div class="acc-item">
                         <h5>
                             <a class="collapsed" role="button" data-toggle="collapse"
-                                href="#collapse-2" aria-expanded="false"
-                                aria-controls="collapse-2">
-                                تلویزیون و ویدیو
+                                href="#collapse-{{category.id}}" aria-expanded="false"
+                                aria-controls="collapse-{{category.id}}">
+                                {{category.name}}
                             </a>
                         </h5>
-                        <div id="collapse-2" class="collapse" data-parent="#widget-cat-acc">
-                            <div class="collapse-wrap">
-                                <ul>
-                                    <li><a href="#">تقویت کننده صوتی</a></li>
-                                    <li><a href="#">پخش کننده Blu-ray</a></li>
-                                    <li><a href="#">پخش کننده DVD</a></li>
-                                    <li><a href="#">پخش کننده HD DVD</a></li>
-                                    <li><a href="#">سیستم سینمای خانگی</a></li>
-                                    <li><a href="#">پروژکتور</a></li>
-                                    <li><a href="#">ویدیو پروژکتور</a></li>
-                                    <li><a href="#">تلویزیون ماهواره ای</a></li>
-                                    <li><a href="#">تلویزیون</a></li>
-                                </ul>
-                            </div><!-- End .collapse-wrap -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .acc-item -->
 
-                    <div class="acc-item">
-                        <h5>
-                            <a class="collapsed" role="button" data-toggle="collapse"
-                                href="#collapse-3" aria-expanded="false"
-                                aria-controls="collapse-3">
-                                موبایل
-                            </a>
-                        </h5>
-                        <div id="collapse-3" class="collapse" data-parent="#widget-cat-acc">
+                        
+                        
+                        <div id="collapse-{{category.id}}" class="collapse" data-parent="#widget-cat-acc">
                             <div class="collapse-wrap">
                                 <ul>
-                                    <li><a href="#">موبایل هوشمند</a></li>
-                                    <li><a href="#">موبایل ساده</a></li>
-                                    <li><a href="#">هدفون و هندزفری</a></li>
-                                    <li><a href="#">کاور و قاب موبایل</a></li>
-                                    <li><a href="#">رم و فلش</a></li>
-                                </ul>
-                            </div><!-- End .collapse-wrap -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .acc-item -->
+                                    {% for sb in category.scategory.all %}
+                                        <li><a href="{{sb.get_absolute_url}}">{{sb.name}}</a></li>
+                                    {% endfor %}
 
-                    <div class="acc-item">
-                        <h5>
-                            <a class="collapsed" role="button" data-toggle="collapse"
-                                href="#collapse-4" aria-expanded="false"
-                                aria-controls="collapse-4">
-                                دوربین دیجیتالی
-                            </a>
-                        </h5>
-                        <div id="collapse-4" class="collapse" data-parent="#widget-cat-acc">
-                            <div class="collapse-wrap">
-                                <ul>
-                                    <li><a href="#">دوربین عکاسی</a></li>
-                                    <li><a href="#">دوربین فیلمبرداری</a></li>
-                                    <li><a href="#">کیف دوربین</a></li>
-                                    <li><a href="#">لنز دوربین</a></li>
                                 </ul>
                             </div><!-- End .collapse-wrap -->
-                        </div><!-- End .collapse -->
+                        </div>
+                        
+
                     </div><!-- End .acc-item -->
+                    {% endif %}
+                    {% endfor %}
+
+
+
                 </div><!-- End .accordion -->
             </div><!-- End .widget-body -->
         </div><!-- End .widget -->

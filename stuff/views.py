@@ -35,7 +35,7 @@ def product_detail(request, slug,id):
     return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
     'allCategories': allCategories,'wishlistAmount':wishlistAmount,'form':form}) 
 #-----------------------------------------------------------------------------------
-def Category_detail(request,slug,id):
+def Category_detail(request,id):
     print("--------------------")
     category = get_object_or_404(Category, id=id)
     products = category.products.all()
