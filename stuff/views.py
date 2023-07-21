@@ -2,6 +2,8 @@ from django.shortcuts import render,get_object_or_404
 from .models import *
 from accounts.forms import *
 from accounts.forms import UserLoginForm
+from django.db.models import Q
+
 # from cart.forms import CartAddForm
 
 
@@ -55,11 +57,10 @@ def Category_detail(request,id):
     'allCategories': allCategories,'wishlistAmount':wishlistAmount,'form':form})
 #-----------------------------------------------------------------------------------
 def showWishList(request):
-    allCategories = Category.objects.filter(is_sub=False)
     products = request.user.wishlist.all()
+
     brands = Brand.objects.all()
-
-
+    allCategories = Category.objects.filter(is_sub=False)
     #wishlist
     wishlistAmount = 0
     if(request.user.is_authenticated):
@@ -67,16 +68,18 @@ def showWishList(request):
 
     return render(request,'stuff/bonePage.html',{'products': products,'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
 #-----------------------------------------------------------------------------------
-from django.db.models import Q
-from urllib.parse import quote
-
 def product_search(request):
-    query = request.GET.get('q')
-    encoded_query = quote(query)
+    query = request.GET.get('query')
     products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-    context = {
-        'query': query,
-        'products': products,
-    }
-    return render(request, 'stuff/bonePage.html', context)
+
+
+
+    brands = Brand.objects.all()
+    allCategories = Category.objects.filter(is_sub=False)
+    #wishlist
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+
+    return render(request, 'stuff/bonePage.html', {'products': products,'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
 
