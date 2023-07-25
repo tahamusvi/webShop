@@ -18,9 +18,14 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
           <div class="container">
               <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'facades:home' %}">خانه</a></li>
                   <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">لوازم الکترونیکی</li>
+                  {% if category.is_sub %}
+                  <li class="breadcrumb-item" ><a href="{{category.sub_category.get_absolute_url}}">{{category.sub_category}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{category}}</li>
+                  {% else %}
+                  <li class="breadcrumb-item active" aria-current="page">{{category}}</li>
+                  {% endif %}
               </ol>
           </div><!-- End .container -->
       </nav><!-- End .breadcrumb-nav -->

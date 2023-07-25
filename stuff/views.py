@@ -4,7 +4,9 @@ from accounts.forms import *
 from accounts.forms import UserLoginForm
 from django.db.models import Q
 from django.core.paginator import Paginator
-
+#-----------------------------------------------------------------------------------
+pagination_amount = 12
+#-----------------------------------------------------------------------------------
 # from cart.forms import CartAddForm
 
 
@@ -38,12 +40,41 @@ def product_detail(request, slug,id):
     return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
     'allCategories': allCategories,'wishlistAmount':wishlistAmount,'form':form}) 
 #-----------------------------------------------------------------------------------
+import random
+from faker import Faker
+def CopyObjects(request):
+    fake = Faker()
+
+    num_products = 100
+    categories = Category.objects.all()
+
+    products = Product.objects.all()
+
+    for i in range(num_products):
+        p = random.choice(products)
+        
+        product = Product()
+        product.name = p.name + " " + fake.name()
+        product.slug = fake.slug()
+        product.image = p.image
+        product.image2 = p.image2
+        product.image3 = p.image3
+        product.description = fake.text()
+        product.price = random.randint(1000, 10000)
+        product.available = True
+        product.save()
+        product.category.add(random.choice(categories))
+
+        product.save()
+    
+
+#-----------------------------------------------------------------------------------
 def Category_detail(request,id,page):
     print("--------------------")
     category = get_object_or_404(Category, id=id)
     products = category.products.all()
 
-    paginator = Paginator(products, 4)
+    paginator = Paginator(products, pagination_amount)
     products = paginator.get_page(page)
 
 
@@ -65,7 +96,7 @@ def Category_detail(request,id,page):
 def showWishList(request,page):
     wishlistProducts = request.user.wishlist.all()
 
-    paginator = Paginator(wishlistProducts, 4)
+    paginator = Paginator(wishlistProducts, pagination_amount)
     products = paginator.get_page(page)
 
     brands = Brand.objects.all()
@@ -82,7 +113,7 @@ def product_search(request,page):
     query = request.GET.get('query')
     product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
-    paginator = Paginator(product_list, 4)
+    paginator = Paginator(product_list, pagination_amount)
     products = paginator.get_page(page)
 
 
