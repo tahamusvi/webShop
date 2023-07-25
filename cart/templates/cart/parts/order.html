@@ -1,0 +1,108 @@
+<div class="col-lg-12">
+    <div class="row justify-content-between">
+        <div class="col-lg-6">
+            <h4 class="text-right mb-3">هزینه ارسال</h4>
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="state">استان : </label>
+                            <div class="select-custom2">
+                                <select name="state" id="state" class="form-control">
+                                    <option value="#" selected="selected">استان خود را
+                                        انتخاب کنید
+                                    </option>
+                                    <option value="s">تهران</option>
+                                    <option value="m">تبریز</option>
+                                    <option value="l">مازندران</option>
+                                    <option value="xl">مشهد</option>
+                                </select>
+                            </div><!-- End .select-custom2 -->
+                        </div><!-- End .form-group -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="city">شهر : </label>
+                            <div class="select-custom2">
+                                <select name="city" id="city" class="form-control">
+                                    <option value="#" selected="selected">شهر خود را انتخاب
+                                        کنید
+                                    </option>
+                                    <option value="s">تهران</option>
+                                    <option value="m">کرج</option>
+                                    <option value="l">شهرری</option>
+                                    <option value="xl">اسلامشهر</option>
+                                </select>
+                            </div><!-- End .select-custom2 -->
+                        </div><!-- End .form-group -->
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label for="address">آدرس</label>
+                            <textarea class="form-control" style="min-height: 20px;"
+                                placeholder="آدرس کامل خود را بنویسید"></textarea>
+                        </div><!-- End .form-group -->
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group position-custum"
+                            style="position: absolute; bottom: 0;">
+                            <button class="btn btn-outline-primary-2" type="submit">محاسبه
+                                هزینه
+                                ارسال</button>
+                        </div><!-- .End .input-group-append -->
+                    </div>
+                </div>
+            </form>
+            <div class="cart-discount">
+                <h4 class="text-right mt-3">کد تخفیف</h4>
+                <form action="#">
+                    <div class="input-group">
+                        <input type="text" class="form-control" required
+                            placeholder="کد تخفیف خود را اینجا وارد کنید">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary-2" type="submit"><i
+                                    class="icon-long-arrow-left"></i></button>
+                        </div><!-- .End .input-group-append -->
+                    </div><!-- End .input-group -->
+                </form>
+            </div><!-- End .cart-discount -->
+        </div><!-- End .col-lg-6 -->
+        <div class="col-lg-5">
+            <div class="summary summary-cart">
+                <h3 class="summary-title">خلاصه سبد خرید</h3><!-- End .summary-title -->
+
+                <table class="table table-summary">
+                    <tbody>
+                        <tr class="summary-subtotal">
+                            <td class="border-bottom-0">جمع کل سبد خرید : </td>
+                            <td class="text-left border-bottom-0">{{cart.get_total_price}} تومان</td>
+                        </tr><!-- End .summary-subtotal -->
+
+                        <tr class="summary-subtotal">
+                            <td class="border-bottom-0">هزینه ارسال : </td>
+                            <td class="text-left border-bottom-0">1,000 تومان</td>
+                        </tr><!-- End .summary-subtotal -->
+
+                        <tr class="summary-subtotal">
+                            <td>تخفیف : </td>
+                            <td class="text-left">0,000 تومان</td>
+                        </tr><!-- End .summary-subtotal -->
+
+                        <tr class="summary-total">
+                            <td>مبلغ قابل پرداخت :</td>
+                            <td class="text-left">236,000 تومان</td>
+                        </tr><!-- End .summary-total -->
+                    </tbody>
+                </table><!-- End .table table-summary -->
+                <a href="{% url 'facades:home' %}"
+                    class="btn btn-outline-primary-2 btn-order btncart1"><span>ادامه
+                        خرید</span><i class="icon-refresh"></i></a>
+                <a href="#"
+                    class="btn btn-outline-primary-2 btn-order float-left btncart2"><span>رفتن
+                        به
+                        صفحه
+                        پرداخت</span><i class="icon-long-arrow-left"></i></a>
+            </div><!-- End .summary -->
+        </div><!-- End .col-lg-5 -->
+    </div>
+</div>

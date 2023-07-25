@@ -1,37 +1,31 @@
 {% extends 'facades/base.html' %}
 {% load static %}
 
-{% block content %}
-</br>
-<table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">product</th>
-      <th scope="col">quantity</th>
-      <th scope="col">Unit Price</th>
-      <th scope="col">Total Price</th>
-      <th>remove</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in cart %}
-        <tr>
-          <th scope="row">{{forloop.counter}}</th>
-          <td>{{item.product}}</td>
-          <td>{{item.quantity}}</td>
-          <td>{{item.price}}</td>
-          <td>{{item.total_price}}</td>
-          <td><a href="{% url 'cart:cart_remove' item.product.id %}">Remove</a></td>
-        </tr>
-    {% endfor %}
-    <tr>
-      <td>Total</td>
-      <td colspan="4"></td>
-      <td>{{cart.get_total_price}}</td>
-    </tr>
-  </tbody>
-</table>
-<a href="{% url 'orders:order_create' %}" class="btn btn-primary">Checkout</a>
+{% block css %}{% include 'facades/parts/css.html' %}{% endblock %}
+
+
+{% block main %}
+
+
+
+
+        {% include 'cart/parts/banner.html' %}
+
+        <div class="page-content">
+          <div class="cart">
+              <div class="container">
+                  <div class="row">
+
+        {% include 'cart/parts/cart.html' %}
+
+        {% include 'cart/parts/order.html' %}
+
+
+      </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .cart -->
+</div><!-- End .page-content -->
+</main><!-- End .main -->
+
 
 {% endblock %}

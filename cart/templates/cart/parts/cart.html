@@ -1,0 +1,68 @@
+<div class="col-lg-12">
+    <table class="table table-cart table-mobile">
+        <thead>
+            <tr>
+                <th>محصول</th>
+                <th>قیمت</th>
+                <th>تعداد</th>
+                <th>مجموع</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        
+        {% for item in cart %}
+            <tr>
+                <td class="product-col">
+                    <div class="product">
+                        <figure class="product-media">
+                            <a href="{{item.product.get_absolute_url}}">
+                                <img src="{{item.product.image.url}}"
+                                    alt="تصویر محصول">
+                            </a>
+                        </figure>
+
+                        <h3 class="product-title">
+                            <a href="{{item.product.get_absolute_url}}">{{item.product}}</a>
+                        </h3><!-- End .product-title -->
+                    </div><!-- End .product -->
+                </td>
+                <td class="price-col">{{item.price}}</td>
+                <td class="quantity-col">
+                    <div class="cart-product-quantity">{{item.quantity}}
+                    </div><!-- End .cart-product-quantity -->
+                </td>
+                <td class="total-col">{{item.total_price}}</td>
+                <td class="remove-col"><button class="btn-remove" href="{% url 'cart:cart_remove' item.product.id %}"><i
+                            class="icon-close"></i></button></td>
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td class="product-col">
+                    <div class="product">
+
+                        <h3 class="product-title">
+                            <a >جمع کل</a>
+                        </h3><!-- End .product-title -->
+                    </div><!-- End .product -->
+                </td>
+                <td class="price-col">{{cart.get_total_price}}</td>
+                <td class="quantity-col">
+                    <div class="cart-product-quantity">{{cart.get_total_count}}
+                    </div><!-- End .cart-product-quantity -->
+                </td>
+                <td class="total-col">{{cart.get_total_price}}</td>
+            </tr>
+
+
+        </tbody>
+    </table><!-- End .table table-wishlist -->
+
+    <div class="cart-bottom">
+        <a href="{% url 'cart:detail' %}" class="btn btn-outline-dark-2 ml-auto display-7 px-5"><span>به روز رسانی
+                سبد
+                خرید</span><i class="icon-refresh"></i></a>
+    </div><!-- End .cart-bottom -->
+</div><!-- End .col-lg-12 -->

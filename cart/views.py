@@ -9,7 +9,7 @@ from django.views.decorators.http import require_POST
 def detail(request):
     cart = Cart(request)
     print(cart.get_total_price())
-    return render(request,'facades/detail.html',{'cart':cart})
+    return render(request,'cart/detail.html',{'cart':cart})
 #-----------------------------------------------------------------------------------
 
 @require_POST

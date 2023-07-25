@@ -18,6 +18,7 @@ INSTALLED_APPS += [
     'facades',
     'stuff',
     'accounts',
+    'cart',
 ]
 
 MIDDLEWARE = [
