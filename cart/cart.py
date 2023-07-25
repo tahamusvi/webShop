@@ -45,6 +45,9 @@ class Cart:
         
     def get_total_count(self):
         return sum(item['quantity'] for item in self.cart.values())    
+    
+    def get_count(self):
+        return sum(1 for item in self.cart.values())  
 
 
     def clear(self):

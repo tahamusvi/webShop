@@ -8,8 +8,14 @@ from django.views.decorators.http import require_POST
 
 def detail(request):
     cart = Cart(request)
-    print(cart.get_total_price())
-    return render(request,'cart/detail.html',{'cart':cart})
+
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+
+    CartAmount = cart.get_count()
+
+    return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
 
 @require_POST
