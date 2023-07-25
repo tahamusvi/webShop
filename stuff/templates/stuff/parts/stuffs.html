@@ -74,7 +74,7 @@
 
     </div><!-- End .row -->
 </div><!-- End .products -->
-
+{% if products.has_other_pages %}
 <nav aria-label="Page navigation">
     <ul class="pagination">
         <li class="page-item disabled">
@@ -83,14 +83,24 @@
                 <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>قبلی
             </a>
         </li>
-        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a>
+        {% if products.has_previous %}
+        <li class="page-item"><a class="page-link" href="{% url 'stuff:product_search' products.previous_page_number %}?query={{query}}">{{products.previous_page_number}}</a></li>
+        {% endif %}
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{products.number}}</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item-total">از 2</li>
+        {% if products.has_next %}
+        <li class="page-item"><a class="page-link" href="{% url 'stuff:product_search' products.next_page_number %}?query={{query}}">{{products.next_page_number}}</a></li>
+        
+        
         <li class="page-item">
-            <a class="page-link page-link-next" href="#" aria-label="Next">
+            <a class="page-link page-link-next" href="{% url 'stuff:product_search' products.next_page_number %}?query={{query}}" aria-label="Next">
                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
             </a>
         </li>
+        {% endif %}
+        <li class="page-item-total">از {{num_pages}}</li>
     </ul>
 </nav>
+{% else %}
+
+{% endif %}

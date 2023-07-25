@@ -24,7 +24,7 @@
             <div class="header-center">
                 <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
                     <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                    <form action="{% url 'stuff:product_search' %}" method="GET">
+                    <form action="{% url 'stuff:product_search' 1 %}" method="GET">
                       <div class="header-search-wrapper search-wrapper-wide">
                         <label for="query" class="sr-only">جستجو</label>
                         <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>

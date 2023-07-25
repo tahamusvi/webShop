@@ -3,6 +3,7 @@ from .models import *
 from accounts.forms import *
 from accounts.forms import UserLoginForm
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 # from cart.forms import CartAddForm
 
@@ -68,18 +69,23 @@ def showWishList(request):
 
     return render(request,'stuff/bonePage.html',{'products': products,'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
 #-----------------------------------------------------------------------------------
-def product_search(request):
+def product_search(request,page):
     query = request.GET.get('query')
-    products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    paginator = Paginator(product_list, 4)
+
+    products = paginator.get_page(page)
 
 
 
     brands = Brand.objects.all()
     allCategories = Category.objects.filter(is_sub=False)
-    #wishlist
+
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
 
-    return render(request, 'stuff/bonePage.html', {'products': products,'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
-
+    return render(request, 'stuff/bonePage.html', {'products': products,'query':query,'num_pages':paginator.num_pages,
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
+#-----------------------------------------------------------------------------------
