@@ -132,20 +132,28 @@
 
 
 
-                                  <div class="details-filter-row details-row-size">
-                                      <label for="qty">تعداد : </label>
-                                      <div class="product-details-quantity">
-                                          <input type="number" id="qty" class="form-control" value="1" min="1"
-                                              max="10" step="1" data-decimals="0" required>
-                                      </div><!-- End .product-details-quantity -->
-                                  </div><!-- End .details-filter-row -->
+                                  
 
                                   <div class="product-details-action">
+
+                                    
                                       
 
                                         
                                       {% if user.is_authenticated %}
-                                      <a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+                                     <!-- Add to Cart -->
+                                      <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                        {% csrf_token %}
+                                        <div class="details-filter-row details-row-size">
+                                          <label for="quantity">تعداد : </label>
+                                          <div class="product-details-quantity">
+                                            <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                          </div><!-- End .product-details-quantity -->
+                                        </div><!-- End .details-filter-row -->
+                                        <button type="submit" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></button>
+                                      </form>
+
+
                                       <div class="details-action-wrapper">
                                         
                                           <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product btn-wishlist"

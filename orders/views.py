@@ -47,53 +47,53 @@ def coupon_apply(request,order_id):
 #-----------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------
-from django.http import HttpResponse
-from django.shortcuts import redirect
-from suds.client import Client
+# from django.http import HttpResponse
+# from django.shortcuts import redirect
+# from suds.client import Client
 
 
-from django.contrib import messages
-
-
-
+# from django.contrib import messages
 
 
 
-MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
-client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
-description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
-email = 'email@example.com'  # Optional
-mobile = '09123456789'  # Optional
-# Important: need to edit for realy server.
-CallbackURL = 'http://localhost:8000/orders/verify/'
 
 
-@login_required
-def send_request(request,order_id,price):
-    global amount , o_id
-    amount = price
-    o_id = order_id
-    result = client.service.PaymentRequest(MERCHANT, amount, description, request.user.email, mobile, CallbackURL)
-    if result.Status == 100:
-        return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
-    else:
-        return HttpResponse('Error code: ' + str(result.Status))
+
+# MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+# client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
+# description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
+# email = 'email@example.com'  # Optional
+# mobile = '09123456789'  # Optional
+# # Important: need to edit for realy server.
+# CallbackURL = 'http://localhost:8000/orders/verify/'
 
 
-#-----------------------------------------------------------------------------------
-@login_required
-def verify(request):
-    if request.GET.get('Status') == 'OK':
-        result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
-        if result.Status == 100:
-            order = Order.objects.get(id=o_id)
-            order.paid = True
-            order.save()
-            messages.success(request,'Transaction was Successful')
-            return redirect('shop:home')
-        elif result.Status == 101:
-            return HttpResponse('Transaction submitted ')
-        else:
-            return HttpResponse('Transaction failed.')
-    else:
-        return HttpResponse('Transaction failed or canceled by user')
+# @login_required
+# def send_request(request,order_id,price):
+#     global amount , o_id
+#     amount = price
+#     o_id = order_id
+#     result = client.service.PaymentRequest(MERCHANT, amount, description, request.user.email, mobile, CallbackURL)
+#     if result.Status == 100:
+#         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
+#     else:
+#         return HttpResponse('Error code: ' + str(result.Status))
+
+
+# #-----------------------------------------------------------------------------------
+# @login_required
+# def verify(request):
+#     if request.GET.get('Status') == 'OK':
+#         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
+#         if result.Status == 100:
+#             order = Order.objects.get(id=o_id)
+#             order.paid = True
+#             order.save()
+#             messages.success(request,'Transaction was Successful')
+#             return redirect('shop:home')
+#         elif result.Status == 101:
+#             return HttpResponse('Transaction submitted ')
+#         else:
+#             return HttpResponse('Transaction failed.')
+#     else:
+#         return HttpResponse('Transaction failed or canceled by user')

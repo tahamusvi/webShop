@@ -1,5 +1,5 @@
 CART_SESSION_ID = 'cart'
-from shop.models import Product
+from stuff.models import Product
 
 
 class Cart:
