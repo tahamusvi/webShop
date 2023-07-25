@@ -56,6 +56,17 @@ def AddToWish(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
+def RomeveToWish(request, id):
+    if(request.user.is_authenticated):
+        item = get_object_or_404(Product, id=id)
+
+        request.user.wishlist.remove(item)
+
+        # return redirect('stuff:product_detail',item.slug,item.id)
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect("accounts:login")
+#------------------------------------------------------------------------------------------------
 def LikeComment(request, id):
     if(request.user.is_authenticated):
         comment = get_object_or_404(Comment, id=id)

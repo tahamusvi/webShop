@@ -464,6 +464,17 @@
   background-color: #555cfa;
 }
 
+.btn-product-icon.btn-wishlist.active{
+  color: #fff !important;
+  background-color: #555cfa !important;
+}
+
+.btn-product-icon.btn-wishlist.active:hover {
+  color: #555cfa!important;
+  background-color: #ffffff!important;
+}
+
+
 .product-action {
   left: 2rem;
   right: 2rem;

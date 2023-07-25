@@ -10,6 +10,7 @@ urlpatterns = [
 
 
     path('AddToWish/<int:id>/',AddToWish, name='AddToWish'),
+    path('RomeveToWish/<int:id>/',RomeveToWish, name='RomeveToWish'),
     path('LikeComment/<int:id>/',LikeComment, name='LikeComment'),
     path('DisLikeComment/<int:id>/',DisLikeComment, name='DisLikeComment'),
 ]

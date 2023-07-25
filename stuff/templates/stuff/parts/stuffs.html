@@ -35,10 +35,15 @@
                           alt="تصویر محصول" class="product-image-hover">
                   </a>
 
-                  <div class="product-action-vertical">
-                      <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product-icon btn-wishlist "><span>افزودن به
-                              لیست علاقه مندی</span></a>
-                  </div><!-- End .product-action-vertical -->
+                  {% if product in request.user.wishlist.all %}
+                    <div class="product-action-vertical">
+                        <a href="{% url 'accounts:RomeveToWish' product.id %}" class="btn-product-icon btn-wishlist active" ><span></span></a>
+                    </div>
+                    {% else %}
+                    <div class="product-action-vertical">
+                        <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product-icon btn-wishlist"><span class="icon-heart"></span></a>
+                    </div>
+                    {% endif %}<!-- End .product-action-vertical -->
 
                     <div class="product-action">
                         <a href="#" class="btn-product btn-cart"
