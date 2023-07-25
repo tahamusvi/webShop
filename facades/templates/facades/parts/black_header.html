@@ -41,7 +41,7 @@
               {% if request.user.is_authenticated %}
 
               <div class="wishlist">
-                            <a href="{% url 'stuff:showWishList' %}" title="لیست محصولات مورد علاقه شما">
+                            <a href="{% url 'stuff:showWishList' 1 %}" title="لیست محصولات مورد علاقه شما">
                                 <div class="icon">
                                     <i class="icon-heart-o"></i>
                                     <span class="wishlist-count badge">{{wishlistAmount}}</span>

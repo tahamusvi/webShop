@@ -57,8 +57,11 @@ def Category_detail(request,id):
     return render(request,'stuff/bonePage.html',{'products': products,'category':category,
     'allCategories': allCategories,'wishlistAmount':wishlistAmount,'form':form})
 #-----------------------------------------------------------------------------------
-def showWishList(request):
-    products = request.user.wishlist.all()
+def showWishList(request,page):
+    wishlistProducts = request.user.wishlist.all()
+
+    paginator = Paginator(wishlistProducts, 4)
+    products = paginator.get_page(page)
 
     brands = Brand.objects.all()
     allCategories = Category.objects.filter(is_sub=False)
@@ -67,14 +70,14 @@ def showWishList(request):
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
 
-    return render(request,'stuff/bonePage.html',{'products': products,'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
+    return render(request,'stuff/bonePage.html',{'products': products,'num_pages':paginator.num_pages,
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
 #-----------------------------------------------------------------------------------
 def product_search(request,page):
     query = request.GET.get('query')
     product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
     paginator = Paginator(product_list, 4)
-
     products = paginator.get_page(page)
 
 

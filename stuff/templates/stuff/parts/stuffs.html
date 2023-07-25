@@ -84,16 +84,16 @@
             </a>
         </li>
         {% if products.has_previous %}
-        <li class="page-item"><a class="page-link" href="{% url 'stuff:product_search' products.previous_page_number %}?query={{query}}">{{products.previous_page_number}}</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'stuff:'|add:request.resolver_match.url_name products.previous_page_number %}{% if query %}?query={{query}}{% endif %}">{{products.previous_page_number}}</a></li>
         {% endif %}
         <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{products.number}}</a>
         </li>
         {% if products.has_next %}
-        <li class="page-item"><a class="page-link" href="{% url 'stuff:product_search' products.next_page_number %}?query={{query}}">{{products.next_page_number}}</a></li>
+        <li class="page-item"><a class="page-link" href="{% url 'stuff:'|add:request.resolver_match.url_name  products.next_page_number %}{% if query %}?query={{query}}{% endif %}">{{products.next_page_number}}</a></li>
         
         
         <li class="page-item">
-            <a class="page-link page-link-next" href="{% url 'stuff:product_search' products.next_page_number %}?query={{query}}" aria-label="Next">
+            <a class="page-link page-link-next" href="{% url 'stuff:'|add:request.resolver_match.url_name  products.next_page_number %}{% if query %}?query={{query}}{% endif %}" aria-label="Next">
                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
             </a>
         </li>
