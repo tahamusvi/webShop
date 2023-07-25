@@ -59,9 +59,8 @@
                         {% for brand in brands.all %}
                         <div class="filter-item">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
-                                    id="brand-2">
-                                <label class="custom-control-label" for="brand-2">{{brand.name}}</label>
+                                <input type="checkbox" class="custom-control-input" id="brand-{{brand.id}}">
+                                <label class="custom-control-label" for="brand-{{brand.id}}">{{brand.name}}</label>
                             </div><!-- End .custom-checkbox -->
                         </div><!-- End .filter-item -->
                         {% endfor %}

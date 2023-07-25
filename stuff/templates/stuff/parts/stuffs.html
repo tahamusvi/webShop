@@ -1,7 +1,7 @@
 <div class="toolbox">
     <div class="toolbox-left">
         <div class="toolbox-info">
-            {{products.count}} محصول پیدا شد
+            {{paginator.count}} محصول پیدا شد
         </div><!-- End .toolbox-info -->
     </div><!-- End .toolbox-left -->
 
@@ -84,19 +84,36 @@
             </a>
         </li>
         {% if products.has_previous %}
-        <li class="page-item"><a class="page-link" href="{% url 'stuff:'|add:request.resolver_match.url_name products.previous_page_number %}{% if query %}?query={{query}}{% endif %}">{{products.previous_page_number}}</a></li>
+
+            {% if category %}
+            <li class="page-item"><a class="page-link" href="{% url 'stuff:'|add:request.resolver_match.url_name category.id products.previous_page_number %}">{{products.previous_page_number}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="{% url 'stuff:'|add:request.resolver_match.url_name products.previous_page_number %}{% if query %}?query={{query}}{% endif %}">{{products.previous_page_number}}</a></li>
+            {% endif %}
+
         {% endif %}
         <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{products.number}}</a>
         </li>
         {% if products.has_next %}
+        {% if category %}
+        <li class="page-item"><a class="page-link" href="{% url 'stuff:'|add:request.resolver_match.url_name  category.id products.next_page_number %}">{{products.next_page_number}}</a></li>
+        <li class="page-item">
+            <a class="page-link page-link-next" href="{% url 'stuff:'|add:request.resolver_match.url_name category.id products.next_page_number %}" aria-label="Next">
+                بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+            </a>
+        </li>
+        {% else %}
         <li class="page-item"><a class="page-link" href="{% url 'stuff:'|add:request.resolver_match.url_name  products.next_page_number %}{% if query %}?query={{query}}{% endif %}">{{products.next_page_number}}</a></li>
-        
-        
         <li class="page-item">
             <a class="page-link page-link-next" href="{% url 'stuff:'|add:request.resolver_match.url_name  products.next_page_number %}{% if query %}?query={{query}}{% endif %}" aria-label="Next">
                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
             </a>
         </li>
+        {% endif %}
+        
+        
+        
+        
         {% endif %}
         <li class="page-item-total">از {{num_pages}}</li>
     </ul>

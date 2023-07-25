@@ -18,7 +18,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('stuff:category_detail',args=[self.id])
+        return reverse('stuff:category_detail',args=[self.id,1])
 #-----------------------------------------------------------------------------------
 class Product(models.Model):
     category = models.ManyToManyField(Category,related_name='products')
