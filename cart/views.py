@@ -7,12 +7,10 @@ from django.views.decorators.http import require_POST
 
 
 def detail(request):
-    cart = Cart(request)
-
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
-
+    cart = Cart(request)
     CartAmount = cart.get_count()
 
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})

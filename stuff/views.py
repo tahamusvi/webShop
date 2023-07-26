@@ -4,6 +4,7 @@ from accounts.forms import *
 from accounts.forms import UserLoginForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+from cart.cart import Cart
 #-----------------------------------------------------------------------------------
 pagination_amount = 12
 #-----------------------------------------------------------------------------------
@@ -35,10 +36,13 @@ def product_detail(request, slug,id):
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
+    #cart
+    cart = Cart(request)
+    CartAmount = cart.get_count()
 
 
     return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'form':form}) 
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'form':form}) 
 #-----------------------------------------------------------------------------------
 import random
 from faker import Faker
@@ -89,9 +93,12 @@ def Category_detail(request,id,page):
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
+    #cart
+    cart = Cart(request)
+    CartAmount = cart.get_count()
 
     return render(request,'stuff/bonePage.html',{'products': products,'category':category,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'form':form})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'form':form})
 #-----------------------------------------------------------------------------------
 def showWishList(request,page):
     wishlistProducts = request.user.wishlist.all()
@@ -105,9 +112,12 @@ def showWishList(request,page):
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
+    #cart
+    cart = Cart(request)
+    CartAmount = cart.get_count()
 
     return render(request,'stuff/bonePage.html',{'products': products,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
 def product_search(request,page):
     query = request.GET.get('query')
@@ -125,6 +135,10 @@ def product_search(request,page):
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
 
+    #cart
+    cart = Cart(request)
+    CartAmount = cart.get_count()
+
     return render(request, 'stuff/bonePage.html', {'products': products,'query':query,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
