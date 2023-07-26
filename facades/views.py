@@ -69,6 +69,7 @@ from django.core.mail import send_mail
 from .forms import SurveyForm
 
 def CreateSurvey(request):
+    CreateSurvey = False
     form = SurveyForm()
 
     if request.method == 'POST':
@@ -87,19 +88,10 @@ def CreateSurvey(request):
                 title = title,
                 text = text)
             surveyUser.save()
-            
-            # # ارسال ایمیل
-            # message = f'نام: {name}\nایمیل: {email}\nشماره موبایل: {phone_number}\nموضوع: {title}\nمتن پیام: {text}'
-            # send_mail(
-            #     'پیام از طرف فرم تماس با ما',
-            #     message,
-            #     'example@example.com', # ایمیل شخص ارسال کننده
-            #     ['example@example.com'], # ایمیل شخص دریافت کننده
-            #     fail_silently=False,
-            # )
 
-            # ارسال پیام thank you
-            # return render(request, 'thankyou.html')
+            CreateSurvey = True
+    
 
-    return render(request, 'facades/contact.html', {'form': form})
+
+    return render(request, 'facades/contact.html', {'form': form,'CreateSurvey':CreateSurvey})
 #----------------------------------------------------------------------------------------------

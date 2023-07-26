@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <div class="page-content pb-0">
     <div class="container">
         <div class="row">
@@ -44,6 +47,14 @@
                     </div><!-- End .col-sm-5 -->
                 </div><!-- End .row -->
             </div><!-- End .col-lg-6 -->
+
+            {% if CreateSurvey%}
+            <div class="col-lg-6">
+                <h2 class="title mb-1">سوالت رو دریافت کردیم.</h2><!-- End .title mb-2 -->
+                <p class="mb-2">تا فردا از طریق ایمیل پاسخت رو میدیم :)</p>
+            </div><!-- End .col-lg-6 -->
+
+            {% else %}
             <div class="col-lg-6">
                 <h2 class="title mb-1">سوالی دارید؟</h2><!-- End .title mb-2 -->
                 <p class="mb-2">با استفاده از فرم زیر می توانید با ما ارتباط برقرار کنید</p>
@@ -88,6 +99,9 @@
                     </button>
                 </form><!-- End .contact-form -->
             </div><!-- End .col-lg-6 -->
+            {% endif %}
+
+            
         </div><!-- End .row -->
 
         <hr class="mt-4 mb-5">
@@ -101,7 +115,7 @@
                         <div class="row">
                             <div class="col-sm-5 col-xl-6">
                                 <figure class="store-media mb-2 mb-lg-0">
-                                    <img src="assets/images/stores/img-1.jpg" alt="image">
+                                    <img src="{% static 'facades/images/img-1.jpg' %}" alt="image">
                                 </figure><!-- End .store-media -->
                             </div><!-- End .col-xl-6 -->
                             <div class="col-sm-7 col-xl-6">
@@ -115,8 +129,7 @@
                                     <div>شنبه-چهارشنبه 11صبح تا 7 عصر</div>
                                     <div>پنج شنبه 11 صبح تا 6 عصر</div>
 
-                                    <a href="#" class="btn btn-link" target="_blank"><span>مشاهده روی
-                                            نقشه</span><i class="icon-long-arrow-left"></i></a>
+                                    
                                 </div><!-- End .store-content -->
                             </div><!-- End .col-xl-6 -->
                         </div><!-- End .row -->
@@ -128,7 +141,7 @@
                         <div class="row">
                             <div class="col-sm-5 col-xl-6">
                                 <figure class="store-media mb-2 mb-lg-0">
-                                    <img src="assets/images/stores/img-2.jpg" alt="image">
+                                    <img src="{% static 'facades/images/img-2.jpg' %}" alt="image">
                                 </figure><!-- End .store-media -->
                             </div><!-- End .col-xl-6 -->
 
@@ -144,8 +157,7 @@
                                     <div>پنج شنبه 11 صبح تا 6 عصر</div>
                                     <div>جمعه - تعطیل</div>
 
-                                    <a href="#" class="btn btn-link" target="_blank"><span>مشاهده روی
-                                            نقشه</span><i class="icon-long-arrow-left"></i></a>
+                                    
                                 </div><!-- End .store-content -->
                             </div><!-- End .col-xl-6 -->
                         </div><!-- End .row -->
