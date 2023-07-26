@@ -48,39 +48,40 @@
                 <h2 class="title mb-1">سوالی دارید؟</h2><!-- End .title mb-2 -->
                 <p class="mb-2">با استفاده از فرم زیر می توانید با ما ارتباط برقرار کنید</p>
 
-                <form action="#" class="contact-form mb-3">
+                <form action="{% url 'facades:CreateSurvey' %}" method="post" class="contact-form mb-3">
+                    {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="cname" class="sr-only">نام</label>
-                            <input type="text" class="form-control" id="cname"
+                            <label for="name" class="sr-only">نام</label>
+                            <input type="text" class="form-control" id="id_name" name="name"
                                 placeholder="نام خود را وارد کنید *" required>
                         </div><!-- End .col-sm-6 -->
-
+                
                         <div class="col-sm-6">
-                            <label for="cemail" class="sr-only">ایمیل</label>
-                            <input type="email" class="form-control" id="cemail"
+                            <label for="email" class="sr-only">ایمیل</label>
+                            <input type="email" class="form-control" id="id_email" name="email"
                                 placeholder="ایمیل خود را وارد کنید *" required>
                         </div><!-- End .col-sm-6 -->
                     </div><!-- End .row -->
-
+                
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="cphone" class="sr-only">شماره موبایل</label>
-                            <input type="tel" class="form-control" id="cphone"
+                            <label for="phone_number" class="sr-only">شماره موبایل</label>
+                            <input type="tel" class="form-control" id="id_phone_number" name="phone_number"
                                 placeholder="شماره موبایل خود را وارد کنید">
                         </div><!-- End .col-sm-6 -->
-
+                
                         <div class="col-sm-6">
-                            <label for="csubject" class="sr-only">موضوع</label>
-                            <input type="text" class="form-control" id="csubject"
+                            <label for="title" class="sr-only">موضوع</label>
+                            <input type="text" class="form-control" id="id_title" name="title"
                                 placeholder="موضوع پیام شما">
                         </div><!-- End .col-sm-6 -->
                     </div><!-- End .row -->
-
-                    <label for="cmessage" class="sr-only">پیام</label>
-                    <textarea class="form-control" cols="30" rows="4" id="cmessage" required
+                
+                    <label for="text" class="sr-only">پیام</label>
+                    <textarea class="form-control" cols="30" rows="4" id="id_text" name="text" required
                         placeholder="متن پیام شما *"></textarea>
-
+                
                     <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm float-right">
                         <span>تایید و ارسال</span>
                         <i class="icon-long-arrow-left"></i>

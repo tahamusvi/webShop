@@ -65,3 +65,41 @@ def contact(request):
     return render(request,'facades/contact.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
     'allCategories': allCategories,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'covers':covers,'form':form})
 #----------------------------------------------------------------------------------------------
+from django.core.mail import send_mail
+from .forms import SurveyForm
+
+def CreateSurvey(request):
+    form = SurveyForm()
+
+    if request.method == 'POST':
+        form = SurveyForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone_number = form.cleaned_data['phone_number']
+            title = form.cleaned_data['title']
+            text = form.cleaned_data['text']
+
+            surveyUser = Survey(
+                name = name,
+                email = email,
+                phoneNumber = phone_number,
+                title = title,
+                text = text)
+            surveyUser.save()
+            
+            # # ارسال ایمیل
+            # message = f'نام: {name}\nایمیل: {email}\nشماره موبایل: {phone_number}\nموضوع: {title}\nمتن پیام: {text}'
+            # send_mail(
+            #     'پیام از طرف فرم تماس با ما',
+            #     message,
+            #     'example@example.com', # ایمیل شخص ارسال کننده
+            #     ['example@example.com'], # ایمیل شخص دریافت کننده
+            #     fail_silently=False,
+            # )
+
+            # ارسال پیام thank you
+            # return render(request, 'thankyou.html')
+
+    return render(request, 'facades/contact.html', {'form': form})
+#----------------------------------------------------------------------------------------------
