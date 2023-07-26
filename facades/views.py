@@ -26,14 +26,13 @@ def HomePage(request):
     form = UserLoginForm
     #cart
     cart = Cart(request)
-    CartAmount = cart.get_count()
 
 
 
 
     # return render(request,'facades/landing.html')
     return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'covers':covers,'form':form})
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form})
 #----------------------------------------------------------------------------------------------
 def contact(request):
     print("--------------------------")
@@ -63,7 +62,7 @@ def contact(request):
 
     # return render(request,'facades/landing.html')
     return render(request,'facades/contact.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'covers':covers,'form':form})
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form})
 #----------------------------------------------------------------------------------------------
 from django.core.mail import send_mail
 from .forms import SurveyForm

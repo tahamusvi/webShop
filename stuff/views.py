@@ -42,7 +42,7 @@ def product_detail(request, slug,id):
 
 
     return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'form':form}) 
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form}) 
 #-----------------------------------------------------------------------------------
 import random
 from faker import Faker
@@ -98,7 +98,7 @@ def Category_detail(request,id,page):
     CartAmount = cart.get_count()
 
     return render(request,'stuff/bonePage.html',{'products': products,'category':category,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'form':form})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'form':form})
 #-----------------------------------------------------------------------------------
 def showWishList(request,page):
     wishlistProducts = request.user.wishlist.all()
@@ -117,7 +117,7 @@ def showWishList(request,page):
     CartAmount = cart.get_count()
 
     return render(request,'stuff/bonePage.html',{'products': products,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart})
 #-----------------------------------------------------------------------------------
 def product_search(request,page):
     query = request.GET.get('query')
@@ -140,5 +140,5 @@ def product_search(request,page):
     CartAmount = cart.get_count()
 
     return render(request, 'stuff/bonePage.html', {'products': products,'query':query,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart})
 #-----------------------------------------------------------------------------------

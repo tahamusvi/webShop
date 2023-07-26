@@ -1,14 +1,13 @@
 {% extends 'facades/base.html' %}
 {% load static %}
 
-{% block css %}{% include 'facades/parts/css.html' %}{% endblock %}
+{% block css %}
+{% include 'facades/parts/css.html' %}
+{% endblock %}
 
 
 
 {% block main %}
-
-
-
 
         {% include 'facades/home_parts/banners.html' %}
 
@@ -16,15 +15,14 @@
 
         {% include 'facades/home_parts/discountStuff.html' %}
 
+        
+
         {% include 'facades/home_parts/category.html' %}
 
         {% include 'facades/home_parts/newStuff.html' %}
 
+        {% include 'facades/home_parts/elements-product-category.html' %}
 
-
-
-
-
-
+        
 
 {% endblock %}

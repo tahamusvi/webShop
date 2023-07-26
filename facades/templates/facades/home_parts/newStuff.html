@@ -57,15 +57,15 @@
                                      {{product.price}} تومان
                                 </div><!-- End .product-price -->
 
-                                <div class="product-nav product-nav-dots">
+                                <!-- <div class="product-nav product-nav-dots">
                                     <a href="#" class="active" style="background: #333333;"><span
                                             class="sr-only">نام رنگ</span></a>
                                     <a href="#" style="background: #e8e238;"><span class="sr-only">نام
-                                            رنگ</span></a>
-                                </div><!-- End .product-nav -->
+                                            رنگ</span></a> -->
+                                <!-- </div>End .product-nav -->
                             </div><!-- End .product-body -->
                             <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+                                <a href="{% url 'cart:cart_add' product.id %}" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
                             </div><!-- End .product-action -->
                         </div><!-- End .product -->
                     </div>
@@ -81,8 +81,5 @@
 
 
     </div><!-- End .tab-content -->
-    <div class="more-container text-center">
-        <a href="#" class="btn btn-outline-darker btn-more"><span>محصولات بیشتر</span><i
-                class="icon-long-arrow-down"></i></a>
-    </div><!-- End .more-container -->
+
 </div><!-- End .container -->

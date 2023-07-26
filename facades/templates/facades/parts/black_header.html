@@ -53,11 +53,11 @@
                 <!-- Status Logined -->
 
                 <div class="dropdown cart-dropdown">
-                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                    <a href="{% url 'cart:detail' %}" class="dropdown-toggle" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" data-display="static">
                         <div class="icon">
                             <i class="icon-shopping-cart"></i>
-                            <span class="cart-count">{{CartAmount}}</span>
+                            <span class="cart-count">{{cart.get_count}}</span>
                         </div>
                         <p>سبد خرید</p>
                     </a>
