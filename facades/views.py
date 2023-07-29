@@ -34,6 +34,21 @@ def HomePage(request):
     return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
     'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form})
 #----------------------------------------------------------------------------------------------
+def dashboard(request):
+
+    #wishlist
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+    #cart
+    cart = Cart(request)
+
+
+
+
+    # return render(request,'facades/landing.html')
+    return render(request,'facades/dashboard.html',{'wishlistAmount':wishlistAmount,'cart':cart})
+#----------------------------------------------------------------------------------------------
 def contact(request):
     print("--------------------------")
     # discounted stuff

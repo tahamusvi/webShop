@@ -39,6 +39,16 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 # ----------------------------------------------------------------------------------------------------------------------------
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
+    text = models.TextField()
+    postal_code = models.CharField(max_length=10)
+
+
+    def __str__(self):
+        return str(self.user) + " - " + str(self.postal_code)
+
+# ----------------------------------------------------------------------------------------------------------------------------
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
