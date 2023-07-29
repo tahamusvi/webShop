@@ -41,8 +41,13 @@ class UserChangeForm(forms.ModelForm):
 
 
 #------------------------------------------------------------------------------------------------
-
 class UserRegistrationForm(forms.Form):
     email = forms.EmailField(max_length=40,widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'email'}))
     full_name = forms.CharField(max_length=80,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Full name'}))
     password = forms.CharField(max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'password'}))
+
+#------------------------------------------------------------------------------------------------
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ['user', 'text', 'postal_code', 'city']
