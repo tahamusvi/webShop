@@ -26,7 +26,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     messages.success(request,'you logged out successfully','success')
-    # return redirect('shop:home')
+    return redirect('facades:home')
 
 
 #------------------------------------------------------------------------------------------------
@@ -90,4 +90,16 @@ def DisLikeComment(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
+# @login_required
+def add_address(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+            return redirect('facades:dashboard')
+    else:
+        form = AddressForm()
+    return render(request, 'accounts/add_address.html', {'form': form})
 #------------------------------------------------------------------------------------------------

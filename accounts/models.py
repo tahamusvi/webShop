@@ -47,6 +47,7 @@ class Address(models.Model):
     postal_code = models.CharField(max_length=10)
     city = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20,blank=True,null=True)
+    current = models.BooleanField(default=False)
 
 
 

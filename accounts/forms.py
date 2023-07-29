@@ -47,7 +47,7 @@ class UserRegistrationForm(forms.Form):
     password = forms.CharField(max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'password'}))
 
 #------------------------------------------------------------------------------------------------
-class ProfileForm(forms.ModelForm):
+class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ['user', 'text', 'postal_code', 'city']
+        fields = ['text', 'postal_code', 'city', 'phone_number', 'current']
