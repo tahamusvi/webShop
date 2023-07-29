@@ -9,6 +9,8 @@ class User(AbstractBaseUser):
     full_name = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    email = models.EmailField(unique=True)
+
 
     code = models.IntegerField(blank=True,null=True)
 
