@@ -1,0 +1,26 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}
+{% include 'facades/parts/css.html' %}
+{% endblock %}
+
+
+
+{% block main %}
+
+        <main class="main">
+            
+            {% include 'facades/aboutUsParts/banner.html' %}
+
+            <div class="page-content pb-3">
+                
+
+                {% include 'facades/aboutUsParts/mainText.html' %}
+                {% include 'facades/aboutUsParts/numberBanner.html' %}
+                {% include 'facades/aboutUsParts/teams.html' %}
+                {% include 'facades/aboutUsParts/brands.html' %}
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+{% endblock %}

@@ -4,16 +4,13 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 #------------------------------------------------------------------------------------------------
 class UserLoginForm(forms.Form):
     phoneNumber = forms.CharField(label="شماره تلفن",max_length=40,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'۰۹۱۲۳۴۵۶۷۸۹'}))
-    password = forms.CharField(label="گذرواژه",max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':''}))
+    password = forms.CharField(label="گذرواژه",max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'********'}))
 #------------------------------------------------------------------------------------------------
-
 class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(label='password',widget=forms.PasswordInput)
-    password2 = forms.CharField(label='password confirm',widget=forms.PasswordInput)
-
-    class Meta:
-        model = User
-        fields = ('phoneNumber','full_name')
+    phoneNumber = forms.CharField(label="شماره تلفن",max_length=40,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'۰۹۱۲۳۴۵۶۷۸۹'}))
+    emaill = forms.EmailField(label="ایمیل",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'AliSalehi@gmail.com'})) 
+    password1 = forms.CharField(label="گذرواژه",max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'********'}))
+    password2 = forms.CharField(label="تکرار گذرواژه",max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'********'}))
 
     def clean_password2(self):
         cd = self.cleaned_data

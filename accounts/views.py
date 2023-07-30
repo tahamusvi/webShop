@@ -7,9 +7,11 @@ from django.shortcuts import render,get_object_or_404
 #------------------------------------------------------------------------------------------------
 def user_login(request):
     if request.method == 'POST':
+        
         form = UserLoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
             user = authenticate(request,phoneNumber=cd['phoneNumber'],password=cd['password'])
             if user is not None:
                 login(request,user)
@@ -32,7 +34,7 @@ def user_logout(request):
 #------------------------------------------------------------------------------------------------
 def user_register(request):
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             user = User.objects.create_user(cd['phoneNumber'],cd['full_name'],cd['password'])

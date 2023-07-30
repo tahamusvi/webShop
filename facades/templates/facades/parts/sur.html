@@ -24,6 +24,7 @@
                         <div class="tab-content" id="tab-content-5">
                             <div class="tab-pane fade show active" id="signin" role="tabpanel"
                                 aria-labelledby="signin-tab">
+                                
                                 <form action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
 
                                     {{form}}
@@ -37,8 +38,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input"
                                                 id="signin-remember">
-                                            <label class="custom-control-label" for="signin-remember">مرا به خاطر
-                                                بسپار</label>
+                                            
                                         </div><!-- End .custom-checkbox -->
 
                                         <a href="#" class="forgot-link">فراموشی رمز عبور؟</a>
