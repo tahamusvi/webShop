@@ -2,64 +2,7 @@
 
 
 <footer class="footer footer-dark">
-  <div class="icon-boxes-container">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-6 col-lg-3">
-                  <div class="icon-box icon-box-side">
-                      <span class="icon-box-icon">
-                          <i class="icon-rocket"></i>
-                      </span>
-
-                      <div class="icon-box-content">
-                          <h3 class="icon-box-title">ارسال رایگان</h3><!-- End .icon-box-title -->
-                          <p>برای سفارشات بالای 50 هزار تومان</p>
-                      </div><!-- End .icon-box-content -->
-                  </div><!-- End .icon-box -->
-              </div><!-- End .col-sm-6 col-lg-3 -->
-
-              <div class="col-sm-6 col-lg-3">
-                  <div class="icon-box icon-box-side">
-                      <span class="icon-box-icon">
-                          <i class="icon-rotate-left"></i>
-                      </span>
-
-                      <div class="icon-box-content">
-                          <h3 class="icon-box-title">بازگرداندن رایگان</h3><!-- End .icon-box-title -->
-                          <p>تا 30 روز بعد از خرید</p>
-                      </div><!-- End .icon-box-content -->
-                  </div><!-- End .icon-box -->
-              </div><!-- End .col-sm-6 col-lg-3 -->
-
-              <div class="col-sm-6 col-lg-3">
-                  <div class="icon-box icon-box-side">
-                      <span class="icon-box-icon">
-                          <i class="icon-info-circle"></i>
-                      </span>
-
-                      <div class="icon-box-content">
-                          <h3 class="icon-box-title">20% تخفیف برای اولین خرید</h3>
-                          <!-- End .icon-box-title -->
-                          <p>کافیست ثبت نام کنید</p>
-                      </div><!-- End .icon-box-content -->
-                  </div><!-- End .icon-box -->
-              </div><!-- End .col-sm-6 col-lg-3 -->
-
-              <div class="col-sm-6 col-lg-3">
-                  <div class="icon-box icon-box-side">
-                      <span class="icon-box-icon">
-                          <i class="icon-life-ring"></i>
-                      </span>
-
-                      <div class="icon-box-content">
-                          <h3 class="icon-box-title">پشتیبانی حرفه ای</h3><!-- End .icon-box-title -->
-                          <p>خدمات حرفه ای 24 ساعته/7روز هفته</p>
-                      </div><!-- End .icon-box-content -->
-                  </div><!-- End .icon-box -->
-              </div><!-- End .col-sm-6 col-lg-3 -->
-          </div><!-- End .row -->
-      </div><!-- End .container -->
-  </div>
+    {% include 'facades/parts/slogans.html' %}
     <div class="footer-middle">
         <div class="container">
             <div class="row">
@@ -96,11 +39,11 @@
                         <h4 class="widget-title">لینک های مفید</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="about.html">درباره ما</a></li>
+                            <li><a href="{% url 'facades:aboutUs' %}">درباره ما</a></li>
                             <!-- <li><a href="#">خدمات</a></li> -->
                             <!-- <li><a href="#">نحوه خرید</a></li> -->
-                            <li><a href="faq.html">سوالات متداول</a></li>
-                            <li><a href="contact.html">تماس با ما</a></li>
+                            <li><a href="{% url 'facades:FAQ' %}">سوالات متداول</a></li>
+                            <li><a href="{% url 'facades:contact' %}">تماس با ما</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
