@@ -7,11 +7,9 @@ from django.shortcuts import render,get_object_or_404
 #------------------------------------------------------------------------------------------------
 def user_login(request):
     if request.method == 'POST':
-        
         form = UserLoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            print(cd)
             user = authenticate(request,phoneNumber=cd['phoneNumber'],password=cd['password'])
             if user is not None:
                 login(request,user)
@@ -29,23 +27,24 @@ def user_logout(request):
     logout(request)
     messages.success(request,'you logged out successfully','success')
     return redirect('facades:home')
-
-
 #------------------------------------------------------------------------------------------------
 def user_register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            user = User.objects.create_user(cd['phoneNumber'],cd['full_name'],cd['password'])
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password1'])
             user.save()
-            messages.success(request,'you registered successfully','success')
-            return redirect('shop:home')
+            messages.success(request, 'ثبت نام شما با موفقیت انجام شد.', 'success')
+            user = authenticate(request, username=form.cleaned_data['phoneNumber'], password=form.cleaned_data['password1'])
+            if user is not None:
+                login(request, user)
+                return redirect('facades:home')
         else:
-            messages.error(request,'something is wrong','alert')
+            messages.error(request, 'خطا در ثبت نام.', 'alert')
     else:
-        form = UserRegistrationForm
-    return render(request,'accounts/register.html',{'form':form})
+        form = UserCreationForm()
+    return render(request, 'accounts/register.html', {'form': form})
 #------------------------------------------------------------------------------------------------
 def AddToWish(request, id):
     if(request.user.is_authenticated):

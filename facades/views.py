@@ -23,7 +23,8 @@ def HomePage(request):
     #Covers
     covers = Cover.objects.all()
     #forms
-    form = UserLoginForm
+    formLogin = UserLoginForm
+    formRegister= UserCreationForm
     #cart
     cart = Cart(request)
 
@@ -32,7 +33,7 @@ def HomePage(request):
 
     # return render(request,'facades/landing.html')
     return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form})
+    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'formLogin':formLogin,'formRegister':formRegister})
 #----------------------------------------------------------------------------------------------
 def dashboard(request):
 
