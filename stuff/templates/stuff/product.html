@@ -273,17 +273,15 @@
                                         <div class="row no-gutters">
                                             <div class="col-auto">
                                                 <h4><a href="#">{{cm.user.PhoneNumber}}</a></h4>
+
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        {% if cm.rating %}
-                                                        <span class="star-rating" style="width: 2 ;">
-                                                            <span class="sr-only">{{ cm.rating }}</span>
-                                                        </span><!-- End .star-rating -->
-                                                    {% endif %}
-
+                                                        <div class="ratings-val" style="width: {{cm.star_rating}}%;"></div>
+                                                        <!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
                                                 </div><!-- End .rating-container -->
-                                                <span class="review-date">{{ cm.created|date:"F j, Y" }}</span>
+
+                                                <span class="review-date">{{cm.days_since_creation}}</span>
                                             </div><!-- End .col -->
                                             <div class="col-12">
                                                 <!-- <h4>خیلی عالی</h4> -->

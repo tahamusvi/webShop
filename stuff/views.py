@@ -8,17 +8,6 @@ from cart.cart import Cart
 #-----------------------------------------------------------------------------------
 pagination_amount = 12
 #-----------------------------------------------------------------------------------
-# from cart.forms import CartAddForm
-
-
-# def home(request,slug=None):
-#     products = Product.objects.filter(available=True)
-#     categories = Category.objects.filter(is_sub=False)
-#     if slug:
-#         category = get_object_or_404(Category, slug=slug)
-#         products = products.filter(category=category)
-#     return render(request,'shop/home.html',{'products':products,'category':categories})
-#-----------------------------------------------------------------------------------
 def product_detail(request, slug,id):
     form = UserLoginForm
     product = get_object_or_404(Product, id=id)
