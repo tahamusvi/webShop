@@ -27,3 +27,4 @@ class ProductAdmin(admin.ModelAdmin):
     make_available.short_description = 'make all available'
 #-------------------------------------------------------------------------
 admin.site.register(Brand)
+admin.site.register(ProductImage)

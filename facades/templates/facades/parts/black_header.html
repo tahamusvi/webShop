@@ -84,7 +84,9 @@
                                         <img src="{{item.product.image.url}}" alt="product">
                                     </a>
                                 </figure>
+                                {% if item.product %}
                                 <a href="{% url 'cart:cart_remove' item.product.id %}" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a>
+                                {% endif %}
                             </div><!-- End .product -->
                             {% endfor %}
 

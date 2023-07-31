@@ -11,6 +11,19 @@
 
 {% block main %}
 
+    <script src="//cdn.jsdelivr.net/jquery.elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+
+<script>
+    $('#product-zoom').elevateZoom({
+        zoomType: "inner",
+        cursor: "crosshair",
+        gallery: 'product-zoom-gallery',
+        galleryActiveClass: 'active',
+        imageCrossfade: true,
+        loadingIcon: 'assets/images/zoom-loader.gif'
+    });
+</script>
+
 
 
     <main class="main">
@@ -19,8 +32,10 @@
               <div class="container d-flex align-items-center">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
-                      <li class="breadcrumb-item"><a href="#">محصولات</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">پیش فرض</li>
+                      {% for cat in product.category.all %}
+                      <li class="breadcrumb-item"><a href="{{cat.get_absolute_url}}">{{cat}}</a></li>
+                      {% endfor %}
+                      <li class="breadcrumb-item active" aria-current="page">{{product.name}}</li>
                   </ol>
 
 
@@ -32,11 +47,12 @@
                   <div class="product-details-top">
                       <div class="row">
                           <div class="col-md-6">
+
                               <div class="product-gallery product-gallery-vertical">
                                   <div class="row">
                                       <figure class="product-main-image">
                                           <img id="product-zoom" src="{{product.image.url}}"
-                                              data-zoom-image="assets/images/products/single/1-big.jpg"
+                                              data-zoom-image = "{{product.image.url}}"
                                               alt="تصویر محصول">
 
                                           <a href="#" id="btn-product-gallery" class="btn-product-gallery">
@@ -45,34 +61,23 @@
                                       </figure><!-- End .product-main-image -->
 
                                       <div id="product-zoom-gallery" class="product-image-gallery">
-                                          <a class="product-gallery-item active" href="#"
-                                              data-image="assets/images/products/single/1.jpg"
-                                              data-zoom-image="assets/images/products/single/1-big.jpg">
-                                              <img src="{{product.image2.url}}"
+                                        
+                                            {% for img in product.images.all %}
+                                          <a class="product-gallery-item" href="#product-zoom"
+                                              data-image="{{img.image.url}}"
+                                              data-zoom-image="{{img.image.url}}">
+                                              <img src="{{img.image.url}}"
                                                   alt="توضیحات تصویر">
                                           </a>
+                                          {% endfor %}
 
-                                          <a class="product-gallery-item" href="#"
-                                              data-image="assets/images/products/single/2.jpg"
-                                              data-zoom-image="assets/images/products/single/2-big.jpg">
-                                              <img src="assets/images/products/single/2-small.jpg"
-                                                  alt="توضیحات تصویر">
-                                          </a>
 
-                                          <a class="product-gallery-item" href="#"
-                                              data-image="assets/images/products/single/3.jpg"
-                                              data-zoom-image="assets/images/products/single/3-big.jpg">
-                                              <img src="assets/images/products/single/3-small.jpg"
-                                                  alt="توضیحات تصویر">
-                                          </a>
+                                          
 
-                                          <a class="product-gallery-item" href="#"
-                                              data-image="assets/images/products/single/4.jpg"
-                                              data-zoom-image="assets/images/products/single/4-big.jpg">
-                                              <img src="assets/images/products/single/4-small.jpg" alt="product back">
-                                          </a>
+                                          
                                       </div><!-- End .product-image-gallery -->
                                   </div><!-- End .row -->
+
                               </div><!-- End .product-gallery -->
                           </div><!-- End .col-md-6 -->
 
@@ -83,7 +88,7 @@
 
                                   <div class="ratings-container">
                                       <div class="ratings">
-                                          <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                          <div class="ratings-val" style="width: {{product.star_rating}}%;"></div><!-- End .ratings-val -->
                                       </div><!-- End .ratings -->
                                       <a class="ratings-text" href="#product-review-link" id="review-link">( {{product.comments.count}} نظر
                                           )</a>
@@ -347,22 +352,18 @@
                               </a>
 
                               <div class="product-action-vertical">
-                                  <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
+                                  <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
                                           لیست علاقه مندی</span></a>
-                                  <a href="popup/quickView.html" class="btn-product-icon btn-quickview"
-                                      title="مشاهده سریع"><span>مشاهده سریع</span></a>
-                                  <a href="#" class="btn-product-icon btn-compare" title="مقایسه"><span>لیست
-                                          مقایسه</span></a>
                               </div><!-- End .product-action-vertical -->
 
-                              <div class="product-action">
-                                  <a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
-                              </div><!-- End .product-action -->
+                              
                           </figure><!-- End .product-media -->
 
                           <div class="product-body">
                               <div class="product-cat text-center">
-                                  <a href="#">{{s.category.name}}</a>
+                                  {% for cat in s.category.all %}
+                                  <a href="{{cat.get_absolute_url}}">{{cat}}</a>
+                                  {% endfor %}
                               </div><!-- End .product-cat -->
                               <h3 class="product-title text-center"><a href="{{s.get_absolute_url}}">{{s.name}}</a></h3>
                               <!-- End .product-title -->
@@ -371,21 +372,18 @@
                               </div><!-- End .product-price -->
                               <div class="ratings-container">
                                   <div class="ratings">
-                                      <div class="ratings-val" style="width:2"></div><!-- End .ratings-val -->
+                                      <div class="ratings-val" style="width:{{s.star_rating}}%"></div><!-- End .ratings-val -->
                                   </div><!-- End .ratings -->
                                   <span class="ratings-text">( {{s.comments.count}} دیدگاه )</span>
                               </div><!-- End .rating-container -->
 
                               <div class="product-nav product-nav-thumbs">
-                                  <a href="{{s.get_absolute_url}}" class="active">
-                                      <img src="{{s.image2.url}}" alt="product desc">
-                                  </a>
-                                  {% if s.image3 != None %}
-                                  <a href="{{s.get_absolute_url}}" class="active">
-                                      <img src="{{s.image3.url}}" alt="product desc">
-                                  </a>
-                                  {% else %}
-                                  {% endif %}
+                                  {% for img in s.images.all %}
+                                    <a href="" class="active">
+                                        <img src="{{img.image.url}}" alt="product desc">
+                                    </a>
+                                  {% endfor %}
+                                  
 
 
 
