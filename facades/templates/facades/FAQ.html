@@ -1,0 +1,30 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}
+{% include 'facades/parts/css.html' %}
+{% endblock %}
+
+
+
+{% block main %}
+
+    
+
+        <main class="main">
+
+            {% include 'facades/faqParts/banner.html' %}
+
+
+            {% include 'facades/faqParts/Questions.html' %}
+
+            {% include 'facades/faqParts/fullWidthBanner.html' %}
+
+            
+
+            
+        </main><!-- End .main -->
+
+        
+
+{% endblock %}

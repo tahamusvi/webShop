@@ -1,0 +1,43 @@
+{% load static %}
+
+
+<div class="page-content">
+    <div class="container">
+
+
+        {% for group in FAQG %}
+        <h2 class="title text-center mb-3">{{group.bigTitle}}</h2><!-- End .title -->
+
+        <div class="accordion accordion-rounded" id="accordion-1">
+
+            {% for faq in group.faqs.all %}
+            <div class="card card-box card-sm bg-light">
+                <div class="card-header" id="heading-2">
+                    <h2 class="card-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-{{faq.id}}"
+                            aria-expanded="false" aria-controls="collapse-2">
+                            {{faq.question}}
+                        </a>
+                    </h2>
+                </div><!-- End .card-header -->
+                <div id="collapse-{{faq.id}}" class="collapse" aria-labelledby="heading-2"
+                    data-parent="#accordion-1">
+                    <div class="card-body">
+                        {{faq.answer}}
+                    </div><!-- End .card-body -->
+                </div><!-- End .collapse -->
+            </div><!-- End .card -->
+
+            {% endfor %}
+
+            
+        </div><!-- End .accordion -->
+
+
+        {% endfor %}
+
+
+
+        
+    </div><!-- End .container -->
+</div><!-- End .page-content -->
