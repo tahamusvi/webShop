@@ -1,14 +1,16 @@
-<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+{% load static %}
+
+
+<div class="page-header text-center" style="background-image: url({% static 'facades/images/slide-1.png' %})">
     <div class="container">
-        <h1 class="page-title">درباره ما 2<span>صفحات</span></h1>
+        <h1 class="page-title">درباره ما</h1>
     </div><!-- End .container -->
 </div><!-- End .page-header -->
 <nav aria-label="breadcrumb" class="breadcrumb-nav">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
-            <li class="breadcrumb-item"><a href="#">صفحات</a></li>
-            <li class="breadcrumb-item active" aria-current="page">درباره ما 2</li>
+            <li class="breadcrumb-item"><a href="{% url 'facades:home' %}">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">درباره ما</li>
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
