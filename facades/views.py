@@ -27,6 +27,7 @@ def HomePage(request):
     formRegister= UserCreationForm
     #cart
     cart = Cart(request)
+    
 
 
 

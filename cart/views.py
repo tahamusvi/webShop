@@ -12,6 +12,7 @@ def detail(request):
         wishlistAmount = request.user.wishlist.all().count()
     cart = Cart(request)
     CartAmount = cart.get_count()
+    print(CartAmount)
 
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------

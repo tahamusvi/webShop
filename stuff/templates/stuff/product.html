@@ -11,20 +11,6 @@
 
 {% block main %}
 
-    <script src="//cdn.jsdelivr.net/jquery.elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
-
-<script>
-    $('#product-zoom').elevateZoom({
-        zoomType: "inner",
-        cursor: "crosshair",
-        gallery: 'product-zoom-gallery',
-        galleryActiveClass: 'active',
-        imageCrossfade: true,
-        loadingIcon: 'assets/images/zoom-loader.gif'
-    });
-</script>
-
-
 
     <main class="main">
 
@@ -51,18 +37,22 @@
                               <div class="product-gallery product-gallery-vertical">
                                   <div class="row">
                                       <figure class="product-main-image">
-                                          <img id="product-zoom" src="{{product.image.url}}"
+                                          <img class="a1" id="product-zoom-{{product.images.first.id}}" src="{{product.image.url}}"
                                               data-zoom-image = "{{product.image.url}}"
                                               alt="تصویر محصول">
 
-                                          <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                            {% comment %} <img class="a2" id="product-zoom-{{product.images.first.id}}" src="{{product.images.first.image.url}}"
+                                              data-zoom-image = "{{product.image.url}}"
+                                              alt="تصویر محصول"> {% endcomment %}
+
+                                      </figure><!-- End .product-main-image -->
+                                      <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                               <i class="icon-arrows"></i>
                                           </a>
-                                      </figure><!-- End .product-main-image -->
 
                                       <div id="product-zoom-gallery" class="product-image-gallery">
                                         
-                                            {% for img in product.images.all %}
+                                        {% for img in product.images.all %}
                                           <a class="product-gallery-item" href="#product-zoom"
                                               data-image="{{img.image.url}}"
                                               data-zoom-image="{{img.image.url}}">
