@@ -46,9 +46,9 @@ def user_register(request):
                 return redirect('facades:home')
         else:
             messages.error(request, 'خطا در ثبت نام.', 'alert')
-    else:
-        Loginform = UserLoginForm()
-        Registerform = UserCreationForm()
+    
+    Loginform = UserLoginForm()
+    Registerform = UserCreationForm()
     return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
 #------------------------------------------------------------------------------------------------
 def AddToWish(request, id):

@@ -25,7 +25,7 @@ def order_create(request):
 def detail(request,order_id):
     form = CouponForm
     order = get_object_or_404(Order,id=order_id)
-    return render(request,'orders/order.html',{'order':order,'form':form})
+    return render(request,'orders/checkout.html',{'order':order,'form':form})
 
 #-----------------------------------------------------------------------------------
 @require_POST
