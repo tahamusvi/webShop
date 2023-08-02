@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from stuff.models import Product
 from django.core.validators import MinValueValidator,MaxValueValidator
+from facades.utils import jalali_converter
 
 
 
@@ -15,6 +16,16 @@ class Order(models.Model):
 
     class Meta:
         ordering = ('-created',)
+    
+    def paid_string(self):
+        if self.paid:
+            return f"پرداخت شده."
+        return f"پرداخت نشده."
+    
+    def discount_string(self):
+        if self.discount == None:
+            return f" تخفیفی اعمال نشده است."
+        return f"{self.discount} درصد تخفیف اعمال شده است"
 
     def __str__(self):
         return f'{self.user} - {self.id}'
@@ -25,6 +36,9 @@ class Order(models.Model):
             discount_price = (self.discount/100)* total
             return total - discount_price
         return total
+    
+    def jda(self):
+        return jalali_converter(self.created)
 
 
 #-----------------------------------------------------------------------------------

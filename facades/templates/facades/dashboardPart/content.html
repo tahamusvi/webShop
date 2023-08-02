@@ -38,7 +38,7 @@
 
                         <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
                             aria-labelledby="tab-dashboard-link">
-                            <p>سلام <span class="font-weight-normal text-dark">کاربر</span>
+                            <p>سلام <span class="font-weight-normal text-dark">{{request.user.full_name}}</span>
                                 <br>
                                 شما در اینجا میتوانید <a href="#tab-orders"
                                     class="tab-trigger-link link-underline">سفارشات خود را ببینید</a>، وضعیت
@@ -51,6 +51,28 @@
                         <div class="tab-pane fade" id="tab-orders" role="tabpanel"
                             aria-labelledby="tab-orders-link">
                             <p>سفارش جدیدی وجود ندارد</p>
+
+
+                            {% for order in request.user.orders.all %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card card-dashboard">
+                                            <div class="card-body">
+                                                <h3 class="card-title">سفارش {{order.jda}}</h3><!-- End .card-title -->
+
+                                                <p>{{order.user.full_name}}<br>
+                                                    {{order.get_total_price}} تومان<br>
+                                                    {{order.paid_string}}<br>
+                                                    {{order.discount_string}}<br>
+                                                    <a href="#">ویرایش <i class="icon-edit"></i></a></p>
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .card-dashboard -->
+                                    </div><!-- End .col-lg-12 -->
+                                </div><!-- End .row -->
+                            {% endfor %}
+
+
+
                             <a href="category.html" class="btn btn-outline-primary-2"><span>رفتن به
                                     فروشگاه</span><i class="icon-long-arrow-left"></i></a>
                         </div><!-- .End .tab-pane -->

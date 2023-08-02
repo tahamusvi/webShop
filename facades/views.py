@@ -3,6 +3,7 @@ from stuff.models import Product,Category
 from .models import *
 from accounts.forms import *
 from cart.cart import Cart
+from django.contrib.auth.decorators import login_required
 
 #----------------------------------------------------------------------------------------------
 def HomePage(request):
@@ -36,6 +37,7 @@ def HomePage(request):
     return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
     'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'formLogin':formLogin,'formRegister':formRegister})
 #----------------------------------------------------------------------------------------------
+@login_required
 def dashboard(request):
 
     #wishlist
