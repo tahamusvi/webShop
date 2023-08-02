@@ -1,8 +1,20 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}
+{% include 'facades/parts/css.html' %}
+{% endblock %}
 
 
-  <p>Login page</p>
-  <form class="" action="" method="post">{% csrf_token %}
-    {{form}}
-    <input type="submit" name="" value="login" class="btn btn-primary">
 
-  </form>
+{% block main %}
+        <main class="main">
+
+          {% include 'accounts/loginParts/breadcrumb.html' %}
+
+          {% include 'accounts/loginParts/loginPage.html' %}
+
+        </main><!-- End .main -->
+
+{% endblock %}
+

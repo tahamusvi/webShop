@@ -14,12 +14,16 @@ def user_login(request):
             if user is not None:
                 login(request,user)
                 messages.success(request,'you logged in successfully','success')
-                return redirect(request.META.get('HTTP_REFERER'))
+                if 'next' in request.GET:
+                    return redirect(request.GET['next'])
+                else:
+                    return redirect(request.META.get('HTTP_REFERER'))
             else:
                 messages.error(request,'username or password is wrong','alert')
-    else:
-        form = UserLoginForm
-    return redirect(request.META.get('HTTP_REFERER'))
+
+    Loginform = UserLoginForm()
+    Registerform = UserCreationForm()      
+    return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
 
 
 #------------------------------------------------------------------------------------------------
@@ -43,8 +47,9 @@ def user_register(request):
         else:
             messages.error(request, 'خطا در ثبت نام.', 'alert')
     else:
-        form = UserCreationForm()
-    return render(request, 'accounts/register.html', {'form': form})
+        Loginform = UserLoginForm()
+        Registerform = UserCreationForm()
+    return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
 #------------------------------------------------------------------------------------------------
 def AddToWish(request, id):
     if(request.user.is_authenticated):
