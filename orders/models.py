@@ -6,6 +6,9 @@ from facades.utils import jalali_converter
 
 
 
+
+
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='orders')
     created = models.DateTimeField(auto_now_add=True)
@@ -44,6 +47,14 @@ class Order(models.Model):
     
     def shamsi_date(self):
         return jalali_converter(self.created)
+
+    def get_order_number(self):
+        order_id = self.id
+        order_num = abs(hash(self.created)) % (10 ** 5)
+        order_num_str = str(order_num).zfill(5)
+        return order_num_str
+
+
 
 
 #-----------------------------------------------------------------------------------
