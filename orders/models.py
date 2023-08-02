@@ -13,6 +13,11 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     discount = models.IntegerField(blank=True,null=True,default=None)
 
+    processed = models.BooleanField(default=False)
+    packing = models.BooleanField(default=False) 
+    shipped = models.BooleanField(default=False)
+    deliveried = models.BooleanField(default=False) 
+
 
     class Meta:
         ordering = ('-created',)
