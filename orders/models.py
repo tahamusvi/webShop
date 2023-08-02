@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from shop.models import Product
+from stuff.models import Product
 from django.core.validators import MinValueValidator,MaxValueValidator
 
 

@@ -19,6 +19,7 @@ INSTALLED_APPS += [
     'stuff',
     'accounts',
     'cart',
+    'orders'
 ]
 
 MIDDLEWARE = [
