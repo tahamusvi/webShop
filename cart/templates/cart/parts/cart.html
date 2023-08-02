@@ -40,10 +40,9 @@
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
                                             <td class="total-col">{{item.total_price}}</td>
-                                            {% if item %}
-                                            <td class="remove-col"><button class="btn-remove" href="{% url 'cart:cart_remove' item.product.id %}"><i
-                                                        class="icon-close"></i></button></td>
-                                            {% endif %}
+                                            <td class="remove-col" ><a href="{% url 'cart:cart_remove' item.product.id %}" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a></td>
+                                                
+                                            
                                                     
                 
                                         </tr>

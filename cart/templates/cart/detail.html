@@ -8,9 +8,18 @@
 
   
 <main class="main">
-        {% include 'cart/parts/banner.html' %}
 
-        {% include 'cart/parts/cart.html' %}
+{% include 'cart/parts/banner.html' %}
+
+        {% if CartAmount != 0 %}
+
+                {% include 'cart/parts/cart.html' %}
+
+        {% else %}
+
+                {% include 'cart/parts/cartEmpty.html' %}
+
+        {% endif %}
 </main><!-- End .main -->
 
 

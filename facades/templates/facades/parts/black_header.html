@@ -51,7 +51,7 @@
                   </div>
 
                 <!-- Status Logined -->
-
+                
                 <div class="dropdown cart-dropdown">
                     <a href="{% url 'cart:detail' %}" class="dropdown-toggle" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" data-display="static">
@@ -61,7 +61,7 @@
                         </div>
                         <p>سبد خرید</p>
                     </a>
-
+                    {% if cart.get_count != 0 %}
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-cart-products">
 
@@ -75,7 +75,7 @@
 
                                     <span class="cart-product-info">
                                         <span class="cart-product-qty">{{item.quantity}} x </span>
-                                        84,000 تومان
+                                        {{item.product.discounted_price}} تومان
                                     </span>
                                 </div><!-- End .product-cart-details -->
 
@@ -105,7 +105,11 @@
                                     class="icon-long-arrow-left"></i></a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdown-menu -->
+                    {% else %}
+
+                {% endif %}
                 </div><!-- End .cart-dropdown -->
+                
 
               {% else %}
               <div class="wishlist">
