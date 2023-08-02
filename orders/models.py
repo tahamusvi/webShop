@@ -37,7 +37,7 @@ class Order(models.Model):
             return total - discount_price
         return total
     
-    def jda(self):
+    def shamsi_date(self):
         return jalali_converter(self.created)
 
 

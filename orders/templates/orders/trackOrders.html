@@ -1,0 +1,75 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}
+{% include 'facades/parts/css.html' %}
+{% endblock %}
+
+
+
+{% block main %}
+
+
+    
+        <main class="main">
+
+            {% include 'facades/faqParts/banner.html' %}
+
+
+            <div class="page-content">
+                <div class="container">
+                    <div class="trackorder-content col-md-12">
+                        <div class="trackorder-inner">
+                            <div class="trackorder-top">
+                                <div class="trackorder-detail">
+                                    <div>بازه زمانی تحویل سفارش : 1401/09/20 - 12:00 تا 15:00</div>
+                                    <div>نام تحویل گیرنده سفارش : <span>امیر سبحانی</span></div>
+                                </div>
+                                <h2 class="trackorder-id">سفارش 24032#</h2>
+                            </div>
+                            <div class="trackorder-bottom">
+                                <div class="trackorder-progress">
+                                    <ul class="trackorder-progressbar">
+
+                                        <li class="trackorder-step active"><span class="track-icon"> <img
+                                                    src="{% static 'facades/images/track%20order/processed.png' %}"
+                                                    alt="track_order"></span><span
+                                                class="progressbar-track"></span><span class="track-title">سفارش
+                                                <br>پردازش شد</span></li>
+
+                                        <li class="trackorder-step active"><span class="track-icon"> <img
+                                                    src="{% static 'facades/images/track%20order/packing.png' %}"
+                                                    alt="track_order"></span><span
+                                                class="progressbar-track"></span><span class="track-title">سفارش
+                                                <br>بسته بندی شد</span></li>
+
+                                        <li class="trackorder-step"><span class="track-icon"> <img
+                                                    src="{% static 'facades/images/track%20order/shipped.png' %}"
+                                                    alt="track_order"></span><span
+                                                class="progressbar-track"></span><span class="track-title">سفارش
+                                                <br>ارسال شد</span></li>
+
+                                        <li class="trackorder-step"><span class="track-icon"> <img
+                                                    src="{% static 'facades/images/track%20order/deliveried.png' %}"
+                                                    alt="track_order"></span><span
+                                                class="progressbar-track"></span><span class="track-title">سفارش
+                                                <br>تحویل داده شد</span></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+
+
+
+            
+
+            
+        </main><!-- End .main -->
+
+        
+
+{% endblock %}

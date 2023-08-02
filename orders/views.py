@@ -25,8 +25,9 @@ def order_create(request):
 def detail(request,order_id):
     form = CouponForm
     order = get_object_or_404(Order,id=order_id)
+    if order.paid :
+        return render(request,'orders/trackOrders.html',{'order':order})
     return render(request,'orders/checkout.html',{'order':order,'form':form})
-
 #-----------------------------------------------------------------------------------
 @require_POST
 def coupon_apply(request,order_id):
