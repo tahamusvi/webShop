@@ -1,0 +1,15 @@
+{% if messages %}
+
+    {% for message in messages %}
+    <div class="popup success">
+        <p class="popup-title">Success!</p>
+        <p class="popup-content {{ message.tags }}">{{ message }}</p>
+    </div>
+    {% comment %} <a{% if message.tags %} class="btn-square wobble-horizontal {{ message.tags }}"{% endif %}></a> {% endcomment %}
+    {% endfor %}
+
+
+
+{% endif %}
+
+
