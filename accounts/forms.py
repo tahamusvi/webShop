@@ -32,21 +32,13 @@ class UserCreationForm(forms.ModelForm):
 
 #------------------------------------------------------------------------------------------------
 class UserChangeForm(forms.ModelForm):
-    password = ReadOnlyPasswordHashField()
+    phoneNumber = forms.CharField(label="شماره تلفن", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control','readonly': True}))
+    full_name = forms.CharField(label="نام شما", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'علی صالحی'}))
+    email = forms.EmailField(label="ایمیل", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'AliSalehi@gmail.com','readonly': True}))
 
     class Meta:
         model = User
-        fields = ('phoneNumber','full_name','password')
-
-    def cleaned_data(self):
-        return self.initial['password']
-
-
-#------------------------------------------------------------------------------------------------
-class UserRegistrationForm(forms.Form):
-    email = forms.EmailField(max_length=40,widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'email'}))
-    full_name = forms.CharField(max_length=80,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Full name'}))
-    password = forms.CharField(max_length=40,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'password'}))
+        fields = ('phoneNumber', 'full_name', 'email')
 
 #------------------------------------------------------------------------------------------------
 class AddressForm(forms.ModelForm):

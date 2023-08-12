@@ -3,35 +3,9 @@
 
 <div class="tab-pane fade" id="tab-account" role="tabpanel"
                             aria-labelledby="tab-account-link">
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>نام *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
+                            <form action="{% url 'accounts:profile' %}" method="post"> {% csrf_token %}
 
-                                    <div class="col-sm-6">
-                                        <label>نام خانوادگی *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
-                                </div><!-- End .row -->
-
-                                <label>نام نمایش *</label>
-                                <input type="text" class="form-control" required>
-                                <small class="form-text">این نام در قسمت بازدیدها، نظرات و حساب کاربری شما
-                                    نمایش داده می شود.</small>
-
-                                <label>ایمیل *</label>
-                                <input type="email" class="form-control" required>
-
-                                <label>پسورد فعلی</label>
-                                <input type="password" class="form-control">
-
-                                <label>پسورد جدید</label>
-                                <input type="password" class="form-control">
-
-                                <label>تکرار پسورد جدید</label>
-                                <input type="password" class="form-control mb-2">
+                                {{profileForm}}
 
                                 <button type="submit" class="btn btn-outline-primary-2 float-right">
                                     <span>ذخیره تغییرات</span>

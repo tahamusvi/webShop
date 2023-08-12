@@ -24,8 +24,19 @@ def user_login(request):
     Loginform = UserLoginForm()
     Registerform = UserCreationForm()      
     return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
+#------------------------------------------------------------------------------------------------
+def profile(request):
+    if request.method == 'POST':
+        profileForm = UserChangeForm(request.POST,instance=request.user)
 
+        if profileForm.is_valid():
+            profileForm.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        profileForm = UserChangeForm(instance=request.user)
 
+    return render(request, 'facades/dashboard.html', {'profileForm': profileForm})
 #------------------------------------------------------------------------------------------------
 def user_logout(request):
     logout(request)

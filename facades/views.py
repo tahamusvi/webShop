@@ -47,11 +47,13 @@ def dashboard(request):
     #cart
     cart = Cart(request)
 
+    profileForm = UserChangeForm(instance=request.user)
+
 
 
 
     # return render(request,'facades/landing.html')
-    return render(request,'facades/dashboard.html',{'wishlistAmount':wishlistAmount,'cart':cart})
+    return render(request,'facades/dashboard.html',{'wishlistAmount':wishlistAmount,'cart':cart,'profileForm':profileForm})
 #----------------------------------------------------------------------------------------------
 def contact(request):
     print("--------------------------")
