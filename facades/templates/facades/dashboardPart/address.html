@@ -4,6 +4,11 @@
 
 <div class="tab-pane fade" id="tab-address" role="tabpanel"
                             aria-labelledby="tab-address-link">
+                            {% if request.user.addresses.all.count == 0 %}
+                            <p>آدرسی ثبت نشده است.</p>
+
+                            <a href="category.html" class="btn btn-outline-primary-2"><span> ثبت آدرس جدید</span><i class="icon-long-arrow-left"></i></a>
+                            {% else %}
                             <p>آدرسی که اینجا ثبت می کنید به صورت پیش فرض برای ارسال محصولات به شما استفاده
                                 می شود.</p>
                             
@@ -13,7 +18,9 @@
                                     <div class="col-lg-12">
                                         <div class="card card-dashboard">
                                             <div class="card-body">
-                                                <h3 class="card-title">آدرس شما</h3><!-- End .card-title -->
+                                                {% if address.current %}
+                                                <h3 class="card-title">آدرس حال حاضر شما</h3><!-- End .card-title -->
+                                                {% endif %}
 
                                                 <p>{{address.user.full_name}}<br>
                                                     {{address.phone_number}}<br>
@@ -26,4 +33,5 @@
                                     </div><!-- End .col-lg-12 -->
                                 </div><!-- End .row -->
                             {% endfor %}
+                            {% endif %}
                         </div><!-- .End .tab-pane -->

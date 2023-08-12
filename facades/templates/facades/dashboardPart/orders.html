@@ -3,7 +3,10 @@
 
 <div class="tab-pane fade" id="tab-orders" role="tabpanel"
                             aria-labelledby="tab-orders-link">
+                            {% if request.user.orders.all.count == 0 %}
                             <p>سفارش جدیدی وجود ندارد</p>
+                            {% else %}
+                            <p>سفارشات :</p>
 
 
                             {% for order in request.user.orders.all %}
@@ -17,7 +20,12 @@
                                                     {{order.get_total_price}} تومان<br>
                                                     {{order.paid_string}}<br>
                                                     {{order.discount_string}}<br>
-                                                    <a href="{% url 'orders:detail' order.id %}">ویرایش <i class="icon-edit"></i></a></p>
+                                                    {% if order.paid %}
+                                                    <a href="{% url 'orders:detail' order.id %}">پیگیری سفارش <i class="icon-jedi-order"></i></a>
+                                                    {% else %}
+                                                    <a href="{% url 'orders:detail' order.id %}">پرداخت <i class="icon-edit"></i></a>
+                                                    {% endif %}
+                                                    </p>
                                             </div><!-- End .card-body -->
                                         </div><!-- End .card-dashboard -->
                                     </div><!-- End .col-lg-12 -->
@@ -25,7 +33,7 @@
                             {% endfor %}
 
 
-
+                            {% endif %}
                             <a href="category.html" class="btn btn-outline-primary-2"><span>رفتن به
                                     فروشگاه</span><i class="icon-long-arrow-left"></i></a>
                         </div><!-- .End .tab-pane -->
