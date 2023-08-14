@@ -5,9 +5,8 @@ from cart.cart import Cart
 from .forms import *
 from django.views.decorators.http import require_POST
 from django.utils import timezone
-
-
-
+from django.contrib import messages
+#-----------------------------------------------------------------------------------
 @login_required
 def order_create(request):
     cart = Cart(request)
@@ -19,7 +18,6 @@ def order_create(request):
         quantity=item['quantity'])
     cart.clear()
     return redirect('orders:detail',order.id)
-
 #-----------------------------------------------------------------------------------
 @login_required
 def detail(request,order_id):

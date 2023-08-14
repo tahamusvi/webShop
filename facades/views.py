@@ -4,18 +4,10 @@ from .models import *
 from accounts.forms import *
 from cart.cart import Cart
 from django.contrib.auth.decorators import login_required
-
 #----------------------------------------------------------------------------------------------
-def HomePage(request):
-    print("--------------------------")
-    # discounted stuff
-    discounted = Product.objects.filter(available=True,discounted=True)
-    # New stuff in website
-    news = Product.objects.filter(available=True)
-    news_list = [s.id for s in news if s.is_new][0:8]
-    news = news.filter(id__in=news_list)
+def InformationsForTemplate(request):
+    Info = {}
     # Categories
-    Categories = Category.objects.filter(is_sub=False)[0:4]
     allCategories = Category.objects.filter(is_sub=False)
     #wishlist
     wishlistAmount = 0
@@ -23,127 +15,64 @@ def HomePage(request):
         wishlistAmount = request.user.wishlist.all().count()
     #Covers
     covers = Cover.objects.all()
+    #forms
+    form = UserLoginForm
+    #cart
+    cart = Cart(request)
+    CartAmount = cart.get_count()
     #forms
     formLogin = UserLoginForm
     formRegister= UserCreationForm
-    #cart
-    cart = Cart(request)
+
+    Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form
+    ,'formLogin':formLogin,'formRegister':formRegister}
+
+    return Info
+#----------------------------------------------------------------------------------------------
+def HomePage(request):
+
+    print("--------------------------")
+    # discounted stuff
+    discounted = Product.objects.filter(available=True,discounted=True)
+    # New stuff in website
+    news = Product.objects.filter(available=True)
+    news_list = [s.id for s in news if s.is_new][0:8]
+    news = news.filter(id__in=news_list)
+    # Categories
+    Categories = Category.objects.filter(is_sub=False)[0:4]
     
+    Info = InformationsForTemplate(request)
+    Info["Categories"] = Categories
+    Info["productsOfDiscount"] = discounted
+    Info["products"] = news
 
-
-
-
-    # return render(request,'facades/landing.html')
-    return render(request,'facades/landing.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'formLogin':formLogin,'formRegister':formRegister})
+    return render(request,'facades/landing.html',Info)
 #----------------------------------------------------------------------------------------------
 @login_required
 def dashboard(request):
-
-    #wishlist
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-    #cart
-    cart = Cart(request)
-
     profileForm = UserChangeForm(instance=request.user)
 
+    Info = InformationsForTemplate(request)
+    Info["profileForm"] = profileForm
 
-
-
-    # return render(request,'facades/landing.html')
-    return render(request,'facades/dashboard.html',{'wishlistAmount':wishlistAmount,'cart':cart,'profileForm':profileForm})
+    return render(request,'facades/dashboard.html',Info)
 #----------------------------------------------------------------------------------------------
 def contact(request):
-    print("--------------------------")
-    # discounted stuff
-    discounted = Product.objects.filter(available=True,discounted=True)
-    # New stuff in website
-    news = Product.objects.filter(available=True)
-    news_list = [s.id for s in news if s.is_new][0:8]
-    news = news.filter(id__in=news_list)
-    # Categories
-    Categories = Category.objects.filter(is_sub=False)[0:4]
-    allCategories = Category.objects.filter(is_sub=False)
-    #wishlist
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-    #Covers
-    covers = Cover.objects.all()
-    #forms
-    form = UserLoginForm
-    #cart
-    cart = Cart(request)
-    CartAmount = cart.get_count()
+    Info = InformationsForTemplate(request)
 
-
-
-
-    # return render(request,'facades/landing.html')
-    return render(request,'facades/contact.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form})
+    return render(request,'facades/contact.html',Info)
 #----------------------------------------------------------------------------------------------
-def aboutUs(request):
-    print("--------------------------")
-    # discounted stuff
-    discounted = Product.objects.filter(available=True,discounted=True)
-    # New stuff in website
-    news = Product.objects.filter(available=True)
-    news_list = [s.id for s in news if s.is_new][0:8]
-    news = news.filter(id__in=news_list)
-    # Categories
-    Categories = Category.objects.filter(is_sub=False)[0:4]
-    allCategories = Category.objects.filter(is_sub=False)
-    #wishlist
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-    #Covers
-    covers = Cover.objects.all()
-    #forms
-    form = UserLoginForm
-    #cart
-    cart = Cart(request)
-    CartAmount = cart.get_count()
+def aboutUs(request):  
+    Info = InformationsForTemplate(request)
 
-
-
-
-    # return render(request,'facades/landing.html')
-    return render(request,'facades/aboutUs.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form})
+    return render(request,'facades/aboutUs.html',Info)
 #----------------------------------------------------------------------------------------------
 def FAQ(request):
-    print("--------------------------")
-    # discounted stuff
-    discounted = Product.objects.filter(available=True,discounted=True)
-    # New stuff in website
-    news = Product.objects.filter(available=True)
-    news_list = [s.id for s in news if s.is_new][0:8]
-    news = news.filter(id__in=news_list)
-    # Categories
-    Categories = Category.objects.filter(is_sub=False)[0:4]
-    allCategories = Category.objects.filter(is_sub=False)
-    #wishlist
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-    #Covers
-    covers = Cover.objects.all()
-    #forms
-    form = UserLoginForm
-    #cart
-    cart = Cart(request)
-    CartAmount = cart.get_count()
-
-
     FAQG = FAQGroup.objects.all()
+    Info = InformationsForTemplate(request)
+    Info["FAQG"] = FAQG
 
-
-    return render(request,'facades/FAQ.html',{'products':news,'productsOfDiscount':discounted,'Categories' : Categories,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form,"FAQG" : FAQG})
+    return render(request,'facades/FAQ.html',Info)
 #----------------------------------------------------------------------------------------------
 from django.core.mail import send_mail
 from .forms import SurveyForm
@@ -170,8 +99,6 @@ def CreateSurvey(request):
             surveyUser.save()
 
             CreateSurvey = True
-    
-
 
     return render(request, 'facades/contact.html', {'form': form,'CreateSurvey':CreateSurvey})
 #----------------------------------------------------------------------------------------------
