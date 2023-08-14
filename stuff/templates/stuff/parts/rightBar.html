@@ -63,7 +63,7 @@
                 </div><!-- End .widget-body -->
             </div><!-- End .collapse -->
         </div><!-- End .widget -->
-    <form method="POST" action="{% url 'stuff:product_search' 1 %}?query={{request.GET.query|default:''}}" enctype="multipart/form-data">{% csrf_token %}
+    <form method="POST" action="{{request.get_full_path}}" enctype="multipart/form-data">{% csrf_token %}
         
         <div class="widget">
             <h3 class="widget-title">

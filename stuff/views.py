@@ -67,6 +67,9 @@ def Category_detail(request,id,page):
     category = get_object_or_404(Category, id=id)
     products = category.products.all()
 
+    filters = filter(request,products)
+    products = filters["product_list"]
+
     paginator = Paginator(products, pagination_amount)
     products = paginator.get_page(page)
 
@@ -87,10 +90,13 @@ def Category_detail(request,id,page):
     CartAmount = cart.get_count()
 
     return render(request,'stuff/bonePage.html',{'products': products,'category':category,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'form':form})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'form':form,'filters':filters})
 #-----------------------------------------------------------------------------------
 def showWishList(request,page):
     wishlistProducts = request.user.wishlist.all()
+
+    filters = filter(request,wishlistProducts)
+    wishlistProducts = filters["product_list"]
 
     paginator = Paginator(wishlistProducts, pagination_amount)
     products = paginator.get_page(page)
@@ -106,28 +112,24 @@ def showWishList(request,page):
     CartAmount = cart.get_count()
 
     return render(request,'stuff/bonePage.html',{'products': products,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'filters':filters})
+
 #-----------------------------------------------------------------------------------
-def product_search(request,page):
+def filter(request,product_list):
     filter_price_option = -1
     brands = []
     rating_list  = []
 
     if(request.method == "POST"):
-        print("----3----------------------------")
-      
-        print(request.POST)
-
-      
         keys = request.POST.keys()
 
+        #get brand id and star ints
         for key in keys:
             if 'brand-' in key:
                 brands.append(int(key[6]))
             if 'cus-rating-' in key:
                 rating_list.append(int(key[11]))  
 
-        
 
         filter_price_option = request.POST.get("filter-price")
         if filter_price_option:
@@ -146,10 +148,9 @@ def product_search(request,page):
 
     filters = {}
     
-    query = request.GET.get('query')
-    product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
     
-    if(filter_price_option):
+    
+    if(filter_price_option != -1 and filter_price_option):
         product_list = product_list.filter(price__gte=filter_price_low, price__lte=filter_price_high)
         filters['price_bool'] = True
         filters['price_high'] = filter_price_high
@@ -164,8 +165,6 @@ def product_search(request,page):
         for brand_id in brands:
             brands_name.append(Brand.objects.get(id=brand_id).name)
         filters['brands'] = brands_name
-        print("brands")
-        print(brands_name)
 
 
 
@@ -181,8 +180,18 @@ def product_search(request,page):
             ratings.append(rate * 20)
         filters['ratings'] = ratings
 
-        print(ratings)
+    filters["product_list"] = product_list
 
+    return filters
+#-----------------------------------------------------------------------------------
+def product_search(request,page):
+    
+
+    query = request.GET.get('query')
+    product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    filters = filter(request,product_list)
+    product_list = filters["product_list"]
 
     paginator = Paginator(product_list, pagination_amount)
     products = paginator.get_page(page)
