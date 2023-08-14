@@ -111,16 +111,23 @@ def showWishList(request,page):
 def product_search(request,page):
     filter_price_option = -1
     brands = []
+    rating_list  = []
 
     if(request.method == "POST"):
         print("----3----------------------------")
       
         print(request.POST)
 
+      
         keys = request.POST.keys()
+
         for key in keys:
             if 'brand-' in key:
                 brands.append(int(key[6]))
+            if 'cus-rating-' in key:
+                rating_list.append(int(key[11]))  
+
+        
 
         filter_price_option = request.POST.get("filter-price")
         if filter_price_option:
@@ -143,7 +150,6 @@ def product_search(request,page):
     product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
     
     if(filter_price_option):
-        print("pirce!!!!!!!!!!!")
         product_list = product_list.filter(price__gte=filter_price_low, price__lte=filter_price_high)
         filters['price_bool'] = True
         filters['price_high'] = filter_price_high
@@ -160,6 +166,23 @@ def product_search(request,page):
         filters['brands'] = brands_name
         print("brands")
         print(brands_name)
+
+
+
+    if rating_list:
+        filter_criteria = Q()
+        for rating in rating_list:
+            filter_criteria |= Q(rating=rating)
+        product_list = product_list.filter(filter_criteria)
+
+        filters['rating_bool'] = True
+        ratings = []
+        for rate in rating_list:
+            ratings.append(rate * 20)
+        filters['ratings'] = ratings
+
+        print(ratings)
+
 
     paginator = Paginator(product_list, pagination_amount)
     products = paginator.get_page(page)

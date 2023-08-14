@@ -5,13 +5,13 @@
     <div class="sidebar sidebar-shop">
     <div class="widget">
             <h3 class="widget-title">
-                <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
+                <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
                     aria-controls="widget-4">
                     فیلتر های اعمال شده:
                 </a>
             </h3><!-- End .widget-title -->
 
-            <div class="collapse show" id="widget-4">
+            <div class="collapse show" id="widget-5">
                 <div class="widget-body">
                     <div class="filter-items">
 
@@ -27,14 +27,32 @@
 
                         {% endif %}
 
-                        <div class="filter-item">
+                        
+                        {% if filters.brand_bool %}
+                            <div class="filter-item">
                                 برند ها:
                             </div><!-- End .filter-item -->
-                        {% if filters.brand_bool %}
                         
                             {% for brand_name in filters.brands %}
                             <div class="filter-item">
                                 {{brand_name}}
+                            </div><!-- End .filter-item -->
+                            {% endfor %}
+
+                        {% endif %}
+
+                        {% if filters.rating_bool %}
+                            <div class="filter-item">
+                                امتیاز ها:
+                            </div><!-- End .filter-item -->
+                        
+                            {% for rate in filters.ratings %}
+                            <div class="filter-item">
+                                <span class="ratings-container">
+                                    <span class="ratings">
+                                        <span class="ratings-val" style="width: {{rate}}%;"></span>
+                                        <!-- End .ratings-val -->
+                                    </span><!-- End .ratings -->
                             </div><!-- End .filter-item -->
                             {% endfor %}
 
@@ -76,8 +94,14 @@
 
 
         <div class="widget">
-            <h3 class="widget-title">قیمت</h3><!-- End .widget-title -->
+            <h3 class="widget-title">
+                <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true"
+                    aria-controls="widget-3">
+                    قیمت
+                </a>
+            </h3><!-- End .widget-title -->
 
+            <div class="collapse show" id="widget-3">
             <div class="widget-body">
                 <div class="filter-items">
                     <div class="filter-item">
@@ -126,8 +150,8 @@
                     </div><!-- End .filter-item -->
                 </div><!-- End .filter-items -->
             </div><!-- End .widget-body -->
+            </div><!-- End .collapse -->
         </div><!-- End .widget -->
-
 
 
         <div class="widget">
@@ -138,8 +162,8 @@
                 <div class="filter-items">
                     <div class="filter-item">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="cus-rating-1"
-                                id="cus-rating-1" >
+                            <input type="checkbox" class="custom-control-input" name="cus-rating-5" value="5"
+                                id="cus-rating-1">
                             <label class="custom-control-label" for="cus-rating-1">
                                 <span class="ratings-container">
                                     <span class="ratings">
@@ -154,7 +178,7 @@
 
                     <div class="filter-item">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input"
+                            <input type="checkbox" class="custom-control-input" name="cus-rating-4" value="4"
                                 id="cus-rating-2">
                             <label class="custom-control-label" for="cus-rating-2">
                                 <span class="ratings-container">
@@ -170,7 +194,7 @@
 
                     <div class="filter-item">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input"
+                            <input type="checkbox" class="custom-control-input" name="cus-rating-3" value="3"
                                 id="cus-rating-3">
                             <label class="custom-control-label" for="cus-rating-3">
                                 <span class="ratings-container">
@@ -186,7 +210,7 @@
 
                     <div class="filter-item">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input"
+                            <input type="checkbox" class="custom-control-input" name="cus-rating-2" value="2"
                                 id="cus-rating-4">
                             <label class="custom-control-label" for="cus-rating-4">
                                 <span class="ratings-container">
@@ -202,7 +226,7 @@
 
                     <div class="filter-item">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input"
+                            <input type="checkbox" class="custom-control-input" name="cus-rating-1" value="1"
                                 id="cus-rating-5">
                             <label class="custom-control-label" for="cus-rating-5">
                                 <span class="ratings-container">
