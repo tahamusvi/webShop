@@ -3,7 +3,32 @@
 
 <aside class="col-lg-3 col-xl-5col order-lg-first">
     <div class="sidebar sidebar-shop">
-    
+    <div class="widget">
+            <h3 class="widget-title">
+                <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
+                    aria-controls="widget-4">
+                    فیلتر های اعمال شده:
+                </a>
+            </h3><!-- End .widget-title -->
+
+            <div class="collapse show" id="widget-4">
+                <div class="widget-body">
+                    <div class="filter-items">
+                        
+                        <div class="filter-item">
+                            قیمت سقف : {{filters.price_high}} تومان
+                        </div><!-- End .filter-item -->
+
+                        <div class="filter-item">
+                            قیمت کف : {{filters.price_low}} تومان
+                        </div><!-- End .filter-item -->
+                        
+                        
+
+                    </div><!-- End .filter-items -->
+                </div><!-- End .widget-body -->
+            </div><!-- End .collapse -->
+        </div><!-- End .widget -->
     <form method="POST" action="{% url 'stuff:product_search' 1 %}?query={{request.GET.query|default:''}}">{% csrf_token %}
         
         <div class="widget">

@@ -128,14 +128,15 @@ def product_search(request,page):
            filter_price_low = 2000000
         
 
-    
+    filters = {}
     
     query = request.GET.get('query')
     product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
     
     if(filter_price_option != -1):
         product_list = product_list.filter(price__gte=filter_price_low, price__lte=filter_price_high) 
-        
+        filters['price_high'] = filter_price_high
+        filters['price_low'] = filter_price_low
 
     paginator = Paginator(product_list, pagination_amount)
     products = paginator.get_page(page)
@@ -155,5 +156,5 @@ def product_search(request,page):
 
 
     return render(request, 'stuff/bonePage.html', {'products': products,'query':query,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart})
+    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'filters':filters})
 #-----------------------------------------------------------------------------------
