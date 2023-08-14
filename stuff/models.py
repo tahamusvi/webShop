@@ -4,6 +4,19 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.validators import MaxValueValidator, MinValueValidator
 #-----------------------------------------------------------------------------------
+class Brand(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200,unique=True)
+    logo = models.ImageField(upload_to='web_shop/logos/')
+    description = models.TextField()
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse('stuff:product_detail',args=[self.slug,self.id])
+#-----------------------------------------------------------------------------------
 class Category(models.Model):
     sub_category = models.ForeignKey('self',on_delete=models.CASCADE, related_name='scategory',null=True,blank=True)
     is_sub = models.BooleanField(default=False)
@@ -24,6 +37,7 @@ class Category(models.Model):
 #-----------------------------------------------------------------------------------
 class Product(models.Model):
     category = models.ManyToManyField(Category,related_name='products')
+    brand = models.ForeignKey(Brand,related_name='products',on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,unique=True)
     description = models.TextField()
@@ -66,17 +80,5 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"{self.product} - {self.id}"
-#-----------------------------------------------------------------------------------
-class Brand(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200,unique=True)
-    logo = models.ImageField(upload_to='web_shop/logos/')
-    description = models.TextField()
-    created = models.DateField(auto_now_add=True)
 
-    def __str__(self):
-        return self.name
-
-    # def get_absolute_url(self):
-    #     return reverse('stuff:product_detail',args=[self.slug,self.id])
 #-----------------------------------------------------------------------------------
