@@ -1,0 +1,40 @@
+<div class="widget widget-categories">
+            <h3 class="widget-title">دسته بندی ها</h3><!-- End .widget-title -->
+
+            <div class="widget-body">
+                <div class="accordion" id="widget-cat-acc">
+
+                    {% for category in allCategories %}
+                    {% if not category.sub %}
+                    <div class="acc-item">
+                        <h5>
+                            <a class="collapsed" role="button" data-toggle="collapse"
+                                href="#collapse-{{category.id}}" aria-expanded="false"
+                                aria-controls="collapse-{{category.id}}">
+                                {{category.name}}
+                            </a>
+                        </h5>
+
+                        
+                        
+                        <div id="collapse-{{category.id}}" class="collapse" data-parent="#widget-cat-acc">
+                            <div class="collapse-wrap">
+                                <ul>
+                                    {% for sb in category.scategory.all %}
+                                        <li><a href="{{sb.get_absolute_url}}">{{sb.name}}</a></li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div><!-- End .collapse-wrap -->
+                        </div>
+                        
+
+                    </div><!-- End .acc-item -->
+                    {% endif %}
+                    {% endfor %}
+
+
+
+                </div><!-- End .accordion -->
+            </div><!-- End .widget-body -->
+        </div><!-- End .widget -->

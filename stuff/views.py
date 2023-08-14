@@ -109,8 +109,33 @@ def showWishList(request,page):
     'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart})
 #-----------------------------------------------------------------------------------
 def product_search(request,page):
+    filter_price_option = -1
+
+    if(request.method == "POST"):
+       print("----3----------------------------")
+       print(request.POST)
+
+       filter_price_option = int(request.POST["filter-price"])
+
+       filter_price_high = 250 * 2 ** (filter_price_option - 1) * 1000
+       filter_price_low = filter_price_high // 2
+
+       if(filter_price_option == 1):
+           filter_price_low = 0
+
+       if(filter_price_option == 5):
+           filter_price_high = 10000000
+           filter_price_low = 2000000
+        
+
+    
+    
     query = request.GET.get('query')
     product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    
+    if(filter_price_option != -1):
+        product_list = product_list.filter(price__gte=filter_price_low, price__lte=filter_price_high) 
+        
 
     paginator = Paginator(product_list, pagination_amount)
     products = paginator.get_page(page)
@@ -127,6 +152,7 @@ def product_search(request,page):
     #cart
     cart = Cart(request)
     CartAmount = cart.get_count()
+
 
     return render(request, 'stuff/bonePage.html', {'products': products,'query':query,'num_pages':paginator.num_pages,'paginator':paginator,
     'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart})

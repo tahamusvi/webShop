@@ -3,47 +3,9 @@
 
 <aside class="col-lg-3 col-xl-5col order-lg-first">
     <div class="sidebar sidebar-shop">
-        <div class="widget widget-categories">
-            <h3 class="widget-title">دسته بندی ها</h3><!-- End .widget-title -->
-
-            <div class="widget-body">
-                <div class="accordion" id="widget-cat-acc">
-
-                    {% for category in allCategories %}
-                    {% if not category.sub %}
-                    <div class="acc-item">
-                        <h5>
-                            <a class="collapsed" role="button" data-toggle="collapse"
-                                href="#collapse-{{category.id}}" aria-expanded="false"
-                                aria-controls="collapse-{{category.id}}">
-                                {{category.name}}
-                            </a>
-                        </h5>
-
-                        
-                        
-                        <div id="collapse-{{category.id}}" class="collapse" data-parent="#widget-cat-acc">
-                            <div class="collapse-wrap">
-                                <ul>
-                                    {% for sb in category.scategory.all %}
-                                        <li><a href="{{sb.get_absolute_url}}">{{sb.name}}</a></li>
-                                    {% endfor %}
-
-                                </ul>
-                            </div><!-- End .collapse-wrap -->
-                        </div>
-                        
-
-                    </div><!-- End .acc-item -->
-                    {% endif %}
-                    {% endfor %}
-
-
-
-                </div><!-- End .accordion -->
-            </div><!-- End .widget-body -->
-        </div><!-- End .widget -->
-
+    
+    <form method="POST" action="{% url 'stuff:product_search' 1 %}?query={{request.GET.query|default:''}}">{% csrf_token %}
+        
         <div class="widget">
             <h3 class="widget-title">
                 <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
@@ -71,6 +33,7 @@
             </div><!-- End .collapse -->
         </div><!-- End .widget -->
 
+
         <div class="widget">
             <h3 class="widget-title">قیمت</h3><!-- End .widget-title -->
 
@@ -79,8 +42,8 @@
                     <div class="filter-item">
                         <div class="custom-control custom-radio">
                             <input type="radio" class="custom-control-input" id="price-1"
-                                name="filter-price">
-                            <label class="custom-control-label" for="price-1">زیر 25,000
+                                name="filter-price" value="1">
+                            <label class="custom-control-label" for="price-1">زیر 250,000
                                 تومان</label>
                         </div><!-- End .custom-checkbox -->
                     </div><!-- End .filter-item -->
@@ -88,41 +51,43 @@
                     <div class="filter-item">
                         <div class="custom-control custom-radio">
                             <input type="radio" class="custom-control-input" id="price-2"
-                                name="filter-price">
-                            <label class="custom-control-label" for="price-2">بین 25,000 تا
-                                50,000 تومان</label>
+                                name="filter-price" value="2">
+                            <label class="custom-control-label" for="price-2">بین 250,000 تا
+                                500,000 تومان</label>
                         </div><!-- End .custom-checkbox -->
                     </div><!-- End .filter-item -->
 
                     <div class="filter-item">
                         <div class="custom-control custom-radio">
                             <input type="radio" class="custom-control-input" id="price-3"
-                                name="filter-price">
-                            <label class="custom-control-label" for="price-3">بین 50,000 تا
-                                100,000 تومان</label>
+                                name="filter-price" value="3">
+                            <label class="custom-control-label" for="price-3">بین 500,000 تا
+                                1,000,000 تومان</label>
                         </div><!-- End .custom-checkbox -->
                     </div><!-- End .filter-item -->
 
                     <div class="filter-item">
                         <div class="custom-control custom-radio">
                             <input type="radio" class="custom-control-input" id="price-4"
-                                name="filter-price">
-                            <label class="custom-control-label" for="price-4">بین 100,000 تا
-                                200,000 تومان</label>
+                                name="filter-price" value="4">
+                            <label class="custom-control-label" for="price-4">بین 1,000,000 تا
+                                2,000,000 تومان</label>
                         </div><!-- End .custom-checkbox -->
                     </div><!-- End .filter-item -->
 
                     <div class="filter-item">
                         <div class="custom-control custom-radio">
                             <input type="radio" class="custom-control-input" id="price-5"
-                                name="filter-price">
+                                name="filter-price" value="5">
                             <label class="custom-control-label" for="price-5">بیش تر از
-                                200,000</label>
+                                2,000,000</label>
                         </div><!-- End .custom-checkbox -->
                     </div><!-- End .filter-item -->
                 </div><!-- End .filter-items -->
             </div><!-- End .widget-body -->
         </div><!-- End .widget -->
+
+
 
         <div class="widget">
             <h3 class="widget-title">امتیاز مشتری</h3><!-- End .widget-title -->
@@ -213,22 +178,9 @@
             </div><!-- End .widget-body -->
         </div><!-- End .widget -->
 
-
-        <div class="widget widget-banner-sidebar">
-            <div class="banner-sidebar-title" dir="ltr">218 x 430px</div>
-
-
-            <!-- End .ad-title -->
-
-            <div class="banner-sidebar banner-overlay">
-                <a href="#">
-                    <img src="{% static 'stuff/images/banners/6.jpg' %}" alt="بنر">
-                </a>
-            </div><!-- End .banner-ad -->
+        <button type="submit" class="btn-product btn-cart"><span>اعمال فیلتر ها</span></button>
+        </form>
 
 
-
-
-        </div><!-- End .widget -->
     </div><!-- End .sidebar sidebar-shop -->
 </aside><!-- End .col-lg-3 -->

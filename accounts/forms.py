@@ -42,6 +42,7 @@ class UserChangeForm(forms.ModelForm):
 
 #------------------------------------------------------------------------------------------------
 class AddressForm(forms.ModelForm):
+    
     class Meta:
         model = Address
         fields = ['text', 'postal_code', 'city', 'phone_number', 'current']
