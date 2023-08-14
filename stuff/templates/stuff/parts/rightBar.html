@@ -14,22 +14,38 @@
             <div class="collapse show" id="widget-4">
                 <div class="widget-body">
                     <div class="filter-items">
+
+                        {% if filters.price_bool %}
                         
-                        <div class="filter-item">
-                            قیمت سقف : {{filters.price_high}} تومان
-                        </div><!-- End .filter-item -->
+                            <div class="filter-item">
+                                قیمت سقف : {{filters.price_high}} تومان
+                            </div><!-- End .filter-item -->
+
+                            <div class="filter-item">
+                                قیمت کف : {{filters.price_low}} تومان
+                            </div><!-- End .filter-item -->
+
+                        {% endif %}
 
                         <div class="filter-item">
-                            قیمت کف : {{filters.price_low}} تومان
-                        </div><!-- End .filter-item -->
+                                برند ها:
+                            </div><!-- End .filter-item -->
+                        {% if filters.brand_bool %}
                         
+                            {% for brand_name in filters.brands %}
+                            <div class="filter-item">
+                                {{brand_name}}
+                            </div><!-- End .filter-item -->
+                            {% endfor %}
+
+                        {% endif %}
                         
 
                     </div><!-- End .filter-items -->
                 </div><!-- End .widget-body -->
             </div><!-- End .collapse -->
         </div><!-- End .widget -->
-    <form method="POST" action="{% url 'stuff:product_search' 1 %}?query={{request.GET.query|default:''}}">{% csrf_token %}
+    <form method="POST" action="{% url 'stuff:product_search' 1 %}?query={{request.GET.query|default:''}}" enctype="multipart/form-data">{% csrf_token %}
         
         <div class="widget">
             <h3 class="widget-title">
@@ -46,7 +62,7 @@
                         {% for brand in brands.all %}
                         <div class="filter-item">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="brand-{{brand.id}}">
+                                <input type="checkbox" class="custom-control-input" id="brand-{{brand.id}}" name="brand-{{brand.id}}" value="{{brand.id}}">
                                 <label class="custom-control-label" for="brand-{{brand.id}}">{{brand.name}}</label>
                             </div><!-- End .custom-checkbox -->
                         </div><!-- End .filter-item -->
@@ -118,11 +134,12 @@
             <h3 class="widget-title">امتیاز مشتری</h3><!-- End .widget-title -->
 
             <div class="widget-body">
+
                 <div class="filter-items">
                     <div class="filter-item">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input"
-                                id="cus-rating-1">
+                            <input type="checkbox" class="custom-control-input" name="cus-rating-1"
+                                id="cus-rating-1" >
                             <label class="custom-control-label" for="cus-rating-1">
                                 <span class="ratings-container">
                                     <span class="ratings">

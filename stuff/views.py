@@ -110,22 +110,31 @@ def showWishList(request,page):
 #-----------------------------------------------------------------------------------
 def product_search(request,page):
     filter_price_option = -1
+    brands = []
 
     if(request.method == "POST"):
-       print("----3----------------------------")
-       print(request.POST)
+        print("----3----------------------------")
+      
+        print(request.POST)
 
-       filter_price_option = int(request.POST["filter-price"])
+        keys = request.POST.keys()
+        for key in keys:
+            if 'brand-' in key:
+                brands.append(int(key[6]))
 
-       filter_price_high = 250 * 2 ** (filter_price_option - 1) * 1000
-       filter_price_low = filter_price_high // 2
+        filter_price_option = request.POST.get("filter-price")
+        if filter_price_option:
+            filter_price_option = int(filter_price_option)
 
-       if(filter_price_option == 1):
-           filter_price_low = 0
+            filter_price_high = 250 * 2 ** (filter_price_option - 1) * 1000
+            filter_price_low = filter_price_high // 2
 
-       if(filter_price_option == 5):
-           filter_price_high = 10000000
-           filter_price_low = 2000000
+            if(filter_price_option == 1):
+                filter_price_low = 0
+
+            if(filter_price_option == 5):
+                filter_price_high = 10000000
+                filter_price_low = 2000000
         
 
     filters = {}
@@ -133,10 +142,24 @@ def product_search(request,page):
     query = request.GET.get('query')
     product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
     
-    if(filter_price_option != -1):
-        product_list = product_list.filter(price__gte=filter_price_low, price__lte=filter_price_high) 
+    if(filter_price_option):
+        print("pirce!!!!!!!!!!!")
+        product_list = product_list.filter(price__gte=filter_price_low, price__lte=filter_price_high)
+        filters['price_bool'] = True
         filters['price_high'] = filter_price_high
         filters['price_low'] = filter_price_low
+
+
+
+    if(len(brands) != 0):
+        product_list = product_list.filter(brand_id__in=brands)
+        filters['brand_bool'] = True
+        brands_name = []
+        for brand_id in brands:
+            brands_name.append(Brand.objects.get(id=brand_id).name)
+        filters['brands'] = brands_name
+        print("brands")
+        print(brands_name)
 
     paginator = Paginator(product_list, pagination_amount)
     products = paginator.get_page(page)
