@@ -23,7 +23,7 @@ class Survey(models.Model):
     text = models.TextField()
 
     def __str__(self):
-        return self.name
+        return f"{self.email} - {self.name}"
 #----------------------------------------------------------------------------------------------
 class FAQGroup(models.Model):
     bigTitle = models.CharField(max_length=100)

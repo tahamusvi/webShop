@@ -185,8 +185,6 @@ def filter(request,product_list):
     return filters
 #-----------------------------------------------------------------------------------
 def product_search(request,page):
-    
-
     query = request.GET.get('query')
     product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
