@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from stuff.models import Product,Category
 from .models import *
 from accounts.forms import *
@@ -49,11 +49,18 @@ def HomePage(request):
     return render(request,'facades/landing.html',Info)
 #----------------------------------------------------------------------------------------------
 @login_required
-def dashboard(request):
+def dashboard(request,address_id = None):
     profileForm = UserChangeForm(instance=request.user)
     addressForm = AddressForm()
-
     Info = InformationsForTemplate(request)
+
+    if(address_id):
+        address = get_object_or_404(Address,id=address_id)
+        EditAddressForm = AddressForm(instance=address)
+        Info["EditAddressForm"] = EditAddressForm
+        Info["EditAddressId"] = address_id
+
+    
     Info["profileForm"] = profileForm
     Info["addressForm"] = addressForm
 

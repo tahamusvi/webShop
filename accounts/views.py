@@ -130,3 +130,14 @@ def delete_address(request,address_id):
     messages.success(request,'با موفقیت آدرس حذف شد.','background-color: #00ac09;')
     return redirect('facades:dashboard')
 #------------------------------------------------------------------------------------------------
+def edit_address(request,address_id):
+    address = get_object_or_404(Address,id=address_id)
+    if request.method == 'POST':
+        addressForms = AddressForm(request.POST,instance=address)
+        if addressForms.is_valid():
+            addressForms.save()
+            messages.success(request, 'آدرس با موفقیت تغییر کرد')
+            return redirect('facades:dashboard')
+
+    return redirect('facades:dashboard')
+#------------------------------------------------------------------------------------------------

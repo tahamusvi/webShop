@@ -21,7 +21,7 @@
                                                     {{order.paid_string}}<br>
                                                     {{order.discount_string}}<br>
                                                     {% if order.paid %}
-                                                    <a href="{% url 'orders:detail' order.id %}">پیگیری سفارش <i class="icon-jedi-order"></i></a>
+                                                    <a href="{% url 'orders:detail' order.id %}">پیگیری سفارش <i class="icon-cog"></i></a>
                                                     {% else %}
                                                     <a href="{% url 'orders:detail' order.id %}">پرداخت <i class="icon-edit"></i></a>
                                                     {% endif %}
@@ -34,6 +34,5 @@
 
 
                             {% endif %}
-                            <a href="category.html" class="btn btn-outline-primary-2"><span>رفتن به
-                                    فروشگاه</span><i class="icon-long-arrow-left"></i></a>
+                            
                         </div><!-- .End .tab-pane -->

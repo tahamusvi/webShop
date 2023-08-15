@@ -37,8 +37,25 @@
                 <div class="col-md-8 col-lg-9">
                     <div class="tab-content">
 
+                        {% if EditAddressForm %}
+                            <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
+                            aria-labelledby="tab-dashboard-link">
+                            <form action="{% url 'accounts:edit_address' EditAddressId %}" method="post"> {% csrf_token %}
 
-                        {% include "facades/dashboardPart/mainPane.html" %}
+                                {{EditAddressForm}}
+
+                                <button type="submit" class="btn btn-outline-primary-2 float-right">
+                                    <span>ذخیره آدرس</span>
+                                    <i class="icon-long-arrow-left"></i>
+                                </button>
+                            </form>
+                        </div><!-- .End .tab-pane -->
+                        {% else %}
+                            {% include "facades/dashboardPart/mainPane.html" %}
+                        {% endif %}
+
+
+                        
 
                         {% include "facades/dashboardPart/orders.html" %}
 

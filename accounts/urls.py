@@ -10,6 +10,7 @@ urlpatterns = [
     path('profile/',profile, name='profile'),
     path('add_address/',add_address, name='add_address'),
     path('delete_address/<int:address_id>/',delete_address, name='delete_address'),
+    path('edit_address/<int:address_id>/',edit_address, name='edit_address'),
 
     path('AddToWish/<int:id>/',AddToWish, name='AddToWish'),
     path('RomeveToWish/<int:id>/',RomeveToWish, name='RomeveToWish'),
