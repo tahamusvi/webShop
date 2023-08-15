@@ -36,6 +36,8 @@
                                 <div class="trackorder-detail">
                                     <div>بازه زمانی تحویل سفارش : 1401/09/20 - 12:00 تا 15:00</div>
                                     <div>نام تحویل گیرنده سفارش : <span>{{request.user.full_name}}</span></div>
+                                    </br>
+                                    <div><a href="{% url 'orders:factor' order.id %}"><span>دریافت فاکتور</span></a></div>
                                 </div>
                                 <h2 class="trackorder-id">سفارش {{order.get_order_number}}#</h2>
                             </div>
@@ -77,6 +79,8 @@
                     </div>
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
+
+            
 
 
 

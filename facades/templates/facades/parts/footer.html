@@ -10,7 +10,7 @@
                     <div class="widget widget-about">
                         <img src="{% static 'facades/images/logi.png' %}" class="footer-logo" alt="Footer Logo"
                             width="105" height="25">
-                        <p>از تنوع محصولات ما لذت ببرید، با قیمت و کیفیتی که شما مستحق هستید.</p>
+                        <p>از تنوع محصولات ما لذت ببرید، با قیمت و کیفیتی که انتظار دارید خرید کنید.</p>
 
                         <div class="social-icons">
                             <a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
@@ -55,10 +55,13 @@
                         <h4 class="widget-title">حساب کاربری</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="#">ورود</a></li>
-                            <li><a href="cart.html">سبد خرید</a></li>
-                            <li><a href="#">لیست علاقه مندی ها</a></li>
-                            <li><a href="#">پیگیری سفارشات</a></li>
+                            {% if request.user.is_authenticated %}
+                            {% else %}  
+                            <li><a href="{% url "accounts:login" %}">ورود</a></li>
+                            {% endif %}
+                            <li><a href="{% url "cart:detail" %}">سبد خرید</a></li>
+                            <li><a href="{% url "stuff:showWishList" 1 %}">لیست علاقه مندی ها</a></li>
+                            <li><a href="{% url "facades:dashboard" %}">پیگیری سفارشات</a></li>
                             <li><a href="#">راهنما</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->

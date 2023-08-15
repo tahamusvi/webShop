@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from accounts.models import Address
 from stuff.models import Product
 from django.core.validators import MinValueValidator,MaxValueValidator
 from facades.utils import jalali_converter
@@ -15,6 +16,8 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     discount = models.IntegerField(blank=True,null=True,default=None)
+
+    address = models.ForeignKey(Address,on_delete=models.CASCADE)
 
     processed = models.BooleanField(default=False)
     packing = models.BooleanField(default=False) 
@@ -44,6 +47,12 @@ class Order(models.Model):
             discount_price = (self.discount/100)* total
             return total - discount_price
         return total
+
+    def tax(self):
+        return 9 * self.get_total_price() / 100
+
+    def taxAndTotal(self):
+        return self.get_total_price() + self.tax()
     
     def shamsi_date(self):
         return jalali_converter(self.created)

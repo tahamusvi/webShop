@@ -46,6 +46,14 @@ def coupon_apply(request,order_id):
     return redirect('orders:detail',order_id)
 
 #-----------------------------------------------------------------------------------
+def factor(request,order_id):
+    form = CouponForm
+    order = get_object_or_404(Order,id=order_id)
+    if (order.user != request.user) and not(request.user.is_admin):
+        return render(request,'facades/404.html',{'order':order})
+    if order.paid :
+        return render(request,'orders/factor.html',{'order':order})
+    return render(request,'orders/checkout.html',{'order':order,'form':form})
 #-----------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------
 # from django.http import HttpResponse

@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+
+<!-- Mirrored from filenter.ir/molla/invoice-template/invoice-template.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 May 2023 12:28:23 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>قالب Molla - قالب بوت استرپ فروشگاهی</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="../assets/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="../assets/images/icons/safari-pinned-tab.html" color="#666666">
+    <link rel="shortcut icon" href="../assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="../assets/images/icons/browserconfig.html">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{% static 'facades/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'facades/css/bootstrap-rtl.min.css' %}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static 'facades/css/style.css' %}">
+</head>
+
+<body>
+    <!-- invoice start-->
+    <section class="invoice1">
+        <div class="container ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="invoice-popup overflow-auto">
+                        <div>
+                            <div class="row invoice-header">
+                                <div class="col-md-6 ">
+                                    <div class="header-invoice-right">
+                                        <div class="brand-logo">
+                                            <a href="../index-1.html">
+                                                <img src="../assets/images/logo.png" alt=''>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="header-invoice-left">
+                                        <ul>
+                                            <li>
+                                                <h2>گیزموشاپ</h2>
+                                            </li>
+                                            <li>فروشگاه اینترنتی گیزموشاپ - تهران</li>
+                                            <li>تماس با ما : 02155667788</li>
+                                            <li>GizmoShop@gmail.com</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-breadcrumb">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="breadcrumb-right">
+                                            <ul>
+                                                <li>نام مشتری : <span>{{order.user.full_name}}</span></li>
+                                                <li>آدرس : <span>{{order.address.text}}</span></li>
+                                                <li>شماره تماس : <span>{{order.address.phone_number}}</span></li>
+                                                <li>ایمیل : <span>{{order.user.email}}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="breadcrumb-left">
+                                            <ul>
+                                                <li>تاریخ فاکتور : <span>{{order.shamsi_date}}</span></li>
+                                                <li>شماره فاکتور : <span>{{order.get_order_number}}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive-md">
+                                <table class="invoice-table ">
+                                    <thead>
+                                        <tr>
+                                            <th>شماره</th>
+                                            <th>جزئیات آیتم</th>
+                                            <th>تعداد</th>
+                                            <th>قیمت</th>
+                                            <th>مجموع</th>
+                                        </tr>
+                                    </thead>
+                                                
+                                                
+                                    {% for item in order.items.all %}        
+                                    <tbody>
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td>
+                                                <h3>
+                                                    {{item.product}}
+                                                </h3>
+                                            </td>
+                                            <td>{{item.quantity}}</td>
+                                            <td>{{item.product.discounted_price}} تومان</td>
+                                            <td>500,000 تومان</td>
+                                        </tr>
+                                        {% endfor %}
+                                        
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">جمع فاکتور</td>
+                                            <td>{{order.get_total_price}} تومان</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">مالیات بر ارزش افزوده</td>
+                                            <td>{{order.tax}} تومان</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">مبلغ نهایی</td>
+                                            <td>{{order.taxAndTotal}} تومان</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="row print-bar justify-content-end">
+                                    <div class="col-md-6">
+                                        <div class="printbar-right">
+                                            <button id="printinvoice" class="btn btn-solid btn-md ">
+                                                چاپ فاکتور
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- invoice end -->
+
+    <!-- Plugins JS File -->
+    <script src="{% static 'facades/js/jquery.min.js' %}"></script>
+    <script src="{% static 'facades/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'facades/js/jquery.hoverIntent.min.js' %}"></script>
+    <script src="{% static 'facades/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'facades/js/superfish.min.js' %}"></script>
+    <script src="{% static 'facades/js/owl.carousel.min.js' %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static 'facades/js/main.js' %}"></script>
+	
+	<script src="../../../files-de.rtl-theme.com/jsdemos/21f532f8f7c2f65db1d73263889e5599f01b7444a116.js?pid=144791"></script>
+</body>
+
+
+<!-- Mirrored from filenter.ir/molla/invoice-template/invoice-template.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 May 2023 12:28:23 GMT -->
+</html>
