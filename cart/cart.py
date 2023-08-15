@@ -1,4 +1,5 @@
 CART_SESSION_ID = 'cart'
+DISCOUNT_SESSION_ID = 'discount'
 from stuff.models import Product
 
 
@@ -9,6 +10,11 @@ class Cart:
         if not cart:
             cart = self.session[CART_SESSION_ID] = {}
         self.cart = cart
+
+        # discount = self.session.get(DISCOUNT_SESSION_ID)
+        # if not discount:
+        #     discount = self.session[DISCOUNT_SESSION_ID] = {}
+        # self.discount = discount
 
     def remove(self,product):
         product_id = str(product.id)
@@ -24,6 +30,23 @@ class Cart:
             self.cart[product_id] = {'quantity':0,'price':str(product.price)}
         self.cart[product_id]['quantity'] += quantity
         self.save()
+
+    # def apply_coupon(self,coupon):
+    #     coupon_str = str(coupon.code)
+
+    #     if coupon_str not in self.discount:
+    #         self.discount[coupon_str] = {'active':1,'discount':str(coupon.discount)}
+    #     self.save()
+
+    # def unactive_coupon(self,coupon):
+    #     coupon_str = str(coupon.code)
+
+    #     if coupon_str in self.discount:
+    #         self.discount[coupon_str] = {'active':0,'discount':str(coupon.discount)}
+        
+    #     self.save()
+
+
 
     def save(self):
         self.session.modified = True
@@ -41,7 +64,11 @@ class Cart:
 
 
     def get_total_price(self):
-        return sum(int(item['price'])*item['quantity'] for item in self.cart.values())
+        total = sum(int(item['price'])*item['quantity'] for item in self.cart.values())
+        # if self.discount:
+        #     discount_price = (self.discount/100)* total
+        #     return total - discount_price
+        return total
         
     def get_total_count(self):
         return sum(item['quantity'] for item in self.cart.values())    

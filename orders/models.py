@@ -5,11 +5,6 @@ from stuff.models import Product
 from django.core.validators import MinValueValidator,MaxValueValidator
 from facades.utils import jalali_converter
 
-
-
-
-
-
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='orders')
     created = models.DateTimeField(auto_now_add=True)
@@ -80,7 +75,6 @@ class OrderItem(models.Model):
     def get_cost(self):
         return self.price*self.quantity
 #-----------------------------------------------------------------------------------
-
 class Coupon(models.Model):
     code = models.CharField(max_length=30,unique=True)
     valid_from = models.DateTimeField()
