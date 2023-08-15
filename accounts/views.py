@@ -115,10 +115,12 @@ def add_address(request):
         form = AddressForm(request.POST)
         if form.is_valid():
             address = form.save(commit=False)
+            address.phone_number = request.user.phoneNumber
             address.user = request.user
             address.save()
+            messages.success(request, 'آدرس با موفقیت ثبت شد.', 'success')
             return redirect('facades:dashboard')
     else:
         form = AddressForm()
-    return render(request, 'accounts/add_address.html', {'form': form})
+    return redirect('facades:dashboard')
 #------------------------------------------------------------------------------------------------

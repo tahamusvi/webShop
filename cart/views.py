@@ -19,19 +19,22 @@ def detail(request):
 
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
-
-@require_POST
 def cart_add(request,product_id):
     cart = Cart(request)
     product = get_object_or_404(Product,id=product_id)
-    print(product)
-    form = CartAddForm(request.POST)
-    print(form.errors)
-    if form.is_valid():
-        cd = form.cleaned_data
-        cart.add(product=product,quantity=cd['quantity'])
+    if(request.method == "POST"):
+        
+        form = CartAddForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            cart.add(product=product,quantity=cd['quantity'])
+            messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: #00ac09;')
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        cart.add(product=product,quantity=1)
         messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: #00ac09;')
-    return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER'))
+
 
 #-----------------------------------------------------------------------------------
 

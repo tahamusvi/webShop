@@ -90,7 +90,7 @@
                         </div><!-- End .product-price -->
                     </div><!-- End .product-body -->
                     <div class="product-action">
-                        <a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+                        <a href="{% url 'cart:cart_add' product.id %}" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
                     </div><!-- End .product-action -->
                 </div><!-- End .product -->
 

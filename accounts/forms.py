@@ -42,7 +42,11 @@ class UserChangeForm(forms.ModelForm):
 
 #------------------------------------------------------------------------------------------------
 class AddressForm(forms.ModelForm):
+    postal_code = forms.CharField(label="کد پستی", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    text = forms.CharField(label="آدرس", max_length=400, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    city = forms.CharField(label="شهر", max_length=400, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
     
     class Meta:
         model = Address
-        fields = ['text', 'postal_code', 'city', 'phone_number', 'current']
+        fields = ['text', 'postal_code', 'city']

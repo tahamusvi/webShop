@@ -51,9 +51,11 @@ def HomePage(request):
 @login_required
 def dashboard(request):
     profileForm = UserChangeForm(instance=request.user)
+    addressForm = AddressForm()
 
     Info = InformationsForTemplate(request)
     Info["profileForm"] = profileForm
+    Info["addressForm"] = addressForm
 
     return render(request,'facades/dashboard.html',Info)
 #----------------------------------------------------------------------------------------------

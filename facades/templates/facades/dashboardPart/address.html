@@ -7,7 +7,8 @@
                             {% if request.user.addresses.all.count == 0 %}
                             <p>آدرسی ثبت نشده است.</p>
 
-                            <a href="category.html" class="btn btn-outline-primary-2"><span> ثبت آدرس جدید</span><i class="icon-long-arrow-left"></i></a>
+                            
+                            
                             {% else %}
                             <p>آدرسی که اینجا ثبت می کنید به صورت پیش فرض برای ارسال محصولات به شما استفاده
                                 می شود.</p>
@@ -34,4 +35,5 @@
                                 </div><!-- End .row -->
                             {% endfor %}
                             {% endif %}
+                            <a id="tab-add-address-link" href="#tab-add-address" aria-controls="tab-add-address" role="tab"  data-toggle="tab" class="btn btn-outline-primary-2"><span> ثبت آدرس جدید</span><i class="icon-long-arrow-left"></i></a>
                         </div><!-- .End .tab-pane -->

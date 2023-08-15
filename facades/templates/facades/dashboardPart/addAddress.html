@@ -1,0 +1,15 @@
+{% load static %}
+
+
+<div class="tab-pane fade" id="tab-add-address" role="tabpanel"
+                            aria-labelledby="tab-account-link">
+                            <form action="{% url 'accounts:add_address' %}" method="post"> {% csrf_token %}
+
+                                {{addressForm}}
+
+                                <button type="submit" class="btn btn-outline-primary-2 float-right">
+                                    <span>ذخیره آدرس</span>
+                                    <i class="icon-long-arrow-left"></i>
+                                </button>
+                            </form>
+                        </div><!-- .End .tab-pane -->
