@@ -29,6 +29,7 @@
                                                     {{address.postal_code}}<br>
                                                     {{address.text}}<br>
                                                     <a href="#">ویرایش <i class="icon-edit"></i></a></p>
+                                                    <a href="{% url 'accounts:delete_address' address.id %}" style="color: red;"> حذف <i class="icon-cog"></i></a></p>
                                             </div><!-- End .card-body -->
                                         </div><!-- End .card-dashboard -->
                                     </div><!-- End .col-lg-12 -->

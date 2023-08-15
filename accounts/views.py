@@ -124,3 +124,9 @@ def add_address(request):
         form = AddressForm()
     return redirect('facades:dashboard')
 #------------------------------------------------------------------------------------------------
+def delete_address(request,address_id):
+    address = get_object_or_404(Address,id=address_id)
+    address.delete()
+    messages.success(request,'با موفقیت آدرس حذف شد.','background-color: #00ac09;')
+    return redirect('facades:dashboard')
+#------------------------------------------------------------------------------------------------
