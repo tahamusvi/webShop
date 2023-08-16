@@ -33,7 +33,13 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('stuff:category_detail',args=[self.id,1])
+#-----------------------------------------------------------------------------------        
+class Color(models.Model):
+    name = models.CharField(max_length=50)
+    code = models.CharField(max_length=6)
 
+    def __str__(self):
+        return self.name
 #-----------------------------------------------------------------------------------
 class Product(models.Model):
     category = models.ManyToManyField(Category,related_name='products')
@@ -47,6 +53,8 @@ class Product(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     rating = models.FloatField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
+    colors = models.ManyToManyField(Color)
+
 
     discount = models.IntegerField(default=0)
     discounted = models.BooleanField(default=False)
@@ -59,7 +67,9 @@ class Product(models.Model):
 
     @property
     def discounted_price(self):
-        return int(((self.price)*(100-self.discount))/100)
+        show = int(((self.price)*(100-self.discount))/100)
+        formatted_price = "{:,.0f}".format(show)
+        return formatted_price
 
 
     @property

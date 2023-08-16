@@ -28,3 +28,4 @@ class ProductAdmin(admin.ModelAdmin):
 #-------------------------------------------------------------------------
 admin.site.register(Brand)
 admin.site.register(ProductImage)
+admin.site.register(Color)

@@ -90,27 +90,27 @@
                                       {{product.discounted_price}} تومان
                                   </div><!-- End .product-price -->
 
-                                  <!-- <div class="product-content">
+                                   <div class="product-content">
                                       <p> {{product.description}}
                                       </p>
-                                  </div> -->
+                                  </div> 
 
-                                  <!-- <div class="details-filter-row details-row-size">
-                                      <label>رنگ : </label>
+                                    {% if product.colors.all.count > 0 %}
+                                   <div class="details-filter-row details-row-size">
+                                        <label>رنگ : </label>
 
-                                      <div class="product-nav product-nav-thumbs">
-                                          <a href="#" class="active">
-                                              <img src="assets/images/products/single/1-thumb.jpg" alt="product desc">
-                                          </a>
-                                          <a href="#">
-                                              <img src="assets/images/products/single/2-thumb.jpg" alt="product desc">
-                                          </a>
-                                      </div>
-                                  </div> -->
+                                        <div class="product-nav product-nav-dots">
+                                            {% for color in product.colors.all %}
+                                                <a href="#" class="active" style="background: #{{color.code}};"><span
+                                                    class="sr-only">نام رنگ</span></a>
+                                            {% endfor %}
+                                        </div><!-- End .product-nav -->
+                                    </div><!-- End .details-filter-row -->
+                                    {% endif %}
 
 
 
-                                  <!-- <div class="details-filter-row details-row-size">
+                                   {% comment %} <div class="details-filter-row details-row-size">
                                       <label for="size">سایز : </label>
                                       <div class="select-custom">
                                           <select name="size" id="size" class="form-control">
@@ -120,10 +120,10 @@
                                               <option value="l">بزرگ (Large)</option>
                                               <option value="xl">خیلی بزرگ (XLarge)</option>
                                           </select>
-                                      </div> -->
+                                      </div>  {% endcomment %}
 
-                                      <!-- <a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>
-                                  </div> -->
+                                       {% comment %} <a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>
+                                  </div>  {% endcomment %}
 
 
 
