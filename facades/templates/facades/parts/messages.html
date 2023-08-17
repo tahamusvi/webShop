@@ -1,15 +1,41 @@
 {% if messages %}
 
     {% for message in messages %}
-    <div class="popup success">
-        <p class="popup-title">Success!</p>
-        <p class="popup-content {{ message.tags }}">{{ message }}</p>
+    
+    <div class="after-click" style="background-color: rgba(127, 255, 0, 0.5);">
+        <span>{{message}}</span>
     </div>
-    {% comment %} <a{% if message.tags %} class="btn-square wobble-horizontal {{ message.tags }}"{% endif %}></a> {% endcomment %}
     {% endfor %}
 
 
 
 {% endif %}
+
+
+
+
+
+
+
+
+<script>
+
+let afterClick = document.querySelector('.after-click');
+let clickHere =document.querySelector('.clickhere');
+
+clickHere.onclick =() => {
+    afterClick.classList.toggle('active');
+
+    window.setTimeout(3000);
+    
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+            var div = document.querySelector('.after-click');
+            div.classList.add('najla');
+        });
+
+
+</script>
 
 

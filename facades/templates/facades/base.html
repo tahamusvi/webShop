@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{% static 'facades/css/bootstrap-rtl.min.css' %}">
     <link rel="stylesheet" href="{% static 'facades/css/plugins/owl-carousel/owl.carousel.css' %}">
     <link rel="stylesheet" href="{% static 'facades/css/plugins/magnific-popup/magnific-popup.css' %}">
-    {% comment %} <link rel="stylesheet" href="{% static 'facades/css/myCss.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'facades/css/myCss.css' %}">
     <!-- Main CSS File -->
     {% block css %}{% endblock %}
 
@@ -37,11 +37,11 @@
 
 <body>
 
-  
+    {% include 'facades/parts/messages.html' %}
   
   <div class="page-wrapper">
   
-            {% include 'facades/parts/messages.html' %}
+            
   
 
   {% include 'facades/parts/black_header.html' %}
