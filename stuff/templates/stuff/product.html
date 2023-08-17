@@ -38,7 +38,7 @@
 
                               <div class="product-gallery product-gallery-vertical">
                                   <div class="row">
-                                      <figure class="product-main-image">
+                                      <figure class="product-main-image imageNajla">
                                           <img class="a1" id="product-zoom-{{product.images.first.id}}" src="{{product.image.url}}"
                                               data-zoom-image = "{{product.image.url}}"
                                               alt="تصویر محصول">
@@ -55,10 +55,10 @@
                                       <div id="product-zoom-gallery" class="product-image-gallery">
                                         
                                         {% for img in product.images.all %}
-                                          <a class="product-gallery-item" href="#product-zoom"
+                                          <a class="product-gallery-item" 
                                               data-image="{{img.image.url}}"
                                               data-zoom-image="{{img.image.url}}">
-                                              <img src="{{img.image.url}}"
+                                              <img class="another-image-option" src="{{img.image.url}}"
                                                   alt="توضیحات تصویر">
                                           </a>
                                           {% endfor %}
@@ -391,6 +391,22 @@
 
 
       </main>
+
+
+
+<script>
+$(document).ready(function() {
+    $(".another-image-option").click(function() {
+      var clickedImageSrc = $(this).attr("src");
+      $(".imageNajla img").attr("src", clickedImageSrc);
+    });
+  })
+</script>
+
+
+
+
+
 
 
 {% endblock %}

@@ -16957,6 +16957,7 @@ button:focus {
   padding-left: .5rem;
   padding-right: .5rem;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .max-col-6 .product-gallery-item {
@@ -27441,26 +27442,4 @@ table.invoice-table th {
 
 /*# sourceMappingURL=style.css.map */
 
-/* .a2{
-  position: absolute;
-}
-.a1{
-  position: absolute;
-}
-
-.product-gallery-item:hover + .product-main-image {
-  opacity: 1;
-}
-
-
-
-.product-main-image .a1,.product-main-image .a2{
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.product-gallery-item{
-  z-index: 199999;
-} */
 
