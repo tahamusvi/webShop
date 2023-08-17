@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from cart.cart import Cart
 from .scripts import formating_price
+from facades.views import InformationsForTemplate
 #-----------------------------------------------------------------------------------
 pagination_amount = 12
 #-----------------------------------------------------------------------------------
@@ -88,31 +89,6 @@ def filter(request,product_list):
 
     return filters
 #-----------------------------------------------------------------------------------
-def product_detail(request, slug,id):
-    form = UserLoginForm
-    product = get_object_or_404(Product, id=id)
-    # form = CartAddForm()
-
-    category = product.category.all()[0]
-    print(category)
-    Suggested = category.products.all()[0:4]
-
-    allCategories = Category.objects.filter(is_sub=False)
-
-
-
-    #wishlist
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-    #cart
-    cart = Cart(request)
-    CartAmount = cart.get_count()
-
-
-    return render(request,'stuff/product.html',{'product': product,'Suggested':Suggested,
-    'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form}) 
-#-----------------------------------------------------------------------------------
 import random
 from faker import Faker
 def CopyObjects(request):
@@ -140,37 +116,47 @@ def CopyObjects(request):
 
         product.save()
     
+#-----------------------------------------------------------------------------------
+def product_detail(request, slug,id):
+    product = get_object_or_404(Product, id=id)
 
+    category = product.category.all()[0]
+    Suggested = category.products.all()[0:4]
+
+    Info = InformationsForTemplate(request)
+    Info.update({'product': product,'Suggested':Suggested})
+    
+    return render(request,'stuff/product.html',Info) 
+#-----------------------------------------------------------------------------------
+def product_search(request,page):
+    query = request.GET.get('query')
+    product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    filters = filter(request,product_list)
+    product_list = ordering(request,filters["product_list"])
+
+    paginator = Paginator(product_list, pagination_amount)
+    product_list = paginator.get_page(page)
+
+    Info = InformationsForTemplate(request)
+    Info.update({'products': product_list,'query':query,'paginator':paginator,'filters':filters})
+
+    return render(request, 'stuff/bonePage.html', Info)
 #-----------------------------------------------------------------------------------
 def Category_detail(request,id,page):
-    print("--------------------")
     category = get_object_or_404(Category, id=id)
-    products = category.products.all()
+    product_list = category.products.all()
 
-    filters = filter(request,products)
-    products = ordering(request,filters["product_list"])
+    filters = filter(request,product_list)
+    product_list = ordering(request,filters["product_list"])
 
-    paginator = Paginator(products, pagination_amount)
-    products = paginator.get_page(page)
+    paginator = Paginator(product_list, pagination_amount)
+    product_list = paginator.get_page(page)
 
+    Info = InformationsForTemplate(request)
+    Info.update({'products': product_list,'category':category,'paginator':paginator,'filters':filters,'filters':filters})
 
-    allCategories = Category.objects.filter(is_sub=False)
-
-
-    brands = Brand.objects.all()
-    #forms
-    form = UserLoginForm
-
-    #wishlist
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-    #cart
-    cart = Cart(request)
-    CartAmount = cart.get_count()
-
-    return render(request,'stuff/bonePage.html',{'products': products,'category':category,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'form':form,'filters':filters})
+    return render(request,'stuff/bonePage.html',Info)
 #-----------------------------------------------------------------------------------
 def showWishList(request,page):
     wishlistProducts = request.user.wishlist.all()
@@ -181,51 +167,10 @@ def showWishList(request,page):
     ordering(request,wishlistProducts)
 
     paginator = Paginator(wishlistProducts, pagination_amount)
-    products = paginator.get_page(page)
+    product_list = paginator.get_page(page)
 
-    brands = Brand.objects.all()
-    allCategories = Category.objects.filter(is_sub=False)
-    #wishlist
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-    #cart
-    cart = Cart(request)
-    CartAmount = cart.get_count()
+    Info = InformationsForTemplate(request)
+    Info.update({'products': product_list,'paginator':paginator,'filters':filters,'filters':filters})
 
-    
-
-
-    return render(request,'stuff/bonePage.html',{'products': products,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'filters':filters})
-
-
-
-#-----------------------------------------------------------------------------------
-def product_search(request,page):
-    query = request.GET.get('query')
-    product_list = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-
-    filters = filter(request,product_list)
-    product_list = ordering(request,filters["product_list"])
-
-    paginator = Paginator(product_list, pagination_amount)
-    products = paginator.get_page(page)
-
-
-
-    brands = Brand.objects.all()
-    allCategories = Category.objects.filter(is_sub=False)
-
-    wishlistAmount = 0
-    if(request.user.is_authenticated):
-        wishlistAmount = request.user.wishlist.all().count()
-
-    #cart
-    cart = Cart(request)
-    CartAmount = cart.get_count()
-
-
-    return render(request, 'stuff/bonePage.html', {'products': products,'query':query,'num_pages':paginator.num_pages,'paginator':paginator,
-    'allCategories': allCategories,'brands':brands,'wishlistAmount':wishlistAmount,'cart':cart,'filters':filters})
+    return render(request,'stuff/bonePage.html',Info)
 #-----------------------------------------------------------------------------------
