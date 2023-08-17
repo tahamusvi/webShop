@@ -25,9 +25,12 @@ def ordering(request,product_list):
 
 #-----------------------------------------------------------------------------------
 def filter(request,product_list):
+    print(request.POST)
     filter_price_option = -1
     brands = []
     rating_list  = []
+    filters = {}
+    filters["active"] = False
 
     if(request.method == "POST"):
         keys = request.POST.keys()
@@ -54,14 +57,13 @@ def filter(request,product_list):
                 filter_price_high = 100000000
                 filter_price_low = 2000000
         
-
-    filters = {}
     
     if(filter_price_option != -1 and filter_price_option):
         product_list = product_list.filter(price__gte=filter_price_low, price__lte=filter_price_high)
         filters['price_bool'] = True
         filters['price_high'] = formating_price(filter_price_high)
         filters['price_low'] = formating_price(filter_price_low)
+        filters["active"] = True
 
 
 
@@ -72,6 +74,7 @@ def filter(request,product_list):
         for brand_id in brands:
             brands_name.append(Brand.objects.get(id=brand_id).name)
         filters['brands'] = brands_name
+        filters["active"] = True
 
     if rating_list:
         filter_criteria = Q()
@@ -84,8 +87,20 @@ def filter(request,product_list):
         for rate in rating_list:
             ratings.append(rate * 20)
         filters['ratings'] = ratings
+        filters["active"] = True
 
     filters["product_list"] = product_list
+
+
+    filters["rating_count"] = {
+        "1" : product_list.filter(rating=1).count(),
+        "2" : product_list.filter(rating=2).count(),
+        "3" : product_list.filter(rating=3).count(),
+        "4" : product_list.filter(rating=4).count(),
+        "5" : product_list.filter(rating=5).count(),
+    }
+
+    
 
     return filters
 #-----------------------------------------------------------------------------------
@@ -154,23 +169,20 @@ def Category_detail(request,id,page):
     product_list = paginator.get_page(page)
 
     Info = InformationsForTemplate(request)
-    Info.update({'products': product_list,'category':category,'paginator':paginator,'filters':filters,'filters':filters})
+    Info.update({'products': product_list,'category':category,'paginator':paginator,'filters':filters})
 
     return render(request,'stuff/bonePage.html',Info)
 #-----------------------------------------------------------------------------------
 def showWishList(request,page):
     wishlistProducts = request.user.wishlist.all()
-    print(request.POST)
     filters = filter(request,wishlistProducts)
-    wishlistProducts = filters["product_list"]
-
-    ordering(request,wishlistProducts)
+    wishlistProducts = ordering(request,filters["product_list"])
 
     paginator = Paginator(wishlistProducts, pagination_amount)
     product_list = paginator.get_page(page)
 
     Info = InformationsForTemplate(request)
-    Info.update({'products': product_list,'paginator':paginator,'filters':filters,'filters':filters})
+    Info.update({'products': product_list,'paginator':paginator,'filters':filters})
 
     return render(request,'stuff/bonePage.html',Info)
 #-----------------------------------------------------------------------------------

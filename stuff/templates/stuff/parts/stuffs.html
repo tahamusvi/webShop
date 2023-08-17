@@ -5,23 +5,12 @@
         </div><!-- End .toolbox-info -->
     </div><!-- End .toolbox-left -->
 
-        <form method="POST" action="{{request.get_full_path}}" enctype="multipart/form-data">{% csrf_token %}
+        
     <div class="toolbox-right">
         <div class="toolbox-sort">
             <label for="sortby">مرتب سازی بر اساس : </label>
-            <div class="select-custom">
-                <select name="sortby" id="sortby" class="form-control">
-                    <option  value="popularity" selected="selected">محبوب ترین</option>
-                    <option value="rating">جدیدترین</option>
-                    <option value="date">تاریخ</option>
-                </select>
-            </div>
-        </div><!-- End .toolbox-sort -->
-        <div class="toolbox-sort">
-            <button type="submit" class="btn-product"><span>اعمال</span></button>
         </div><!-- End .toolbox-sort -->
     </div><!-- End .toolbox-right -->
-        </form>
 </div><!-- End .toolbox -->
 
 
@@ -51,7 +40,7 @@
                     {% endif %}<!-- End .product-action-vertical -->
 
                     <div class="product-action">
-                        <a href="#" class="btn-product btn-cart"
+                        <a href="{% url 'cart:cart_add' product.id %}" class="btn-product btn-cart"
                             title="افزودن به سبد خرید"><span>افزودن به سبد خرید</span></a>
                     </div><!-- End .product-action -->
                 </figure><!-- End .product-media -->

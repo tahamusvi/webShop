@@ -7,13 +7,19 @@
             <h3 class="widget-title">
                 <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
                     aria-controls="widget-4">
+                    {% if filters.active %}
                     فیلتر های اعمال شده:
+                    {% else %}
+                    فیلتری اعمال نشده است.
+                    {% endif %}
                 </a>
             </h3><!-- End .widget-title -->
 
             <div class="collapse show" id="widget-5">
                 <div class="widget-body">
                     <div class="filter-items">
+
+                        
 
                         {% if filters.price_bool %}
                         
@@ -57,6 +63,8 @@
                             {% endfor %}
 
                         {% endif %}
+
+                        
                         
 
                     </div><!-- End .filter-items -->
@@ -153,11 +161,6 @@
             </div><!-- End .collapse -->
         </div><!-- End .widget -->
 
-
-        
-
-
-
         <div class="widget">
             <h3 class="widget-title">امتیاز مشتری</h3><!-- End .widget-title -->
 
@@ -174,7 +177,7 @@
                                         <span class="ratings-val" style="width: 100%;"></span>
                                         <!-- End .ratings-val -->
                                     </span><!-- End .ratings -->
-                                    <span class="ratings-text">( 24 )</span>
+                                    <span class="ratings-text">( {{filters.rating_count.5}} )</span>
                                 </span><!-- End .rating-container -->
                             </label>
                         </div><!-- End .custom-checkbox -->
@@ -190,7 +193,7 @@
                                         <span class="ratings-val" style="width: 80%;"></span>
                                         <!-- End .ratings-val -->
                                     </span><!-- End .ratings -->
-                                    <span class="ratings-text">( 8 )</span>
+                                    <span class="ratings-text">( {{filters.rating_count.4}} )</span>
                                 </span><!-- End .rating-container -->
                             </label>
                         </div><!-- End .custom-checkbox -->
@@ -206,7 +209,7 @@
                                         <span class="ratings-val" style="width: 60%;"></span>
                                         <!-- End .ratings-val -->
                                     </span><!-- End .ratings -->
-                                    <span class="ratings-text">( 5 )</span>
+                                    <span class="ratings-text">( {{filters.rating_count.3}} )</span>
                                 </span><!-- End .rating-container -->
                             </label>
                         </div><!-- End .custom-checkbox -->
@@ -222,7 +225,7 @@
                                         <span class="ratings-val" style="width: 40%;"></span>
                                         <!-- End .ratings-val -->
                                     </span><!-- End .ratings -->
-                                    <span class="ratings-text">( 1 )</span>
+                                    <span class="ratings-text">( {{filters.rating_count.2}} )</span>
                                 </span><!-- End .rating-container -->
                             </label>
                         </div><!-- End .custom-checkbox -->
@@ -238,7 +241,7 @@
                                         <span class="ratings-val" style="width: 20%;"></span>
                                         <!-- End .ratings-val -->
                                     </span><!-- End .ratings -->
-                                    <span class="ratings-text">( 3 )</span>
+                                    <span class="ratings-text">( {{filters.rating_count.1}} )</span>
                                 </span><!-- End .rating-container -->
                             </label>
                         </div><!-- End .custom-checkbox -->
@@ -247,7 +250,6 @@
                 </div><!-- End .filter-items -->
             </div><!-- End .widget-body -->
         </div><!-- End .widget -->
-
 
         <div class="widget">
             <h3 class="widget-title">
@@ -299,7 +301,7 @@
             </div><!-- End .collapse -->
         </div><!-- End .widget -->
 
-        <button type="submit" class="btn-product btn-cart"><span>اعمال فیلتر ها</span></button>
+        <button type="submit" class="btn-product"><span>اعمال فیلتر ها</span></button>
         </form>
 
 

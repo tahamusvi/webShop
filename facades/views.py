@@ -24,8 +24,12 @@ def InformationsForTemplate(request):
     formLogin = UserLoginForm
     formRegister= UserCreationForm
 
+    #brands
+    brands = Brand.objects.all()
+
+
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form
-    ,'formLogin':formLogin,'formRegister':formRegister}
+    ,'formLogin':formLogin,'formRegister':formRegister,"brands":brands}
 
     return Info
 #----------------------------------------------------------------------------------------------
