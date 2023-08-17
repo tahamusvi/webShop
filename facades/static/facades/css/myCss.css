@@ -6,7 +6,7 @@
 
 
 .after-click{
-  width: 10rem !important;
+  width: fit-content !important;
   height: fit-content;
   padding: 1rem;
   display: flex;
@@ -14,12 +14,17 @@
   justify-content: center;
   position: absolute;
   margin: 0.5rem;
-  right: 0;
-  top: 0%;
+  right: 3rem;
+  top: -200%;
   transition: 0.8s;
   z-index: 10000;
+  border-radius: 1.2rem;
 }
 
 .najla{
   display: none !important;
+}
+
+.activeNajla{
+  top: 5rem;
 }

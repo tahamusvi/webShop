@@ -2,8 +2,8 @@
 
     {% for message in messages %}
     
-    <div class="after-click" style="background-color: rgba(127, 255, 0, 0.5);">
-        <span>{{message}}</span>
+    <div class="after-click" style="background-color: rgb(0, 190, 0);">
+        <span style="color: #fff">{{message}}</span>
     </div>
     {% endfor %}
 
@@ -20,20 +20,18 @@
 
 <script>
 
-let afterClick = document.querySelector('.after-click');
-let clickHere =document.querySelector('.clickhere');
+let popUp = document.querySelector('.after-click')
+console.log(popUp)
 
-clickHere.onclick =() => {
-    afterClick.classList.toggle('active');
+setTimeout(function() {
+    popUp.classList.toggle('najla')
+}, 4000)
 
-    window.setTimeout(3000);
-    
-};
 
-document.addEventListener('DOMContentLoaded', function() {
-            var div = document.querySelector('.after-click');
-            div.classList.add('najla');
-        });
+setTimeout(function() {
+    popUp.classList.toggle('activeNajla')
+}, 500)
+
 
 
 </script>
