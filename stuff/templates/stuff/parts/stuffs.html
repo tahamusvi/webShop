@@ -5,6 +5,7 @@
         </div><!-- End .toolbox-info -->
     </div><!-- End .toolbox-left -->
 
+        <form method="POST" action="{{request.get_full_path}}" enctype="multipart/form-data">{% csrf_token %}
     <div class="toolbox-right">
         <div class="toolbox-sort">
             <label for="sortby">مرتب سازی بر اساس : </label>
@@ -16,7 +17,11 @@
                 </select>
             </div>
         </div><!-- End .toolbox-sort -->
+        <div class="toolbox-sort">
+            <button type="submit" class="btn-product"><span>اعمال</span></button>
+        </div><!-- End .toolbox-sort -->
     </div><!-- End .toolbox-right -->
+        </form>
 </div><!-- End .toolbox -->
 
 
@@ -53,9 +58,11 @@
 
                 <div class="product-body">
                     <div class="product-cat">
-                        {% for cat in product.category.all %}
+                        
+                        <a>{{ product.category.all|join:", " }}</a>
+                        {% comment %} {% for cat in product.category.all %}
                         <a href="{{cat.url}}">{{cat.name}} </a>
-                        {% endfor %}
+                        {% endfor %} {% endcomment %}
                     </div><!-- End .product-cat -->
                     <h3 class="product-title"><a href="product.html">{{product.name}}</a>
                     </h3>
