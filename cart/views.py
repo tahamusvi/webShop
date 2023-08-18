@@ -30,11 +30,11 @@ def cart_add(request,product_id):
         if form.is_valid():
             cd = form.cleaned_data
             cart.add(product=product,quantity=cd['quantity'])
-            messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: #00ac09;')
+            messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
     else:
         cart.add(product=product,quantity=1)
-        messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: #00ac09;')
+        messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
 #-----------------------------------------------------------------------------------
 def cart_remove(request,product_id):

@@ -2,7 +2,7 @@
 
     {% for message in messages %}
     
-    <div class="after-click" style="background-color: rgb(0, 190, 0);">
+    <div class="after-click" style="{{ message.tags }}">
         <span style="color: #fff">{{message}}</span>
     </div>
     {% endfor %}
@@ -10,8 +10,6 @@
 
 
 {% endif %}
-
-
 
 
 
@@ -30,7 +28,7 @@ setTimeout(function() {
 
 setTimeout(function() {
     popUp.classList.toggle('activeNajla')
-}, 500)
+}, 50)
 
 
 
