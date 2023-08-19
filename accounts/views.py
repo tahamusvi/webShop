@@ -1,10 +1,10 @@
-from sre_constants import SUCCESS
 from django.shortcuts import render,redirect
 from .forms import *
-from  django.contrib.auth import authenticate, login , logout
+from django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
 from .models import *
 from django.shortcuts import render,get_object_or_404
+import random
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "logout" : 'بعدا باز برگرد ":)',
@@ -16,7 +16,12 @@ messages_dict = {
     "add_wishlist" : 'به لیست موردعلاقه ها اضافه شد.', 
     "remove" : 'با موفقیت حذف شد.',
     "add_address" : 'آدرس با موفقیت ثبت شد.',
-    "edit" : 'با موفقیت تغییر کرد.'
+    "edit" : 'با موفقیت تغییر کرد.',
+    "forgot" : 'کد تغییر رمز با موفقیت ارسال شد.',
+    "codeReject" : 'کد بازیابی اشتباه وارد شده است.', 
+    "password_changed" : 'گذرواژه با موفقیت تغییر کرد.',
+    "login_again" : 'لطفا با گذرواژه جدید لاگین کنید.',
+    "error_password" : 'گذرواژه های وارد شده یکسان نیستند.',
 
 }
 
@@ -59,6 +64,64 @@ def profile(request):
         profileForm = UserChangeForm(instance=request.user)
 
     return render(request, 'facades/dashboard.html', {'profileForm': profileForm})
+#------------------------------------------------------------------------------------------------
+def forgotPassword(request):
+    if request.method == 'POST':
+        ForgotProfile = ForgotPasswordForm(request.POST)
+
+        if ForgotProfile.is_valid():
+            cd = ForgotProfile.cleaned_data
+            user = User.objects.get(phoneNumber=cd['phoneNumber'])
+            user.code = random.randint(10000, 99999)
+            user.save()
+            messages.success(request, messages_dict['forgot'],color_messages['gray'])
+            return redirect("accounts:CheckCodeForgot",user.phoneNumber)
+    else:
+        ForgotProfile = ForgotPasswordForm()
+
+    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile})
+#------------------------------------------------------------------------------------------------
+def CheckCodeForgot(request,phoneNumber):
+    user = User.objects.get(phoneNumber=phoneNumber)
+    if request.method == 'POST':
+        CheckcodeForm = CheckForm(request.POST)
+
+        if CheckcodeForm.is_valid():
+            cd = CheckcodeForm.cleaned_data
+            if(user.code == int(cd['code'])):
+                print("what happend?")
+                return redirect("accounts:ChangePasswordForgot",user.phoneNumber)
+            else:
+                messages.error(request, messages_dict['codeReject'],color_messages['error'])
+                return redirect("accounts:forgotPassword")
+            
+    else:
+        CheckcodeForm = CheckForm()
+
+    return render(request, 'accounts/forgotPassword.html', {'Form': CheckcodeForm})
+
+#------------------------------------------------------------------------------------------------
+def ChangePasswordForgot(request,phoneNumber):
+    user = User.objects.get(phoneNumber=phoneNumber)
+    if request.method == 'POST':
+        ChangeForm = ChangePasswordForm(request.POST)
+
+        if ChangeForm.is_valid():
+            cd = ChangeForm.cleaned_data
+            if(cd['password1'] == cd['password2']):
+                user.set_password(cd['password1'])
+                user.save()
+                messages.error(request, messages_dict['password_changed'],color_messages['success'])
+                messages.error(request, messages_dict['login_again'],color_messages['gray'])         
+                return redirect('facades:home')
+            else:
+                messages.error(request, messages_dict['error_password'],color_messages['error'])
+                return redirect('accounts:ChangePasswordForgot',phoneNumber)
+            
+    else:
+        ChangeForm = ChangePasswordForm()
+
+    return render(request, 'accounts/forgotPassword.html', {'Form': ChangeForm})
 #------------------------------------------------------------------------------------------------
 def user_logout(request):
     logout(request)

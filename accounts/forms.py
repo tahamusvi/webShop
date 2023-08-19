@@ -50,3 +50,14 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ['text', 'postal_code', 'city']
+#------------------------------------------------------------------------------------------------
+class ForgotPasswordForm(forms.Form):
+    phoneNumber = forms.CharField(label="شماره تلفن",max_length=40,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'۰۹۱۲۳۴۵۶۷۸۹'}))
+#------------------------------------------------------------------------------------------------
+class CheckForm(forms.Form):
+    code = forms.CharField(label="کد تایید",max_length=40,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'62440'}))
+#------------------------------------------------------------------------------------------------
+class ChangePasswordForm(forms.Form):
+    password1 = forms.CharField(label="گذرواژه جدید", max_length=40, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}))
+    password2 = forms.CharField(label="تکرار گذرواژه جدید", max_length=40, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}))
+#------------------------------------------------------------------------------------------------
