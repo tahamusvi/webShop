@@ -5,6 +5,8 @@ from django.contrib import messages
 from .models import *
 from django.shortcuts import render,get_object_or_404
 import random
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "logout" : 'بعدا باز برگرد ":)',
@@ -23,6 +25,9 @@ messages_dict = {
     "login_again" : 'لطفا با گذرواژه جدید لاگین کنید.',
     "error_password" : 'گذرواژه های وارد شده یکسان نیستند.',
     "cant_change_password" : 'گذرواژه این کاربر قابل تعویض نیست.',
+    "numeric_error" : 'در گذرواژه از حروف نیز استفاده کنید.',
+    "common_error" : 'این گذرواژه خیلی عمومی است.',
+    "lentgh_error" : 'این گذرواژه کم تر از هشت کاراکتر دارد.',
 
 }
 
@@ -80,7 +85,7 @@ def forgotPassword(request):
     else:
         ForgotProfile = ForgotPasswordForm()
 
-    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile})
+    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی'})
 #------------------------------------------------------------------------------------------------
 def CheckCodeForgot(request,phoneNumber):
     user = User.objects.get(phoneNumber=phoneNumber)
@@ -100,7 +105,7 @@ def CheckCodeForgot(request,phoneNumber):
     else:
         CheckcodeForm = CheckForm()
 
-    return render(request, 'accounts/forgotPassword.html', {'Form': CheckcodeForm})
+    return render(request, 'accounts/forgotPassword.html', {'Form': CheckcodeForm,'btn_text':'تایید کد'})
 
 #------------------------------------------------------------------------------------------------
 def ChangePasswordForgot(request,phoneNumber):
@@ -110,6 +115,20 @@ def ChangePasswordForgot(request,phoneNumber):
 
         if ChangeForm.is_valid():
             cd = ChangeForm.cleaned_data
+            try:
+                validate_password(cd['password1'])
+            except ValidationError as validation_error:
+                for message in validation_error:
+                    if('This password is too short. It must contain at least 8 characters.' == message):
+                        messages.error(request, messages_dict['lentgh_error'],color_messages['error'])
+                    if('This password is too common.' == message):
+                        messages.error(request, messages_dict['common_error'],color_messages['error'])
+                    if('This password is entirely numeric.' == message):
+                        messages.error(request, messages_dict['numeric_error'],color_messages['error'])
+                    
+                return redirect(request.META.get('HTTP_REFERER'),phoneNumber)
+                
+            
             if(cd['password1'] == cd['password2']):
                 if(user.can_change_password):
                     user.set_password(cd['password1'])
@@ -128,7 +147,7 @@ def ChangePasswordForgot(request,phoneNumber):
     else:
         ChangeForm = ChangePasswordForm()
 
-    return render(request, 'accounts/forgotPassword.html', {'Form': ChangeForm})
+    return render(request, 'accounts/forgotPassword.html', {'Form': ChangeForm,'btn_text':'تغییر رمز'})
 #------------------------------------------------------------------------------------------------
 def user_logout(request):
     logout(request)
