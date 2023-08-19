@@ -11,6 +11,8 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     email = models.EmailField(unique=True)
 
+    can_change_password = models.BooleanField(default=False)
+
 
     code = models.IntegerField(blank=True,null=True)
 

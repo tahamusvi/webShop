@@ -22,6 +22,7 @@ messages_dict = {
     "password_changed" : 'گذرواژه با موفقیت تغییر کرد.',
     "login_again" : 'لطفا با گذرواژه جدید لاگین کنید.',
     "error_password" : 'گذرواژه های وارد شده یکسان نیستند.',
+    "cant_change_password" : 'گذرواژه این کاربر قابل تعویض نیست.',
 
 }
 
@@ -89,7 +90,8 @@ def CheckCodeForgot(request,phoneNumber):
         if CheckcodeForm.is_valid():
             cd = CheckcodeForm.cleaned_data
             if(user.code == int(cd['code'])):
-                print("what happend?")
+                user.can_change_password = True
+                user.save()
                 return redirect("accounts:ChangePasswordForgot",user.phoneNumber)
             else:
                 messages.error(request, messages_dict['codeReject'],color_messages['error'])
@@ -109,11 +111,16 @@ def ChangePasswordForgot(request,phoneNumber):
         if ChangeForm.is_valid():
             cd = ChangeForm.cleaned_data
             if(cd['password1'] == cd['password2']):
-                user.set_password(cd['password1'])
-                user.save()
-                messages.error(request, messages_dict['password_changed'],color_messages['success'])
-                messages.error(request, messages_dict['login_again'],color_messages['gray'])         
-                return redirect('facades:home')
+                if(user.can_change_password):
+                    user.set_password(cd['password1'])
+                    user.can_change_password = False
+                    user.save()
+                    messages.error(request, messages_dict['password_changed'],color_messages['success'])
+                    messages.error(request, messages_dict['login_again'],color_messages['gray'])         
+                    return redirect('facades:home')
+                else:
+                    messages.error(request, messages_dict['cant_change_password'],color_messages['error'])
+                    return redirect('facades:home')
             else:
                 messages.error(request, messages_dict['error_password'],color_messages['error'])
                 return redirect('accounts:ChangePasswordForgot',phoneNumber)
