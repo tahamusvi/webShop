@@ -189,7 +189,7 @@ def AddComment(request,id):
         if form.is_valid():
 
             item = get_object_or_404(Product, id=id)
-            comment = Comment(user=request.user,product=item,text=form.cleaned_data['text'])
+            comment = Comment(user=request.user,product=item,text=form.cleaned_data['text'],rating=form.cleaned_data['rating'])
             comment.save()
 
             messages.success(request,"بعد از تایید ادمین نظر شما ثبت خواهد شد", color_messages['success'])

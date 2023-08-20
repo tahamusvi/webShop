@@ -62,5 +62,9 @@ class ChangePasswordForm(forms.Form):
     password2 = forms.CharField(label="تکرار گذرواژه جدید", max_length=40, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}))
 #------------------------------------------------------------------------------------------------
 class CommentForm(forms.Form):
-    text = forms.CharField(label="نظر شما",max_length=400,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'اا'}))
+    text = forms.CharField(label="نظر شما",max_length=400,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'عالیه بابا، نظر دیگه ای هم داری ؟'}))
+
+    rating_choices = [(str(i), str(i)) for i in range(6)]  # تعیین گزینه‌های انتخابی برای ریتینگ
+    rating = forms.ChoiceField(label="امتیاز مد نظرتون رو انتخاب کنید:",choices=rating_choices,widget=forms.Select(attrs={'class':'form-control'}))
+
 #------------------------------------------------------------------------------------------------
