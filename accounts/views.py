@@ -183,6 +183,23 @@ def AddToWish(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
+def AddComment(request,id):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+
+            item = get_object_or_404(Product, id=id)
+            comment = Comment(user=request.user,product=item,text=form.cleaned_data['text'])
+            comment.save()
+
+            messages.success(request,"بعد از تایید ادمین نظر شما ثبت خواهد شد", color_messages['success'])
+            return redirect(request.META.get('HTTP_REFERER'))
+                
+        else:
+            messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
+
+    return redirect(request.META.get('HTTP_REFERER'))
+#------------------------------------------------------------------------------------------------
 def RomeveToWish(request, id):
     if(request.user.is_authenticated):
         item = get_object_or_404(Product, id=id)

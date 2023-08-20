@@ -132,14 +132,18 @@ def CopyObjects(request):
         product.save()
     
 #-----------------------------------------------------------------------------------
+
 def product_detail(request, slug,id):
     product = get_object_or_404(Product, id=id)
 
     category = product.category.all()[0]
     Suggested = category.products.all()[0:4]
+    comments = product.comments.all().filter(valid=True)
+
+    AddCommentForm = CommentForm()
 
     Info = InformationsForTemplate(request)
-    Info.update({'product': product,'Suggested':Suggested})
+    Info.update({'product': product,'Suggested':Suggested,'CommentForm':AddCommentForm,'comments':comments})
     
     return render(request,'stuff/product.html',Info) 
 #-----------------------------------------------------------------------------------

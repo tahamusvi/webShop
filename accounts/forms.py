@@ -61,3 +61,6 @@ class ChangePasswordForm(forms.Form):
     password1 = forms.CharField(label="گذرواژه جدید", max_length=40, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}))
     password2 = forms.CharField(label="تکرار گذرواژه جدید", max_length=40, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}))
 #------------------------------------------------------------------------------------------------
+class CommentForm(forms.Form):
+    text = forms.CharField(label="نظر شما",max_length=400,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'اا'}))
+#------------------------------------------------------------------------------------------------

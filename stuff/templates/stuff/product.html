@@ -82,7 +82,7 @@
                                       <div class="ratings">
                                           <div class="ratings-val" style="width: {{product.star_rating}}%;"></div><!-- End .ratings-val -->
                                       </div><!-- End .ratings -->
-                                      <a class="ratings-text" href="#product-review-link" id="review-link">( {{product.comments.count}} نظر
+                                      <a class="ratings-text" href="#product-review-link" id="review-link">( {{comments.count}} نظر
                                           )</a>
                                   </div><!-- End .rating-container -->
 
@@ -221,7 +221,7 @@
                           <li class="nav-item">
                               <a class="nav-link" id="product-review-link" data-toggle="tab"
                                   href="#product-review-tab" role="tab" aria-controls="product-review-tab"
-                                  aria-selected="false">نظرات ({{product.comments.count}})</a>
+                                  aria-selected="false">نظرات ({{comments.count}})</a>
                           </li>
                       </ul>
                       <div class="tab-content">
@@ -261,10 +261,10 @@
                           <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
                               aria-labelledby="product-review-link">
                               <div class="reviews">
-                                  <h3>{{product.comments.count}} دیدگاه </h3>
+                                  <h3>{{comments.count}} دیدگاه </h3>
 
                                   
-                                    {% for cm in product.comments.all %}
+                                    {% for cm in comments %}
                                     <div class="review">
                                         <div class="row no-gutters">
                                             <div class="col-auto">
@@ -295,6 +295,15 @@
                                     </div><!-- End .review -->
 
                                   {% endfor %}
+                                  
+                                  <form action="{% url 'accounts:AddComment' product.id %}" method="post">
+                                        {% csrf_token %}
+                                        {{CommentForm}}
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>ثبت نظر</span>
+                                            <i class="icon-long-arrow-left"></i>
+                                        </button>
+                                    </form>
 
                               </div><!-- End .نظر -->
                           </div><!-- .End .tab-pane -->

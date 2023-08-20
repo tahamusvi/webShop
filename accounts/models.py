@@ -62,6 +62,7 @@ class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    valid = models.BooleanField(default=False)
 
     rating = models.FloatField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
     likes = models.ManyToManyField(User, related_name='liked_comments', blank=True)

@@ -16,6 +16,8 @@ urlpatterns = [
     path('delete_address/<int:address_id>/',delete_address, name='delete_address'),
     path('edit_address/<int:address_id>/',edit_address, name='edit_address'),
 
+    path('AddComment/<int:id>/',AddComment, name='AddComment'),
+
     path('AddToWish/<int:id>/',AddToWish, name='AddToWish'),
     path('RomeveToWish/<int:id>/',RomeveToWish, name='RomeveToWish'),
     path('LikeComment/<int:id>/',LikeComment, name='LikeComment'),
