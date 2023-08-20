@@ -46,7 +46,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand,related_name='products',on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,unique=True)
-    description = models.TextField()
+    
     price = models.IntegerField()
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
     available = models.BooleanField(default=True)
@@ -54,6 +54,11 @@ class Product(models.Model):
     updated = models.DateField(auto_now=True)
     rating = models.FloatField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
     colors = models.ManyToManyField(Color)
+
+    short_description = models.TextField()
+    description = models.TextField()
+    more_info = models.TextField()
+    
 
 
     discount = models.IntegerField(default=0)
