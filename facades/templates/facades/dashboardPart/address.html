@@ -23,11 +23,11 @@
                                                 <h3 class="card-title">آدرس حال حاضر شما</h3><!-- End .card-title -->
                                                 {% endif %}
 
-                                                <p>{{address.user.full_name}}<br>
-                                                    {{address.phone_number}}<br>
-                                                    {{address.city}}<br>
-                                                    {{address.postal_code}}<br>
-                                                    {{address.text}}<br>
+                                                <p>نام: {{address.user.full_name}}<br>
+                                                    شماره تلفن: {{address.phone_number}}<br>
+                                                    شهر: {{address.city}}<br>
+                                                    کد پستی: {{address.postal_code}}<br>
+                                                    آدرس: {{address.text}}<br>
                                                     <a href="{% url 'facades:dashboard_id' address.id %}">ویرایش <i class="icon-edit"></i></a></p>
                                                     <a href="{% url 'accounts:delete_address' address.id %}" style="color: red;"> حذف <i class="icon-cog"></i></a></p>
                                             </div><!-- End .card-body -->

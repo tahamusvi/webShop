@@ -6,6 +6,7 @@ from .forms import *
 from django.views.decorators.http import require_POST
 from django.utils import timezone
 from django.contrib import messages
+from facades.views import InformationsForTemplate
 #-----------------------------------------------------------------------------------
 @login_required
 def order_create(request):
@@ -21,13 +22,20 @@ def order_create(request):
 #-----------------------------------------------------------------------------------
 @login_required
 def detail(request,order_id):
+    Info = InformationsForTemplate(request)
     form = CouponForm
     order = get_object_or_404(Order,id=order_id)
+
+    Info['order'] = order
+    Info['form'] = form
+
     if (order.user != request.user) and not(request.user.is_admin):
-        return render(request,'facades/404.html',{'order':order})
+        return render(request,'facades/404.html', Info)
+    
     if order.paid :
-        return render(request,'orders/trackOrders.html',{'order':order})
-    return render(request,'orders/checkout.html',{'order':order,'form':form})
+        return render(request,'orders/trackOrders.html', Info)
+    
+    return render(request,'orders/checkout.html', Info)
 #-----------------------------------------------------------------------------------
 @require_POST
 def coupon_apply(request,order_id):

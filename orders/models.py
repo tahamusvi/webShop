@@ -36,7 +36,13 @@ class Order(models.Model):
     def __str__(self):
         return f'{self.user} - {self.id}'
 
+    def formatPay(self,pay):
+        return "{:,.0f}".format(pay)
+
     def get_total_price(self):
+        return self.formatPay(self.total_price())
+
+    def total_price(self):
         total = sum(item.get_cost() for item in self.items.all())
         if self.discount:
             discount_price = (self.discount/100)* total
@@ -44,10 +50,14 @@ class Order(models.Model):
         return total
 
     def tax(self):
-        return 9 * self.get_total_price() / 100
+        return 9 * self.total_price() / 100
+    
+    def get_tax(self):
+        return "{:,.0f}".format(9 * self.total_price() / 100)
 
     def taxAndTotal(self):
-        return self.get_total_price() + self.tax()
+        
+        return "{:,.0f}".format(self.total_price() + self.tax())
     
     def shamsi_date(self):
         return jalali_converter(self.created)

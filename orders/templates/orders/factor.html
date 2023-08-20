@@ -107,7 +107,7 @@
                                             </td>
                                             <td>{{item.quantity}}</td>
                                             <td>{{item.product.discounted_price}} تومان</td>
-                                            <td>500,000 تومان</td>
+                                            <td>۵۰۰ تومان</td>
                                         </tr>
                                         {% endfor %}
                                         
@@ -122,7 +122,7 @@
                                         <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">مالیات بر ارزش افزوده</td>
-                                            <td>{{order.tax}} تومان</td>
+                                            <td>{{order.get_tax}} تومان</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"></td>
