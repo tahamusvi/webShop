@@ -1,4 +1,6 @@
 from django.shortcuts import render,get_object_or_404
+
+from facades.models import EndBanner
 from .models import *
 from accounts.forms import *
 from accounts.forms import UserLoginForm
@@ -157,8 +159,10 @@ def product_search(request,page):
     paginator = Paginator(product_list, pagination_amount)
     product_list = paginator.get_page(page)
 
+    banner = EndBanner.objects.all()[0]
+
     Info = InformationsForTemplate(request)
-    Info.update({'products': product_list,'query':query,'paginator':paginator,'filters':filters})
+    Info.update({'products': product_list,'query':query,'paginator':paginator,'filters':filters,'banner':banner})
 
     return render(request, 'stuff/bonePage.html', Info)
 #-----------------------------------------------------------------------------------
@@ -172,8 +176,10 @@ def Category_detail(request,id,page):
     paginator = Paginator(product_list, pagination_amount)
     product_list = paginator.get_page(page)
 
+    banner = EndBanner.objects.all()[0]
+
     Info = InformationsForTemplate(request)
-    Info.update({'products': product_list,'category':category,'paginator':paginator,'filters':filters})
+    Info.update({'products': product_list,'category':category,'paginator':paginator,'filters':filters,'banner':banner})
 
     return render(request,'stuff/bonePage.html',Info)
 #-----------------------------------------------------------------------------------
@@ -185,8 +191,10 @@ def showWishList(request,page):
     paginator = Paginator(wishlistProducts, pagination_amount)
     product_list = paginator.get_page(page)
 
+    banner = EndBanner.objects.all()[0]
+
     Info = InformationsForTemplate(request)
-    Info.update({'products': product_list,'paginator':paginator,'filters':filters})
+    Info.update({'products': product_list,'paginator':paginator,'filters':filters,'banner':banner})
 
     return render(request,'stuff/bonePage.html',Info)
 #-----------------------------------------------------------------------------------

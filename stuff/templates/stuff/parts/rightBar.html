@@ -64,9 +64,14 @@
 
                         {% endif %}
 
-                        
-                        
 
+                        {% if filters.active %}
+                            <a href="{{request.path}}?{{request.GET.urlencode}}">پاک کردن فیلتر ها</a>
+                        {% endif %}
+
+                            
+                        
+                        
                     </div><!-- End .filter-items -->
                 </div><!-- End .widget-body -->
             </div><!-- End .collapse -->
@@ -99,7 +104,6 @@
                 </div><!-- End .widget-body -->
             </div><!-- End .collapse -->
         </div><!-- End .widget -->
-
 
         <div class="widget">
             <h3 class="widget-title">
@@ -303,7 +307,6 @@
 
         <button type="submit" class="btn-product"><span>اعمال فیلتر ها</span></button>
         </form>
-
 
     </div><!-- End .sidebar sidebar-shop -->
 </aside><!-- End .col-lg-3 -->

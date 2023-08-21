@@ -1,0 +1,21 @@
+{% load static %}
+
+
+ <div class="cta bg-image bg-dark pt-6 pb-7"
+                    style="background-image: url({{banner.image.url}});">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-10 col-md-8 col-lg-6">
+                                <div class="cta-text text-center">
+                                    <h3 class="cta-title text-white">{{banner.title}}</h3>
+                                    <!-- End .cta-title -->
+                                    <p class="cta-desc text-light text-center">{{banner.describe}}</p>
+                                    <!-- End .cta-desc -->
+
+                                    <a href="{{banner.get_absolute_url}}" class="btn btn-primary btn-rounded"><span>{{banner.button}}</span><i
+                                            class="icon-long-arrow-left"></i></a>
+                                </div><!-- End .cta-text -->
+                            </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .container -->
+                </div><!-- End .cta -->
