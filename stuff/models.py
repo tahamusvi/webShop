@@ -49,11 +49,13 @@ class Product(models.Model):
     
     price = models.IntegerField()
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
+    alt = models.CharField(max_length=200)
     available = models.BooleanField(default=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     rating = models.FloatField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
     colors = models.ManyToManyField(Color)
+    warehouse = models.IntegerField(default=0)
 
     short_description = models.TextField()
     description = models.TextField()
@@ -92,6 +94,7 @@ class ProductImage(models.Model):
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
     is_main = models.BooleanField(default=False) 
     product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name='images',null=True,blank=True)
+    alt = models.CharField(max_length=200)
 
     def __str__(self):
         return f"{self.product} - {self.id}"

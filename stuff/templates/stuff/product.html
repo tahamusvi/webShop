@@ -41,11 +41,7 @@
                                       <figure class="product-main-image imageNajla">
                                           <img class="a1" id="product-zoom-{{product.images.first.id}}" src="{{product.image.url}}"
                                               data-zoom-image = "{{product.image.url}}"
-                                              alt="تصویر محصول">
-
-                                            {% comment %} <img class="a2" id="product-zoom-{{product.images.first.id}}" src="{{product.images.first.image.url}}"
-                                              data-zoom-image = "{{product.image.url}}"
-                                              alt="تصویر محصول"> {% endcomment %}
+                                              alt="{{product.alt}}">
 
                                       </figure><!-- End .product-main-image -->
                                       <a href="#" id="btn-product-gallery" class="btn-product-gallery">
@@ -53,13 +49,20 @@
                                           </a>
 
                                       <div id="product-zoom-gallery" class="product-image-gallery">
+
+                                        <a class="product-gallery-item" 
+                                              data-image="{{img.image.url}}"
+                                              data-zoom-image="{{img.image.url}}">
+                                              <img class="another-image-option" src="{{product.image.url}}"
+                                                  alt="{{product.alt}}">
+                                          </a>
                                         
                                         {% for img in product.images.all %}
                                           <a class="product-gallery-item" 
                                               data-image="{{img.image.url}}"
                                               data-zoom-image="{{img.image.url}}">
                                               <img class="another-image-option" src="{{img.image.url}}"
-                                                  alt="توضیحات تصویر">
+                                                  alt="{{img.alt}}">
                                           </a>
                                           {% endfor %}
 
@@ -138,6 +141,7 @@
                                         
                                       {% if user.is_authenticated %}
                                      <!-- Add to Cart -->
+                                     {% if product.available %}
                                       <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                         {% csrf_token %}
                                         <div class="details-filter-row details-row-size">
@@ -146,8 +150,16 @@
                                             <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
                                           </div><!-- End .product-details-quantity -->
                                         </div><!-- End .details-filter-row -->
-                                        <button type="submit" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></button>
+                                            <button type="submit" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></button>       
                                       </form>
+                                      {% else %}
+                                        <div class="details-action-wrapper">
+                                        
+                                          <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product btn-quickview"
+                                              title="لیست علاقه مندی"><span>وقتی موجود شد به من خبر بده!</span></a>
+
+                                      </div>    
+                                      {% endif %}
 
 
                                       <div class="details-action-wrapper">
@@ -331,7 +343,7 @@
                           <figure class="product-media">
                               <span class="product-label label-new">جدید</span>
                               <a href="{{s.get_absolute_url}}">
-                                  <img src="{{s.image.url}}" alt="تصویر محصول"
+                                  <img src="{{s.image.url}}" alt="{{s.alt}}"
                                       class="product-image">
                               </a>
 
@@ -364,7 +376,7 @@
                               <div class="product-nav product-nav-thumbs">
                                   {% for img in s.images.all %}
                                     <a href="" class="active">
-                                        <img src="{{img.image.url}}" alt="product desc">
+                                        <img src="{{img.image.url}}" alt="{{img.alt}}">
                                     </a>
                                   {% endfor %}
                                   

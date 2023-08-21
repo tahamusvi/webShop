@@ -24,6 +24,9 @@ def detail(request):
 def cart_add(request,product_id):
     cart = Cart(request)
     product = get_object_or_404(Product,id=product_id)
+    if(product.warehouse == 0):
+        messages.error(request,'کالا در انبار موجود نیست!','background-color: rgb(198, 2, 2);')
+        return redirect(request.META.get('HTTP_REFERER'))
     if(request.method == "POST"):
         
         form = CartAddForm(request.POST)
