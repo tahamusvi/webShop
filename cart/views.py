@@ -33,6 +33,8 @@ def cart_add(request,product_id):
         if form.is_valid():
             cd = form.cleaned_data
             cart.add(product=product,quantity=cd['quantity'])
+            product.warehouse -= 1
+            product.save()
             messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
     else:

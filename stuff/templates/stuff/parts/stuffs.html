@@ -48,7 +48,7 @@
                 <div class="product-body">
                     <div class="product-cat">
                         
-                        <a>{{ product.category.all|join:", " }}</a>
+                        <a>{{product.category.all|join:", " }}</a>
                         {% comment %} {% for cat in product.category.all %}
                         <a href="{{cat.url}}">{{cat.name}} </a>
                         {% endfor %} {% endcomment %}
@@ -57,7 +57,11 @@
                     </h3>
                     <!-- End .product-title -->
                     <div class="product-price">
+                    {% if product.available %}
                         {{product.discounted_price}} تومان
+                    {% else %}
+                            ناموجود
+                    {% endif %}
                     </div><!-- End .product-price -->
                     <div class="ratings-container">
                         <div class="ratings">
