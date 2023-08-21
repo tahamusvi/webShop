@@ -17,7 +17,8 @@ class User(AbstractBaseUser):
     code = models.IntegerField(blank=True,null=True)
 
 
-    wishlist = models.ManyToManyField(Product,blank=True)
+    wishlist = models.ManyToManyField(Product,blank=True,related_name ="wishlist")
+    informing = models.ManyToManyField(Product,blank=True,related_name ="informing")
 
 
 

@@ -155,8 +155,9 @@
                                       {% else %}
                                         <div class="details-action-wrapper">
                                         
-                                          <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product btn-quickview"
-                                              title="لیست علاقه مندی"><span>وقتی موجود شد به من خبر بده!</span></a>
+                                          <a href="{% url 'accounts:AddToInforming' product.id %}" class="btn-product "
+                                              title="لیست علاقه مندی">   </i> <span><i class="icon-rotate-left"> </i>
+                                               وقتی موجود شد به من خبر بده! </span></a>
 
                                       </div>    
                                       {% endif %}

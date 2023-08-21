@@ -28,6 +28,7 @@ messages_dict = {
     "numeric_error" : 'در گذرواژه از حروف نیز استفاده کنید.',
     "common_error" : 'این گذرواژه خیلی عمومی است.',
     "lentgh_error" : 'این گذرواژه کم تر از هشت کاراکتر دارد.',
+    "add_informing" : 'به لیست موردعلاقه ها اضافه شد.', 
 
 }
 
@@ -179,6 +180,16 @@ def AddToWish(request, id):
 
         request.user.wishlist.add(item)
         messages.success(request, messages_dict['add_wishlist'], color_messages['success'])
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect("accounts:login")
+#------------------------------------------------------------------------------------------------
+def AddToInforming(request, id):
+    if(request.user.is_authenticated):
+        item = get_object_or_404(Product, id=id)
+
+        request.user.informing.add(item)
+        messages.success(request, messages_dict['add_informing'], color_messages['success'])
         return redirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect("accounts:login")
