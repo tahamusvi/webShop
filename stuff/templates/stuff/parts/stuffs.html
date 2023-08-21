@@ -24,9 +24,9 @@
               <figure class="product-media">
                   <a href="{{product.get_absolute_url}}">
                       <img src="{{product.image.url}}"
-                          alt="تصویر محصول" class="product-image">
+                          alt="{{product.alt}}" class="product-image">
                       <img src="{{product.images.first.image.url}}"
-                          alt="تصویر محصول" class="product-image-hover">
+                          alt="{{product.alt}}" class="product-image-hover">
                   </a>
 
                   {% if product in request.user.wishlist.all %}

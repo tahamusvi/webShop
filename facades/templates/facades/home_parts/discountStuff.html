@@ -66,9 +66,9 @@
                     <figure class="product-media">
                       <span class="product-label label-sale">{{product.discount}}% </span>
                         <a href="{{product.get_absolute_url}}">
-                            <img src="{{product.image.url}}" alt="تصویر محصول"
+                            <img src="{{product.image.url}}" alt="{{product.alt}}"
                                 class="product-image">
-                            <img src="{{product.images.first.image.url}}" alt="تصویر محصول"
+                            <img src="{{product.images.first.image.url}}" alt="{{product.alt}}"
                                 class="product-image-hover">
                         </a>
 

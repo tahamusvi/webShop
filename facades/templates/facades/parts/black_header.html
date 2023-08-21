@@ -56,7 +56,7 @@
                 </button>
 
                 <a href="{% url 'facades:home' %}" class="logo">
-                    <img src="{% static 'facades/images/logi.png' %}" alt="Molla Logo" width="105" height="25">
+                    <img src="{% static 'facades/images/logi.png' %}" alt="Logo image" width="105" height="25">
                 </a>
             </div><!-- End .header-left -->
 
@@ -120,7 +120,7 @@
 
                                 <figure class="product-image-container">
                                     <a href="{{item.product.get_absolute_url}}" class="product-image">
-                                        <img src="{{item.product.image.url}}" alt="product">
+                                        <img src="{{item.product.image.url}}" alt="{{item.product.alt}}">
                                     </a>
                                 </figure>
                                 {% if item.product %}
