@@ -13,6 +13,7 @@ urlpatterns = [
     path('ChangePasswordForgot/<slug:phoneNumber>/',ChangePasswordForgot, name='ChangePasswordForgot'),   
 
     path('add_address/',add_address, name='add_address'),
+    path('change_main_address/',change_main_address, name='change_main_address'),
     path('delete_address/<int:address_id>/',delete_address, name='delete_address'),
     path('edit_address/<int:address_id>/',edit_address, name='edit_address'),
 

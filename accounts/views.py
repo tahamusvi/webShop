@@ -29,6 +29,7 @@ messages_dict = {
     "common_error" : 'این گذرواژه خیلی عمومی است.',
     "lentgh_error" : 'این گذرواژه کم تر از هشت کاراکتر دارد.',
     "add_informing" : 'به لیست موردعلاقه ها اضافه شد.', 
+    "change_main_address" : 'آدرس اصلی با موفقیت تغییر کرد.',
 
 }
 
@@ -159,11 +160,25 @@ def user_register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            cd = form.cleaned_data
+            try:
+                validate_password(cd['password1'])
+            except ValidationError as validation_error:
+                for message in validation_error:
+                    if('This password is too short. It must contain at least 8 characters.' == message):
+                        messages.error(request, messages_dict['lentgh_error'],color_messages['error'])
+                    if('This password is too common.' == message):
+                        messages.error(request, messages_dict['common_error'],color_messages['error'])
+                    if('This password is entirely numeric.' == message):
+                        messages.error(request, messages_dict['numeric_error'],color_messages['error'])
+                    
+                return redirect('accounts:login')
+            
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password1'])
+            user.set_password(cd['password1'])
             user.save()
             messages.success(request, messages_dict['sign_up'], color_messages['success'])
-            user = authenticate(request, username=form.cleaned_data['phoneNumber'], password=form.cleaned_data['password1'])
+            user = authenticate(request, username=cd['phoneNumber'], password=cd['password1'])
             if user is not None:
                 login(request, user)
                 return redirect('facades:home')
@@ -259,6 +274,23 @@ def add_address(request):
     else:
         form = AddressForm()
     return redirect('facades:dashboard')
+#------------------------------------------------------------------------------------------------
+def change_main_address(request):
+    if request.method == 'POST':
+        address_id = request.POST["address_id"]
+        address = get_object_or_404(Address,id=address_id)
+        addresses = request.user.addresses.all()
+        for ad in addresses:
+            ad.current = False
+            ad.save()
+        address.current = True
+        address.save()
+        messages.success(request, messages_dict["change_main_address"],  color_messages['success'])
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+
+    return redirect(request.META.get('HTTP_REFERER'))
+
 #------------------------------------------------------------------------------------------------
 def delete_address(request,address_id):
     address = get_object_or_404(Address,id=address_id)

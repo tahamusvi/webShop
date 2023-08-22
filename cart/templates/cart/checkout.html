@@ -27,80 +27,30 @@
 
 
 
-                        <form action="#">
+                        
                             <div class="row">
                                 <div class="col-lg-9">
-                                    <h2 class="checkout-title">جزئیات صورت حساب</h2><!-- End .checkout-title -->
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>نام *</label>
-                                            <input type="text" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
+                                    <h2 class="checkout-title">آدرس اصلی:</h2><!-- End .checkout-title -->
+                                    
+                                        <h6 class="checkout-title">{{caddress.text}} - کد پستی: {{caddress.postal_code}}</h3>
+                                    
 
-                                        <div class="col-sm-6">
-                                            <label>نام خانوادگی *</label>
-                                            <input type="text" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
-                                    </div><!-- End .row -->
 
-                                    <label>نام شرکت (اختیاری)</label>
-                                    <input type="text" class="form-control">
-
-                                    <label>کشور *</label>
-                                    <input type="text" class="form-control" required>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>شهر *</label>
-                                            <input type="text" class="form-control" required>
-
-                                        </div><!-- End .col-sm-6 -->
-
-                                        <div class="col-sm-6">
-                                            <label>شهرستان *</label>
-                                            <input type="text" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
-                                    </div><!-- End .row -->
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <label>خیابان *</label>
-                                            <input type="text" class="form-control" placeholder="نام خیابان و پلاک"
-                                                required>
-
-                                        </div><!-- End .col-sm-12 -->
-
-                                    </div><!-- End .row -->
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>کد پستی *</label>
-                                            <input type="text" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
-
-                                        <div class="col-sm-6">
-                                            <label>تلفن *</label>
-                                            <input type="tel" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
-                                    </div><!-- End .row -->
-
-                                    <label>ایمیل *</label>
-                                    <input type="email" class="form-control" required>
-
+                                    <h2 class="checkout-title">آدرس ها:</h2><!-- End .checkout-title -->
+                                    <form class="" action="{% url 'accounts:change_main_address' %}" method="post">{% csrf_token %}
+                                    {% for address in request.user.addresses.all %}
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="checkout-create-acc">
-                                        <label class="custom-control-label" for="checkout-create-acc">ایجاد یک حساب
-                                            کاربری؟</label>
+                                        <input type="checkbox" class="custom-control-input" id="{{address.id}}" value="{{address.id}}" name="address_id">
+                                        <label class="custom-control-label" for="{{address.id}}">{{address.text}} - کد پستی: {{address.postal_code}}</label>
                                     </div><!-- End .custom-checkbox -->
+                                    {% endfor %}
+                                    
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>انتخاب آدرس</span>
+                                                <i class="icon-long-arrow-left"></i>
+                                            </button>
 
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
-                                        <label class="custom-control-label" for="checkout-diff-address">ارسال به یک آدرس
-                                            متفاوت؟</label>
-                                    </div><!-- End .custom-checkbox -->
-
-                                    <label>توضیحات (اختیاری)</label>
-                                    <textarea class="form-control" cols="30" rows="4"
-                                        placeholder="شما میتوانید توضیحات اضافی خود را اینجا بنویسید"></textarea>
+                                    </form>
                                 </div><!-- End .col-lg-9 -->
                                 
                                 <aside class="col-lg-3">
@@ -240,7 +190,6 @@
                                         </div><!-- End .summary -->
                                 </aside><!-- End .col-lg-3 -->
                             </div><!-- End .row -->
-                        </form>
 
 
 
