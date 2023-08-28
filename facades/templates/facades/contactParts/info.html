@@ -110,19 +110,20 @@
             <h2 class="title text-center mb-3">فروشگاه های ما</h2><!-- End .title text-center mb-2 -->
 
             <div class="row">
+            {% for shop in shops %}
                 <div class="col-lg-6">
                     <div class="store">
                         <div class="row">
                             <div class="col-sm-5 col-xl-6">
                                 <figure class="store-media mb-2 mb-lg-0">
-                                    <img src="{% static 'facades/images/img-1.jpg' %}" alt="shop image">
+                                    <img src="{{shop.image.url}}" alt="shop image">
                                 </figure><!-- End .store-media -->
                             </div><!-- End .col-xl-6 -->
                             <div class="col-sm-7 col-xl-6">
                                 <div class="store-content">
-                                    <h3 class="store-title">فروشگاه شماره 1</h3><!-- End .store-title -->
-                                    <address>تهران، میدان تجریش</address>
-                                    <div><a href="tel:#">88776655</a></div>
+                                    <h3 class="store-title">{{shop.name}}</h3><!-- End .store-title -->
+                                    <address>{{shop.address}}</address>
+                                    <div><a href="tel:#">0{{shop.phone}}</a></div>
 
                                     <h4 class="store-subtitle">ساعت کاری فروشگاه :</h4>
                                     <!-- End .store-subtitle -->
@@ -136,33 +137,10 @@
                     </div><!-- End .store -->
                 </div><!-- End .col-lg-6 -->
 
-                <div class="col-lg-6">
-                    <div class="store">
-                        <div class="row">
-                            <div class="col-sm-5 col-xl-6">
-                                <figure class="store-media mb-2 mb-lg-0">
-                                    <img src="{% static 'facades/images/img-2.jpg' %}" alt="shop image">
-                                </figure><!-- End .store-media -->
-                            </div><!-- End .col-xl-6 -->
+            {% endfor %}
 
-                            <div class="col-sm-7 col-xl-6">
-                                <div class="store-content">
-                                    <h3 class="store-title">فروشگاه شماره 2</h3><!-- End .store-title -->
-                                    <address>تهران، میدان منیریه</address>
-                                    <div><a href="tel:#">77558866</a></div>
+                
 
-                                    <h4 class="store-subtitle">ساعت کاری فروشگاه :</h4>
-                                    <!-- End .store-subtitle -->
-                                    <div>شنبه-چهارشنبه 11صبح تا 7 عصر</div>
-                                    <div>پنج شنبه 11 صبح تا 6 عصر</div>
-                                    <div>جمعه - تعطیل</div>
-
-                                    
-                                </div><!-- End .store-content -->
-                            </div><!-- End .col-xl-6 -->
-                        </div><!-- End .row -->
-                    </div><!-- End .store -->
-                </div><!-- End .col-lg-6 -->
             </div><!-- End .row -->
         </div><!-- End .stores -->
     </div><!-- End .container -->

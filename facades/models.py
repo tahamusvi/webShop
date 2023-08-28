@@ -54,6 +54,18 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+#----------------------------------------------------------------------------------------------
+class shop(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.TextField()
+    postal_code = models.CharField(max_length=10)
+    phone = models.CharField(max_length=10)
+    image = models.ImageField(upload_to='web_shop/banners/')
+
+
+    def __str__(self):
+        return self.name
+
 
 
 
