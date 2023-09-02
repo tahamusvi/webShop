@@ -1,3 +1,4 @@
+from unittest import result
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -7,18 +8,7 @@ from django.views.decorators.http import require_POST
 from django.utils import timezone
 from django.contrib import messages
 from facades.views import InformationsForTemplate
-#-----------------------------------------------------------------------------------
-@login_required
-def order_create(request):
-    cart = Cart(request)
-    order = Order.objects.create(user=request.user)
-    for item in cart:
-        OrderItem.objects.create(order=order,
-        product=item['product'],
-        price=item['price'],
-        quantity=item['quantity'])
-    cart.clear()
-    return redirect('orders:detail',order.id)
+# from suds.client import Client
 #-----------------------------------------------------------------------------------
 @login_required
 def detail(request,order_id):
@@ -63,19 +53,6 @@ def factor(request,order_id):
         return render(request,'orders/factor.html',{'order':order})
     return render(request,'orders/checkout.html',{'order':order,'form':form})
 #-----------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------
-# from django.http import HttpResponse
-# from django.shortcuts import redirect
-# from suds.client import Client
-
-
-# from django.contrib import messages
-
-
-
-
-
-
 # MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 # client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 # description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
@@ -83,34 +60,54 @@ def factor(request,order_id):
 # mobile = '09123456789'  # Optional
 # # Important: need to edit for realy server.
 # CallbackURL = 'http://localhost:8000/orders/verify/'
-
-
-# @login_required
-# def send_request(request,order_id,price):
-#     global amount , o_id
-#     amount = price
-#     o_id = order_id
-#     result = client.service.PaymentRequest(MERCHANT, amount, description, request.user.email, mobile, CallbackURL)
-#     if result.Status == 100:
-#         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
-#     else:
-#         return HttpResponse('Error code: ' + str(result.Status))
-
-
-# #-----------------------------------------------------------------------------------
-# @login_required
-# def verify(request):
-#     if request.GET.get('Status') == 'OK':
-#         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
-#         if result.Status == 100:
-#             order = Order.objects.get(id=o_id)
-#             order.paid = True
-#             order.save()
-#             messages.success(request,'Transaction was Successful')
-#             return redirect('shop:home')
-#         elif result.Status == 101:
-#             return HttpResponse('Transaction submitted ')
-#         else:
-#             return HttpResponse('Transaction failed.')
-#     else:
-#         return HttpResponse('Transaction failed or canceled by user')
+#-----------------------------------------------------------------------------------
+@login_required
+def send_request(request,order_id,price):
+    global amount , o_id
+    amount = price
+    o_id = order_id
+    # result = client.service.PaymentRequest(MERCHANT, amount, description, request.user.email, mobile, CallbackURL)
+    if True:
+        # result.Status == 100
+        # return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
+        return verify(request)
+    else:
+        # return HttpResponse('Error code: ' + str(result.Status))
+        pass
+#-----------------------------------------------------------------------------------
+def verify(request):
+    # request.GET.get('Status') == 'OK'
+    if True :
+        result = 100
+        # result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
+        if result == 100:
+            # result.Status == 100
+            order = Order.objects.get(id=o_id)
+            order.paid = True
+            order.save()
+            messages.success(request,'خرید با موفقیت انجام شد.','background-color: rgb(0, 190, 0);')
+            return redirect('facades:dashboard')
+        elif result == 101:
+            pass
+            # result.Status == 101
+            # return HttpResponse('Transaction submitted ')
+        else:
+            pass
+            # return HttpResponse('Transaction failed.')
+    else:
+        # return HttpResponse('Transaction failed or canceled by user')
+        pass
+#-----------------------------------------------------------------------------------
+@login_required
+def order_create(request,address_id):
+    cart = Cart(request)
+    order = Order.objects.create(user=request.user)
+    order.address = Address.objects.get(id=address_id)
+    for item in cart:
+        OrderItem.objects.create(order=order,
+        product=item['product'],
+        price=item['price'],
+        quantity=item['quantity'])
+    cart.clear()
+    return send_request(request,order.id,order.total_price)
+#-----------------------------------------------------------------------------------

@@ -185,10 +185,7 @@
                                                 </div><!-- End .card -->
                                             </div><!-- End .accordion -->
 
-                                            <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
-                                                <span class="btn-text">ثبت</span>
-                                                <span class="btn-hover-text">پرداخت</span>
-                                            </button>
+                                            <a href="{% url 'orders:order_create' caddress.id %}" class="btn btn-outline-primary-2 btn-order btn-block">پرداخت</a>
                                         </div><!-- End .summary -->
                                 </aside><!-- End .col-lg-3 -->
                             </div><!-- End .row -->
