@@ -78,25 +78,29 @@ def send_request(request,order_id,price):
 def verify(request):
     # request.GET.get('Status') == 'OK'
     if True :
-        result = 100
+        result = 101
         # result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result == 100:
             # result.Status == 100
             order = Order.objects.get(id=o_id)
             order.paid = True
             order.save()
+            cart = Cart(request)
+            cart.clear()
             messages.success(request,'خرید با موفقیت انجام شد.','background-color: rgb(0, 190, 0);')
             return redirect('facades:dashboard')
         elif result == 101:
-            pass
             # result.Status == 101
-            # return HttpResponse('Transaction submitted ')
+            cart = Cart(request)
+            cart.clear()
+            messages.success(request,'پرداخت انجام شده بوده است.','background-color: rgb(108, 105, 105);')
+            return redirect('facades:dashboard')
         else:
-            pass
-            # return HttpResponse('Transaction failed.')
+            messages.success(request,'پرداخت ناموفق بود.','background-color: rgb(198, 2, 2);')
+            return redirect('cart:detail')
     else:
-        # return HttpResponse('Transaction failed or canceled by user')
-        pass
+        messages.success(request,'پرداخت ناموفق بود.','background-color: rgb(198, 2, 2);')
+        return redirect('cart:detail')
 #-----------------------------------------------------------------------------------
 @login_required
 def order_create(request,address_id):
@@ -108,6 +112,6 @@ def order_create(request,address_id):
         product=item['product'],
         price=item['price'],
         quantity=item['quantity'])
-    cart.clear()
+    
     return send_request(request,order.id,order.total_price)
 #-----------------------------------------------------------------------------------
