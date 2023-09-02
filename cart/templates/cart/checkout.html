@@ -39,8 +39,10 @@
                                     <h2 class="checkout-title">آدرس ها:</h2><!-- End .checkout-title -->
                                     <form class="" action="{% url 'accounts:change_main_address' %}" method="post">{% csrf_token %}
                                     {% for address in request.user.addresses.all %}
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="{{address.id}}" value="{{address.id}}" name="address_id">
+
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="{{address.id}}"
+                                            name="address_id" value="{{address.id}}">
                                         <label class="custom-control-label" for="{{address.id}}">{{address.text}} - کد پستی: {{address.postal_code}}</label>
                                     </div><!-- End .custom-checkbox -->
                                     {% endfor %}

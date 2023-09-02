@@ -77,7 +77,11 @@ class Product(models.Model):
         show = int(((self.price)*(100-self.discount))/100)
         formatted_price = "{:,.0f}".format(show)
         return formatted_price
-
+        
+    @property
+    def discounted_price_int(self):
+        show = int(((self.price)*(100-self.discount))/100)
+        return show
 
     @property
     def is_new(self):
