@@ -1,3 +1,4 @@
+from math import prod
 from django.shortcuts import render,get_object_or_404
 
 from facades.models import EndBanner
@@ -134,12 +135,11 @@ def CopyObjects(request):
         product.save()
     
 #-----------------------------------------------------------------------------------
-
 def product_detail(request, slug,id):
     product = get_object_or_404(Product, id=id)
 
     category = product.category.all()[0]
-    Suggested = category.products.all()[0:4]
+    Suggested = product.get_similar_products()
     comments = product.comments.all().filter(valid=True)
 
     AddCommentForm = CommentForm()

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 from datetime import timedelta
 from django.core.validators import MaxValueValidator, MinValueValidator
+import random
 #-----------------------------------------------------------------------------------
 class Brand(models.Model):
     name = models.CharField(max_length=200)
@@ -93,6 +94,18 @@ class Product(models.Model):
 
     def star_rating(self):
         return self.rating * 20
+
+
+    def get_similar_products(self):
+        similar_products = Product.objects.filter(category__in=self.category.all()).exclude(id=self.id)[:6]
+        
+        if similar_products.count() < 6:
+            remaining_count = 6 - similar_products.count()
+            other_products = Product.objects.exclude(category__in=self.category.all()).exclude(id=self.id)
+            random_products = random.sample(list(other_products), remaining_count)
+            similar_products = list(similar_products) + random_products
+        
+        return similar_products
 #-----------------------------------------------------------------------------------
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
