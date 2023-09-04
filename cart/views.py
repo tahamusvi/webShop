@@ -32,7 +32,8 @@ def cart_add(request,product_id):
         form = CartAddForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            cart.add(product=product,quantity=cd['quantity'])
+            print()
+            cart.add(product=product,quantity=cd['quantity'],color=request.POST.get('color'))
             product.warehouse -= 1
             product.save()
             messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')

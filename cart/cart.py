@@ -16,6 +16,14 @@ class Cart:
         #     discount = self.session[DISCOUNT_SESSION_ID] = {}
         # self.discount = discount
 
+    def add(self,product,quantity=1,color="custom"):
+        product_id = str(product.id)
+
+        if product_id not in self.cart:
+            self.cart[product_id] = {'quantity':0,'price':str(product.discounted_price_int),'color':color}
+        self.cart[product_id]['quantity'] += quantity
+        self.save()
+
     def remove(self,product):
         product_id = str(product.id)
         if product_id in self.cart:
@@ -23,14 +31,7 @@ class Cart:
             self.save()
 
 
-    def add(self,product,quantity=1):
-        product_id = str(product.id)
-
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity':0,'price':str(product.discounted_price_int)}
-        self.cart[product_id]['quantity'] += quantity
-        self.save()
-
+    
     # def apply_coupon(self,coupon):
     #     coupon_str = str(coupon.code)
 
