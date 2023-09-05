@@ -37,6 +37,8 @@ def InformationsForTemplate(request):
     return Info
 #----------------------------------------------------------------------------------------------
 def HomePage(request):
+    # cart = Cart(request)
+    # cart.clear()
 
     print("--------------------------")
     # discounted stuff

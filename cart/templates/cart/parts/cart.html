@@ -7,6 +7,7 @@
                                     <thead>
                                         <tr>
                                             <th>محصول</th>
+                                            <th>رنگ</th>
                                             <th>قیمت</th>
                                             <th>تعداد</th>
                                             <th>مجموع</th>
@@ -28,10 +29,11 @@
                                                     </figure>
 
                                                     <h3 class="product-title">
-                                                        <a href="{{item.product.get_absolute_url}}">{{item.product}} -*- {{item.color}}</a>
+                                                        <a href="{{item.product.get_absolute_url}}">{{item.product}}</a>
                                                     </h3><!-- End .product-title -->
                                                 </div><!-- End .product -->
                                             </td>
+                                            <td class="price-col">{{item.color}}</td>
                                             <td class="price-col">{{item.price}}</td>
                                             <td class="quantity-col">
                                                 <div class="cart-product-quantity">

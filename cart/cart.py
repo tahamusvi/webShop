@@ -1,6 +1,6 @@
 CART_SESSION_ID = 'cart'
 DISCOUNT_SESSION_ID = 'discount'
-from stuff.models import Product
+from stuff.models import Product,Color
 
 
 class Cart:
@@ -17,17 +17,20 @@ class Cart:
         # self.discount = discount
 
     def add(self,product,quantity=1,color="custom"):
-        product_id = str(product.id)
+        product_cart_id = f"{product.id}-{color}"
+        
 
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity':0,'price':str(product.discounted_price_int),'color':color}
-        self.cart[product_id]['quantity'] += quantity
+        if product_cart_id not in self.cart:
+            self.cart[product_cart_id] = {'quantity':0,'price':str(product.discounted_price_int),'color':color,'color_code':Color.objects.get(name=color).code}
+        self.cart[product_cart_id]['quantity'] += quantity
+        
+        
         self.save()
 
-    def remove(self,product):
-        product_id = str(product.id)
-        if product_id in self.cart:
-            del self.cart[product_id]
+    def remove(self,product,color="custom"):
+        product_cart_id = f"{product.id}-{color}"
+        if product_cart_id in self.cart:
+            del self.cart[product_cart_id]
             self.save()
 
 
@@ -53,11 +56,9 @@ class Cart:
         self.session.modified = True
 
     def __iter__(self):
-        product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
-        for product in products:
-            cart[str(product.id)]['product'] = product
+        for key in cart:
+            cart[key]['product'] = Product.objects.get(id=int(key.split('-')[0]))
 
         for item in cart.values():
             item['total_price'] = int(item['price'])*item['quantity']
