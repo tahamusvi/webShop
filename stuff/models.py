@@ -118,3 +118,4 @@ class ProductImage(models.Model):
         return f"{self.product} - {self.id}"
 
 #-----------------------------------------------------------------------------------
+

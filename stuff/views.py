@@ -142,6 +142,13 @@ def product_detail(request, slug,id):
     Suggested = product.get_similar_products()
     comments = product.comments.all().filter(valid=True)
 
+    
+    watched_product, created = WatchedProduct.objects.get_or_create(user=request.user, product=product)
+    if not created:
+        watched_product.timestamp = timezone.now()
+        watched_product.save()
+
+
     AddCommentForm = CommentForm()
 
     Info = InformationsForTemplate(request)

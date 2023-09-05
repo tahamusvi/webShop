@@ -37,8 +37,7 @@
                                             <td class="price-col">{{item.price}}</td>
                                             <td class="quantity-col">
                                                 <div class="cart-product-quantity">
-                                                    <input type="number" class="form-control" value="{{item.quantity}}" min="1" max="10"
-                                                        step="1" data-decimals="0" required>
+                                                    {{item.quantity}}
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
                                             <td class="total-col">{{item.total_price}}</td>
@@ -54,21 +53,17 @@
                                 </table><!-- End .table table-wishlist -->
 
                                 <div class="cart-bottom">
+                                    
                                     <div class="cart-discount">
-                                        <form action="#">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" required placeholder="کد تخفیف">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-primary-2" type="submit"><i
-                                                            class="icon-long-arrow-left"></i></button>
-                                                </div><!-- .End .input-group-append -->
-                                            </div><!-- End .input-group -->
-                                        </form>
+                                        <p> اگر کد تخفیف دارید در صفحه ی پرداخت وارد کنید.</p>
+                                        <p> برای افزایش تعداد محصول بر روی عکس آن کلیک کرده و به تعداد مورد نظر به به سبد خرید اضافه نمایید.</p>
                                     </div><!-- End .cart-discount -->
+                                    
 
-                                    <a href="#" class="btn btn-outline-dark-2"><span>به روز رسانی سبد خرید</span><i
-                                            class="icon-refresh"></i></a>
+                                    
                                 </div><!-- End .cart-bottom -->
+                                        
+                                
                             </div><!-- End .col-lg-9 -->
                             <aside class="col-lg-3">
                                 <div class="summary summary-cart">
