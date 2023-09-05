@@ -37,6 +37,7 @@ class Category(models.Model):
 #-----------------------------------------------------------------------------------        
 class Color(models.Model):
     name = models.CharField(max_length=50)
+    en = models.CharField(max_length=50)
     code = models.CharField(max_length=6)
 
     def __str__(self):

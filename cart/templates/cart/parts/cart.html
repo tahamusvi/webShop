@@ -33,7 +33,7 @@
                                                     </h3><!-- End .product-title -->
                                                 </div><!-- End .product -->
                                             </td>
-                                            <td class="price-col">{{item.color}}</td>
+                                            <td class="price-col">{{item.color_per}}</td>
                                             <td class="price-col">{{item.price}}</td>
                                             <td class="quantity-col">
                                                 <div class="cart-product-quantity">
@@ -42,7 +42,7 @@
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
                                             <td class="total-col">{{item.total_price}}</td>
-                                            <td class="remove-col" ><a href="{% url 'cart:cart_remove' item.product.id %}" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a></td>
+                                            <td class="remove-col" ><a href="{% url 'cart:cart_remove' item.id %}" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a></td>
                                                 
                                             
                                                     

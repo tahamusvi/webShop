@@ -21,14 +21,15 @@ class Cart:
         
 
         if product_cart_id not in self.cart:
-            self.cart[product_cart_id] = {'quantity':0,'price':str(product.discounted_price_int),'color':color,'color_code':Color.objects.get(name=color).code}
+            self.cart[product_cart_id] = {'quantity':0,'price':str(product.discounted_price_int),'color':color,
+            'color_per':Color.objects.get(en=color).name,'id':product_cart_id}
         self.cart[product_cart_id]['quantity'] += quantity
         
         
         self.save()
 
-    def remove(self,product,color="custom"):
-        product_cart_id = f"{product.id}-{color}"
+    def remove(self,product_cart_id):
+        # product_cart_id = f"{product.id}-{color}"
         if product_cart_id in self.cart:
             del self.cart[product_cart_id]
             self.save()

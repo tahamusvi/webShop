@@ -43,10 +43,10 @@ def cart_add(request,product_id):
         messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
 #-----------------------------------------------------------------------------------
-def cart_remove(request,product_id):
+def cart_remove(request,product_id_color):
     cart = Cart(request)
-    product = get_object_or_404(Product,id=product_id)
-    cart.remove(product)
+    # product = get_object_or_404(Product,id=product_id)
+    cart.remove(product_id_color)
     return redirect('cart:detail')
 #-----------------------------------------------------------------------------------
 @login_required
