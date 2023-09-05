@@ -37,9 +37,6 @@ def InformationsForTemplate(request):
     return Info
 #----------------------------------------------------------------------------------------------
 def HomePage(request):
-    cart = Cart(request)
-    cart.clear()
-
     print("--------------------------")
     # discounted stuff
     discounted = Product.objects.filter(available=True,discounted=True)

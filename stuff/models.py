@@ -55,7 +55,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    rating = models.FloatField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
+    rating = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
     colors = models.ManyToManyField(Color)
     warehouse = models.IntegerField(default=0)
 
