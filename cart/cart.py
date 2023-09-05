@@ -18,6 +18,9 @@ class Cart:
 
     def add(self,product,quantity=1,color="custom"):
         product_cart_id = f"{product.id}-{color}"
+
+        if(color == None):
+            color = 'custom'
         
 
         if product_cart_id not in self.cart:
@@ -29,7 +32,6 @@ class Cart:
         self.save()
 
     def remove(self,product_cart_id):
-        # product_cart_id = f"{product.id}-{color}"
         if product_cart_id in self.cart:
             del self.cart[product_cart_id]
             self.save()
