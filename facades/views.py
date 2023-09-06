@@ -4,6 +4,7 @@ from .models import *
 from accounts.forms import *
 from cart.cart import Cart
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 #----------------------------------------------------------------------------------------------
 def InformationsForTemplate(request):
     Info = {}
@@ -95,6 +96,8 @@ from .forms import SurveyForm
 def CreateSurvey(request):
     CreateSurvey = False
     form = SurveyForm()
+    Info = InformationsForTemplate(request)
+    Info.update({'form': form,'CreateSurvey':CreateSurvey})
 
     if request.method == 'POST':
         form = SurveyForm(request.POST)
@@ -114,6 +117,12 @@ def CreateSurvey(request):
             surveyUser.save()
 
             CreateSurvey = True
+            Info.update({'CreateSurvey':CreateSurvey})
+            messages.success(request,"سوالت رو با موفقیت ارسال شد.",'background-color: rgb(0, 190, 0);')
+            return render(request, 'facades/contact.html', Info)
+        else:
+            messages.error(request,'مشکلی تو ارسال سوالت پیش اومد.','background-color: rgb(198, 2, 2);')
+            return render(request, 'facades/contact.html', Info)
 
-    return render(request, 'facades/contact.html', {'form': form,'CreateSurvey':CreateSurvey})
+    return contact(request)
 #----------------------------------------------------------------------------------------------
