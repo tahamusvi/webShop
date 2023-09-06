@@ -8,10 +8,11 @@
     <div class="mobile-menu-wrapper">
         <span class="mobile-menu-close"><i class="icon-close"></i></span>
 
-        <form action="#" method="get" class="mobile-search">
+        <form action="{% url 'stuff:product_search' 1 %}" method="get" class="mobile-search">
             <label for="mobile-search" class="sr-only">جستجو</label>
-            <input type="search" class="form-control" name="mobile-search" id="mobile-search"
-                placeholder="جستجو در ..." required>
+            <input type="search" class="form-control" name="query" id="mobile-search"
+                placeholder="جستجو  ..." required>
+                
             <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
         </form>
 
@@ -31,14 +32,26 @@
                 aria-labelledby="mobile-menu-link">
                 <nav class="mobile-nav">
                     <ul class="mobile-menu">
-                        <li class="active">
-                            <a href="index-1.html">خانه</a>
-
-                            <ul>
-                                <li><a href="index-1.html">01 - فروشگاه مبلمان</a></li>
-                            </ul>
+                        <li {% if request.resolver_match.url_name == 'home' %} class="active" {% endif %}>
+                            <a href="{% url 'facades:home' %}">خانه</a>
                         </li>
-                        <li>
+
+                        <li {% if request.resolver_match.url_name == 'dashboard' %} class="active" {% endif %} >
+                            <a href="{% url 'facades:dashboard' %}">داشبورد</a>
+                        </li>
+
+                        <li {% if request.resolver_match.url_name == 'aboutUs' %} class="active" {% endif %} >
+                            <a href="{% url 'facades:aboutUs' %}">درباره ی گیزمو</a>
+                        </li>    
+
+                        <li {% if request.resolver_match.url_name == 'contact' %} class="active" {% endif %} >
+                            <a href="{% url 'facades:contact' %}">ارتباط با گیزمو</a>
+                        </li>
+
+                        <li {% if request.resolver_match.url_name == 'FAQ' %} class="active" {% endif %} >
+                            <a href="{% url 'facades:FAQ' %}">سوالات متداول</a>
+                        </li>
+                        {% comment %} <li>
                             <a href="category.html">فروشگاه</a>
                             <ul>
                                 <li><a href="category-list.html">فروشگاه لیست</a></li>
@@ -49,18 +62,26 @@
                                 <li><a href="product-category-fullwidth.html"><span>دسته بندی محصولات تمام عرض<span
                                                 class="tip tip-new">جدید</span></span></a></li>
                             </ul>
-                        </li>
+                        </li> {% endcomment %}
 
 
                     </ul>
                 </nav><!-- End .mobile-nav -->
             </div><!-- .End .tab-pane -->
+
+
             <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
                 <nav class="mobile-cats-nav">
                     <ul class="mobile-cats-menu">
 
-                        <li><a class="mobile-cats-lead" href="#">پیشنهاد روزانه</a></li>
-                        <li><a class="mobile-cats-lead" href="#">هدیه</a></li>
+                        {% for cat in allCategories %}
+
+                        <li >
+                            <a class="mobile-cats-lead" href="{{cat.get_absolute_url}}">{{cat.name}}</a>
+                        </li>
+
+                        {% endfor %}
+
 
                     </ul><!-- End .mobile-cats-menu -->
                 </nav><!-- End .mobile-cats-nav -->
@@ -69,7 +90,7 @@
 
         <div class="social-icons">
             <a href="#" class="social-icon" target="_blank" title="اینستاگرام"><i class="icon-instagram"></i></a>
-            <a href="#" class="social-icon" target="_blank" title="یوتیوب"><i class="icon-youtube"></i></a>
+            {% comment %} <a href="#" class="social-icon" target="_blank" title="یوتیوب"><i class="icon-youtube"></i></a> {% endcomment %}
         </div><!-- End .social-icons -->
     </div><!-- End .mobile-menu-wrapper -->
 </div><!-- End .mobile-menu-container -->
