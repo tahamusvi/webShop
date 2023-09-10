@@ -1,0 +1,349 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}{% include 'facades/parts/css.html' %}{% endblock %}
+
+
+
+{% block main %}
+
+
+
+<main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url "facades:home" %}">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="#">اخبار</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <figure class="entry-media">
+                    <img src="{{post.Cover.url}}" alt="توضیحات عکس">
+                </figure><!-- End .entry-media -->
+                <div class="container">
+                    <article class="entry single-entry entry-fullwidth">
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">{{post.Author.full_name}}</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">22 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">2 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title entry-title-big">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats">
+                                        <a href="#">سفر</a>
+                                    </div><!-- End .entry-cats -->
+
+                                    <div class="entry-content editor-content">
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.
+                                        </p>
+
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی
+                                            نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی
+                                            با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم
+                                            ایپسوم متن ساختگی با تولید سادگی نامفهوم.</p>
+
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی
+                                            نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی
+                                            با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم
+                                            ایپسوم متن ساختگی با تولید سادگی.</p>
+
+                                        <div class="pb-1"></div><!-- End .pb-1 -->
+
+                                        <img src="assets/images/blog/single/fullwidth/2.jpg" alt="image">
+
+                                        <div class="pb-1"></div><!-- End .pb-1 -->
+
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم، لورم ایپسوم متن ساختگی با
+                                            تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم. لورم
+                                            ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.
+                                        </p>
+
+                                        <blockquote>
+                                            <p>“ لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با
+                                                تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم ”</p>
+                                        </blockquote>
+
+                                        <h3>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</h3>
+
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی
+                                            نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی
+                                            با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم
+                                            ایپسوم متن ساختگی با تولید سادگی نامفهوم. </p>
+
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی
+                                            نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
+
+                                        <div class="pb-1"></div><!-- End .pb-1 -->
+
+                                        <img src="assets/images/blog/single/fullwidth/3.jpg" alt="image">
+
+                                        <div class="pb-1"></div><!-- End .pb-1 -->
+
+                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با
+                                            تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم
+                                            ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                            سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                            ساختگی با تولید سادگی نامفهوم </p>
+                                    </div><!-- End .entry-content -->
+
+                                    <div class="entry-footer row no-gutters">
+                                        <div class="col-12">
+                                            <div class="entry-tags">
+                                                <span>برچسب : </span> <a href="#">عکاسی</a> <a href="#">استایل</a>
+                                            </div><!-- End .entry-tags -->
+                                        </div><!-- End .col -->
+                                    </div><!-- End .entry-footer row no-gutters -->
+                                </div><!-- End .entry-body -->
+                            </div><!-- End .col-lg-11 -->
+
+                            <div class="col-lg-1 order-lg-first mb-2 mb-lg-0">
+                                <div class="sticky-content">
+                                    <div class="social-icons social-icons-colored social-icons-vertical">
+                                        <span class="social-label">اشتراک گذاری</span>
+                                        <a href="#" class="social-icon social-facebook" title="فیسبوک"
+                                            target="_blank"><i class="icon-facebook-f"></i></a>
+                                        <a href="#" class="social-icon social-twitter" title="توییتر" target="_blank"><i
+                                                class="icon-twitter"></i></a>
+                                        <a href="#" class="social-icon social-pinterest" title="پینترست"
+                                            target="_blank"><i class="icon-pinterest"></i></a>
+                                        <a href="#" class="social-icon social-linkedin" title="لینکدین"
+                                            target="_blank"><i class="icon-linkedin"></i></a>
+                                    </div><!-- End .soial-icons -->
+                                </div><!-- End .sticky-content -->
+                            </div><!-- End .col-lg-1 -->
+                        </div><!-- End .row -->
+
+                        <div class="entry-author-details">
+                            <figure class="author-media">
+                                <a href="#">
+                                    <img src="assets/images/blog/single/author.jpg" alt="User name">
+                                </a>
+                            </figure><!-- End .author-media -->
+
+                            <div class="author-body">
+                                <div class="author-header row no-gutters flex-column flex-md-row">
+                                    <div class="col-12">
+                                        <h4><a href="#">مدیر سایت</a></h4>
+                                    </div><!-- End .col -->
+                                    <div class="col-auto mt-1 mt-md-0">
+                                        <a href="#" class="author-link">مشاهده همه پست های این نویسنده <i
+                                                class="icon-long-arrow-left"></i></a>
+                                    </div><!-- End .col -->
+                                </div><!-- End .row -->
+
+                                <div class="author-content">
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با
+                                        تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم
+                                        ایپسوم متن ساختگی با تولید سادگی
+                                    </p>
+                                </div><!-- End .author-content -->
+                            </div><!-- End .author-body -->
+                        </div><!-- End .entry-author-details-->
+                    </article><!-- End .entry -->
+
+                    <nav class="pager-nav" aria-label="Page navigation">
+                        <a class="pager-link pager-link-prev" href="#" aria-label="Previous" tabindex="-1">
+                            پست قبلی
+                            <span class="pager-link-title">لورم ایپسوم متن ساختگی با تولید سادگی</span>
+                        </a>
+
+                        <a class="pager-link pager-link-next" href="#" aria-label="Next" tabindex="-1">
+                            پست بعدی
+                            <span class="pager-link-title">لورم ایپسوم متن ساختگی</span>
+                        </a>
+                    </nav><!-- End .pager-nav -->
+
+                    <div class="related-posts">
+                        <h3 class="title">پست های مرتبط</h3><!-- End .title -->
+
+                        <div class="owl-carousel owl-simple" data-toggle="owl" data-owl-options='{
+                                "nav": false, 
+                                "dots": true,
+                                "margin": 20,
+                                "loop": false,
+                                "rtl": true, 
+                            "responsive": {
+                                    "0": {
+                                        "items":1
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    }
+                                }
+                            }'>
+                            <article class="entry entry-grid">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/grid/3cols/post-1.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta justify-content-start">
+                                        <a href="#">22 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">2 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats">
+                                        <a href="#">سبک زندگی</a>،
+                                        <a href="#">فروشگاه</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+
+                            <article class="entry entry-grid">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/grid/3cols/post-2.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta justify-content-start">
+                                        <a href="#">21 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">0 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats">
+                                        <a href="#">سبک زندگی</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+
+                            <article class="entry entry-grid">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/grid/3cols/post-3.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta justify-content-start">
+                                        <a href="#">18 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">3 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی.</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats">
+                                        <a href="#">مد</a>،
+                                        <a href="#">سبک زندگی</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+
+                            <article class="entry entry-grid">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/grid/3cols/post-4.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta justify-content-start">
+                                        <a href="#">15 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">4 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats">
+                                        <a href="#">سفر</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .owl-carousel -->
+                    </div><!-- End .related-posts -->
+
+                    <div class="comments">
+                        <h3 class="title">0 دیدگاه</h3><!-- End .title -->
+                    </div><!-- End .comments -->
+                    <div class="reply">
+                        <div class="heading">
+                            <h3 class="title">ارسال یک دیدگاه</h3><!-- End .title -->
+                            <p class="title-desc">ایمیل شما منتشر نخواهد شد، فیلد های اجباری با علامت * مشخص
+                                شده اند.</p>
+                        </div><!-- End .heading -->
+
+                        <form action="#">
+                            <label for="reply-message" class="sr-only">دیدگاه</label>
+                            <textarea name="reply-message" id="reply-message" cols="30" rows="4" class="form-control"
+                                required placeholder="دیدگاه شما *"></textarea>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="reply-name" class="sr-only">نام</label>
+                                    <input type="text" class="form-control" id="reply-name" name="reply-name" required
+                                        placeholder="نام شما *">
+                                </div><!-- End .col-md-6 -->
+
+                                <div class="col-md-6">
+                                    <label for="reply-email" class="sr-only">ایمیل</label>
+                                    <input type="email" class="form-control" id="reply-email" name="reply-email"
+                                        required placeholder="ایمیل شما *">
+                                </div><!-- End .col-md-6 -->
+                            </div><!-- End .row -->
+
+                            <button type="submit" class="btn btn-outline-primary-2 float-right">
+                                <span>ارسال دیدگاه</span>
+                                <i class="icon-long-arrow-left"></i>
+                            </button>
+                        </form>
+                    </div><!-- End .reply -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+{% endblock %}
