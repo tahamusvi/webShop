@@ -10,6 +10,8 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     email = models.EmailField(unique=True)
+    image = models.ImageField(upload_to='web_shop/users/%Y/%m/%d/',blank=True,null=True)
+    bio = models.CharField(max_length=500,blank=True,null=True)
 
     can_change_password = models.BooleanField(default=False)
 
