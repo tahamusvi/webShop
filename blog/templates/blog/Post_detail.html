@@ -34,17 +34,19 @@
                                             نویسنده : <a href="#">{{post.Author.full_name}}</a>
                                         </span>
                                         <span class="meta-separator">|</span>
-                                        <a href="#">22 اسفند 1401</a>
+                                        <p>{{post.shamsi_date}}</p>
                                         <span class="meta-separator">|</span>
                                         <a href="#">2 دیدگاه</a>
                                     </div><!-- End .entry-meta -->
 
                                     <h2 class="entry-title entry-title-big">
-                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                        {{post.title}}
                                     </h2><!-- End .entry-title -->
 
                                     <div class="entry-cats">
-                                        <a href="#">سفر</a>
+                                        {% for cat in post.Category.all %}
+                                            <a href="{{cat.get_absolute_url}}">{{cat}}</a>
+                                        {% endfor %}
                                     </div><!-- End .entry-cats -->
 
                                     <div class="entry-content editor-content">

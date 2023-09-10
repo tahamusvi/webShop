@@ -3,7 +3,7 @@ from accounts.models import User
 from .managers import *
 from django.urls import reverse
 from django.utils import timezone
-# from utils.utils import jalali_converter
+from facades.utils import jalali_converter
 from django.utils.html import format_html
 
 
@@ -22,6 +22,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        # return reverse("blog:category",args=[self.slug])
+        return "comment"
+
 
     class Meta:
         verbose_name = "دسته بندی"
@@ -60,13 +65,12 @@ class Post(models.Model):
         return txtperview
 
 
-    # def get_absolute_url(self):
-    #     return reverse("account:home")
+    def get_absolute_url(self):
+        return reverse("blog:post",args=[self.slug])
 
-
-    # def jpublish(self):
-    #     return jalali_converter(self.publish)
-    # jpublish.short_description = "publish"
+    def shamsi_date(self):
+        return jalali_converter(self.publish)
+    shamsi_date.short_description = "publish"
 
     def __str__(self):
         return self.title

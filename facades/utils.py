@@ -36,7 +36,14 @@ def jalali_converter(time):
     int(hour),
     min,
     )
-    return persion_converter_number(output)
+
+    output2 = "{} {} {}".format(
+    time_to_list[2],
+    time_to_list[1],
+    time_to_list[0],
+    )
+
+    return persion_converter_number(output2)
 
 
 
@@ -58,18 +65,3 @@ def persion_converter_number(en_number):
         en_number = en_number.replace(k,v)
     return en_number
 
-
-
-
-# def jalali_month_show():
-#     jmonth = ["فرودین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"]
-#     now = datetime.datetime.now.month()
-#     month = now.month
-#     for index , mongth in enumerate(jmonth):
-#         if month == index + 1:
-#             month =  mongth
-#             break
-#
-#
-#
-#     return month

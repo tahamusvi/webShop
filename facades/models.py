@@ -1,7 +1,3 @@
-from pydoc import describe
-from tkinter import Button, PhotoImage
-from turtle import title
-from unicodedata import category
 from django.db import models
 from django.urls import reverse
 # Create your models here.
