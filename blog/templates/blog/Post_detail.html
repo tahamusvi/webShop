@@ -147,14 +147,14 @@
                         <div class="entry-author-details">
                             <figure class="author-media">
                                 <a href="#">
-                                    <img src="assets/images/blog/single/author.jpg" alt="User name">
+                                    <img src="{{post.Author.image.url}}" alt="{{post.Author.full_name}} image">
                                 </a>
                             </figure><!-- End .author-media -->
 
                             <div class="author-body">
                                 <div class="author-header row no-gutters flex-column flex-md-row">
                                     <div class="col-12">
-                                        <h4><a href="#">مدیر سایت</a></h4>
+                                        <h4><a href="#">{{post.Author.full_name}}</a></h4>
                                     </div><!-- End .col -->
                                     <div class="col-auto mt-1 mt-md-0">
                                         <a href="#" class="author-link">مشاهده همه پست های این نویسنده <i
