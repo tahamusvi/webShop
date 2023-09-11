@@ -4,14 +4,21 @@ from .managers import *
 from stuff.models import *
 from django.core.validators import MaxValueValidator, MinValueValidator
 # ----------------------------------------------------------------------------------------------------------------------------
+class ProfileUser(models.Model):
+    image = models.ImageField(upload_to='web_shop/users/%Y/%m/%d/')
+    bio = models.CharField(max_length=500)
+
+    def __str__(self):
+        return str(self.bio)
+# ----------------------------------------------------------------------------------------------------------------------------
 class User(AbstractBaseUser):
     phoneNumber = models.CharField(unique=True, max_length=11)
     full_name = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     email = models.EmailField(unique=True)
-    image = models.ImageField(upload_to='web_shop/users/%Y/%m/%d/',blank=True,null=True)
-    bio = models.CharField(max_length=500,blank=True,null=True)
+    profile = models.OneToOneField(ProfileUser,on_delete=models.SET_NULL,blank=True,null=True,related_name="user") 
+    
 
     can_change_password = models.BooleanField(default=False)
 
@@ -45,7 +52,10 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
 # ----------------------------------------------------------------------------------------------------------------------------
+
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     text = models.TextField()

@@ -147,7 +147,7 @@
                         <div class="entry-author-details">
                             <figure class="author-media">
                                 <a href="#">
-                                    <img src="{{post.Author.image.url}}" alt="{{post.Author.full_name}} image">
+                                    <img src="{{post.Author.profile.image.url}}" alt="{{post.Author.full_name}} image">
                                 </a>
                             </figure><!-- End .author-media -->
 
@@ -163,9 +163,7 @@
                                 </div><!-- End .row -->
 
                                 <div class="author-content">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با
-                                        تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم
-                                        ایپسوم متن ساختگی با تولید سادگی
+                                    <p>{{post.Author.profile.bio}}
                                     </p>
                                 </div><!-- End .author-content -->
                             </div><!-- End .author-body -->
