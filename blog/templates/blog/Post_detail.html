@@ -206,103 +206,37 @@
                                     }
                                 }
                             }'>
+
+
+                            {% for item in post.get_similar_posts %}
                             <article class="entry entry-grid">
                                 <figure class="entry-media">
                                     <a href="single.html">
-                                        <img src="assets/images/blog/grid/3cols/post-1.jpg" alt="توضیحات عکس">
+                                        <img src="{{item.Cover.url}}" alt="توضیحات عکس">
                                     </a>
                                 </figure><!-- End .entry-media -->
 
                                 <div class="entry-body">
                                     <div class="entry-meta justify-content-start">
-                                        <a href="#">22 اسفند 1401</a>
+                                        <a>{{post.shamsi_date}}</a>
                                         <span class="meta-separator">|</span>
-                                        <a href="#">2 دیدگاه</a>
+                                        <a href="{{item.get_absolute_url}}">2 دیدگاه</a>
                                     </div><!-- End .entry-meta -->
 
                                     <h2 class="entry-title">
-                                        <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                        <a href="{{item.get_absolute_url}}">{{item.title}}</a>
                                     </h2><!-- End .entry-title -->
 
                                     <div class="entry-cats">
-                                        <a href="#">سبک زندگی</a>،
-                                        <a href="#">فروشگاه</a>
+                                        {% for cat in item.Category.all %}
+                                        <a href="{{cat.get_absolute_url}}">{{cat}}</a>
+                                        {% endfor %}
                                     </div><!-- End .entry-cats -->
                                 </div><!-- End .entry-body -->
                             </article><!-- End .entry -->
+                            {% endfor %}
 
-                            <article class="entry entry-grid">
-                                <figure class="entry-media">
-                                    <a href="single.html">
-                                        <img src="assets/images/blog/grid/3cols/post-2.jpg" alt="توضیحات عکس">
-                                    </a>
-                                </figure><!-- End .entry-media -->
-
-                                <div class="entry-body">
-                                    <div class="entry-meta justify-content-start">
-                                        <a href="#">21 اسفند 1401</a>
-                                        <span class="meta-separator">|</span>
-                                        <a href="#">0 دیدگاه</a>
-                                    </div><!-- End .entry-meta -->
-
-                                    <h2 class="entry-title">
-                                        <a href="single.html">لورم ایپسوم متن ساختگی</a>
-                                    </h2><!-- End .entry-title -->
-
-                                    <div class="entry-cats">
-                                        <a href="#">سبک زندگی</a>
-                                    </div><!-- End .entry-cats -->
-                                </div><!-- End .entry-body -->
-                            </article><!-- End .entry -->
-
-                            <article class="entry entry-grid">
-                                <figure class="entry-media">
-                                    <a href="single.html">
-                                        <img src="assets/images/blog/grid/3cols/post-3.jpg" alt="توضیحات عکس">
-                                    </a>
-                                </figure><!-- End .entry-media -->
-
-                                <div class="entry-body">
-                                    <div class="entry-meta justify-content-start">
-                                        <a href="#">18 اسفند 1401</a>
-                                        <span class="meta-separator">|</span>
-                                        <a href="#">3 دیدگاه</a>
-                                    </div><!-- End .entry-meta -->
-
-                                    <h2 class="entry-title">
-                                        <a href="single.html">لورم ایپسوم متن ساختگی.</a>
-                                    </h2><!-- End .entry-title -->
-
-                                    <div class="entry-cats">
-                                        <a href="#">مد</a>،
-                                        <a href="#">سبک زندگی</a>
-                                    </div><!-- End .entry-cats -->
-                                </div><!-- End .entry-body -->
-                            </article><!-- End .entry -->
-
-                            <article class="entry entry-grid">
-                                <figure class="entry-media">
-                                    <a href="single.html">
-                                        <img src="assets/images/blog/grid/3cols/post-4.jpg" alt="توضیحات عکس">
-                                    </a>
-                                </figure><!-- End .entry-media -->
-
-                                <div class="entry-body">
-                                    <div class="entry-meta justify-content-start">
-                                        <a href="#">15 اسفند 1401</a>
-                                        <span class="meta-separator">|</span>
-                                        <a href="#">4 دیدگاه</a>
-                                    </div><!-- End .entry-meta -->
-
-                                    <h2 class="entry-title">
-                                        <a href="single.html">لورم ایپسوم متن ساختگی</a>
-                                    </h2><!-- End .entry-title -->
-
-                                    <div class="entry-cats">
-                                        <a href="#">سفر</a>
-                                    </div><!-- End .entry-cats -->
-                                </div><!-- End .entry-body -->
-                            </article><!-- End .entry -->
+                            
                         </div><!-- End .owl-carousel -->
                     </div><!-- End .related-posts -->
 

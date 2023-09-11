@@ -28,9 +28,9 @@ class Category(models.Model):
         return "comment"
 
 
-    class Meta:
-        verbose_name = "دسته بندی"
-        verbose_name_plural = "دسته بندی ها"
+    # class Meta:
+    #     verbose_name = "دسته بندی"
+    #     verbose_name_plural = "دسته بندی ها"
 #-----------------------------------------------------------------------------------
 class Post(models.Model):
     status_ch = (
@@ -56,9 +56,9 @@ class Post(models.Model):
 
     objects = PostManager()
 
-    class Meta:
-        verbose_name = "پست"
-        verbose_name_plural = "پست ها"
+    # class Meta:
+    #     verbose_name = "پست"
+    #     verbose_name_plural = "پست ها"
 
     def preview(self):
         txtperview = self.text[:123] + " .... "
@@ -77,6 +77,10 @@ class Post(models.Model):
 
     def Cover_tags(self):
         return format_html("<img width=120 style='border-radius:5px' src='{}'>".format(self.Cover.url))
+
+    def get_similar_posts(self):
+        similar_posts = Post.objects.filter(Category__in=self.Category.all()).exclude(id=self.id)[:4]
+        return similar_posts
 
     
 
