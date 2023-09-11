@@ -65,6 +65,7 @@ class Address(models.Model):
         return str(self.user) + " - " + str(self.postal_code)
 
 #----------------------------------------------------------------------------------------------------------------------------
+from facades.utils import jalali_converter_with_hour
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     # product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
@@ -83,7 +84,10 @@ class Comment(models.Model):
         return f"{self.user.full_name}"
 
     def star_rating(self):
-        return self.rating * 20 
+        return self.rating * 20
+
+    def shamsi_date(self):
+        return jalali_converter_with_hour(self.created) 
     
     def days_since_creation(self):
         now = timezone.now()

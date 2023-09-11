@@ -11,12 +11,19 @@ from accounts.models import User
 #     queryset = models.Post.objects.published()[::-1]
 #     paginate_by = 5
 #----------------------------------------------------------------------------------------------
+from accounts.forms import CommentForm
 class PostDetail(DetailView):
     template_name = "blog/Post_detail.html"
     context_object_name = "post"
+
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Post.objects.published(), slug=slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['CommentForm'] = CommentForm
+        return context
 #----------------------------------------------------------------------------------------------
 # class AuthorDetail(ListView):
 #     paginate_by = 3

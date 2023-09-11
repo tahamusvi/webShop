@@ -82,5 +82,7 @@ class Post(models.Model):
         similar_posts = Post.objects.filter(Category__in=self.Category.all()).exclude(id=self.id)[:4]
         return similar_posts
 
-    
+    def get_comments(self):
+        comments = self.comments.all()
+        return comments
 

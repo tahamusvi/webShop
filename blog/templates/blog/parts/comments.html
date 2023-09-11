@@ -1,0 +1,86 @@
+{% load static %}
+
+
+<div class="comments">
+                                <h3 class="title">3 دیدگاه</h3><!-- End .title -->
+
+                                <ul>
+                                {% for comment in post.get_comments %}
+                                    <li>
+                                        <div class="comment">
+                                            <figure class="comment-media">
+                                                <a>
+                                                    {% if comment.user.profile %}
+                                                    <img src="{{comment.user.profile.image.url}}" alt="user avatar">
+                                                    {% else %}
+                                                    <img src="{% static 'blog/images/custom.jpg' %}" alt="user avatar"> 
+                                                    {% endif %}
+                                                </a>
+                                            </figure>
+
+                                            <div class="comment-body">
+                                                {% comment %} <a href="#" class="comment-reply">پاسخ</a> {% endcomment %}
+                                                <div class="comment-user">
+                                                    <h4><a>{{comment.user.full_name}}</a></h4>
+                                                    <span class="comment-date">{{comment.shamsi_date}}</span>
+                                                </div> <!-- End .comment-user -->
+
+                                                <div class="comment-content">
+                                                    <p>{{comment.text}}
+                                                    </p>
+                                                </div><!-- End .comment-content -->
+                                            </div><!-- End .comment-body -->
+                                        </div><!-- End .comment -->
+
+                                        {% comment %} <ul>
+                                            <li>
+                                                <div class="comment">
+                                                    <figure class="comment-media">
+                                                        <a href="#">
+                                                            <img src="assets/images/blog/comments/2.jpg"
+                                                                alt="User name">
+                                                        </a>
+                                                    </figure>
+
+                                                    <div class="comment-body">
+                                                        <a href="#" class="comment-reply">پاسخ</a>
+                                                        <div class="comment-user">
+                                                            <h4><a href="#">کاربر 2</a></h4>
+                                                            <span class="comment-date">9 اسفند 1401 - 2:19
+                                                                بعدازظهر</span>
+                                                        </div><!-- End .comment-user -->
+
+                                                        <div class="comment-content">
+                                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.</p>
+                                                        </div><!-- End .comment-content -->
+                                                    </div><!-- End .comment-body -->
+                                                </div><!-- End .comment -->
+                                            </li>
+                                        </ul> {% endcomment %}
+                                    </li>
+
+                                    {% endfor %}
+
+                                    
+
+                                </ul>
+                            </div><!-- End .comments -->
+
+
+
+                            <div class="reply">
+                        <div class="heading">
+                            <h3 class="title">ارسال یک دیدگاه</h3><!-- End .title -->
+                            {% comment %} <p class="title-desc">ایمیل شما منتشر نخواهد شد، فیلد های اجباری با علامت * مشخص
+                                شده اند.</p> {% endcomment %}
+                        </div><!-- End .heading -->
+
+                        <form action="{% url 'accounts:AddComment' post.id 1 %}" method="post">
+                            {% csrf_token %}
+                            {{CommentForm}}
+                            <button type="submit" class="btn btn-outline-primary-2">
+                                <span>ثبت نظر</span>
+                                <i class="icon-long-arrow-left"></i>
+                            </button>
+                        </form>
+                    </div><!-- End .reply -->

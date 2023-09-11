@@ -240,41 +240,10 @@
                         </div><!-- End .owl-carousel -->
                     </div><!-- End .related-posts -->
 
-                    <div class="comments">
-                        <h3 class="title">0 دیدگاه</h3><!-- End .title -->
-                    </div><!-- End .comments -->
-                    <div class="reply">
-                        <div class="heading">
-                            <h3 class="title">ارسال یک دیدگاه</h3><!-- End .title -->
-                            <p class="title-desc">ایمیل شما منتشر نخواهد شد، فیلد های اجباری با علامت * مشخص
-                                شده اند.</p>
-                        </div><!-- End .heading -->
+                    {% include 'blog/parts/comments.html' %}
 
-                        <form action="#">
-                            <label for="reply-message" class="sr-only">دیدگاه</label>
-                            <textarea name="reply-message" id="reply-message" cols="30" rows="4" class="form-control"
-                                required placeholder="دیدگاه شما *"></textarea>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="reply-name" class="sr-only">نام</label>
-                                    <input type="text" class="form-control" id="reply-name" name="reply-name" required
-                                        placeholder="نام شما *">
-                                </div><!-- End .col-md-6 -->
-
-                                <div class="col-md-6">
-                                    <label for="reply-email" class="sr-only">ایمیل</label>
-                                    <input type="email" class="form-control" id="reply-email" name="reply-email"
-                                        required placeholder="ایمیل شما *">
-                                </div><!-- End .col-md-6 -->
-                            </div><!-- End .row -->
-
-                            <button type="submit" class="btn btn-outline-primary-2 float-right">
-                                <span>ارسال دیدگاه</span>
-                                <i class="icon-long-arrow-left"></i>
-                            </button>
-                        </form>
-                    </div><!-- End .reply -->
+                    
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->

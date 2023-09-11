@@ -209,14 +209,23 @@ def AddToInforming(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
-def AddComment(request,id):
+def AddComment(request,id,type):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
 
-            item = get_object_or_404(Product, id=id)
-            comment = Comment(user=request.user,product=item,text=form.cleaned_data['text'],rating=form.cleaned_data['rating'])
-            comment.save()
+            if(type == 0):
+                item = get_object_or_404(Product, id=id)
+                comment = ProductComment(user=request.user,product=item,text=form.cleaned_data['text'],rating=form.cleaned_data['rating'])
+                comment.save()
+            elif(type == 1):
+                item = get_object_or_404(Post, id=id)
+                comment = PostComment(user=request.user,post=item,text=form.cleaned_data['text'],rating=form.cleaned_data['rating'])
+                comment.save()
+            else:
+                messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
+                return redirect(request.META.get('HTTP_REFERER'))
+
 
             messages.success(request,"بعد از تایید ادمین نظر شما ثبت خواهد شد", color_messages['success'])
             return redirect(request.META.get('HTTP_REFERER'))
