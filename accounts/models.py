@@ -46,16 +46,11 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-
-
-
     @property
     def is_staff(self):
         return self.is_admin
 
-
 # ----------------------------------------------------------------------------------------------------------------------------
-
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     text = models.TextField()
@@ -72,7 +67,7 @@ class Address(models.Model):
 #----------------------------------------------------------------------------------------------------------------------------
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
+    # product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField(default=False)
@@ -85,7 +80,7 @@ class Comment(models.Model):
 
 
     def __str__(self):
-        return f"{self.user.full_name} - {self.product.name}"
+        return f"{self.user.full_name}"
 
     def star_rating(self):
         return self.rating * 20 
@@ -96,7 +91,19 @@ class Comment(models.Model):
         created_aware = timezone.make_aware(created_naive, timezone.get_default_timezone())
         days = (now - created_aware).days
         return f"{days} روز پیش"
+#----------------------------------------------------------------------------------------------------------------------------
+class ProductComment(Comment):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="comments")
 
+    def __str__(self):
+        return f"{self.user.full_name} - {self.product.name}"
+#----------------------------------------------------------------------------------------------------------------------------
+from blog.models import Post
+class PostComment(Comment):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+
+    def __str__(self):
+        return f"{self.user.full_name} - {self.post.title}"
 #----------------------------------------------------------------------------------------------------------------------------
 class WatchedProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="wacthed")

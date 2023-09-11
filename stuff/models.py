@@ -62,6 +62,8 @@ class Product(models.Model):
     short_description = models.TextField()
     description = models.TextField()
     more_info = models.TextField()
+
+
     
 
 
@@ -84,6 +86,10 @@ class Product(models.Model):
     def discounted_price_int(self):
         show = int(((self.price)*(100-self.discount))/100)
         return show
+    
+    def get_comments(self):
+        comments = self.comments.all()
+        return comments
 
     @property
     def is_new(self):
