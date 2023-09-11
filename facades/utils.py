@@ -1,7 +1,7 @@
 from . import jalali
 import datetime
 
-def jalali_converter(time):
+def jalali_create(time):
 
     jmonth = ["فرودین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"]
     time_to_str = "{},{},{}".format(time.year,time.month,time.day)
@@ -12,6 +12,12 @@ def jalali_converter(time):
         if time_to_list[1] == index+1:
             time_to_list[1] = month
             break
+
+    return time_to_list
+
+
+def jalali_converter_with_hour(time):
+    time_to_list = jalali_create(time)
 
     hour = time.hour
     minute = time.minute
@@ -37,13 +43,19 @@ def jalali_converter(time):
     min,
     )
 
-    output2 = "{} {} {}".format(
+    return persion_converter_number(output)
+
+
+def jalali_converter(time):
+    time_to_list = jalali_create(time)
+
+    output = "{} {} {}".format(
     time_to_list[2],
     time_to_list[1],
     time_to_list[0],
     )
 
-    return persion_converter_number(output2)
+    return persion_converter_number(output)
 
 
 
