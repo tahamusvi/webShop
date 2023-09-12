@@ -2,7 +2,7 @@
 
 
 <div class="comments">
-                                <h3 class="title">3 دیدگاه</h3><!-- End .title -->
+                                <h3 class="title">{{post.get_comments.count}} دیدگاه</h3><!-- End .title -->
 
                                 <ul>
                                 {% for comment in post.get_comments %}

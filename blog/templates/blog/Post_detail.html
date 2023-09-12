@@ -36,7 +36,7 @@
                                         <span class="meta-separator">|</span>
                                         <p>{{post.shamsi_date}}</p>
                                         <span class="meta-separator">|</span>
-                                        <a href="#">2 دیدگاه</a>
+                                        <a>{{post.get_comments.count}} دیدگاه</a>
                                     </div><!-- End .entry-meta -->
 
                                     <h2 class="entry-title entry-title-big">
@@ -130,7 +130,7 @@
                             <div class="col-lg-1 order-lg-first mb-2 mb-lg-0">
                                 <div class="sticky-content">
                                     <div class="social-icons social-icons-colored social-icons-vertical">
-                                        <span class="social-label">اشتراک گذاری</span>
+                                       {% comment %} <span class="social-label">اشتراک گذاری</span>
                                         <a href="#" class="social-icon social-facebook" title="فیسبوک"
                                             target="_blank"><i class="icon-facebook-f"></i></a>
                                         <a href="#" class="social-icon social-twitter" title="توییتر" target="_blank"><i
@@ -138,7 +138,7 @@
                                         <a href="#" class="social-icon social-pinterest" title="پینترست"
                                             target="_blank"><i class="icon-pinterest"></i></a>
                                         <a href="#" class="social-icon social-linkedin" title="لینکدین"
-                                            target="_blank"><i class="icon-linkedin"></i></a>
+                                            target="_blank"><i class="icon-linkedin"></i></a> {% endcomment %}
                                     </div><!-- End .soial-icons -->
                                 </div><!-- End .sticky-content -->
                             </div><!-- End .col-lg-1 -->
@@ -220,7 +220,7 @@
                                     <div class="entry-meta justify-content-start">
                                         <a>{{post.shamsi_date}}</a>
                                         <span class="meta-separator">|</span>
-                                        <a href="{{item.get_absolute_url}}">2 دیدگاه</a>
+                                        <a>{{item.get_comments.count}} دیدگاه</a>
                                     </div><!-- End .entry-meta -->
 
                                     <h2 class="entry-title">
