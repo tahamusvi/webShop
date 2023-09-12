@@ -1,0 +1,347 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}{% include 'facades/parts/css.html' %}{% endblock %}
+
+
+
+{% block main %}
+
+
+<main class="main">
+            <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+                <div class="container">
+                    <h1 class="page-title">سایزهای مختلف 3 ستونه<span>اخبار</span></h1>
+                </div><!-- End .container -->
+            </div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="#">اخبار</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">سایزهای مختلف 3 ستونه</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                    <nav class="blog-nav">
+                        <ul class="menu-cat entry-filter justify-content-center">
+                            <li class="active"><a href="#" data-filter="*">همه اخبار<span>9</span></a></li>
+                            <li><a href="#" data-filter=".lifestyle">سبک زندگی<span>3</span></a></li>
+                            <li><a href="#" data-filter=".shopping">فروشگاه<span>1</span></a></li>
+                            <li><a href="#" data-filter=".fashion">مد<span>2</span></a></li>
+                            <li><a href="#" data-filter=".travel">سفر<span>4</span></a></li>
+                            <li><a href="#" data-filter=".hobbies">سرگرمی<span>2</span></a></li>
+                        </ul><!-- End .blog-menu -->
+                    </nav><!-- End .blog-nav -->
+
+                    <div class="entry-container max-col-3">
+                        <div class="entry-item lifestyle shopping col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/masonry/3cols/post-1.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">22 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">2 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">سبک زندگی</a>،
+                                        <a href="#">فروشگاه</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item lifestyle col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/masonry/3cols/post-2.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">21 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">0 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">سبک زندگی</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item lifestyle fashion col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <div class="owl-carousel owl-simple owl-light owl-nav-inside" data-toggle="owl"
+                                        data-owl-options='{"rtl": true}'>
+                                        <a href="single.html">
+                                            <img src="assets/images/blog/masonry/3cols/post-3.jpg" alt="توضیحات عکس">
+                                        </a>
+                                        <a href="single.html">
+                                            <img src="assets/images/blog/masonry/3cols/post-3-2.jpg" alt="توضیحات عکس">
+                                        </a>
+                                    </div><!-- End .owl-carousel -->
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">18 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">3 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی.</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">مد</a>،
+                                        <a href="#">سبک زندگی</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item travel col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media entry-video">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/masonry/3cols/post-4.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">15 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">4 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">سفر</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item travel hobbies col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/masonry/3cols/post-5.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">11 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">2 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">سفر</a>،
+                                        <a href="#">سرگرمی</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item hobbies col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/masonry/3cols/post-6.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">10 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">4 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">سرگرمی</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item travel col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/masonry/3cols/post-7.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">11 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">3 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی </a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">سفر</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item fashion col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <a href="single.html">
+                                        <img src="assets/images/blog/masonry/3cols/post-8.jpg" alt="توضیحات عکس">
+                                    </a>
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">8 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">0 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">مد</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+
+                        <div class="entry-item travel col-sm-6 col-lg-4">
+                            <article class="entry entry-grid text-center">
+                                <figure class="entry-media">
+                                    <div class="owl-carousel owl-simple owl-light owl-nav-inside" data-toggle="owl"
+                                        data-owl-options='{"rtl": true}'>
+                                        <a href="single.html">
+                                            <img src="assets/images/blog/masonry/3cols/post-9.jpg" alt="توضیحات عکس">
+                                        </a>
+                                        <a href="single.html">
+                                            <img src="assets/images/blog/masonry/3cols/post-9-2.jpg" alt="توضیحات عکس">
+                                        </a>
+                                    </div><!-- End .owl-carousel -->
+                                </figure><!-- End .entry-media -->
+
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        <span class="entry-author">
+                                            نویسنده : <a href="#">مدیر سایت</a>
+                                        </span>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">7 اسفند 1401</a>
+                                        <span class="meta-separator">|</span>
+                                        <a href="#">5 دیدگاه</a>
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title text-center">
+                                        <a href="single.html">لورم ایپسوم متن ساختگی.</a>
+                                    </h2><!-- End .entry-title -->
+
+                                    <div class="entry-cats text-center">
+                                        <a href="#">سفر</a>
+                                    </div><!-- End .entry-cats -->
+                                </div><!-- End .entry-body -->
+                            </article><!-- End .entry -->
+                        </div><!-- End .entry-item -->
+                    </div><!-- End .entry-container -->
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1"
+                                    aria-disabled="true">
+                                    <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>قبلی
+                                </a>
+                            </li>
+                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item">
+                                <a class="page-link page-link-next" href="#" aria-label="Next">
+                                    بعدی<span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+{% endblock %}
