@@ -52,7 +52,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=40, unique = True,verbose_name="آدرس")
     status = models.CharField(max_length=1,choices = status_ch,verbose_name="وضعیت")
     Category = models.ManyToManyField(Category,related_name = "posts",verbose_name="دسته بندی")
-
+    views = models.PositiveIntegerField(default=0, verbose_name="تعداد بازدید")
 
     objects = PostManager()
 
@@ -73,7 +73,7 @@ class Post(models.Model):
     shamsi_date.short_description = "publish"
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.views}"
 
     def Cover_tags(self):
         return format_html("<img width=120 style='border-radius:5px' src='{}'>".format(self.Cover.url))
@@ -85,4 +85,14 @@ class Post(models.Model):
     def get_comments(self):
         comments = self.comments.all()
         return comments
+
+    def increase_views(self):
+        self.views += 1
+        self.save()
+
+    @staticmethod
+    def get_popular_posts():
+        popular_posts = Post.objects.order_by('-views')[:5]
+        return popular_posts
+
 
