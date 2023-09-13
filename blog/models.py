@@ -27,6 +27,9 @@ class Category(models.Model):
         # return reverse("blog:category",args=[self.slug])
         return "comment"
 
+    def count_posts(self):
+        return self.posts.all().count()
+
 
     # class Meta:
     #     verbose_name = "دسته بندی"

@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Post
+from .models import Category, Post
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from accounts.models import User
@@ -10,7 +10,7 @@ def post_list(request,page=1):
     paginator = Paginator(queryset, 8)
     posts = paginator.get_page(page)
 
-    return render(request,"blog/post_list.html",{'posts':posts})
+    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts()})
 #----------------------------------------------------------------------------------------------
 from accounts.forms import CommentForm
 def post_detail(request,slug):

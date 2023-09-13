@@ -104,66 +104,31 @@
                                     <h3 class="widget-title">دسته بندی ها</h3><!-- End .widget-title -->
 
                                     <ul>
-                                        <li><a href="#">سبد زندگی<span>3</span></a></li>
-                                        <li><a href="#">خرید<span>3</span></a></li>
-                                        <li><a href="#">مد<span>1</span></a></li>
-                                        <li><a href="#">سفر<span>3</span></a></li>
-                                        <li><a href="#">سرگرمی<span>2</span></a></li>
+                                        {% for cat in categories %}
+                                        <li><a href="{{cat.get_absolute_url}}">{{cat}}<span>{{cat.count_posts}}</span></a></li>
+                                        {% endfor %}
                                     </ul>
                                 </div><!-- End .widget -->
 
                                 <div class="widget">
-                                    <h3 class="widget-title">محبوب ترین اخبار</h3><!-- End .widget-title -->
+                                    <h3 class="widget-title">پر بازدید ترین اخبار</h3><!-- End .widget-title -->
 
                                     <ul class="posts-list">
+                                        {% for ps in views_post %}
                                         <li>
                                             <figure>
                                                 <a href="#">
-                                                    <img src="assets/images/blog/sidebar/post-1.jpg" alt="post">
+                                                    <img src="{{ps.Cover.url}}" alt="post">
                                                 </a>
                                             </figure>
 
                                             <div>
-                                                <span>22 اسفند 1401</span>
-                                                <h4><a href="#">لورم ایپسوم متن ساختگی با تولید سادگی</a></h4>
+                                                <span>{{ps.shamsi_date}}</span>
+                                                <h4><a href="{{ps.get_absolute_url}}">{{ps.title}}</a></h4>
                                             </div>
                                         </li>
-                                        <li>
-                                            <figure>
-                                                <a href="#">
-                                                    <img src="assets/images/blog/sidebar/post-2.jpg" alt="post">
-                                                </a>
-                                            </figure>
-
-                                            <div>
-                                                <span>19 اسفند 1401</span>
-                                                <h4><a href="#">لورم ایپسوم متن ساختگی</a></h4>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <figure>
-                                                <a href="#">
-                                                    <img src="assets/images/blog/sidebar/post-3.jpg" alt="post">
-                                                </a>
-                                            </figure>
-
-                                            <div>
-                                                <span>12 اسفند 1401</span>
-                                                <h4><a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h4>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <figure>
-                                                <a href="#">
-                                                    <img src="assets/images/blog/sidebar/post-4.jpg" alt="post">
-                                                </a>
-                                            </figure>
-
-                                            <div>
-                                                <span>25 اسفند 1401</span>
-                                                <h4><a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h4>
-                                            </div>
-                                        </li>
+                                        {% endfor %}
+                                        
                                     </ul><!-- End .posts-list -->
                                 </div><!-- End .widget -->
 
@@ -173,7 +138,7 @@
 
                                     <div class="banner-sidebar banner-overlay">
                                         <a href="#">
-                                            <img src="assets/images/blog/sidebar/banner.jpg" alt="بنر">
+                                            <img src="{% static 'blog/images/banner.jpg' %}" alt="بنر">
                                         </a>
                                     </div><!-- End .banner-ad -->
                                 </div><!-- End .widget -->
@@ -196,9 +161,9 @@
                                     <h3 class="widget-title">درباره بخش اخبار</h3><!-- End .widget-title -->
 
                                     <div class="widget-text-content">
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم، لورم ایپسوم متن ساختگی با
-                                            تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با لورم ایپسوم متن ساختگی با
-                                            تولید سادگی نامفهوم</p>
+                                        <p>قسمت اخبار در سایت فروشگاهی گیزمو یک بخش است که به منظور اطلاع‌رسانی و ارتباط با مشتریان و علاقه‌مندان به محصولات و 
+                                        خدمات آن سایت ایجاد شده است. در این قسمت، مطالب و اخبار مرتبط با دنیای فناوری، محصولات جدید، تکنولوژی‌ها،
+                                         نکات و ترفندهای مربوط به استفاده از محصولات، مقالات تخصصی و مهم و دیگر موارد مرتبط قرار می‌گیرند.</p>
                                     </div><!-- End .widget-text-content -->
                                 </div><!-- End .widget -->
                             </div><!-- End .sidebar -->
