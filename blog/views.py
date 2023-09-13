@@ -4,12 +4,15 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from accounts.models import User
 #----------------------------------------------------------------------------------------------
-class PostListView(ListView):
-    model = Post
-    context_object_name = "posts"
-    template_name = "blog/post_list.html"
+from django.core.paginator import Paginator
+def post_list(request,page=1):
     queryset = Post.objects.published()[::-1]
-    paginate_by = 8
+
+    paginator = Paginator(queryset, 8)
+    posts = paginator.get_page(page)
+
+
+    return render(request,"blog/post_list.html",{'posts':posts})
 #----------------------------------------------------------------------------------------------
 from accounts.forms import CommentForm
 class PostDetail(DetailView):
