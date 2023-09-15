@@ -14,13 +14,20 @@ def post_list(request,page=1):
     paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
-    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator})
+    Info = InformationsForTemplate(request)
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator})
+
+    return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
 from accounts.forms import CommentForm
 def post_detail(request,slug):
     post = get_object_or_404(Post.objects.published(), slug=slug)
     post.increase_views()
-    return render(request,"blog/Post_detail.html",{'post':post,'CommentForm':CommentForm})
+
+    Info = InformationsForTemplate(request)
+    Info.update({'post':post,'CommentForm':CommentForm})
+
+    return render(request,"blog/Post_detail.html",Info)
 #----------------------------------------------------------------------------------------------
 def author_posts(request,id,page=1):
     author = get_object_or_404(User.objects.all(), id=id)
@@ -29,7 +36,10 @@ def author_posts(request,id,page=1):
     paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
-    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author})
+    Info = InformationsForTemplate(request)
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author})
+
+    return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
 def category_posts(request,id,page=1):
     cat = get_object_or_404(Category.objects.all(), id=id)
@@ -38,7 +48,10 @@ def category_posts(request,id,page=1):
     paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
-    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':cat})
+    Info = InformationsForTemplate(request)
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':cat})
+
+    return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
 def post_search(request,page):
     query = request.GET.get('query')
@@ -47,5 +60,8 @@ def post_search(request,page):
     paginator = Paginator(posts_list, pagination_amount)
     posts = paginator.get_page(page)
 
-    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'query':query})
+    Info = InformationsForTemplate(request)
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'query':query})
+
+    return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
