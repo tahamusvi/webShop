@@ -7,10 +7,10 @@ from accounts.models import User
 from django.core.paginator import Paginator
 def post_list(request,page=1):
     queryset = Post.objects.published()[::-1]
-    paginator = Paginator(queryset, 8)
+    paginator = Paginator(queryset, 1)
     posts = paginator.get_page(page)
 
-    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts()})
+    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator})
 #----------------------------------------------------------------------------------------------
 from accounts.forms import CommentForm
 def post_detail(request,slug):
