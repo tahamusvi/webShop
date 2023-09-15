@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Category, Post
+from .models import Category, Post, publicitar
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from accounts.models import User
@@ -14,8 +14,10 @@ def post_list(request,page=1):
     paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
+    publicitar_banner = publicitar.objects.all()[::-1][0]
+
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator})
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'publicitar':publicitar_banner})
 
     return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
@@ -36,8 +38,10 @@ def author_posts(request,id,page=1):
     paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
+    publicitar_banner = publicitar.objects.all()[::-1][0]
+
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author})
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author,'publicitar':publicitar_banner})
 
     return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
@@ -48,8 +52,10 @@ def category_posts(request,slug,page=1):
     paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
+    publicitar_banner = publicitar.objects.all()[::-1][0]
+
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'category':cat})
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'category':cat,'publicitar':publicitar_banner})
 
     return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
@@ -60,8 +66,10 @@ def post_search(request,page=1):
     paginator = Paginator(posts_list, pagination_amount)
     posts = paginator.get_page(page)
 
+    publicitar_banner = publicitar.objects.all()[::-1][0]
+
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'query':query})
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'query':query,'publicitar':publicitar_banner})
 
     return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------

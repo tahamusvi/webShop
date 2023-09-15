@@ -183,12 +183,12 @@
                                 </div><!-- End .widget -->
 
                                 <div class="widget widget-banner-sidebar">
-                                    <div class="banner-sidebar-title">قسمت تبلیغات 280 در 280</div>
+                                    <div class="banner-sidebar-title">{{publicitar.title}}</div>
                                     <!-- End .ad-title -->
 
                                     <div class="banner-sidebar banner-overlay">
-                                        <a href="#">
-                                            <img src="{% static 'blog/images/banner.jpg' %}" alt="بنر">
+                                        <a href="{{publicitar.get_absolute_url}}">
+                                            <img src="{{publicitar.image.url}}" alt="بنر">
                                         </a>
                                     </div><!-- End .banner-ad -->
                                 </div><!-- End .widget -->
