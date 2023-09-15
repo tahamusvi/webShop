@@ -16,13 +16,13 @@
 <div class="page-content">
                 <div class="checkout">
                     <div class="container">
-                        <div class="checkout-discount">
+                        {% comment %} <div class="checkout-discount">
                             <form action="{% url 'cart:coupon_apply' %}" method="POST"> {% csrf_token %}
                                 <input type="text" class="form-control" required id="checkout-discount-input" name="code" >
                                 <label for="checkout-discount-input" class="text-truncate">کد تخفیف دارید؟ <span>برای
                                         وارد کردن کد تخفیف خود اینجا کلیک کنید</span></label>
                             </form>
-                        </div><!-- End .checkout-discount -->
+                        </div><!-- End .checkout-discount --> {% endcomment %}
 
 
 
