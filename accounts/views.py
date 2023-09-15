@@ -1,4 +1,3 @@
-import email
 from django.shortcuts import render,redirect
 from .forms import *
 from django.contrib.auth import authenticate, login , logout
@@ -8,6 +7,8 @@ from django.shortcuts import render,get_object_or_404
 import random
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+import smtplib
+from email.message import EmailMessage
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "logout" : 'بعدا باز برگرد ":)',
@@ -40,6 +41,9 @@ color_messages = {
     "gray" : 'background-color: rgb(108, 105, 105);',
 
 }
+#------------------------------------------------------------------------------------------------
+EMAIL_PORT_SSL = 465
+
 #------------------------------------------------------------------------------------------------
 def user_login(request):
     if request.method == 'POST':
@@ -90,6 +94,7 @@ def forgotPasswordWithPhone(request):
 
     return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی'})
 #------------------------------------------------------------------------------------------------
+from config.settings import shop_email,password_email
 def forgotPasswordWithEmail(request):
     if request.method == 'POST':
         ForgotProfile = ForgotPasswordWithEmailForm(request.POST)
@@ -100,6 +105,15 @@ def forgotPasswordWithEmail(request):
             user.code = random.randint(10000, 99999)
             user.save()
             
+            msg = EmailMessage()
+            msg['Subject'] = 'تغییر رمز عبور'
+            msg['From'] = shop_email
+            msg['To'] = user.email
+            msg.set_content(f"کد تغییر رمز برای شما : {user.code}")
+
+            with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
+                server.login(shop_email,password_email)
+                server.send_message(msg)
 
 
             messages.success(request, messages_dict['forgot'],color_messages['gray'])
