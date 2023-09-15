@@ -1,3 +1,4 @@
+import email
 from django.shortcuts import render,redirect
 from .forms import *
 from django.contrib.auth import authenticate, login , logout
@@ -73,7 +74,7 @@ def profile(request):
 
     return render(request, 'facades/dashboard.html', {'profileForm': profileForm})
 #------------------------------------------------------------------------------------------------
-def forgotPassword(request):
+def forgotPasswordWithPhone(request):
     if request.method == 'POST':
         ForgotProfile = ForgotPasswordForm(request.POST)
 
@@ -86,6 +87,25 @@ def forgotPassword(request):
             return redirect("accounts:CheckCodeForgot",user.phoneNumber)
     else:
         ForgotProfile = ForgotPasswordForm()
+
+    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی'})
+#------------------------------------------------------------------------------------------------
+def forgotPasswordWithEmail(request):
+    if request.method == 'POST':
+        ForgotProfile = ForgotPasswordWithEmailForm(request.POST)
+
+        if ForgotProfile.is_valid():
+            cd = ForgotProfile.cleaned_data
+            user = User.objects.get(email=cd['email'])
+            user.code = random.randint(10000, 99999)
+            user.save()
+
+
+
+            messages.success(request, messages_dict['forgot'],color_messages['gray'])
+            return redirect("accounts:CheckCodeForgot",user.phoneNumber)
+    else:
+        ForgotProfile = ForgotPasswordWithEmailForm()
 
     return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی'})
 #------------------------------------------------------------------------------------------------

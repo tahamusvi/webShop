@@ -8,9 +8,12 @@ urlpatterns = [
     path('logout/',user_logout, name='logout'),
     path('register/',user_register, name='register'),
     path('profile/',profile, name='profile'),
-    path('forgotPassword/',forgotPassword, name='forgotPassword'),
+
+    path('forgotPassword/',forgotPasswordWithPhone, name='forgotPasswordwithPhone'),
     path('CheckCodeForgot/<slug:phoneNumber>/',CheckCodeForgot, name='CheckCodeForgot'),
-    path('ChangePasswordForgot/<slug:phoneNumber>/',ChangePasswordForgot, name='ChangePasswordForgot'),   
+    path('ChangePasswordForgot/<slug:phoneNumber>/',ChangePasswordForgot, name='ChangePasswordForgot'),
+
+    path('forgotPasswordWithEmail/',forgotPasswordWithEmail, name='forgotPassword'),
 
     path('add_address/',add_address, name='add_address'),
     path('change_main_address/',change_main_address, name='change_main_address'),
