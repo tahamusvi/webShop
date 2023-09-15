@@ -32,7 +32,7 @@
                                 <div class="entry-item col-sm-6">
                                     <article class="entry entry-grid text-center">
                                         <figure class="entry-media">
-                                            <a href="single.html">
+                                            <a href="{{post.get_absolute_url}}">
                                                 <img src="{{post.Cover.url}}" alt="توضیحات عکس">
                                             </a>
                                         </figure><!-- End .entry-media -->
@@ -40,7 +40,7 @@
                                         <div class="entry-body">
                                             <div class="entry-meta">
                                                 <span class="entry-author">
-                                                    نویسنده : <a href="{% url 'blog:author_posts' post.Author.id 1 %}">{{post.Author.full_name}}</a>
+                                                    نویسنده : <a href="{{post.Author.blog_posts}}">{{post.Author.full_name}}</a>
                                                 </span>
                                                 <span class="meta-separator">|</span>
                                                 <a>{{post.shamsi_date}}</a>
@@ -158,7 +158,7 @@
                                         {% for ps in views_post %}
                                         <li>
                                             <figure>
-                                                <a href="#">
+                                                <a href="{{pss.get_absolute_url}}">
                                                     <img src="{{ps.Cover.url}}" alt="post">
                                                 </a>
                                             </figure>

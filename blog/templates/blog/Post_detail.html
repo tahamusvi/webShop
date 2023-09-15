@@ -14,7 +14,7 @@
                 <div class="container">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url "facades:home" %}">خانه</a></li>
-                        <li class="breadcrumb-item"><a href="#">اخبار</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'blog:home' %}">اخبار</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
                     </ol>
                 </div><!-- End .container -->
@@ -31,7 +31,7 @@
                                 <div class="entry-body">
                                     <div class="entry-meta">
                                         <span class="entry-author">
-                                            نویسنده : <a href="#">{{post.Author.full_name}}</a>
+                                            نویسنده : <a href="{{post.Author.blog_posts}}">{{post.Author.full_name}}</a>
                                         </span>
                                         <span class="meta-separator">|</span>
                                         <p>{{post.shamsi_date}}</p>
@@ -119,9 +119,9 @@
 
                                     <div class="entry-footer row no-gutters">
                                         <div class="col-12">
-                                            <div class="entry-tags">
+                                            {% comment %} <div class="entry-tags">
                                                 <span>برچسب : </span> <a href="#">عکاسی</a> <a href="#">استایل</a>
-                                            </div><!-- End .entry-tags -->
+                                            </div><!-- End .entry-tags --> {% endcomment %}
                                         </div><!-- End .col -->
                                     </div><!-- End .entry-footer row no-gutters -->
                                 </div><!-- End .entry-body -->
@@ -146,7 +146,7 @@
 
                         <div class="entry-author-details">
                             <figure class="author-media">
-                                <a href="#">
+                                <a href="{{post.Author.blog_posts}}">
                                     <img src="{{post.Author.profile.image.url}}" alt="{{post.Author.full_name}} image">
                                 </a>
                             </figure><!-- End .author-media -->
@@ -154,10 +154,10 @@
                             <div class="author-body">
                                 <div class="author-header row no-gutters flex-column flex-md-row">
                                     <div class="col-12">
-                                        <h4><a href="#">{{post.Author.full_name}}</a></h4>
+                                        <h4><a href="{{post.Author.blog_posts}}">{{post.Author.full_name}}</a></h4>
                                     </div><!-- End .col -->
                                     <div class="col-auto mt-1 mt-md-0">
-                                        <a href="#" class="author-link">مشاهده همه پست های این نویسنده <i
+                                        <a href="{{post.Author.blog_posts}}" class="author-link">مشاهده همه پست های این نویسنده <i
                                                 class="icon-long-arrow-left"></i></a>
                                     </div><!-- End .col -->
                                 </div><!-- End .row -->
@@ -170,7 +170,7 @@
                         </div><!-- End .entry-author-details-->
                     </article><!-- End .entry -->
 
-                    <nav class="pager-nav" aria-label="Page navigation">
+                    {% comment %} <nav class="pager-nav" aria-label="Page navigation">
                         <a class="pager-link pager-link-prev" href="#" aria-label="Previous" tabindex="-1">
                             پست قبلی
                             <span class="pager-link-title">لورم ایپسوم متن ساختگی با تولید سادگی</span>
@@ -180,7 +180,7 @@
                             پست بعدی
                             <span class="pager-link-title">لورم ایپسوم متن ساختگی</span>
                         </a>
-                    </nav><!-- End .pager-nav -->
+                    </nav><!-- End .pager-nav --> {% endcomment %}
 
                     <div class="related-posts">
                         <h3 class="title">پست های مرتبط</h3><!-- End .title -->

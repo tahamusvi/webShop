@@ -40,6 +40,9 @@ class User(AbstractBaseUser):
     # def full_name(self):
     #     return str(self.full_name) + " " + str(self.lastName)
 
+    def blog_posts(self):
+        return reverse("blog:author_posts",args=[1,self.id])
+
     def has_perm(self, perm, obj=None):
         return True
 

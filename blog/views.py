@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from accounts.models import User
 from django.db.models import Q
+from facades.views import InformationsForTemplate
 #----------------------------------------------------------------------------------------------
 pagination_amount = 1
 #----------------------------------------------------------------------------------------------

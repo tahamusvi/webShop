@@ -1,6 +1,4 @@
-from math import prod
 from django.shortcuts import render,get_object_or_404
-
 from facades.models import EndBanner
 from .models import *
 from accounts.forms import *
