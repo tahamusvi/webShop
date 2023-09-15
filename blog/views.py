@@ -41,19 +41,19 @@ def author_posts(request,id,page=1):
 
     return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
-def category_posts(request,id,page=1):
-    cat = get_object_or_404(Category.objects.all(), id=id)
+def category_posts(request,slug,page=1):
+    cat = get_object_or_404(Category.objects.all(), slug=slug)
     
     queryset = cat.posts.published()[::-1]
     paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':cat})
+    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'category':cat})
 
     return render(request,"blog/post_list.html",Info)
 #----------------------------------------------------------------------------------------------
-def post_search(request,page):
+def post_search(request,page=1):
     query = request.GET.get('query')
     posts_list = Post.objects.filter(Q(title__icontains=query) | Q(text__icontains=query))
 

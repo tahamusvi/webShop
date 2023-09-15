@@ -6,7 +6,7 @@ urlpatterns = [
     path('',post_list,name="home"),
     path('<int:page>/',post_list,name="home"),
     path('posts/<slug>/',post_detail,name="post"),
-    path('Authors/<int:page>/<int:id>/',author_posts,name = "author_posts"),
-    path('Category/<int:page>/<int:id>/',category_posts,name = "category"),
+    path('authors/<int:id>/<int:page>/',author_posts,name = "author_posts"),
+    path('categories/<slug>/<int:page>/',category_posts,name = "category_posts"),
     path('search/<int:page>/', post_search, name='post_search'),
 ]

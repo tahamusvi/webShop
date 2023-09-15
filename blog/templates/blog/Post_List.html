@@ -76,6 +76,8 @@
 
                                             {% if author %}
                                             <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name author.id posts.previous_page_number %}">{{posts.previous_page_number}}</a></li>
+                                            {% elif category %}
+                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name category.slug posts.previous_page_number %}">{{posts.previous_page_number}}</a></li>
                                             {% elif query %}
                                             <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name posts.previous_page_number %}?query={{query}}">{{posts.previous_page_number}}</a></li>
                                             {% else %}
@@ -89,6 +91,13 @@
                                         <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  author.id posts.next_page_number %}">{{posts.next_page_number}}</a></li>
                                         <li class="page-item">
                                             <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name author.id posts.next_page_number %}" aria-label="Next">
+                                                بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+                                            </a>
+                                        </li>
+                                        {% elif category %}
+                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  category.slug posts.next_page_number %}">{{posts.next_page_number}}</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name category.slug posts.next_page_number %}" aria-label="Next">
                                                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                             </a>
                                         </li>
@@ -158,7 +167,7 @@
                                         {% for ps in views_post %}
                                         <li>
                                             <figure>
-                                                <a href="{{pss.get_absolute_url}}">
+                                                <a href="{{ps.get_absolute_url}}">
                                                     <img src="{{ps.Cover.url}}" alt="post">
                                                 </a>
                                             </figure>
