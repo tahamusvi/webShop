@@ -73,14 +73,17 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     {% if posts.has_previous %}
+
                                             {% if author %}
                                             <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name author.id posts.previous_page_number %}">{{posts.previous_page_number}}</a></li>
+                                            {% elif query %}
+                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name posts.previous_page_number %}?query={{query}}">{{posts.previous_page_number}}</a></li>
                                             {% else %}
                                             <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name posts.previous_page_number %}{% if query %}?query={{query}}{% endif %}">{{posts.previous_page_number}}</a></li>
                                             {% endif %}
 
                                     {% endif %}
-                                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{posts.number}}</a></li>
+                                    <li class="page-item" aria-current="page"><a class="page-link" >{{posts.number}}</a></li>
                                     {% if posts.has_next %}
                                         {% if author %}
                                         <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  author.id posts.next_page_number %}">{{posts.next_page_number}}</a></li>
@@ -89,6 +92,14 @@
                                                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                             </a>
                                         </li>
+                                        {% elif query %}
+                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  posts.next_page_number %}?query={{query}}">{{posts.next_page_number}}</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name posts.next_page_number %}?query={{query}}" aria-label="Next">
+                                                بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+                                            </a>
+                                        </li>
+                                            
                                         {% else %}
                                         <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  posts.next_page_number %}{% if query %}?query={{query}}{% endif %}">{{posts.next_page_number}}</a></li>
                                         <li class="page-item">
@@ -113,17 +124,22 @@
 
                         <aside class="col-lg-3">
                             <div class="sidebar">
+
+
                                 <div class="widget widget-search">
                                     <h3 class="widget-title">جستجو</h3><!-- End .widget-title -->
 
-                                    <form action="#">
-                                        <label for="ws" class="sr-only">جستجوی اخبار</label>
-                                        <input type="search" class="form-control" name="ws" id="ws"
+                                    <form action="{% url 'blog:post_search' 1 %}" method="GET">
+                                        <label for="query" class="sr-only">جستجوی اخبار</label>
+                                        <input type="search" class="form-control" name="query" id="query"
                                             placeholder="جستجوی خبر مورد نظر" required>
                                         <button type="submit" class="btn"><i class="icon-search"></i><span
                                                 class="sr-only">جستجو</span></button>
                                     </form>
                                 </div><!-- End .widget -->
+
+
+
 
                                 <div class="widget widget-cats">
                                     <h3 class="widget-title">دسته بندی ها</h3><!-- End .widget-title -->
@@ -168,7 +184,7 @@
                                     </div><!-- End .banner-ad -->
                                 </div><!-- End .widget -->
 
-                                <div class="widget">
+                                {% comment %} <div class="widget">
                                     <h3 class="widget-title">برچسب ها</h3><!-- End .widget-title -->
 
                                     <div class="tagcloud">
@@ -180,7 +196,7 @@
                                         <a href="#">خرید</a>
                                         <a href="#">سرگرمی</a>
                                     </div><!-- End .tagcloud -->
-                                </div><!-- End .widget -->
+                                </div><!-- End .widget --> {% endcomment %}
 
                                 <div class="widget widget-text">
                                     <h3 class="widget-title">درباره بخش اخبار</h3><!-- End .widget-title -->

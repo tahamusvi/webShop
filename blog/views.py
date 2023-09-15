@@ -3,11 +3,14 @@ from .models import Category, Post
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from accounts.models import User
+from django.db.models import Q
+#----------------------------------------------------------------------------------------------
+pagination_amount = 1
 #----------------------------------------------------------------------------------------------
 from django.core.paginator import Paginator
 def post_list(request,page=1):
     queryset = Post.objects.published()[::-1]
-    paginator = Paginator(queryset, 1)
+    paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
     return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator})
@@ -22,7 +25,7 @@ def author_posts(request,id,page=1):
     author = get_object_or_404(User.objects.all(), id=id)
     
     queryset = author.posts.published()[::-1]
-    paginator = Paginator(queryset, 1)
+    paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
     return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author})
@@ -31,23 +34,17 @@ def category_posts(request,id,page=1):
     cat = get_object_or_404(Category.objects.all(), id=id)
     
     queryset = cat.posts.published()[::-1]
-    paginator = Paginator(queryset, 3)
+    paginator = Paginator(queryset, pagination_amount)
     posts = paginator.get_page(page)
 
     return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':cat})
 #----------------------------------------------------------------------------------------------
-# class CategoryDetail(ListView):
-#     paginate_by = 4
-#     template_name = "posts/classBaseViews/Category_detail.html"
+def post_search(request,page):
+    query = request.GET.get('query')
+    posts_list = Post.objects.filter(Q(title__icontains=query) | Q(text__icontains=query))
 
-#     def get_queryset(self):
-#         global Category
-#         slug = self.kwargs.get('slug')
-#         Category = get_object_or_404(models.Category.objects.actived(), slug=slug)
-#         return Category.posts.published()
+    paginator = Paginator(posts_list, pagination_amount)
+    posts = paginator.get_page(page)
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['Category'] = Category
-#         return context
+    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'query':query})
 #----------------------------------------------------------------------------------------------
