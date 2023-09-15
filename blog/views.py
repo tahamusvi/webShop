@@ -27,6 +27,15 @@ def author_posts(request,id,page=1):
 
     return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author})
 #----------------------------------------------------------------------------------------------
+def category_posts(request,id,page=1):
+    cat = get_object_or_404(Category.objects.all(), id=id)
+    
+    queryset = cat.posts.published()[::-1]
+    paginator = Paginator(queryset, 3)
+    posts = paginator.get_page(page)
+
+    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':cat})
+#----------------------------------------------------------------------------------------------
 # class CategoryDetail(ListView):
 #     paginate_by = 4
 #     template_name = "posts/classBaseViews/Category_detail.html"

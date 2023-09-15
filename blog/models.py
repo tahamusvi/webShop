@@ -24,8 +24,8 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        # return reverse("blog:category",args=[self.slug])
-        return "comment"
+        return reverse("blog:category",args=[1,self.id])
+        # return "comment"
 
     def count_posts(self):
         return self.posts.all().count()
