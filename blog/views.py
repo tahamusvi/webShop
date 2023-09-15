@@ -18,20 +18,14 @@ def post_detail(request,slug):
     post.increase_views()
     return render(request,"blog/Post_detail.html",{'post':post,'CommentForm':CommentForm})
 #----------------------------------------------------------------------------------------------
-# class AuthorDetail(ListView):
-#     paginate_by = 3
-#     template_name = "posts/classBaseViews/Author_detail.html"
+def author_posts(request,id,page=1):
+    author = get_object_or_404(User.objects.all(), id=id)
+    
+    queryset = author.posts.published()[::-1]
+    paginator = Paginator(queryset, 1)
+    posts = paginator.get_page(page)
 
-#     def get_queryset(self):
-#         global Author
-#         phoneNumber = self.kwargs.get('phoneNumber')
-#         Author = User.objects.get(phoneNumber=phoneNumber)
-#         return Author.posts.published()[::-1]
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['Author'] = Author
-#         return context
+    return render(request,"blog/post_list.html",{'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author})
 #----------------------------------------------------------------------------------------------
 # class CategoryDetail(ListView):
 #     paginate_by = 4

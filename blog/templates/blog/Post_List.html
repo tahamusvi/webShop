@@ -40,7 +40,7 @@
                                         <div class="entry-body">
                                             <div class="entry-meta">
                                                 <span class="entry-author">
-                                                    نویسنده : <a href="#">{{post.Author.full_name}}</a>
+                                                    نویسنده : <a href="{% url 'blog:author_posts' post.Author.id 1 %}">{{post.Author.full_name}}</a>
                                                 </span>
                                                 <span class="meta-separator">|</span>
                                                 <a>{{post.shamsi_date}}</a>
@@ -73,9 +73,8 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     {% if posts.has_previous %}
-
-                                            {% if category %}
-                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name category.id posts.previous_page_number %}">{{posts.previous_page_number}}</a></li>
+                                            {% if author %}
+                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name author.id posts.previous_page_number %}">{{posts.previous_page_number}}</a></li>
                                             {% else %}
                                             <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name posts.previous_page_number %}{% if query %}?query={{query}}{% endif %}">{{posts.previous_page_number}}</a></li>
                                             {% endif %}
@@ -83,10 +82,10 @@
                                     {% endif %}
                                     <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{posts.number}}</a></li>
                                     {% if posts.has_next %}
-                                        {% if category %}
-                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  category.id posts.next_page_number %}">{{posts.next_page_number}}</a></li>
+                                        {% if author %}
+                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  author.id posts.next_page_number %}">{{posts.next_page_number}}</a></li>
                                         <li class="page-item">
-                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name category.id posts.next_page_number %}" aria-label="Next">
+                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name author.id posts.next_page_number %}" aria-label="Next">
                                                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                             </a>
                                         </li>
