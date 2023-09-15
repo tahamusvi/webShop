@@ -14,7 +14,7 @@
                 <div class="container">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url "facades:home" %}">خانه</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'blog:home' %}">اخبار</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'blog:home_blog' %}">اخبار</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
                     </ol>
                 </div><!-- End .container -->
@@ -211,7 +211,7 @@
                             {% for item in post.get_similar_posts %}
                             <article class="entry entry-grid">
                                 <figure class="entry-media">
-                                    <a href="single.html">
+                                    <a href="{{item.get_absolute_url}}">
                                         <img src="{{item.Cover.url}}" alt="توضیحات عکس">
                                     </a>
                                 </figure><!-- End .entry-media -->
