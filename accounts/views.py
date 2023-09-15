@@ -99,7 +99,7 @@ def forgotPasswordWithEmail(request):
             user = User.objects.get(email=cd['email'])
             user.code = random.randint(10000, 99999)
             user.save()
-
+            
 
 
             messages.success(request, messages_dict['forgot'],color_messages['gray'])
