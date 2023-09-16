@@ -10,12 +10,12 @@
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="widget widget-about">
-                        <img src="{% static 'facades/images/logi.png' %}" class="footer-logo" alt="Footer Logo"
-                            width="105" height="25">
+                        <img src="{% static 'facades/images/gizmo_dark_typo01.png' %}" class="footer-logo" alt="Footer Logo"
+                            width="105" height="45">
                         <p>از تنوع محصولات ما لذت ببرید، با قیمت و کیفیتی که انتظار دارید خرید کنید.</p>
 
                         <div class="social-icons">
-                            <a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
+                            <a href="https://www.instagram.com/gizmoshop.ir/" class="social-icon" title="اینستاگرام" target="_blank"><i
                                   class="icon-instagram"></i></a>
                             <a href="#" class="social-icon" title="واتساپ" target="_blank"><i
                                     class="icon-whatsapp"></i></a>
@@ -41,11 +41,12 @@
                         <h4 class="widget-title">لینک های مفید</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
+                            <li><a href="{% url 'blog:home_blog' %}">اخبار</a></li>
                             <li><a href="{% url 'facades:aboutUs' %}">درباره ما</a></li>
                             <!-- <li><a href="#">خدمات</a></li> -->
                             <!-- <li><a href="#">نحوه خرید</a></li> -->
-                            <li><a href="{% url 'facades:FAQ' %}">سوالات متداول</a></li>
                             <li><a href="{% url 'facades:contact' %}">تماس با ما</a></li>
+                            <li><a href="{% url 'facades:FAQ' %}">سوالات متداول</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -61,10 +62,10 @@
                             {% else %}  
                             <li><a href="{% url "accounts:login" %}">ورود</a></li>
                             {% endif %}
+                            <li><a href="{% url 'facades:dashboard' %}">داشبورد</a></li>
                             <li><a href="{% url "cart:detail" %}">سبد خرید</a></li>
                             <li><a href="{% url "stuff:showWishList" 1 %}">لیست علاقه مندی ها</a></li>
                             <li><a href="{% url "facades:dashboard" %}">پیگیری سفارشات</a></li>
-                            <li><a href="#">راهنما</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
