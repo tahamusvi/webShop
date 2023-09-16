@@ -1,0 +1,63 @@
+{% load static %}
+
+<div class="blog-posts pt-7 pb-7" style="background-color: #fafafa;">
+                <div class="container">
+                    <h2 class="title-lg text-center mb-3 mb-md-4">از وبلاگ ما</h2><!-- End .title-lg text-center -->
+
+                    <div class="owl-carousel owl-simple carousel-with-shadow" data-toggle="owl" data-owl-options='{
+                            "nav": false, 
+                            "dots": true,
+                            "items": 3,
+                            "margin": 20,
+                            "loop": false,
+                            "rtl": true, 
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "600": {
+                                    "items":2
+                                },
+                                "992": {
+                                    "items":3
+                                }
+                            }
+                        }'>
+
+                        {% for post in posts %}
+                        <article class="entry entry-display">
+                            <figure class="entry-media">
+                                <a href="{{post.get_absolute_url}}">
+                                    <img src="{{post.Cover.url}}" alt="توضیحات عکس">
+                                </a>
+                            </figure><!-- End .entry-media -->
+
+                            <div class="entry-body pb-4 text-center">
+                                <div class="entry-meta">
+                                    <a>{{post.shamsi_date}}</a>، {{post.get_comments.count}}  دیدگاه
+                                </div><!-- End .entry-meta -->
+
+                                <h3 class="entry-title text-center">
+                                    <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+                                </h3><!-- End .entry-title -->
+
+                                <div class="entry-content">
+                                    <p class="text-center">{{post.preview}}</p>
+                                    <a href="{{post.get_absolute_url}}" class="read-more">خواندن
+                                        بیشتر</a>
+                                </div><!-- End .entry-content -->
+                            </div><!-- End .entry-body -->
+                        </article><!-- End .entry -->
+                        {% endfor %}
+
+
+
+                        
+                    </div><!-- End .owl-carousel -->
+                </div><!-- container -->
+
+                <div class="more-container text-center mb-0 mt-3">
+                    <a href="{% url 'blog:home_blog' %}" class="btn btn-outline-darker btn-more"><span>مشاهده اخبار بیشتر</span><i
+                            class="icon-long-arrow-left"></i></a>
+                </div><!-- End .more-container -->
+            </div>

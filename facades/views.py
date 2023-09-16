@@ -33,7 +33,7 @@ def InformationsForTemplate(request):
 
 
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form
-    ,'formLogin':formLogin,'formRegister':formRegister,"brands":brands,"shops":shops}
+    ,'formLogin':formLogin,'formRegister':formRegister,"brands":brands,"shops":shops,}
 
     return Info
 #----------------------------------------------------------------------------------------------
@@ -52,6 +52,8 @@ def HomePage(request):
     Info["Categories"] = Categories
     Info["productsOfDiscount"] = discounted
     Info["products"] = news
+    Info["banner"] = EndBanner.objects.all()[0]
+    Info["posts"] = Post.objects.all()[0:3]
 
     return render(request,'facades/landing.html',Info)
 #----------------------------------------------------------------------------------------------
