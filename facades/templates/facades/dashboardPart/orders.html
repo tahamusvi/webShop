@@ -23,7 +23,7 @@
                                                     {% if order.paid %}
                                                     <a href="{% url 'orders:detail' order.id %}">پیگیری سفارش <i class="icon-cog"></i></a>
                                                     {% else %}
-                                                    <a href="{% url 'orders:detail' order.id %}">پرداخت <i class="icon-edit"></i></a>
+                                                    {% comment %} <a href="{% url 'cart:checkout' order.id %}">پرداخت <i class="icon-edit"></i></a> {% endcomment %}
                                                     {% endif %}
                                                     </p>
                                             </div><!-- End .card-body -->

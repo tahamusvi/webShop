@@ -25,33 +25,33 @@ def detail(request,order_id):
     if order.paid :
         return render(request,'orders/trackOrders.html', Info)
     
-    return render(request,'orders/checkout.html', Info)
+    # return render(request,'orders/checkout.html', Info)
+    return render(request,'facades/404.html', Info)
 #-----------------------------------------------------------------------------------
-@require_POST
-def coupon_apply(request,order_id):
-    now = timezone.now()
-    form = CouponForm(request.POST)
-    if form.is_valid():
-        code = form.cleaned_data['code']
-        try:
-            coupon = Coupon.objects.get(code__iexact=code,valid_from__lte=now,valid_to__gte=now,active=True)
-        except Coupon.DoesNotExist:
-            messages.error(request,'this Coupon does not exist.','danger')
-            return redirect('order:detail',order_id)
-        order = Order.objects.get(id=order_id)
-        order.discount = coupon.discount
-        order.save()
-    return redirect('orders:detail',order_id)
+# @require_POST
+# def coupon_apply(request,order_id):
+#     now = timezone.now()
+#     form = CouponForm(request.POST)
+#     if form.is_valid():
+#         code = form.cleaned_data['code']
+#         try:
+#             coupon = Coupon.objects.get(code__iexact=code,valid_from__lte=now,valid_to__gte=now,active=True)
+#         except Coupon.DoesNotExist:
+#             messages.error(request,'this Coupon does not exist.','danger')
+#             return redirect('order:detail',order_id)
+#         order = Order.objects.get(id=order_id)
+#         order.discount = coupon.discount
+#         order.save()
+#     return redirect('orders:detail',order_id)
 
 #-----------------------------------------------------------------------------------
 def factor(request,order_id):
-    form = CouponForm
     order = get_object_or_404(Order,id=order_id)
     if (order.user != request.user) and not(request.user.is_admin):
         return render(request,'facades/404.html',{'order':order})
     if order.paid :
         return render(request,'orders/factor.html',{'order':order})
-    return render(request,'orders/checkout.html',{'order':order,'form':form})
+    return render(request,'facades/404.html',{'order':order})
 #-----------------------------------------------------------------------------------
 # MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 # client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
