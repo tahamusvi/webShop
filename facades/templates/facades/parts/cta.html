@@ -1,0 +1,26 @@
+{% load static %}
+
+
+
+<div class="cta cta-display bg-image pt-4 pb-4"
+                style="background-image: url({{banner.image.url}});">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-9 col-xl-8">
+                            <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">
+                                <div class="col-md-8">
+                                    <h3 class="cta-title text-white text-right">{{banner.title}}</h3>
+                                    <!-- End .cta-title -->
+                                    <p class="cta-desc text-white">{{banner.describe}}</p>
+                                    <!-- End .cta-desc -->
+                                </div><!-- End .col -->
+
+                                <div class="col-auto d-flex">
+                                    <a href="{{banner.get_absolute_url}}" class="btn btn-outline-white"><span>{{banner.button}}</span><i
+                                            class="icon-long-arrow-left"></i></a>
+                                </div><!-- End .col-auto -->
+                            </div><!-- End .row no-gutters -->
+                        </div><!-- End .col-md-10 col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .cta -->
