@@ -107,7 +107,7 @@
                                             </td>
                                             <td>{{item.quantity}}</td>
                                             <td>{{item.product.discounted_price}} تومان</td>
-                                            <td>۵۰۰ تومان</td>
+                                            <td>{{item.get_cost_from_product}} تومان</td>
                                         </tr>
                                         {% endfor %}
                                         

@@ -4,7 +4,11 @@ from accounts.models import Address
 from stuff.models import Product
 from django.core.validators import MinValueValidator,MaxValueValidator
 from facades.utils import jalali_converter
-
+#-----------------------------------------------------------------------------------
+def format(show):
+    formatted_price = "{:,.0f}".format(show)
+    return formatted_price
+#-----------------------------------------------------------------------------------
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='orders')
     created = models.DateTimeField(auto_now_add=True)
@@ -83,7 +87,12 @@ class OrderItem(models.Model):
 
 
     def get_cost(self):
-        return self.price*self.quantity
+        return self.product.discounted_price_int * self.quantity
+
+    def get_cost_from_product(self):
+        return format(self.product.discounted_price_int * self.quantity)
+
+    
 #-----------------------------------------------------------------------------------
 class Coupon(models.Model):
     code = models.CharField(max_length=30,unique=True)
