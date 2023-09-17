@@ -57,6 +57,8 @@ class Post(models.Model):
     Category = models.ManyToManyField(Category,related_name = "posts",verbose_name="دسته بندی")
     views = models.PositiveIntegerField(default=0, verbose_name="تعداد بازدید")
 
+    is_for_landing = models.BooleanField(default=False)
+
     objects = PostManager()
 
     # class Meta:

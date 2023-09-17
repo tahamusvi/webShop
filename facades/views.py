@@ -53,7 +53,7 @@ def HomePage(request):
     Info["productsOfDiscount"] = discounted
     Info["products"] = news
     Info["banner"] = EndBanner.objects.all()[0]
-    Info["posts"] = Post.objects.all()[0:3]
+    Info["posts"] = Post.objects.filter(is_for_landing=True)
 
     return render(request,'facades/landing.html',Info)
 #----------------------------------------------------------------------------------------------
