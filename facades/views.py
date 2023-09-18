@@ -40,7 +40,7 @@ def InformationsForTemplate(request):
 def HomePage(request):
     print("--------------------------")
     # discounted stuff
-    discounted = Product.objects.filter(available=True,discounted=True)
+    discounted = Product.objects.filter(available=True,discounted=True)[::-1][0:6]
     # New stuff in website
     news = Product.objects.filter(available=True)
     news_list = [s.id for s in news if s.is_new][0:8]
@@ -55,6 +55,9 @@ def HomePage(request):
     Info["banner"] = EndBanner.objects.all()[0]
     Info["articles"] = Article.objects.filter(is_for_landing=True)[0:3]
     Info["footer_articles"] = Article.objects.all()[::-1][0:3]
+    if request.user.is_authenticated:
+        Info["watched"] = request.user.wacthed.all()[::-1][0:4]
+    
 
     return render(request,'facades/landing.html',Info)
 #----------------------------------------------------------------------------------------------

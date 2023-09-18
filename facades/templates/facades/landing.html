@@ -16,14 +16,16 @@
         {% include 'facades/home_parts/discountStuff.html' %}
 
         {% include 'facades/home_parts/2col.html' %}
-
-        {% include 'facades/home_parts/discountStuff.html' %}
+        
+        {% include 'facades/home_parts/newStuff.html' %}
 
         
 
         {% include 'facades/home_parts/category.html' %}
 
-        {% include 'facades/home_parts/newStuff.html' %}
+        {% if request.user.is_authenticated %}
+                {% include 'facades/home_parts/watched_products.html' %}
+        {% endif %}
 
         {% include 'facades/home_parts/Slogan.html' %}
 
