@@ -1,6 +1,6 @@
 from django.db import models
 
-class PostManager(models.Manager):
+class ArticleManager(models.Manager):
     def published(self):
         return self.filter(status = "p")
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Category, Post, publicitar
+from .models import Category, Article, publicitar
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from accounts.models import User
@@ -9,67 +9,67 @@ from facades.views import InformationsForTemplate
 pagination_amount = 1
 #----------------------------------------------------------------------------------------------
 from django.core.paginator import Paginator
-def post_list(request,page=1):
-    queryset = Post.objects.published()[::-1]
+def article_list(request,page=1):
+    queryset = Article.objects.published()[::-1]
     paginator = Paginator(queryset, pagination_amount)
-    posts = paginator.get_page(page)
+    articles = paginator.get_page(page)
 
     publicitar_banner = publicitar.objects.all()[::-1][0]
 
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'publicitar':publicitar_banner})
+    Info.update({'articles':articles,'categories':Category.objects.all(),'views_article':Article.get_popular_articles(),'paginator':paginator,'publicitar':publicitar_banner})
 
-    return render(request,"blog/post_list.html",Info)
+    return render(request,"blog/article_list.html",Info)
 #----------------------------------------------------------------------------------------------
 from accounts.forms import CommentForm
-def post_detail(request,slug):
-    post = get_object_or_404(Post.objects.published(), slug=slug)
-    post.increase_views()
+def article_detail(request,slug):
+    article = get_object_or_404(Article.objects.published(), slug=slug)
+    article.increase_views()
 
     Info = InformationsForTemplate(request)
-    Info.update({'post':post,'CommentForm':CommentForm})
+    Info.update({'article':article,'CommentForm':CommentForm})
 
-    return render(request,"blog/Post_detail.html",Info)
+    return render(request,"blog/Article_detail.html",Info)
 #----------------------------------------------------------------------------------------------
-def author_posts(request,id,page=1):
+def author_articles(request,id,page=1):
     author = get_object_or_404(User.objects.all(), id=id)
     
-    queryset = author.posts.published()[::-1]
+    queryset = author.articles.published()[::-1]
     paginator = Paginator(queryset, pagination_amount)
-    posts = paginator.get_page(page)
+    articles = paginator.get_page(page)
 
     publicitar_banner = publicitar.objects.all()[::-1][0]
 
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'author':author,'publicitar':publicitar_banner})
+    Info.update({'articles':articles,'categories':Category.objects.all(),'views_article':Article.get_popular_articles(),'paginator':paginator,'author':author,'publicitar':publicitar_banner})
 
-    return render(request,"blog/post_list.html",Info)
+    return render(request,"blog/article_list.html",Info)
 #----------------------------------------------------------------------------------------------
-def category_posts(request,slug,page=1):
+def category_articles(request,slug,page=1):
     cat = get_object_or_404(Category.objects.all(), slug=slug)
     
-    queryset = cat.posts.published()[::-1]
+    queryset = cat.articles.published()[::-1]
     paginator = Paginator(queryset, pagination_amount)
-    posts = paginator.get_page(page)
+    articles = paginator.get_page(page)
 
     publicitar_banner = publicitar.objects.all()[::-1][0]
 
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'category':cat,'publicitar':publicitar_banner})
+    Info.update({'articles':articles,'categories':Category.objects.all(),'views_article':Article.get_popular_articles(),'paginator':paginator,'category':cat,'publicitar':publicitar_banner})
 
-    return render(request,"blog/post_list.html",Info)
+    return render(request,"blog/article_list.html",Info)
 #----------------------------------------------------------------------------------------------
-def post_search(request,page=1):
+def article_search(request,page=1):
     query = request.GET.get('query')
-    posts_list = Post.objects.filter(Q(title__icontains=query) | Q(text__icontains=query))
+    articles_list = Article.objects.filter(Q(title__icontains=query) | Q(text__icontains=query))
 
-    paginator = Paginator(posts_list, pagination_amount)
-    posts = paginator.get_page(page)
+    paginator = Paginator(articles_list, pagination_amount)
+    articles = paginator.get_page(page)
 
     publicitar_banner = publicitar.objects.all()[::-1][0]
 
     Info = InformationsForTemplate(request)
-    Info.update({'posts':posts,'categories':Category.objects.all(),'views_post':Post.get_popular_posts(),'paginator':paginator,'query':query,'publicitar':publicitar_banner})
+    Info.update({'articles':articles,'categories':Category.objects.all(),'views_article':Article.get_popular_articles(),'paginator':paginator,'query':query,'publicitar':publicitar_banner})
 
-    return render(request,"blog/post_list.html",Info)
+    return render(request,"blog/article_list.html",Info)
 #----------------------------------------------------------------------------------------------

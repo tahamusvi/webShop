@@ -24,18 +24,18 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("blog:category_posts",args=[self.slug,1])
+        return reverse("blog:category_articles",args=[self.slug,1])
         # return "comment"
 
-    def count_posts(self):
-        return self.posts.all().count()
+    def count_articles(self):
+        return self.articles.all().count()
 
 
     # class Meta:
     #     verbose_name = "دسته بندی"
     #     verbose_name_plural = "دسته بندی ها"
 #-----------------------------------------------------------------------------------
-class Post(models.Model):
+class Article(models.Model):
     status_ch = (
         ('p' , "انتشار یافته"),
         ('d', "پیش نویس"),
@@ -47,19 +47,19 @@ class Post(models.Model):
 
     title = models.CharField(max_length=50,verbose_name="تیتر")
     text = models.TextField(verbose_name="متن")
-    Author = models.ForeignKey(User,on_delete=models.CASCADE,related_name="posts",verbose_name="نویسنده")
+    Author = models.ForeignKey(User,on_delete=models.CASCADE,related_name="articles",verbose_name="نویسنده")
     Cover = models.ImageField(upload_to="images",null=True,blank=True,verbose_name="تصویر")
     drafted = models.DateTimeField(auto_now_add=True,verbose_name="تاریخ پیش نویس")
     publish = models.DateTimeField(default=timezone.now,verbose_name="تاریخ انتشار")
     update = models.DateTimeField(auto_now=True,verbose_name="تاریخ آپدیت")
     slug = models.SlugField(max_length=40, unique = True,verbose_name="آدرس")
     status = models.CharField(max_length=1,choices = status_ch,verbose_name="وضعیت")
-    Category = models.ManyToManyField(Category,related_name = "posts",verbose_name="دسته بندی")
+    Category = models.ManyToManyField(Category,related_name = "articles",verbose_name="دسته بندی")
     views = models.PositiveIntegerField(default=0, verbose_name="تعداد بازدید")
 
     is_for_landing = models.BooleanField(default=False)
 
-    objects = PostManager()
+    objects = ArticleManager()
 
     # class Meta:
     #     verbose_name = "پست"
@@ -71,7 +71,7 @@ class Post(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse("blog:post",args=[self.slug])
+        return reverse("blog:article",args=[self.slug])
 
     def shamsi_date(self):
         return jalali_converter(self.publish)
@@ -83,9 +83,9 @@ class Post(models.Model):
     def Cover_tags(self):
         return format_html("<img width=120 style='border-radius:5px' src='{}'>".format(self.Cover.url))
 
-    def get_similar_posts(self):
-        similar_posts = Post.objects.filter(Category__in=self.Category.all()).exclude(id=self.id)[:4]
-        return similar_posts
+    def get_similar_articles(self):
+        similar_articles = Article.objects.filter(Category__in=self.Category.all()).exclude(id=self.id)[:4]
+        return similar_articles
 
     def get_comments(self):
         comments = self.comments.all()
@@ -96,9 +96,9 @@ class Post(models.Model):
         self.save()
 
     @staticmethod
-    def get_popular_posts():
-        popular_posts = Post.objects.order_by('-views')[:5]
-        return popular_posts
+    def get_popular_articles():
+        popular_articles = Article.objects.order_by('-views')[:5]
+        return popular_articles
 #-----------------------------------------------------------------------------------
 class publicitar(models.Model):
     title = models.CharField(max_length=200)

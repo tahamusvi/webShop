@@ -28,32 +28,32 @@
                             <div class="entry-container max-col-2">
 
 
-                                {% for post in posts %}
+                                {% for article in articles %}
                                 <div class="entry-item col-sm-6">
                                     <article class="entry entry-grid text-center">
                                         <figure class="entry-media">
-                                            <a href="{{post.get_absolute_url}}">
-                                                <img src="{{post.Cover.url}}" alt="توضیحات عکس">
+                                            <a href="{{article.get_absolute_url}}">
+                                                <img src="{{article.Cover.url}}" alt="توضیحات عکس">
                                             </a>
                                         </figure><!-- End .entry-media -->
 
                                         <div class="entry-body">
                                             <div class="entry-meta">
                                                 <span class="entry-author">
-                                                    نویسنده : <a href="{{post.Author.blog_posts}}">{{post.Author.full_name}}</a>
+                                                    نویسنده : <a href="{{article.Author.blog_articles}}">{{article.Author.full_name}}</a>
                                                 </span>
                                                 <span class="meta-separator">|</span>
-                                                <a>{{post.shamsi_date}}</a>
+                                                <a>{{article.shamsi_date}}</a>
                                                 <span class="meta-separator">|</span>
-                                                <a>{{post.get_comments.count}} دیدگاه</a>
+                                                <a>{{article.get_comments.count}} دیدگاه</a>
                                             </div><!-- End .entry-meta -->
 
                                             <h2 class="entry-title text-center">
-                                                <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+                                                <a href="{{article.get_absolute_url}}">{{article.title}}</a>
                                             </h2><!-- End .entry-title -->
 
                                             <div class="entry-cats text-center">
-                                                {% for cat in post.Category.all %}
+                                                {% for cat in article.Category.all %}
                                                     <a href="{{cat.get_absolute_url}}">{{cat}}</a>
                                                 {% endfor %}
                                             </div><!-- End .entry-cats -->
@@ -69,50 +69,50 @@
 
 
 
-                            {% if posts.has_other_pages %}
+                            {% if articles.has_other_pages %}
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    {% if posts.has_previous %}
+                                    {% if articles.has_previous %}
 
                                             {% if author %}
-                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name author.id posts.previous_page_number %}">{{posts.previous_page_number}}</a></li>
+                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name author.id articles.previous_page_number %}">{{articles.previous_page_number}}</a></li>
                                             {% elif category %}
-                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name category.slug posts.previous_page_number %}">{{posts.previous_page_number}}</a></li>
+                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name category.slug articles.previous_page_number %}">{{articles.previous_page_number}}</a></li>
                                             {% elif query %}
-                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name posts.previous_page_number %}?query={{query}}">{{posts.previous_page_number}}</a></li>
+                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name articles.previous_page_number %}?query={{query}}">{{articles.previous_page_number}}</a></li>
                                             {% else %}
-                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name posts.previous_page_number %}{% if query %}?query={{query}}{% endif %}">{{posts.previous_page_number}}</a></li>
+                                            <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name articles.previous_page_number %}{% if query %}?query={{query}}{% endif %}">{{articles.previous_page_number}}</a></li>
                                             {% endif %}
 
                                     {% endif %}
-                                    <li class="page-item" aria-current="page"><a class="page-link" >{{posts.number}}</a></li>
-                                    {% if posts.has_next %}
+                                    <li class="page-item" aria-current="page"><a class="page-link" >{{articles.number}}</a></li>
+                                    {% if articles.has_next %}
                                         {% if author %}
-                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  author.id posts.next_page_number %}">{{posts.next_page_number}}</a></li>
+                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  author.id articles.next_page_number %}">{{articles.next_page_number}}</a></li>
                                         <li class="page-item">
-                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name author.id posts.next_page_number %}" aria-label="Next">
+                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name author.id articles.next_page_number %}" aria-label="Next">
                                                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                             </a>
                                         </li>
                                         {% elif category %}
-                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  category.slug posts.next_page_number %}">{{posts.next_page_number}}</a></li>
+                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  category.slug articles.next_page_number %}">{{articles.next_page_number}}</a></li>
                                         <li class="page-item">
-                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name category.slug posts.next_page_number %}" aria-label="Next">
+                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name category.slug articles.next_page_number %}" aria-label="Next">
                                                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                             </a>
                                         </li>
                                         {% elif query %}
-                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  posts.next_page_number %}?query={{query}}">{{posts.next_page_number}}</a></li>
+                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  articles.next_page_number %}?query={{query}}">{{articles.next_page_number}}</a></li>
                                         <li class="page-item">
-                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name posts.next_page_number %}?query={{query}}" aria-label="Next">
+                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name articles.next_page_number %}?query={{query}}" aria-label="Next">
                                                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                             </a>
                                         </li>
                                             
                                         {% else %}
-                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  posts.next_page_number %}{% if query %}?query={{query}}{% endif %}">{{posts.next_page_number}}</a></li>
+                                        <li class="page-item"><a class="page-link" href="{% url 'blog:'|add:request.resolver_match.url_name  articles.next_page_number %}{% if query %}?query={{query}}{% endif %}">{{articles.next_page_number}}</a></li>
                                         <li class="page-item">
-                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name  posts.next_page_number %}{% if query %}?query={{query}}{% endif %}" aria-label="Next">
+                                            <a class="page-link page-link-next" href="{% url 'blog:'|add:request.resolver_match.url_name  articles.next_page_number %}{% if query %}?query={{query}}{% endif %}" aria-label="Next">
                                                 بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                             </a>
                                         </li>
@@ -138,7 +138,7 @@
                                 <div class="widget widget-search">
                                     <h3 class="widget-title">جستجو</h3><!-- End .widget-title -->
 
-                                    <form action="{% url 'blog:post_search' 1 %}" method="GET">
+                                    <form action="{% url 'blog:article_search' 1 %}" method="GET">
                                         <label for="query" class="sr-only">جستجوی اخبار</label>
                                         <input type="search" class="form-control" name="query" id="query"
                                             placeholder="جستجوی خبر مورد نظر" required>
@@ -155,7 +155,7 @@
 
                                     <ul>
                                         {% for cat in categories %}
-                                        <li><a href="{{cat.get_absolute_url}}">{{cat}}<span>{{cat.count_posts}}</span></a></li>
+                                        <li><a href="{{cat.get_absolute_url}}">{{cat}}<span>{{cat.count_articles}}</span></a></li>
                                         {% endfor %}
                                     </ul>
                                 </div><!-- End .widget -->
@@ -163,12 +163,12 @@
                                 <div class="widget">
                                     <h3 class="widget-title">پر بازدید ترین اخبار</h3><!-- End .widget-title -->
 
-                                    <ul class="posts-list">
-                                        {% for ps in views_post %}
+                                    <ul class="articles-list">
+                                        {% for ps in views_article %}
                                         <li>
                                             <figure>
                                                 <a href="{{ps.get_absolute_url}}">
-                                                    <img src="{{ps.Cover.url}}" alt="post">
+                                                    <img src="{{ps.Cover.url}}" alt="article">
                                                 </a>
                                             </figure>
 
@@ -179,7 +179,7 @@
                                         </li>
                                         {% endfor %}
                                         
-                                    </ul><!-- End .posts-list -->
+                                    </ul><!-- End .articles-list -->
                                 </div><!-- End .widget -->
 
                                 <div class="widget widget-banner-sidebar">

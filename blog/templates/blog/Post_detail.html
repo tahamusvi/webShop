@@ -15,14 +15,14 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url "facades:home" %}">خانه</a></li>
                         <li class="breadcrumb-item"><a href="{% url 'blog:home_blog' %}">اخبار</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{article.title}}</li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
 
             <div class="page-content">
                 <figure class="entry-media">
-                    <img src="{{post.Cover.url}}" alt="توضیحات عکس">
+                    <img src="{{article.Cover.url}}" alt="توضیحات عکس">
                 </figure><!-- End .entry-media -->
                 <div class="container">
                     <article class="entry single-entry entry-fullwidth">
@@ -31,27 +31,27 @@
                                 <div class="entry-body">
                                     <div class="entry-meta">
                                         <span class="entry-author">
-                                            نویسنده : <a href="{{post.Author.blog_posts}}">{{post.Author.full_name}}</a>
+                                            نویسنده : <a href="{{article.Author.blog_articles}}">{{article.Author.full_name}}</a>
                                         </span>
                                         <span class="meta-separator">|</span>
-                                        <p>{{post.shamsi_date}}</p>
+                                        <p>{{article.shamsi_date}}</p>
                                         <span class="meta-separator">|</span>
-                                        <a>{{post.get_comments.count}} دیدگاه</a>
+                                        <a>{{article.get_comments.count}} دیدگاه</a>
                                     </div><!-- End .entry-meta -->
 
                                     <h2 class="entry-title entry-title-big">
-                                        {{post.title}}
+                                        {{article.title}}
                                     </h2><!-- End .entry-title -->
 
                                     <div class="entry-cats">
-                                        {% for cat in post.Category.all %}
+                                        {% for cat in article.Category.all %}
                                             <a href="{{cat.get_absolute_url}}">{{cat}}</a>
                                         {% endfor %}
                                     </div><!-- End .entry-cats -->
 
                                     <div class="entry-content editor-content">
 
-                                        <p>{{post.text}}</p>
+                                        <p>{{article.text}}</p>
 
                                         {% comment %} <blockquote>
                                             <p>“ لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با
@@ -103,24 +103,24 @@
 
                         <div class="entry-author-details">
                             <figure class="author-media">
-                                <a href="{{post.Author.blog_posts}}">
-                                    <img src="{{post.Author.profile.image.url}}" alt="{{post.Author.full_name}} image">
+                                <a href="{{article.Author.blog_articles}}">
+                                    <img src="{{article.Author.profile.image.url}}" alt="{{article.Author.full_name}} image">
                                 </a>
                             </figure><!-- End .author-media -->
 
                             <div class="author-body">
                                 <div class="author-header row no-gutters flex-column flex-md-row">
                                     <div class="col-12">
-                                        <h4><a href="{{post.Author.blog_posts}}">{{post.Author.full_name}}</a></h4>
+                                        <h4><a href="{{article.Author.blog_articles}}">{{article.Author.full_name}}</a></h4>
                                     </div><!-- End .col -->
                                     <div class="col-auto mt-1 mt-md-0">
-                                        <a href="{{post.Author.blog_posts}}" class="author-link">مشاهده همه پست های این نویسنده <i
+                                        <a href="{{article.Author.blog_articles}}" class="author-link">مشاهده همه پست های این نویسنده <i
                                                 class="icon-long-arrow-left"></i></a>
                                     </div><!-- End .col -->
                                 </div><!-- End .row -->
 
                                 <div class="author-content">
-                                    <p>{{post.Author.profile.bio}}
+                                    <p>{{article.Author.profile.bio}}
                                     </p>
                                 </div><!-- End .author-content -->
                             </div><!-- End .author-body -->
@@ -139,7 +139,7 @@
                         </a>
                     </nav><!-- End .pager-nav --> {% endcomment %}
 
-                    <div class="related-posts">
+                    <div class="related-articles">
                         <h3 class="title">پست های مرتبط</h3><!-- End .title -->
 
                         <div class="owl-carousel owl-simple" data-toggle="owl" data-owl-options='{
@@ -165,7 +165,7 @@
                             }'>
 
 
-                            {% for item in post.get_similar_posts %}
+                            {% for item in article.get_similar_articles %}
                             <article class="entry entry-grid">
                                 <figure class="entry-media">
                                     <a href="{{item.get_absolute_url}}">
@@ -175,7 +175,7 @@
 
                                 <div class="entry-body">
                                     <div class="entry-meta justify-content-start">
-                                        <a>{{post.shamsi_date}}</a>
+                                        <a>{{article.shamsi_date}}</a>
                                         <span class="meta-separator">|</span>
                                         <a>{{item.get_comments.count}} دیدگاه</a>
                                     </div><!-- End .entry-meta -->
@@ -195,7 +195,7 @@
 
                             
                         </div><!-- End .owl-carousel -->
-                    </div><!-- End .related-posts -->
+                    </div><!-- End .related-articles -->
 
                     {% include 'blog/parts/comments.html' %}
 

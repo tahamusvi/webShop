@@ -40,8 +40,8 @@ class User(AbstractBaseUser):
     # def full_name(self):
     #     return str(self.full_name) + " " + str(self.lastName)
 
-    def blog_posts(self):
-        return reverse("blog:author_posts",args=[1,self.id])
+    def blog_articles(self):
+        return reverse("blog:author_articles",args=[1,self.id])
 
     def has_perm(self, perm, obj=None):
         return True
@@ -57,7 +57,7 @@ class User(AbstractBaseUser):
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     text = models.TextField()
-    postal_code = models.CharField(max_length=10)
+    articleal_code = models.CharField(max_length=10)
     city = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20,blank=True,null=True)
     current = models.BooleanField(default=False)
@@ -65,7 +65,7 @@ class Address(models.Model):
 
 
     def __str__(self):
-        return str(self.user) + " - " + str(self.postal_code)
+        return str(self.user) + " - " + str(self.articleal_code)
 
 #----------------------------------------------------------------------------------------------------------------------------
 from facades.utils import jalali_converter_with_hour
@@ -105,12 +105,12 @@ class ProductComment(Comment):
     def __str__(self):
         return f"{self.user.full_name} - {self.product.name}"
 #----------------------------------------------------------------------------------------------------------------------------
-from blog.models import Post
-class PostComment(Comment):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+from blog.models import Article
+class ArticleComment(Comment):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
 
     def __str__(self):
-        return f"{self.user.full_name} - {self.post.title}"
+        return f"{self.user.full_name} - {self.article.title}"
 #----------------------------------------------------------------------------------------------------------------------------
 class WatchedProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="wacthed")

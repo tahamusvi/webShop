@@ -3,10 +3,10 @@ from .views import *
 
 app_name = "blog"
 urlpatterns = [    
-    path('',post_list,name="home_blog"),
-    path('<int:page>/',post_list,name="home_blog"),
-    path('posts/<slug>/',post_detail,name="post"),
-    path('authors/<int:id>/<int:page>/',author_posts,name = "author_posts"),
-    path('categories/<slug>/<int:page>/',category_posts,name = "category_posts"),
-    path('search/<int:page>/', post_search, name='post_search'),
+    path('',article_list,name="home_blog"),
+    path('<int:page>/',article_list,name="home_blog"),
+    path('articles/<slug>/',article_detail,name="article"),
+    path('authors/<int:id>/<int:page>/',author_articles,name = "author_articles"),
+    path('categories/<slug>/<int:page>/',category_articles,name = "category_articles"),
+    path('search/<int:page>/', article_search, name='article_search'),
 ]
