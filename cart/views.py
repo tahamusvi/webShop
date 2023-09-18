@@ -24,18 +24,20 @@ def detail(request):
 def cart_add(request,product_id):
     cart = Cart(request)
     product = get_object_or_404(Product,id=product_id)
-    if(product.warehouse == 0):
-        messages.error(request,'کالا در انبار موجود نیست!','background-color: rgb(198, 2, 2);')
-        return redirect(request.META.get('HTTP_REFERER'))
     if(request.method == "POST"):
-        
         form = CartAddForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            print()
+            
+            if (product.warehouse - cd['quantity'] < 0):
+                if(not product.available):
+                    messages.error(request,'کالا در انبار موجود نیست!','background-color: rgb(198, 2, 2);')
+                else:
+                    messages.error(request,f"کالا تنها به تعداد {product.warehouse} عدد در انبار موجود است!",'background-color: rgb(198, 2, 2);')
+                return redirect(request.META.get('HTTP_REFERER'))
+
             cart.add(product=product,quantity=cd['quantity'],color=request.POST.get('color'))
-            product.warehouse -= 1
-            product.save()
+            product.change_available(int(cd['quantity']))
             messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
     else:
@@ -45,8 +47,8 @@ def cart_add(request,product_id):
 #-----------------------------------------------------------------------------------
 def cart_remove(request,product_id_color):
     cart = Cart(request)
-    # product = get_object_or_404(Product,id=product_id)
-    cart.remove(product_id_color)
+    product = get_object_or_404(Product,id=product_id_color.split("-")[0])
+    product.change_available(-1 * cart.remove(product_id_color))
     return redirect('cart:detail')
 #-----------------------------------------------------------------------------------
 @login_required

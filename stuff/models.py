@@ -64,8 +64,6 @@ class Product(models.Model):
     more_info = models.TextField()
 
 
-    
-
 
     discount = models.IntegerField(default=0)
     discounted = models.BooleanField(default=False)
@@ -95,6 +93,12 @@ class Product(models.Model):
     def is_new(self):
         return True if(timezone.now().day - self.updated.day <= 15) else False
 
+    def change_available(self,quantity):
+        print(quantity)
+        self.warehouse -= quantity
+        self.available = True if(self.warehouse > 0) else False
+        self.save()
+        return 
 
     def __str__(self):
         return self.name
