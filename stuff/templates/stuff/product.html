@@ -98,11 +98,13 @@
                                       </p>
                                   </div> 
 
+                                  
+                                      <div class="product-details-action">
+
                                     {% if user.is_authenticated %}
 
                                     {% if product.available %}
 
-                                    <div class="product-details-action">
                                       <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                     {% if product.colors.all.count > 0 %}
                                    <div class="details-filter-row details-row-size">
@@ -162,7 +164,6 @@
                                             <button type="submit" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></button>       
                                       </form>
                                       {% else %}
-                                      <div class="product-details-action">
                                         <div class="details-action-wrapper">
                                         
                                           <a href="{% url 'accounts:AddToInforming' product.id %}" class="btn-product "
