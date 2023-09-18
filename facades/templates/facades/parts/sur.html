@@ -27,7 +27,7 @@
                                 
                                 <form action="{% url 'accounts:login' %}" method="post">{% csrf_token %}
 
-                                    {{formLogin}}
+                                    {{Loginform}}
 
                                     <div class="form-footer">
                                         <button type="submit" class="btn btn-outline-primary-2">
@@ -51,7 +51,7 @@
                             <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
                             <form action="{% url 'accounts:register' %}" method="post">{% csrf_token %}
 
-                                    {{formRegister}}
+                                    {{Registerform}}
 
                                     <div class="form-footer">
                                         <button type="submit" class="btn btn-outline-primary-2">

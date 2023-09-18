@@ -22,8 +22,8 @@ def InformationsForTemplate(request):
     cart = Cart(request)
     CartAmount = cart.get_count()
     #forms
-    formLogin = UserLoginForm
-    formRegister= UserCreationForm
+    Loginform = UserLoginForm
+    Registerform= UserCreationForm
 
     #brands
     brands = Brand.objects.all()
@@ -33,7 +33,7 @@ def InformationsForTemplate(request):
 
 
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form
-    ,'formLogin':formLogin,'formRegister':formRegister,"brands":brands,"shops":shops,}
+    ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,}
 
     return Info
 #----------------------------------------------------------------------------------------------
