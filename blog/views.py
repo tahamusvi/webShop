@@ -6,7 +6,7 @@ from accounts.models import User
 from django.db.models import Q
 from facades.views import InformationsForTemplate
 #----------------------------------------------------------------------------------------------
-pagination_amount = 1
+pagination_amount = 8
 #----------------------------------------------------------------------------------------------
 from django.core.paginator import Paginator
 def article_list(request,page=1):
