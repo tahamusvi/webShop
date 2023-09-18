@@ -10,17 +10,17 @@
                         {% for banner in banners.c2 %}
                         <div class="col-md-6">
                             <div class="banner">
-                                <a href="#" style="Height : 25rem;overflow-y : hidden">
+                                <a href="{{banner.get_absolute_url}}" style="Height : 25rem;overflow-y : hidden">
                                     <img src="{{banner.image.url}}" alt="بنر" >
                                 </a>
 
                                 <div class="banner-content text-right">
-                                    <h3 class="intro-title" ><a href="#" style="color:#fff">{{banner.bigTitle}}</a></h3>
+                                    <h3 class="intro-title" ><a href="{{banner.get_absolute_url}}" style="color:#fff">{{banner.bigTitle}}</a></h3>
                                     <!-- End .banner-title -->
-                                    <h4 class="banner-title"><a href="#">{{banner.smallTitle}}</a>
+                                    <h4 class="banner-title"><a href="{{banner.get_absolute_url}}">{{banner.smallTitle}}</a>
                                     </h4><!-- End .banner-subtitle -->
                                     
-                                    <a href="#" class="btn btn-outline-white banner-link">خرید<i
+                                    <a href="{{banner.get_absolute_url}}" class="btn btn-outline-white banner-link">خرید<i
                                             class="icon-long-arrow-left"></i></a>
                                 </div><!-- End .banner-content -->
                             </div><!-- End .banner -->

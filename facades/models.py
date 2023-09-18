@@ -71,7 +71,15 @@ class banner(models.Model):
     smallTitle = models.CharField(max_length=200)
     image = models.ImageField(upload_to='web_shop/banners/%Y/%m/%d/')
     for_what = models.CharField(max_length=2,choices=for_what_choices)
+    main_link = models.CharField(max_length=200)
+    out_link = models.CharField(max_length=200)
+    arg = models.CharField(max_length=200,null=True,blank=True)
 
+
+
+    def get_absolute_url(self):
+        args = self.arg.split(',')
+        return reverse(f"{self.main_link}:{self.out_link}",args=args)
 
     def __str__(self):
         return self.bigTitle
