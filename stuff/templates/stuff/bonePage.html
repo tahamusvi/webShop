@@ -36,17 +36,15 @@
                   <div class="col-lg-9 col-xl-4-5col">
 
 
-                      {% include 'stuff/parts/coverScroll.html' %}
+                      {% if not request.resolver_match.url_name == 'product_search' %}
 
-                      <div class="mb-3"></div><!-- End .mb-3 -->
+                        {% include 'stuff/parts/coverScroll.html' %}
 
+                        <div class="mb-3"></div><!-- End .mb-3 -->
+                        <div class="mb-3 mb-lg-5"></div><!-- End .mb-3 mb-lg-5 -->
+                        <div class="mb-2"></div><!-- End .mb-2 --> 
 
-
-                      <div class="mb-3 mb-lg-5"></div><!-- End .mb-3 mb-lg-5 -->
-
-
-
-                      <div class="mb-2"></div><!-- End .mb-2 -->
+                      {% endif %}
 
 
                       {% include 'stuff/parts/stuffs.html' %}
