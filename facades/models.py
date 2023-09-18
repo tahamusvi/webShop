@@ -1,7 +1,11 @@
+from unittest import result
 from django.db import models
 from django.urls import reverse
 # Create your models here.
-
+for_what_choices = (
+        ('c2' , "2col"),
+        ('c3' , "3col"),
+)
 #----------------------------------------------------------------------------------------------
 class Cover(models.Model):
     bigTitle = models.CharField(max_length=200)
@@ -61,6 +65,30 @@ class shop(models.Model):
 
     def __str__(self):
         return self.name
+#----------------------------------------------------------------------------------------------
+class banner(models.Model):
+    bigTitle = models.CharField(max_length=200)
+    smallTitle = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='web_shop/banners/%Y/%m/%d/')
+    for_what = models.CharField(max_length=2,choices=for_what_choices)
+
+
+    def __str__(self):
+        return self.bigTitle
+
+    @staticmethod
+    def filter():
+        banners = banner.objects.all()
+        result = {}
+
+        for what in for_what_choices:
+            reason = what[0]
+            result[reason] = banners.filter(for_what=reason)
+
+        return result
+
+
+
 
 
 

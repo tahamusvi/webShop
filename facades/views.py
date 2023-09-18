@@ -5,6 +5,7 @@ from accounts.forms import *
 from cart.cart import Cart
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from collections import defaultdict
 #----------------------------------------------------------------------------------------------
 def InformationsForTemplate(request):
     Info = {}
@@ -31,9 +32,16 @@ def InformationsForTemplate(request):
     #shops
     shops = shop.objects.all()
 
+    
+    
+    print("--------------------------")
+    
+
+
 
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form
     ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,}
+    Info["banners"] = banner.filter()
 
     return Info
 #----------------------------------------------------------------------------------------------
