@@ -2,10 +2,10 @@
 
 
 <div class="comments">
-                                <h3 class="title">{{post.get_comments.count}} دیدگاه</h3><!-- End .title -->
+                                <h3 class="title">{{article.get_comments.count}} دیدگاه</h3><!-- End .title -->
 
                                 <ul>
-                                {% for comment in post.get_comments %}
+                                {% for comment in article.get_comments %}
                                     <li>
                                         <div class="comment">
                                             <figure class="comment-media">
@@ -75,7 +75,7 @@
                                 شده اند.</p> {% endcomment %}
                         </div><!-- End .heading -->
 
-                        <form action="{% url 'accounts:AddComment' post.id 1 %}" method="post">
+                        <form action="{% url 'accounts:AddComment' article.id 1 %}" method="article">
                             {% csrf_token %}
                             {{CommentForm}}
                             <button type="submit" class="btn btn-outline-primary-2">

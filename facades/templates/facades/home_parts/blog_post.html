@@ -11,7 +11,7 @@
                         <div class="col-sm-6 col-md-4">
                             <article class="entry entry-mask">
                                 <figure class="entry-media">
-                                    <a href="single.html">
+                                    <a href="{{article.Cover.url}}">
                                         <img src="{{article.Cover.url}}" alt="توضیحات عکس">
                                     </a>
                                 </figure><!-- End .entry-media -->
@@ -28,8 +28,9 @@
                                     </h2><!-- End .entry-title -->
 
                                     <div class="entry-cats">
-                                        <a href="#">سبک زندگی</a>،
-                                        <a href="#">فروشگاه</a>
+                                        {% for cat in article.Category.all %}
+                                            <a href="{{cat.get_absolute_url}}">{{cat}}</a>
+                                        {% endfor %}
                                     </div><!-- End .entry-cats -->
                                 </div><!-- End .entry-body -->
                             </article><!-- End .entry -->

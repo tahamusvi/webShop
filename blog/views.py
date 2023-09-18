@@ -29,7 +29,7 @@ def article_detail(request,slug):
     Info = InformationsForTemplate(request)
     Info.update({'article':article,'CommentForm':CommentForm})
 
-    return render(request,"blog/Article_detail.html",Info)
+    return render(request,"blog/article_detail.html",Info)
 #----------------------------------------------------------------------------------------------
 def author_articles(request,id,page=1):
     author = get_object_or_404(User.objects.all(), id=id)
