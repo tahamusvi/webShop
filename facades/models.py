@@ -5,16 +5,10 @@ from django.urls import reverse
 for_what_choices = (
         ('c2' , "2col"),
         ('c3' , "3col"),
+        ('f1' , "fisrt1"),
+        ('f2' , "fisrt2"),
+        ('b1' , "big1"),
 )
-#----------------------------------------------------------------------------------------------
-class Cover(models.Model):
-    bigTitle = models.CharField(max_length=200)
-    smallTitle = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='web_shop/Covers/%Y/%m/%d/')
-
-
-    def __str__(self):
-        return self.bigTitle
 #----------------------------------------------------------------------------------------------
 class EndBanner(models.Model):
     title = models.CharField(max_length=200)
@@ -78,7 +72,9 @@ class banner(models.Model):
 
 
     def get_absolute_url(self):
-        args = self.arg.split(',')
+        args = []
+        if(self.arg):
+            args = self.arg.split(',')
         return reverse(f"{self.main_link}:{self.out_link}",args=args)
 
     def __str__(self):

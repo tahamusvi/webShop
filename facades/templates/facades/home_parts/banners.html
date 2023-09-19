@@ -16,7 +16,7 @@
                                 }
                             }
                         }'>
-                        {% for cover in covers %}
+                        {% for cover in banners.b1 %}
                         <div class="intro-slide">
                             <figure class="slide-image">
                                 <picture>
@@ -32,7 +32,7 @@
                                 <h1 class="intro-title">{{cover.bigTitle}}</h1>
                                 <!-- End .intro-title -->
 
-                                <a href="category.html" class="btn btn-outline-white">
+                                <a href="{{cover.get_absolute_url}}" class="btn btn-outline-white">
                                     <i class="icon-long-arrow-left"></i>
                                     <span>خرید</span>
                                 </a>
@@ -51,39 +51,42 @@
             <div class="col-lg-4">
                 <div class="intro-banners">
                     <div class="row row-sm">
+                        {% for f1 in banners.f1 %}
                         <div class="col-md-6 col-lg-12">
                             <div class="banner banner-display">
-                                <a href="#">
-                                    <img src="{% static 'facades/images/banners/home/intro/banner-1.jpg' %}" alt="Banner">
+                                <a href="{{f1.get_absolute_url}}">
+                                    <img src="{{f1.image.url}}" alt="Banner">
                                 </a>
 
                                 <div class="banner-content">
-                                    <h4 class="banner-subtitle text-darkwhite"><a href="#">مبل راحتی</a>
+                                    <h4 class="banner-subtitle text-darkwhite"><a href="{{f1.get_absolute_url}}">{{f1.smallTitle}}</a>
                                     </h4><!-- End .banner-subtitle -->
-                                    <h3 class="banner-title text-white"><a href="#">صندلی و مبل راحتی <br>تا
-                                            40% تخفیف</a></h3><!-- End .banner-title -->
-                                    <a href="#" class="btn btn-outline-white banner-link">خرید<i
+                                    <h3 class="banner-title text-white"><a href="{{f1.get_absolute_url}}">{{f1.bigTitle}}</a></h3><!-- End .banner-title -->
+                                    <a href="{{f1.get_absolute_url}}" class="btn btn-outline-white banner-link">خرید<i
                                             class="icon-long-arrow-left"></i></a>
                                 </div><!-- End .banner-content -->
                             </div><!-- End .banner -->
                         </div><!-- End .col-md-6 col-lg-12 -->
+                        {% endfor %}
 
+                        {% for f1 in banners.f2 %}
                         <div class="col-md-6 col-lg-12">
-                            <div class="banner banner-display mb-0">
-                                <a href="#">
-                                    <img src="{% static 'facades/images/banners/home/intro/banner-2.jpg' %}" alt="Banner">
+                            <div class="banner banner-display">
+                                <a href="{{f1.get_absolute_url}}">
+                                    <img src="{{f1.image.url}}" alt="Banner">
                                 </a>
 
                                 <div class="banner-content">
-                                    <h4 class="banner-subtitle text-darkwhite"><a href="#">جدید در</a></h4>
-                                    <!-- End .banner-subtitle -->
-                                    <h3 class="banner-title text-white"><a href="#">مجمعه بهترین
-                                            <br>روشنایی ها</a></h3><!-- End .banner-title -->
-                                    <a href="#" class="btn btn-outline-white banner-link">خرید<i
+                                    <h4 class="banner-subtitle text-darkwhite"><a href="{{f1.get_absolute_url}}">{{f1.smallTitle}}</a>
+                                    </h4><!-- End .banner-subtitle -->
+                                    <h3 class="banner-title text-white"><a href="{{f1.get_absolute_url}}">{{f1.bigTitle}}</a></h3><!-- End .banner-title -->
+                                    <a href="{{f1.get_absolute_url}}" class="btn btn-outline-white banner-link">خرید<i
                                             class="icon-long-arrow-left"></i></a>
                                 </div><!-- End .banner-content -->
                             </div><!-- End .banner -->
                         </div><!-- End .col-md-6 col-lg-12 -->
+                        {% endfor %}
+
                     </div><!-- End .row row-sm -->
                 </div><!-- End .intro-banners -->
             </div><!-- End .col-lg-4 -->

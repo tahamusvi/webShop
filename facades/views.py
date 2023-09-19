@@ -15,8 +15,6 @@ def InformationsForTemplate(request):
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
-    #Covers
-    covers = Cover.objects.all()
     #forms
     form = UserLoginForm
     #cart
@@ -32,16 +30,12 @@ def InformationsForTemplate(request):
     #shops
     shops = shop.objects.all()
 
-    
-    
-    print("--------------------------")
-    
 
-
-
-    Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'covers':covers,'form':form
+    Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form
     ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,}
     Info["banners"] = banner.filter()
+    print(banner.filter())
+    Info["footer_articles"] = Article.objects.all()[::-1][0:3]
 
     return Info
 #----------------------------------------------------------------------------------------------
@@ -62,7 +56,6 @@ def HomePage(request):
     Info["products"] = news
     Info["banner"] = EndBanner.objects.all()[0]
     Info["articles"] = Article.objects.filter(is_for_landing=True)[0:3]
-    Info["footer_articles"] = Article.objects.all()[::-1][0:3]
     if request.user.is_authenticated:
         Info["watched"] = request.user.wacthed.all()[::-1][0:4]
     
