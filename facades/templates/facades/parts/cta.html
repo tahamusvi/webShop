@@ -1,7 +1,7 @@
 {% load static %}
 
 
-
+{% for banner in banners.e1 %}
 <div class="cta cta-display bg-image pt-4 pb-4"
                 style="background-image: url({{banner.image.url}});">
                 <div class="container">
@@ -9,9 +9,9 @@
                         <div class="col-md-10 col-lg-9 col-xl-8">
                             <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">
                                 <div class="col-md-8">
-                                    <h3 class="cta-title text-white text-right">{{banner.title}}</h3>
+                                    <h3 class="cta-title text-white text-right">{{banner.bigTitle}}</h3>
                                     <!-- End .cta-title -->
-                                    <p class="cta-desc text-white">{{banner.describe}}</p>
+                                    <p class="cta-desc text-white">{{banner.smallTitle}}</p>
                                     <!-- End .cta-desc -->
                                 </div><!-- End .col -->
 
@@ -24,3 +24,4 @@
                     </div><!-- End .row -->
                 </div><!-- End .container -->
             </div><!-- End .cta -->
+{% endfor %}

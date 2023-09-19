@@ -54,7 +54,6 @@ def HomePage(request):
     Info["Categories"] = Categories
     Info["productsOfDiscount"] = discounted
     Info["products"] = news
-    Info["banner"] = EndBanner.objects.all()[0]
     Info["articles"] = Article.objects.filter(is_for_landing=True)[0:3]
     if request.user.is_authenticated:
         Info["watched"] = request.user.wacthed.all()[::-1][0:4]

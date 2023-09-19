@@ -8,22 +8,8 @@ for_what_choices = (
         ('f1' , "fisrt1"),
         ('f2' , "fisrt2"),
         ('b1' , "big1"),
+        ('e1' , "end1"),
 )
-#----------------------------------------------------------------------------------------------
-class EndBanner(models.Model):
-    title = models.CharField(max_length=200)
-    describe = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='web_shop/Covers/%Y/%m/%d/')
-    button = models.CharField(max_length=200)
-    main_link = models.CharField(max_length=200)
-    out_link = models.CharField(max_length=200)
-    arg = models.CharField(max_length=200,null=True,blank=True)
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse(f"{self.main_link}:{self.out_link}",args=self.arg)
 #----------------------------------------------------------------------------------------------
 class Survey(models.Model):
     name = models.CharField(max_length=200)
@@ -67,6 +53,7 @@ class banner(models.Model):
     for_what = models.CharField(max_length=2,choices=for_what_choices)
     main_link = models.CharField(max_length=200)
     out_link = models.CharField(max_length=200)
+    button = models.CharField(max_length=200,null=True,blank=True)
     arg = models.CharField(max_length=200,null=True,blank=True)
 
 
