@@ -34,7 +34,6 @@ def InformationsForTemplate(request):
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form
     ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,}
     Info["banners"] = banner.filter()
-    print(banner.filter())
     Info["footer_articles"] = Article.objects.all()[::-1][0:3]
 
     return Info
@@ -49,14 +48,17 @@ def HomePage(request):
     news = news.filter(id__in=news_list)
     # Categories
     Categories = Category.objects.filter(is_sub=False)[0:4]
+    cat_dict = {}
+    for i in range(4):
+        cat_dict[f"c{i}"] = Categories[i]
     
     Info = InformationsForTemplate(request)
-    Info["Categories"] = Categories
+    Info["Categories"] = cat_dict
     Info["productsOfDiscount"] = discounted
     Info["products"] = news
     Info["articles"] = Article.objects.filter(is_for_landing=True)[0:3]
     if request.user.is_authenticated:
-        Info["watched"] = request.user.wacthed.all()[::-1][0:4]
+        Info["watched"] = request.user.wacthed.all().order_by('timestamp')[::-1][0:4]
     
 
     return render(request,'facades/landing.html',Info)

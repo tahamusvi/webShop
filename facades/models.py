@@ -9,6 +9,10 @@ for_what_choices = (
         ('f2' , "fisrt2"),
         ('b1' , "big1"),
         ('e1' , "end1"),
+        ('t1',"category1"),
+        ('t2',"category2"),
+        ('t3',"category3"),
+        ('t4',"category4"),
 )
 #----------------------------------------------------------------------------------------------
 class Survey(models.Model):
