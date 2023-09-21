@@ -22,6 +22,10 @@
         <div class="col-6 col-md-4 col-xl-3">
             <div class="product">
               <figure class="product-media">
+                    {% if not product.available %} <span class="product-label label-out">ناموجود</span> 
+                    {% elif product.is_new %} <span class="product-label label-new">جدید</span> 
+                    {% elif product.discounted %} <span class="product-label label-sale">تخفیف ویژه</span> 
+                    {% endif %}
                   <a href="{{product.get_absolute_url}}">
                       <img src="{{product.image.url}}"
                           alt="{{product.alt}}" class="product-image">

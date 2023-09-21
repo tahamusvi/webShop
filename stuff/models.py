@@ -91,7 +91,7 @@ class Product(models.Model):
 
     @property
     def is_new(self):
-        return True if(timezone.now().day - self.updated.day <= 15) else False
+        return True if(timezone.now().day - self.updated.day <= 4) else False
 
     def change_available(self,quantity):
         self.warehouse -= quantity

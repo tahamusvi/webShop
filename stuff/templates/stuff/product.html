@@ -353,7 +353,10 @@
                       {% for s in Suggested %}
                       <div class="product product-7 text-center">
                           <figure class="product-media">
-                              <span class="product-label label-new">جدید</span>
+                              {% if not s.available %} <span class="product-label label-out">ناموجود</span> 
+                              {% elif s.is_new %} <span class="product-label label-new">جدید</span> 
+                              {% elif s.discounted %} <span class="product-label label-sale">تخفیف ویژه</span> 
+                              {% endif %}
                               <a href="{{s.get_absolute_url}}">
                                   <img src="{{s.image.url}}" alt="{{s.alt}}"
                                       class="product-image">
