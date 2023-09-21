@@ -11,33 +11,23 @@
             }
         }
     }'>
+    {% for ct in banners.ct %}
     <div class="banner banner-poster">
 
-        <a href="#">
-            <img src="{% static 'stuff/images/banners/7.jpg' %}" alt="banner">
+        <a href="{{ct.get_absolute_url}}">
+            <img src="{{ct.image.url}}" alt="banner">
         </a>
 
         <div class="banner-content banner-content-right">
-            <h3 class="banner-subtitle"><a href="#">پیشنهاد شگفت انگیز</a></h3>
+            <h3 class="banner-subtitle"><a href="{{ct.get_absolute_url}}">{{ct.smallTitle}}</a></h3>
             <!-- End .banner-subtitle -->
-            <h2 class="banner-title" dir="rtl"><a href="#">تلویزیون های 4K با کیفیت بالا</a>
+            <h2 class="banner-title" dir="rtl">{{ct.bigTitle}}<a href="{{ct.get_absolute_url}}"></a>
             </h2>
             <!-- End .banner-title -->
-            <a href="#" class="banner-link">خرید <i class="icon-long-arrow-left"></i></a>
+            <a href="{{ct.get_absolute_url}}" class="banner-link">{{ct.button}}<i class="icon-long-arrow-left"></i></a>
         </div><!-- End .banner-content -->
     </div><!-- End .banner -->
+    {% endfor %}
 
-    <div class="banner banner-poster">
-        <a href="#">
-            <img src="{% static 'stuff/images/banners/8.jpg' %}" alt="banner">
-        </a>
-
-        <div class="banner-content">
-            <h3 class="banner-subtitle"><a href="#">تخفیف های هفتگی</a></h3>
-            <!-- End .banner-subtitle -->
-            <h2 class="banner-title"><a href="#">اپل و لوازم جانبی</a></h2>
-            <!-- End .banner-title -->
-            <a href="#" class="banner-link">خرید <i class="icon-long-arrow-left"></i></a>
-        </div><!-- End .banner-content -->
-    </div><!-- End .banner -->
+   
 </div><!-- End .owl-carousel -->
