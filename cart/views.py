@@ -8,7 +8,21 @@ from django.contrib import messages
 from django.utils import timezone
 from .forms import *
 from orders.models import Coupon
+#------------------------------------------------------------------------------------------------
+messages_dict = {
+    "not_logined" : 'برای افزودن به سبد خرید ابتدا وارد حساب کاربری خود شوید.',
+    "not_available" : 'کالا در انبار موجود نیست!',
+    "not_available_amount" : 'کالا تنها به تعداد d عدد در انبار موجود است!',
+    "added_cart" : 'با موفقیت کالا به سبد خرید اضافه شد.',
+}
 
+color_messages = {
+    "error" : 'background-color: rgb(198, 2, 2);',
+    "success" : 'background-color: rgb(0, 190, 0);',
+    "gray" : 'background-color: rgb(108, 105, 105);',
+
+}
+#------------------------------------------------------------------------------------------------
 @login_required
 def detail(request):
     wishlistAmount = 0
@@ -16,14 +30,12 @@ def detail(request):
         wishlistAmount = request.user.wishlist.all().count()
     cart = Cart(request)
     CartAmount = cart.get_count()
-    print(CartAmount)
-
 
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
 def cart_add(request,product_id):
     if not request.user.is_authenticated:
-        messages.success(request,'برای افزودن به سبد خرید ابتدا وارد حساب کاربری خود شوید.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['not_logined'],color_messages['error'])
         return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #fix this bug in other situations
     
 
@@ -37,24 +49,24 @@ def cart_add(request,product_id):
             
             if (product.warehouse - cd['quantity'] < 0):
                 if(not product.available):
-                    messages.error(request,'کالا در انبار موجود نیست!','background-color: rgb(198, 2, 2);')
+                    messages.error(request,messages_dict['not_available'],color_messages['error'])
                 else:
-                    messages.error(request,f"کالا تنها به تعداد {product.warehouse} عدد در انبار موجود است!",'background-color: rgb(198, 2, 2);')
+                    messages.error(request,messages_dict['not_available_amount'].replace("d",str(product.warehouse)),color_messages['error'])
                 return redirect(request.META.get('HTTP_REFERER'))
 
             cart.add(product=product,quantity=cd['quantity'],color=request.POST.get('color'))
             product.change_available(int(cd['quantity']))
-            messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
+            messages.success(request,messages_dict['added_cart'],color_messages['success'])
         return redirect(request.META.get('HTTP_REFERER'))
 
     else:
 
         if(not product.available):
-            messages.error(request,'کالا در انبار موجود نیست!','background-color: rgb(198, 2, 2);')
+            messages.error(request,'کالا در انبار موجود نیست!',color_messages['error'])
             return redirect(request.META.get('HTTP_REFERER'))
         
         cart.add(product=product,quantity=1)
-        messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
+        messages.success(request,messages_dict['added_cart'],'background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
 #-----------------------------------------------------------------------------------
 def cart_remove(request,product_id_color):

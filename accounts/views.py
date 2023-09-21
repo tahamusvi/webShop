@@ -253,8 +253,8 @@ def AddComment(request,id,type):
                 comment = ProductComment(user=request.user,product=item,text=form.cleaned_data['text'],rating=form.cleaned_data['rating'])
                 comment.save()
             elif(type == 1):
-                item = get_object_or_404(Post, id=id)
-                comment = PostComment(user=request.user,post=item,text=form.cleaned_data['text'],rating=form.cleaned_data['rating'])
+                item = get_object_or_404(Article, id=id)
+                comment = ArticleComment(user=request.user,post=item,text=form.cleaned_data['text'],rating=form.cleaned_data['rating'])
                 comment.save()
             else:
                 messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
