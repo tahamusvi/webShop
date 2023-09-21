@@ -86,7 +86,7 @@ class Product(models.Model):
         return show
     
     def get_comments(self):
-        comments = self.comments.all()
+        comments = self.comments.all().filter(valid=True)
         return comments
 
     @property
@@ -94,7 +94,6 @@ class Product(models.Model):
         return True if(timezone.now().day - self.updated.day <= 15) else False
 
     def change_available(self,quantity):
-        print(quantity)
         self.warehouse -= quantity
         self.available = True if(self.warehouse > 0) else False
         self.save()
