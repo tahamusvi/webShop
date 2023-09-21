@@ -57,7 +57,7 @@
                         <a href="{{cat.url}}">{{cat.name}} </a>
                         {% endfor %} {% endcomment %}
                     </div><!-- End .product-cat -->
-                    <h3 class="product-title"><a href="product.html">{{product.name}}</a>
+                    <h3 class="product-title"><a href="{{product.get_absolute_url}}">{{product.name}}</a>
                     </h3>
                     <!-- End .product-title -->
                     <div class="product-price">

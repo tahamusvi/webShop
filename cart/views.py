@@ -22,8 +22,14 @@ def detail(request):
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
 def cart_add(request,product_id):
+    if not request.user.is_authenticated:
+        messages.success(request,'برای افزودن به سبد خرید ابتدا وارد حساب کاربری خود شوید.','background-color: rgb(198, 2, 2);')
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #fix this bug in other situations
+    
+
     cart = Cart(request)
     product = get_object_or_404(Product,id=product_id)
+    
     if(request.method == "POST"):
         form = CartAddForm(request.POST)
         if form.is_valid():
@@ -40,7 +46,13 @@ def cart_add(request,product_id):
             product.change_available(int(cd['quantity']))
             messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
+
     else:
+
+        if(not product.available):
+            messages.error(request,'کالا در انبار موجود نیست!','background-color: rgb(198, 2, 2);')
+            return redirect(request.META.get('HTTP_REFERER'))
+        
         cart.add(product=product,quantity=1)
         messages.success(request,'با موفقیت کالا به سبد خرید اضافه شد.','background-color: rgb(0, 190, 0);')
         return redirect(request.META.get('HTTP_REFERER'))
