@@ -1,10 +1,8 @@
 from django.shortcuts import render,get_object_or_404
 from .models import *
 from accounts.forms import *
-from accounts.forms import UserLoginForm
 from django.db.models import Q
 from django.core.paginator import Paginator
-from cart.cart import Cart
 from .scripts import formating_price
 from facades.views import InformationsForTemplate
 #-----------------------------------------------------------------------------------
@@ -25,7 +23,6 @@ def ordering(request,product_list):
 
 #-----------------------------------------------------------------------------------
 def filter(request,product_list):
-    print(request.POST)
     filter_price_option = -1
     brands = []
     rating_list  = []
@@ -104,38 +101,8 @@ def filter(request,product_list):
 
     return filters
 #-----------------------------------------------------------------------------------
-import random
-from faker import Faker
-def CopyObjects(request):
-    fake = Faker()
-
-    num_products = 100
-    categories = Category.objects.all()
-
-    products = Product.objects.all()
-
-    for i in range(num_products):
-        p = random.choice(products)
-        
-        product = Product()
-        product.name = p.name + " " + fake.name()
-        product.slug = fake.slug()
-        product.image = p.image
-        product.image2 = p.image2
-        product.image3 = p.image3
-        product.description = fake.text()
-        product.price = random.randint(1000, 10000)
-        product.available = True
-        product.save()
-        product.category.add(random.choice(categories))
-
-        product.save()
-    
-#-----------------------------------------------------------------------------------
 def product_detail(request, slug,id):
-    product = get_object_or_404(Product, id=id)
-
-
+    product = get_object_or_404(Product, id=id,slug=slug)
 
     Suggested = product.get_similar_products()
     comments = product.get_comments()
