@@ -8,6 +8,8 @@ password_email = config('EMAIL_HOST_PASSWORD')
 
 
 
+# DEBUG = False
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 DEBUG = True
 ALLOWED_HOSTS = []
 

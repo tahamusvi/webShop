@@ -135,9 +135,10 @@ def CopyObjects(request):
 def product_detail(request, slug,id):
     product = get_object_or_404(Product, id=id)
 
-    category = product.category.all()[0]
+
+
     Suggested = product.get_similar_products()
-    comments = product.comments.all().filter(valid=True)
+    comments = product.get_comments()
 
 
     if request.user.is_authenticated:

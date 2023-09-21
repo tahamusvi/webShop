@@ -14,7 +14,8 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
 ]
 
-
+if not settings.DEBUG:
+    handler404 = 'facades.views.handler404'
 
 if settings.DEBUG:
      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

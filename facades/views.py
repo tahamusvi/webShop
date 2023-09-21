@@ -134,3 +134,7 @@ def CreateSurvey(request):
 
     return contact(request)
 #----------------------------------------------------------------------------------------------
+def handler404(request, exception):
+    Info = InformationsForTemplate(request)
+    return render(request, 'facades/404.html', context=Info,status=404)
+#----------------------------------------------------------------------------------------------
