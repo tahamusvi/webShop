@@ -36,7 +36,7 @@ def detail(request):
 def cart_add(request,product_id):
     if not request.user.is_authenticated:
         messages.success(request,messages_dict['not_logined'],color_messages['error'])
-        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #fix this bug in other situations
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
     
 
     cart = Cart(request)
@@ -52,22 +52,22 @@ def cart_add(request,product_id):
                     messages.error(request,messages_dict['not_available'],color_messages['error'])
                 else:
                     messages.error(request,messages_dict['not_available_amount'].replace("d",str(product.warehouse)),color_messages['error'])
-                return redirect(request.META.get('HTTP_REFERER'))
+                return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
 
             cart.add(product=product,quantity=cd['quantity'],color=request.POST.get('color'))
             product.change_available(int(cd['quantity']))
             messages.success(request,messages_dict['added_cart'],color_messages['success'])
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
 
     else:
 
         if(not product.available):
             messages.error(request,'کالا در انبار موجود نیست!',color_messages['error'])
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
         
         cart.add(product=product,quantity=1)
         messages.success(request,messages_dict['added_cart'],'background-color: rgb(0, 190, 0);')
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
 #-----------------------------------------------------------------------------------
 def cart_remove(request,product_id_color):
     cart = Cart(request)

@@ -57,7 +57,7 @@ def user_login(request):
                 if 'next' in request.GET:
                     return redirect(request.GET['next'])
                 else:
-                    return redirect(request.META.get('HTTP_REFERER'))
+                    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
             else:
                 messages.error(request,messages_dict['login_error'],color_messages['error'])
 
@@ -72,7 +72,7 @@ def profile(request):
         if profileForm.is_valid():
             profileForm.save()
             messages.success(request, messages_dict['profile'],color_messages['success'])
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
     else:
         profileForm = UserChangeForm(instance=request.user)
 
@@ -229,7 +229,7 @@ def AddToWish(request, id):
 
         request.user.wishlist.add(item)
         messages.success(request, messages_dict['add_wishlist'], color_messages['success'])
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
@@ -239,7 +239,7 @@ def AddToInforming(request, id):
 
         request.user.informing.add(item)
         messages.success(request, messages_dict['add_informing'], color_messages['success'])
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
@@ -258,16 +258,16 @@ def AddComment(request,id,type):
                 comment.save()
             else:
                 messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
-                return redirect(request.META.get('HTTP_REFERER'))
+                return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
 
 
             messages.success(request,"بعد از تایید ادمین نظر شما ثبت خواهد شد", color_messages['success'])
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
                 
         else:
             messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
 
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
 #------------------------------------------------------------------------------------------------
 def RomeveToWish(request, id):
     if(request.user.is_authenticated):
@@ -276,7 +276,7 @@ def RomeveToWish(request, id):
         request.user.wishlist.remove(item)
 
         messages.success(request, messages_dict["remove"], color_messages['error'])
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
@@ -288,7 +288,7 @@ def LikeComment(request, id):
         comment.dislikes.remove(request.user)
         
         
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
@@ -299,7 +299,7 @@ def DisLikeComment(request, id):
         comment.dislikes.add(request.user)
         comment.likes.remove(request.user)
         
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
@@ -329,10 +329,10 @@ def change_main_address(request):
         address.current = True
         address.save()
         messages.success(request, messages_dict["change_main_address"],  color_messages['success'])
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
     
 
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
 
 #------------------------------------------------------------------------------------------------
 def delete_address(request,address_id):
