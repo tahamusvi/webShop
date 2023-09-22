@@ -31,12 +31,9 @@ def detail(request):
         wishlistAmount = request.user.wishlist.all().count()
     cart = Cart(request)
     CartAmount = cart.get_count()
-
-    
-
-
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
+
 def cart_add(request,product_id):
     if not request.user.is_authenticated:
         messages.success(request,messages_dict['not_logined'],color_messages['error'])

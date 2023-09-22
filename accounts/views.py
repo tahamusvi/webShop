@@ -9,6 +9,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import smtplib
 from email.message import EmailMessage
+from django.contrib.auth.decorators import login_required
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "logout" : 'بعدا باز برگرد ":)',
@@ -66,6 +67,7 @@ def user_login(request):
     Registerform = UserCreationForm()      
     return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
 #------------------------------------------------------------------------------------------------
+@login_required
 def profile(request):
     if request.method == 'POST':
         profileForm = UserChangeForm(request.POST,instance=request.user)
@@ -186,6 +188,7 @@ def ChangePasswordForgot(request,phoneNumber):
 
     return render(request, 'accounts/forgotPassword.html', {'Form': ChangeForm,'btn_text':'تغییر رمز'})
 #------------------------------------------------------------------------------------------------
+@login_required
 def user_logout(request):
     logout(request)
     messages.success(request,messages_dict["logout"],color_messages['gray'])
@@ -224,6 +227,7 @@ def user_register(request):
     Registerform = UserCreationForm()
     return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
 #------------------------------------------------------------------------------------------------
+@login_required
 def AddToWish(request, id):
     if(request.user.is_authenticated):
         item = get_object_or_404(Product, id=id)
@@ -234,6 +238,7 @@ def AddToWish(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
+@login_required
 def AddToInforming(request, id):
     if(request.user.is_authenticated):
         item = get_object_or_404(Product, id=id)
@@ -244,6 +249,7 @@ def AddToInforming(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
+@login_required
 def AddComment(request,id,type):
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -270,6 +276,7 @@ def AddComment(request,id,type):
 
     return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
 #------------------------------------------------------------------------------------------------
+@login_required
 def RomeveToWish(request, id):
     if(request.user.is_authenticated):
         item = get_object_or_404(Product, id=id)
@@ -281,6 +288,7 @@ def RomeveToWish(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
+@login_required
 def LikeComment(request, id):
     if(request.user.is_authenticated):
         comment = get_object_or_404(Comment, id=id)
@@ -293,6 +301,7 @@ def LikeComment(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
+@login_required
 def DisLikeComment(request, id):
     if(request.user.is_authenticated):
         comment = get_object_or_404(Comment, id=id)
@@ -304,7 +313,7 @@ def DisLikeComment(request, id):
     else:
         return redirect("accounts:login")
 #------------------------------------------------------------------------------------------------
-# @login_required
+@login_required
 def add_address(request):
     if request.method == 'POST':
         form = AddressForm(request.POST)
@@ -325,6 +334,7 @@ def add_address(request):
         form = AddressForm()
     return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
 #------------------------------------------------------------------------------------------------
+@login_required
 def change_main_address(request):
     if request.method == 'POST':
         address_id = request.POST["address_id"]
@@ -342,12 +352,14 @@ def change_main_address(request):
     return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
 
 #------------------------------------------------------------------------------------------------
+@login_required
 def delete_address(request,address_id):
     address = get_object_or_404(Address,id=address_id)
     address.delete()
     messages.success(request, messages_dict['remove'], color_messages['error'])
     return redirect('facades:dashboard')
 #------------------------------------------------------------------------------------------------
+@login_required
 def edit_address(request,address_id):
     address = get_object_or_404(Address,id=address_id)
     if request.method == 'POST':
