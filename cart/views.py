@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.utils import timezone
 from .forms import *
 from orders.models import Coupon
+from accounts.forms import AddressForm
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_logined" : 'برای افزودن به سبد خرید ابتدا وارد حساب کاربری خود شوید.',
@@ -30,6 +31,9 @@ def detail(request):
         wishlistAmount = request.user.wishlist.all().count()
     cart = Cart(request)
     CartAmount = cart.get_count()
+
+    
+
 
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
 #-----------------------------------------------------------------------------------
@@ -82,9 +86,9 @@ def checkout(request):
         wishlistAmount = request.user.wishlist.all().count()
     cart = Cart(request)
     # print(cart.discount)
+    addressForm = AddressForm()
 
-
-    return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'caddress':request.user.addresses.filter(current=True)[0]})
+    return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'caddress':request.user.addresses.filter(current=True)[0],"addressForm":addressForm})
 #-----------------------------------------------------------------------------------
 @require_POST
 def coupon_apply(request):  

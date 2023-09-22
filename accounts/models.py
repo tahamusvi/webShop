@@ -55,9 +55,9 @@ class User(AbstractBaseUser):
 
 # ----------------------------------------------------------------------------------------------------------------------------
 class Address(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses",limit_choices_to={'addresses__count__lte': 5})
     text = models.TextField()
-    articleal_code = models.CharField(max_length=10)
+    postal_code = models.CharField(max_length=10)
     city = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20,blank=True,null=True)
     current = models.BooleanField(default=False)
@@ -65,7 +65,7 @@ class Address(models.Model):
 
 
     def __str__(self):
-        return str(self.user) + " - " + str(self.articleal_code)
+        return str(self.user) + " - " + str(self.postal_code)
 
 #----------------------------------------------------------------------------------------------------------------------------
 from facades.utils import jalali_converter_with_hour

@@ -53,6 +53,20 @@
                                             </button>
 
                                     </form>
+
+                                    <h2 class="checkout-title">افزودن آدرس جدید</h2><!-- End .checkout-title -->
+                                    <form action="{% url 'accounts:add_address' %}" method="post"> {% csrf_token %}
+
+                                        {{addressForm}}
+
+                                        <button type="submit" class="btn btn-outline-primary-2 float-right">
+                                            <span>ذخیره آدرس</span>
+                                            <i class="icon-long-arrow-left"></i>
+                                        </button>
+                                    </form>
+                                    
+
+
                                 </div><!-- End .col-lg-9 -->
                                 
                                 <aside class="col-lg-3">

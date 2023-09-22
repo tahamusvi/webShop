@@ -32,6 +32,7 @@ messages_dict = {
     "lentgh_error" : 'این گذرواژه کم تر از هشت کاراکتر دارد.',
     "add_informing" : 'به لیست موردعلاقه ها اضافه شد.', 
     "change_main_address" : 'آدرس اصلی با موفقیت تغییر کرد.',
+    "too_address" : 'برای ثبت آدرس جدید از طریق داشبورد یکی از آدرس های ثبت شده را حذف کنید.',
 
 }
 
@@ -307,16 +308,22 @@ def DisLikeComment(request, id):
 def add_address(request):
     if request.method == 'POST':
         form = AddressForm(request.POST)
+
+        if(request.user.addresses.all().count() >= 3):
+            print(request.user.addresses.all().count())
+            messages.success(request, messages_dict["too_address"], color_messages['error'])
+            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+
         if form.is_valid():
             address = form.save(commit=False)
             address.phone_number = request.user.phoneNumber
             address.user = request.user
             address.save()
             messages.success(request, messages_dict["add_address"],  color_messages['success'])
-            return redirect('facades:dashboard')
+            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
     else:
         form = AddressForm()
-    return redirect('facades:dashboard')
+    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
 #------------------------------------------------------------------------------------------------
 def change_main_address(request):
     if request.method == 'POST':
