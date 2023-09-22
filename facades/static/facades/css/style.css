@@ -13586,6 +13586,8 @@ a:focus {
   text-decoration: none;
 }
 
+
+
 @media screen and (min-width: 480px) {
   .just-action-icons-sm .btn-product span {
     display: none;

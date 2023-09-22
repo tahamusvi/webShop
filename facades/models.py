@@ -12,7 +12,6 @@ for_what_choices = (
         ('t1',"category1"),
         ('t2',"category2"),
         ('t3',"category3"),
-        ('t4',"category4"),
         ('ct',"category page"),
 
 )
