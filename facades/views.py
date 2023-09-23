@@ -34,7 +34,6 @@ def InformationsForTemplate(request):
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form
     ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,}
     Info["banners"] = banner.filter()
-    print(Info['banners'])
     Info["footer_articles"] = Article.objects.all()[::-1][0:3]
 
     return Info

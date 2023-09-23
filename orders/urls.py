@@ -12,5 +12,5 @@ urlpatterns = [
     
     #Zarin pal
     # path('request/<int:order_id>/<int:price>', send_request, name='request'),
-    # path('verify/', verify , name='verify'),
+    path('verify/', verify , name='verify'),
 ]

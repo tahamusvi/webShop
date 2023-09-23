@@ -1,4 +1,3 @@
-from unittest import result
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -8,7 +7,9 @@ from django.views.decorators.http import require_POST
 from django.utils import timezone
 from django.contrib import messages
 from facades.views import InformationsForTemplate
-# from suds.client import Client
+from suds.client import Client
+from config.settings import merchant
+from django.http import HttpResponse
 #-----------------------------------------------------------------------------------
 @login_required
 def detail(request,order_id):
@@ -53,48 +54,136 @@ def factor(request,order_id):
         return render(request,'orders/factor.html',{'order':order})
     return render(request,'facades/404.html',{'order':order})
 #-----------------------------------------------------------------------------------
-# MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
-# client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
-# description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
-# email = 'email@example.com'  # Optional
+
+#Zarinpal
+from django.http import HttpResponse
+from django.shortcuts import redirect
+import requests
+import json
+
+if True:
+    sandbox = 'sandbox'
+else:
+    sandbox = 'www'
+
+
+
+MERCHANT = merchant
+ZP_API_REQUEST = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentRequest.json"
+ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentVerification.json"
+ZP_API_STARTPAY = f"https://{sandbox}.zarinpal.com/pg/StartPay/"
+# amount = 11000  # Rial / Required
+description = "گیزموشاپ"  # Required
+email = 'email@example.com'  # Optional
 # mobile = '09123456789'  # Optional
-# # Important: need to edit for realy server.
-# CallbackURL = 'http://localhost:8000/orders/verify/'
+# Important: need to edit for realy server.
+CallbackURL = 'http://localhost:8000/orders/verify/'
+
+amount = 1450
+user = None
+am = 5
+
 #-----------------------------------------------------------------------------------
-@login_required
-def send_request(request,order_id,price):
-    global amount , o_id
-    amount = price
+
+def send_request(request,order_id):
+    global amount, o_id,am
+    global user_order
     o_id = order_id
-    # result = client.service.PaymentRequest(MERCHANT, amount, description, request.user.email, mobile, CallbackURL)
-    if True:
-        # result.Status == 100
-        # return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
-        return verify(request)
-    else:
-        # return HttpResponse('Error code: ' + str(result.Status))
-        pass
-#-----------------------------------------------------------------------------------
+
+    try:
+        user_order = Order.objects.get(id=o_id)
+    except Order.DoesNotExist:
+        messages.success(request,'جنین سفارشی در دیتابیس وجود ندارد.','background-color: rgb(198, 2, 2);')
+        return redirect('facades:home')
+
+    amount = user_order.total_price()
+
+
+    data = {
+        "MerchantID": MERCHANT,
+        "Amount": amount,
+        "Description": description,
+        "Phone": user_order.user.phoneNumber,
+        "CallbackURL": CallbackURL,
+    }
+    data = json.dumps(data)
+    # set content length by data
+    headers = {'content-type': 'application/json', 'content-length': str(len(data)) }
+    try:
+        response = requests.post(ZP_API_REQUEST, data=data,headers=headers, timeout=10)
+
+        
+        response_dict = json.loads(response.text)
+        print(response_dict)
+        status = response_dict['Status']
+        authority = response_dict['Authority']
+
+        print(status)
+
+        if(status == "100"):
+            am = authority
+            redirect_url = f"{ZP_API_STARTPAY}{authority}"
+            return redirect(redirect_url)
+        elif(status == "-11"):
+            messages.success(request,'اتصال به درگاه ناموفق بود.','background-color: rgb(198, 2, 2);')
+            return redirect('cart:detail')
+
+
+    
+    except requests.exceptions.Timeout:
+        return {'status': False, 'code': 'timeout'}
+    except requests.exceptions.ConnectionError:
+        return {'status': False, 'code': 'connection error'}
+
+
+import random
+from django.shortcuts import redirect
+
 def verify(request):
-    # request.GET.get('Status') == 'OK'
-    if True :
-        result = 101
-        # result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
-        if result == 100:
-            # result.Status == 100
-            order = Order.objects.get(id=o_id)
-            order.paid = True
-            order.save()
-            cart = Cart(request)
-            cart.clear()
-            messages.success(request,'خرید با موفقیت انجام شد.','background-color: rgb(0, 190, 0);')
-            return redirect('facades:dashboard')
-        elif result == 101:
-            # result.Status == 101
+    global amount
+    
+
+    t_status = request.GET.get('Status')
+    t_authority = request.GET['Authority']
+
+    
+    if(t_status == "NOK"):
+        messages.success(request,'پرداخت ناموفق بود.','background-color: rgb(198, 2, 2);')
+        return redirect('cart:detail')
+    
+    elif(t_status == "OK"):
+        data = {
+            "MerchantID": MERCHANT,
+            "Amount": amount,
+            "Authority": t_authority,
+        }
+
+
+    
+        data = json.dumps(data)
+        # set content length by data
+        headers = {'content-type': 'application/json', 'content-length': str(len(data)) }
+        response = requests.post(ZP_API_VERIFY, data=data,headers=headers)
+
+        response_dict = json.loads(response.text)
+        status = response_dict['Status']
+        RefID = response_dict['RefID']
+
+        if status == 100:
+                order = Order.objects.get(id=o_id)
+                order.paid = True
+                order.save()
+                cart = Cart(request)
+                cart.clear()
+                messages.success(request,'خرید با موفقیت انجام شد.','background-color: rgb(0, 190, 0);')
+                return redirect('facades:dashboard')
+
+        elif status == 101:
             cart = Cart(request)
             cart.clear()
             messages.success(request,'پرداخت انجام شده بوده است.','background-color: rgb(108, 105, 105);')
             return redirect('facades:dashboard')
+
         else:
             messages.success(request,'پرداخت ناموفق بود.','background-color: rgb(198, 2, 2);')
             return redirect('cart:detail')
@@ -113,5 +202,5 @@ def order_create(request,address_id):
         price=item['price'],
         quantity=item['quantity'])
     
-    return send_request(request,order.id,order.total_price)
+    return send_request(request,order.id)
 #-----------------------------------------------------------------------------------

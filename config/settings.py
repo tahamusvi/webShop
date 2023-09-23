@@ -5,6 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 shop_email = config('EMAIL_HOST')
 password_email = config('EMAIL_HOST_PASSWORD')
+merchant = config('MERCHANT')
 
 
 
