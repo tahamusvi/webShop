@@ -16,12 +16,17 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     discount = models.IntegerField(blank=True,null=True,default=None)
 
+    ref_id = models.CharField(max_length=100,blank=True,null=True,default=None)
+    authority = models.CharField(max_length=100,blank=True,null=True,default=None)
+
     address = models.ForeignKey(Address,on_delete=models.CASCADE,blank=True,null=True,default=None)
+    
 
     processed = models.BooleanField(default=False)
     packing = models.BooleanField(default=False) 
     shipped = models.BooleanField(default=False)
     deliveried = models.BooleanField(default=False) 
+
 
 
     class Meta:

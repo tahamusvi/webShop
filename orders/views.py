@@ -81,10 +81,8 @@ CallbackURL = 'http://localhost:8000/orders/verify/'
 
 amount = 1450
 user = None
-am = 5
 
 #-----------------------------------------------------------------------------------
-
 def send_request(request,order_id):
     global amount, o_id,am
     global user_order
@@ -120,20 +118,23 @@ def send_request(request,order_id):
 
         print(status)
 
-        if(status == "100"):
+        if(status == 100):
             am = authority
             redirect_url = f"{ZP_API_STARTPAY}{authority}"
             return redirect(redirect_url)
-        elif(status == "-11"):
-            messages.success(request,'اتصال به درگاه ناموفق بود.','background-color: rgb(198, 2, 2);')
-            return redirect('cart:detail')
+        
+        user_order.delete()
+        messages.success(request,'اتصال به درگاه ناموفق بود.','background-color: rgb(198, 2, 2);')
+        return redirect('cart:detail')
 
 
     
     except requests.exceptions.Timeout:
-        return {'status': False, 'code': 'timeout'}
+        messages.success(request,'زمان بیش حد سپری شده برای اتصال به درگاه.','background-color: rgb(198, 2, 2);')
+        return redirect('cart:detail')
     except requests.exceptions.ConnectionError:
-        return {'status': False, 'code': 'connection error'}
+        messages.success(request,'اتصال ناموفق.','background-color: rgb(198, 2, 2);')
+        return redirect('cart:detail')
 
 
 import random
@@ -172,6 +173,8 @@ def verify(request):
         if status == 100:
                 order = Order.objects.get(id=o_id)
                 order.paid = True
+                order.ref_id = RefID
+                order.authority = t_authority
                 order.save()
                 cart = Cart(request)
                 cart.clear()
@@ -201,6 +204,7 @@ def order_create(request,address_id):
         product=item['product'],
         price=item['price'],
         quantity=item['quantity'])
+    order.save()
     
     return send_request(request,order.id)
 #-----------------------------------------------------------------------------------
