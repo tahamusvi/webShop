@@ -85,12 +85,12 @@
                                                 {% for item in cart %}
                                                 <tr>
                                                     <td><a href="{{item.product.get_absolute_url}}">{{item.product}}</a></td>
-                                                    <td class="text-left">{{item.product.discounted_price}} تومان</td>
+                                                    <td class="text-left">{{item.show_total_price}} تومان</td>
                                                 </tr>
                                                 {% endfor %}
                                                 <tr class="summary-subtotal">
                                                     <td>جمع سبد خرید</td>
-                                                    <td class="text-left">{{cart.get_total_price}} تومان</td>
+                                                    <td class="text-left">{{cart.show_total}} تومان</td>
                                                 </tr><!-- End .summary-subtotal -->
                                                 <tr>
                                                     <td>شیوه ارسال : </td>

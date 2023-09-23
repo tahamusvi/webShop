@@ -1,6 +1,7 @@
 CART_SESSION_ID = 'cart'
 DISCOUNT_SESSION_ID = 'discount'
 from stuff.models import Product,Color
+from orders.models import format
 
 
 class Cart:
@@ -67,6 +68,7 @@ class Cart:
 
         for item in cart.values():
             item['total_price'] = int(item['price'])*item['quantity']
+            item['show_total_price'] = format(int(item['price'])*item['quantity'])
             yield item
 
 
@@ -76,6 +78,10 @@ class Cart:
         #     discount_price = (self.discount/100)* total
         #     return total - discount_price
         return total
+
+    def show_total(self):
+        return format(self.get_total_price())
+
         
     def get_total_count(self):
         return sum(item['quantity'] for item in self.cart.values())    

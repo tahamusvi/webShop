@@ -40,7 +40,7 @@
                                                     {{item.quantity}}
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
-                                            <td class="total-col">{{item.total_price}}</td>
+                                            <td class="total-col">{{item.show_total_price}}</td>
                                             <td class="remove-col" ><a href="{% url 'cart:cart_remove' item.id %}" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a></td>
                                                 
                                             
@@ -73,7 +73,7 @@
                                         <tbody>
                                             <tr class="summary-subtotal">
                                                 <td>جمع کل سبد خرید : </td>
-                                                <td class="text-left">{{cart.get_total_price}} تومان</td>
+                                                <td class="text-left">{{cart.show_total}} تومان</td>
                                             </tr><!-- End .summary-subtotal -->
                                             <tr class="summary-shipping">
                                                 <td>&nbsp;</td>
@@ -82,7 +82,7 @@
                                 
                                             <tr class="summary-total">
                                                 <td>مبلغ قابل پرداخت :</td>
-                                                <td class="text-left">{{cart.get_total_price}} تومان</td>
+                                                <td class="text-left">{{cart.show_total}} تومان</td>
                                             </tr><!-- End .summary-total -->
                                         </tbody>
                                     </table><!-- End .table table-summary -->
