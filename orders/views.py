@@ -57,7 +57,6 @@ def factor(request,order_id):
 
 #Zarinpal
 from django.http import HttpResponse
-from django.shortcuts import redirect
 import requests
 import json
 
@@ -65,7 +64,6 @@ if True:
     sandbox = 'sandbox'
 else:
     sandbox = 'www'
-
 
 
 MERCHANT = merchant
@@ -79,13 +77,11 @@ email = 'email@example.com'  # Optional
 # Important: need to edit for realy server.
 CallbackURL = 'http://localhost:8000/orders/verify/'
 
-amount = 1450
+o_id = 1450
 user = None
-
 #-----------------------------------------------------------------------------------
 def send_request(request,order_id):
-    global amount, o_id,am
-    global user_order
+    global o_id
     o_id = order_id
 
     try:
@@ -112,14 +108,11 @@ def send_request(request,order_id):
 
         
         response_dict = json.loads(response.text)
-        print(response_dict)
         status = response_dict['Status']
         authority = response_dict['Authority']
 
-        print(status)
 
         if(status == 100):
-            am = authority
             redirect_url = f"{ZP_API_STARTPAY}{authority}"
             return redirect(redirect_url)
         
@@ -135,17 +128,19 @@ def send_request(request,order_id):
     except requests.exceptions.ConnectionError:
         messages.success(request,'اتصال ناموفق.','background-color: rgb(198, 2, 2);')
         return redirect('cart:detail')
-
-
-import random
-from django.shortcuts import redirect
-
+#-----------------------------------------------------------------------------------
 def verify(request):
-    global amount
-    
-
     t_status = request.GET.get('Status')
     t_authority = request.GET['Authority']
+
+    global o_id
+    try:
+        user_order = Order.objects.get(id=o_id)
+    except Order.DoesNotExist:
+        messages.success(request,'جنین سفارشی در دیتابیس وجود ندارد.','background-color: rgb(198, 2, 2);')
+        return redirect('facades:home')
+
+    amount = user_order.total_price()
 
     
     if(t_status == "NOK"):
@@ -158,8 +153,6 @@ def verify(request):
             "Amount": amount,
             "Authority": t_authority,
         }
-
-
     
         data = json.dumps(data)
         # set content length by data
