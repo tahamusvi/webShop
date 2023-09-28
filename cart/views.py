@@ -87,18 +87,18 @@ def checkout(request):
 
     return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'caddress':request.user.addresses.filter(current=True)[0],"addressForm":addressForm})
 #-----------------------------------------------------------------------------------
-@require_POST
-def coupon_apply(request):  
-    now = timezone.now()
-    form = CouponForm(request.POST)
-    if form.is_valid():
-        code = form.cleaned_data['code']
-        try:
-            coupon = Coupon.objects.get(code__iexact=code,valid_from__lte=now,valid_to__gte=now,active=True)
-        except Coupon.DoesNotExist:
-            messages.error(request,'this Coupon does not exist.','danger')
-            return redirect('cart:checkout')
-        cart = Cart(request)
-        cart.apply_coupon(coupon)
+# @require_POST
+# def coupon_apply(request):  
+#     now = timezone.now()
+#     form = CouponForm(request.POST)
+#     if form.is_valid():
+#         code = form.cleaned_data['code']
+#         try:
+#             coupon = Coupon.objects.get(code__iexact=code,valid_from__lte=now,valid_to__gte=now,active=True)
+#         except Coupon.DoesNotExist:
+#             messages.error(request,'this Coupon does not exist.','danger')
+#             return redirect('cart:checkout')
+#         cart = Cart(request)
+#         cart.apply_coupon(coupon)
         
-    return redirect('cart:checkout')
+#     return redirect('cart:checkout')

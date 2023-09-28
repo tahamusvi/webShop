@@ -7,10 +7,24 @@ from django.views.decorators.http import require_POST
 from django.utils import timezone
 from django.contrib import messages
 from facades.views import InformationsForTemplate
-from suds.client import Client
 from config.settings import merchant
-from django.http import HttpResponse
-#-----------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+messages_dict = {
+    "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',
+    "not_connected" : 'اتصال به درگاه ناموفق بود.',
+    "too_long" : 'زمان بیش حد سپری شده برای اتصال به درگاه.',
+    "not_success_connect" : 'اتصال ناموفق.',
+    "success" : 'خرید با موفقیت انجام شد.',
+    "payed" : 'پرداخت انجام شده بوده است.',
+    "not_success_connect" : 'پرداخت ناموفق بود.',
+}
+
+color_messages = {
+    "error" : 'background-color: rgb(198, 2, 2);',
+    "success" : 'background-color: rgb(0, 190, 0);',
+    "gray" : 'background-color: rgb(108, 105, 105);',
+}
+#------------------------------------------------------------------------------------------------
 @login_required
 def detail(request,order_id):
     Info = InformationsForTemplate(request)
@@ -28,7 +42,7 @@ def detail(request,order_id):
     
     # return render(request,'orders/checkout.html', Info)
     return render(request,'facades/404.html', Info)
-#-----------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
 # @require_POST
 # def coupon_apply(request,order_id):
 #     now = timezone.now()
@@ -60,7 +74,7 @@ from django.http import HttpResponse
 import requests
 import json
 
-if True:
+if False:
     sandbox = 'sandbox'
 else:
     sandbox = 'www'
@@ -87,7 +101,7 @@ def send_request(request,order_id):
     try:
         user_order = Order.objects.get(id=o_id)
     except Order.DoesNotExist:
-        messages.success(request,'جنین سفارشی در دیتابیس وجود ندارد.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['not_order'],color_messages['error'])
         return redirect('facades:home')
 
     amount = user_order.total_price()
@@ -117,16 +131,16 @@ def send_request(request,order_id):
             return redirect(redirect_url)
         
         user_order.delete()
-        messages.success(request,'اتصال به درگاه ناموفق بود.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['not_connected'],color_messages['error'])
         return redirect('cart:detail')
 
 
     
     except requests.exceptions.Timeout:
-        messages.success(request,'زمان بیش حد سپری شده برای اتصال به درگاه.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['too_long'],color_messages['error'])
         return redirect('cart:detail')
     except requests.exceptions.ConnectionError:
-        messages.success(request,'اتصال ناموفق.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
         return redirect('cart:detail')
 #-----------------------------------------------------------------------------------
 def verify(request):
@@ -137,14 +151,14 @@ def verify(request):
     try:
         user_order = Order.objects.get(id=o_id)
     except Order.DoesNotExist:
-        messages.success(request,'جنین سفارشی در دیتابیس وجود ندارد.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['not_order'],color_messages['error'])
         return redirect('facades:home')
 
     amount = user_order.total_price()
 
     
     if(t_status == "NOK"):
-        messages.success(request,'پرداخت ناموفق بود.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
         return redirect('cart:detail')
     
     elif(t_status == "OK"):
@@ -171,20 +185,20 @@ def verify(request):
                 order.save()
                 cart = Cart(request)
                 cart.clear()
-                messages.success(request,'خرید با موفقیت انجام شد.','background-color: rgb(0, 190, 0);')
+                messages.success(request,messages_dict['success'],color_messages['success'])
                 return redirect('facades:dashboard')
 
         elif status == 101:
             cart = Cart(request)
             cart.clear()
-            messages.success(request,'پرداخت انجام شده بوده است.','background-color: rgb(108, 105, 105);')
+            messages.success(request,messages_dict['payed'],color_messages['gray'])
             return redirect('facades:dashboard')
 
         else:
-            messages.success(request,'پرداخت ناموفق بود.','background-color: rgb(198, 2, 2);')
+            messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
             return redirect('cart:detail')
     else:
-        messages.success(request,'پرداخت ناموفق بود.','background-color: rgb(198, 2, 2);')
+        messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
         return redirect('cart:detail')
 #-----------------------------------------------------------------------------------
 @login_required

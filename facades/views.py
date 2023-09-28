@@ -5,7 +5,12 @@ from accounts.forms import *
 from cart.cart import Cart
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from collections import defaultdict
+from accounts.views import color_messages
+#------------------------------------------------------------------------------------------------
+messages_dict = {
+    "send_success" : "سوالت رو با موفقیت ارسال شد.",
+    "problem_in_send" : 'مشکلی تو ارسال سوالت پیش اومد.',
+}
 #----------------------------------------------------------------------------------------------
 def InformationsForTemplate(request):
     Info = {}
@@ -121,10 +126,10 @@ def CreateSurvey(request):
 
             CreateSurvey = True
             Info.update({'CreateSurvey':CreateSurvey})
-            messages.success(request,"سوالت رو با موفقیت ارسال شد.",'background-color: rgb(0, 190, 0);')
+            messages.success(request,messages_dict['send_success'],color_messages['success'])
             return render(request, 'facades/contact.html', Info)
         else:
-            messages.error(request,'مشکلی تو ارسال سوالت پیش اومد.','background-color: rgb(198, 2, 2);')
+            messages.error(request,messages_dict['problem_in_send'],color_messages['error'])
             return render(request, 'facades/contact.html', Info)
 
     return contact(request)

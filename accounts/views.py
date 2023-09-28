@@ -34,6 +34,7 @@ messages_dict = {
     "add_informing" : 'به لیست موردعلاقه ها اضافه شد.', 
     "change_main_address" : 'آدرس اصلی با موفقیت تغییر کرد.',
     "too_address" : 'برای ثبت آدرس جدید از طریق داشبورد یکی از آدرس های ثبت شده را حذف کنید.',
+    "admin_validation" : "بعد از تایید ادمین نظر شما ثبت خواهد شد",
 
 }
 
@@ -268,7 +269,7 @@ def AddComment(request,id,type):
                 return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
 
 
-            messages.success(request,"بعد از تایید ادمین نظر شما ثبت خواهد شد", color_messages['success'])
+            messages.success(request,messages_dict['admin_validation'], color_messages['success'])
             return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home') #change else
                 
         else:
