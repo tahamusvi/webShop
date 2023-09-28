@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import User
-from .managers import *
+from .managers import CategoryManager, ArticleManager
 from django.urls import reverse
 from django.utils import timezone
 from facades.utils import jalali_converter

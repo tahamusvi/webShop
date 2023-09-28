@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from datetime import timedelta
 from django.core.validators import MaxValueValidator, MinValueValidator
 import random
 #-----------------------------------------------------------------------------------

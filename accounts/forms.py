@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from .models import User, Address
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 #------------------------------------------------------------------------------------------------
 class UserLoginForm(forms.Form):

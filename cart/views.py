@@ -5,9 +5,7 @@ from stuff.models import Product
 from .forms import CartAddForm
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from django.utils import timezone
-from .forms import *
-from orders.models import Coupon
+from .forms import CartAddForm
 from accounts.forms import AddressForm
 #------------------------------------------------------------------------------------------------
 messages_dict = {

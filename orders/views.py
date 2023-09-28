@@ -1,11 +1,10 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
-from .models import *
-from cart.cart import Cart
-from .forms import *
 from django.views.decorators.http import require_POST
-from django.utils import timezone
 from django.contrib import messages
+from .models import Order, Address, OrderItem
+from cart.cart import Cart
+from .forms import CouponForm
 from facades.views import InformationsForTemplate
 from config.settings import merchant
 #------------------------------------------------------------------------------------------------

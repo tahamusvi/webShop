@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
-from .managers import *
-from stuff.models import *
+from django.utils import timezone
+from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
+from stuff.models import Product
+from .managers import MyUserManager
 # ----------------------------------------------------------------------------------------------------------------------------
 class ProfileUser(models.Model):
     image = models.ImageField(upload_to='web_shop/users/%Y/%m/%d/')

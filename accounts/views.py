@@ -1,15 +1,17 @@
-from django.shortcuts import render,redirect
-from .forms import *
-from django.contrib.auth import authenticate, login , logout
-from django.contrib import messages
-from .models import *
-from django.shortcuts import render,get_object_or_404
-import random
-from django.contrib.auth.password_validation import validate_password
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ValidationError
-import smtplib
-from email.message import EmailMessage
+from django.contrib.auth import authenticate, login , logout
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from email.message import EmailMessage
+import smtplib
+import random
+from .models import User, Comment, ProductComment, Address
+from stuff.models import Product
+from blog.models import Article
+from .forms import (UserLoginForm, UserCreationForm, CommentForm, UserChangeForm, AddressForm, ChangePasswordForm,
+                    ForgotPasswordForm, ForgotPasswordWithEmailForm, CheckForm, ArticleComment,)
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "logout" : 'بعدا باز برگرد ":)',

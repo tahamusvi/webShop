@@ -1,9 +1,11 @@
 from django.shortcuts import render,get_object_or_404
-from .models import *
-from accounts.forms import *
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.utils import timezone
+from .models import Product, Category, Brand
 from .scripts import formating_price
+from accounts.forms import CommentForm
+from accounts.models import WatchedProduct
 from facades.views import InformationsForTemplate
 #-----------------------------------------------------------------------------------
 pagination_amount = 12
