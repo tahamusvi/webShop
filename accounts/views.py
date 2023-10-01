@@ -7,11 +7,11 @@ from django.contrib import messages
 from email.message import EmailMessage
 import smtplib
 import random
-from .models import User, Comment, ProductComment, Address
+from .models import User, Comment, ProductComment, Address ,ArticleComment
 from stuff.models import Product
 from blog.models import Article
 from .forms import (UserLoginForm, UserCreationForm, CommentForm, UserChangeForm, AddressForm, ChangePasswordForm,
-                    ForgotPasswordForm, ForgotPasswordWithEmailForm, CheckForm, ArticleComment,)
+                    ForgotPasswordForm, ForgotPasswordWithEmailForm, CheckForm)
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "logout" : 'بعدا باز برگرد ":)',
