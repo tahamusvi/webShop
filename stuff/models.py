@@ -49,7 +49,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200,unique=True)
     
     price = models.IntegerField()
-    image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
+    image = models.ImageField(upload_to='web_shop/products/%Y/%m/')
     alt = models.CharField(max_length=200)
     available = models.BooleanField(default=True)
     created = models.DateField(auto_now_add=True)
@@ -117,7 +117,7 @@ class Product(models.Model):
         return similar_products
 #-----------------------------------------------------------------------------------
 class ProductImage(models.Model):
-    image = models.ImageField(upload_to='web_shop/products/%Y/%m/%d/')
+    image = models.ImageField(upload_to='web_shop/products/%Y/%m/')
     is_main = models.BooleanField(default=False) 
     product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name='images',null=True,blank=True)
     alt = models.CharField(max_length=200)

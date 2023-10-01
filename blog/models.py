@@ -15,7 +15,7 @@ class Category(models.Model):
     )
     title = models.CharField(max_length=50,verbose_name="تیتر")
     slug = models.SlugField(max_length=40, unique = True,verbose_name="آدرس")
-    Cover = models.ImageField(upload_to="images",null=True,blank=True,verbose_name="تصویر")
+    Cover = models.ImageField(upload_to='web_shop/blog/categories/%Y/%m/',null=True,blank=True,verbose_name="تصویر")
     status = models.CharField(max_length=1,choices = status_ch,verbose_name="وضعیت")
 
     objects = CategoryManager()
@@ -48,7 +48,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50,verbose_name="تیتر")
     text = models.TextField(verbose_name="متن")
     Author = models.ForeignKey(User,on_delete=models.CASCADE,related_name="articles",verbose_name="نویسنده")
-    Cover = models.ImageField(upload_to="images",null=True,blank=True,verbose_name="تصویر")
+    Cover = models.ImageField(upload_to="'web_shop/blog/articles/%Y/%m/'",null=True,blank=True,verbose_name="تصویر")
     drafted = models.DateTimeField(auto_now_add=True,verbose_name="تاریخ پیش نویس")
     publish = models.DateTimeField(default=timezone.now,verbose_name="تاریخ انتشار")
     update = models.DateTimeField(auto_now=True,verbose_name="تاریخ آپدیت")
@@ -102,7 +102,7 @@ class Article(models.Model):
 #-----------------------------------------------------------------------------------
 class publicitar(models.Model):
     title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='web_shop/publicitar/%Y/%m/%d/')
+    image = models.ImageField(upload_to='web_shop/publicitar/%Y/%m/')
     main_link = models.CharField(max_length=200)
     out_link = models.CharField(max_length=200)
     arg = models.CharField(max_length=200,null=True,blank=True)
