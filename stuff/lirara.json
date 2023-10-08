@@ -1,8 +1,8 @@
 {
-    "disks": [
-      {
-        "name": "files",
-        "mountTo": "web_shop"
-      }
+    "disks":[
+        {
+            "name": "data",
+            "mountTo": "web_shop"
+        }
     ]
 }
