@@ -116,8 +116,9 @@ def CreateSurvey(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             phone_number = form.cleaned_data['phone_number']
-            title = form.cleaned_data['title']
+            
             text = form.cleaned_data['text']
+            title = form.cleaned_data['title']
 
             surveyUser = Survey(
                 name = name,

@@ -19,9 +19,9 @@ for_what_choices = (
 class Survey(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField()
-    phoneNumber = models.CharField(max_length=200)
+    phoneNumber = models.CharField(max_length=200,default="None")
     title = models.CharField(max_length=200)
-    text = models.TextField()
+    text = models.TextField(default="None")
 
     def __str__(self):
         return f"{self.email} - {self.name}"
