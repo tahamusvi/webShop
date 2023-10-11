@@ -18,9 +18,18 @@
 
                                                 <p>{{order.user.full_name}}<br>
                                                     {{order.get_total_price}} تومان<br>
-                                                    {{order.paid_string}}<br>
                                                     {{order.discount_string}}<br>
-                                                    {% if order.paid %}
+                                                    
+
+                                                    {% if order.receipt_bool and order.processed %}
+                                                    پرداخت توسط ادمین تایید شد<br>
+                                                    {% else %}
+                                                        {% if not order.processed %}
+                                                        در انتظار تایید ادمین<br>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    
+                                                    {% if order.paid or order.receipt_bool %}
                                                     <a href="{% url 'orders:detail' order.id %}">پیگیری سفارش <i class="icon-cog"></i></a>
                                                     {% else %}
                                                     {% comment %} <a href="{% url 'cart:checkout' order.id %}">پرداخت <i class="icon-edit"></i></a> {% endcomment %}

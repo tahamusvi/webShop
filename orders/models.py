@@ -16,6 +16,7 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     discount = models.IntegerField(blank=True,null=True,default=None)
     receipt = models.ImageField(upload_to='web_shop/receipt/%Y/%m/',blank=True,null=True)
+    receipt_bool = models.BooleanField(default=False)
 
     ref_id = models.CharField(max_length=100,blank=True,null=True,default=None)
     authority = models.CharField(max_length=100,blank=True,null=True,default=None)

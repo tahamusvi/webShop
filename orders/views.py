@@ -18,7 +18,7 @@ messages_dict = {
     "payed" : 'پرداخت انجام شده بوده است.',
     "not_success_connect" : 'پرداخت ناموفق بود.',
     "not_upload" : 'آپلود با مشکل مواجه شد.',
-    "success_upload" : "آپلود با موفقیت انجام شد.",
+    "success_upload" : "آپلود با موفقیت انجام شد. برای پیگیری سفارش به داشبورد مراجعه کنید.",
 }
 
 color_messages = {
@@ -39,7 +39,7 @@ def detail(request,order_id):
     if (order.user != request.user) and not(request.user.is_admin):
         return render(request,'facades/404.html', Info)
     
-    if order.paid :
+    if order.paid or order.receipt_bool:
         return render(request,'orders/trackOrders.html', Info)
     
     # return render(request,'orders/checkout.html', Info)
@@ -234,6 +234,7 @@ def order_create_receipt(request,address_id):
 
             cd = form.cleaned_data
             order.receipt = cd['receipt']
+            order.receipt_bool = True
             order.save()
             
             cart.clear()
