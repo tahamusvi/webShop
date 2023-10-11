@@ -15,6 +15,7 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
     discount = models.IntegerField(blank=True,null=True,default=None)
+    receipt = models.ImageField(upload_to='web_shop/receipt/%Y/%m/',blank=True,null=True)
 
     ref_id = models.CharField(max_length=100,blank=True,null=True,default=None)
     authority = models.CharField(max_length=100,blank=True,null=True,default=None)

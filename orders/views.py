@@ -4,9 +4,10 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from .models import Order, Address, OrderItem
 from cart.cart import Cart
-from .forms import CouponForm
+from .forms import CouponForm,receiptForm
 from facades.views import InformationsForTemplate
 from config.settings import merchant
+from django.core.exceptions import ObjectDoesNotExist
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',
@@ -16,6 +17,8 @@ messages_dict = {
     "success" : 'خرید با موفقیت انجام شد.',
     "payed" : 'پرداخت انجام شده بوده است.',
     "not_success_connect" : 'پرداخت ناموفق بود.',
+    "not_upload" : 'آپلود با مشکل مواجه شد.',
+    "success_upload" : "آپلود با موفقیت انجام شد.",
 }
 
 color_messages = {
@@ -213,4 +216,38 @@ def order_create(request,address_id):
     order.save()
     
     return send_request(request,order.id)
+#-----------------------------------------------------------------------------------
+@login_required
+def order_create_receipt(request,address_id):
+    if request.method == 'POST':
+        cart = Cart(request)
+        form = receiptForm(request.POST, request.FILES)
+        if form.is_valid():
+            order = Order.objects.create(user=request.user)
+
+            order.address = Address.objects.get(id=address_id)
+            for item in cart:
+                OrderItem.objects.create(order=order,
+                product=item['product'],
+                price=item['price'],
+                quantity=item['quantity'])
+
+            cd = form.cleaned_data
+            order.receipt = cd['receipt']
+            order.save()
+            
+            cart.clear()
+            messages.success(request,messages_dict['success_upload'],color_messages['success'])
+            return redirect("facades:home")
+        else:
+            messages.success(request,messages_dict["not_upload"],color_messages['error'])
+            return order_create_receipt(request,address_id)
+
+    Info = InformationsForTemplate(request)
+    Info["receiptForm"] = receiptForm()
+    Info["caddress"] = request.user.addresses.filter(current=True)[0]
+    
+    return render(request,"orders/checkout.html",Info)
+#-----------------------------------------------------------------------------------
+
 #-----------------------------------------------------------------------------------
