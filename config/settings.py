@@ -44,6 +44,7 @@ INSTALLED_APPS += [
     'orders',
     'blog',
     'django_cleanup.apps.CleanupConfig',
+    'administratorship',
 ]
 
 MIDDLEWARE = [
