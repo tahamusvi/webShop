@@ -119,16 +119,16 @@
                                             <td colspan="2">جمع فاکتور</td>
                                             <td>{{order.get_total_price}} تومان</td>
                                         </tr>
-                                        <tr>
+                                        {% comment %} <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">مالیات بر ارزش افزوده</td>
                                             <td>{{order.get_tax}} تومان</td>
-                                        </tr>
-                                        <tr>
+                                        </tr> {% endcomment %}
+                                        {% comment %} <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">مبلغ نهایی</td>
                                             <td>{{order.taxAndTotal}} تومان</td>
-                                        </tr>
+                                        </tr> {% endcomment %}
                                     </tfoot>
                                 </table>
                                 <div class="row print-bar justify-content-end">
