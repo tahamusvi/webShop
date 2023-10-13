@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from accounts.forms import UserChangeForm, AddressForm
 from accounts.models import Address
 from facades.views import InformationsForTemplate
+from .forms import *
+from .models import ExcelStuff
 #----------------------------------------------------------------------------------------------
 @login_required
 def dashboard(request,address_id = None):
@@ -19,6 +21,7 @@ def dashboard(request,address_id = None):
     
     Info["profileForm"] = profileForm
     Info["addressForm"] = addressForm
+    Info["excelForm"] = ExcelForm() 
 
     return render(request,'administratorship/dashboard.html',Info)
 #----------------------------------------------------------------------------------------------

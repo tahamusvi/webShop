@@ -26,6 +26,15 @@
                                 role="tab" aria-controls="tab-account" aria-selected="false">جزئیات حساب
                                 کاربری</a>
                         </li>
+                        
+                        {% if request.user.is_admin %}
+                        <li class="nav-item">
+                            <a class="nav-link" id="add-product-group-link" data-toggle="tab" href="#tab-add-product-group"
+                                role="tab" aria-controls="add-product-group" aria-selected="false">اضافه کردن گروهی محصولات</a>
+                        </li>
+                        
+                        {% endif %}
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'accounts:logout' %}">خروج از حساب کاربری</a>
                         </li>
@@ -64,6 +73,12 @@
                         {% include "administratorship/dashboardPart/account.html" %}
 
                         {% include "administratorship/dashboardPart/addAddress.html" %}
+
+                        {% if request.user.is_admin %}
+
+                            {% include "administratorship/dashboardPart/addProductGroup.html" %}
+                        
+                        {% endif %}
 
 
                     </div>

@@ -1,0 +1,18 @@
+{% load static %}
+
+
+<div class="tab-pane fade" id="tab-add-product-group" role="tabpanel"
+                            aria-labelledby="add-product-group-link">
+                            <h2 class="checkout-title">آپلود اکسل:</h2><!-- End .checkout-title -->
+                                    <form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+                                        {{excelForm}}
+                                         <br><br>
+                                        <br>
+                                        <button type="submit" class="btn btn-outline-primary-2 float-right">
+                                            <span>آپلود</span>
+                                            <i class="icon-long-arrow-left"></i>
+                                        </button>
+                                    </form>
+                                    
+                        </div><!-- .End .tab-pane -->
