@@ -7,7 +7,6 @@ from cart.cart import Cart
 from .forms import CouponForm,receiptForm
 from facades.views import InformationsForTemplate
 from config.settings import merchant
-from django.core.exceptions import ObjectDoesNotExist
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',

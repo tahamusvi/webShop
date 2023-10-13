@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from stuff.models import Product,Category
 from .models import shop, banner, Survey, FAQGroup
-from accounts.models import Address
 from stuff.models import Brand
 from blog.models import Article
 from cart.cart import Cart
@@ -65,24 +64,6 @@ def HomePage(request):
     
 
     return render(request,'facades/landing.html',Info)
-#----------------------------------------------------------------------------------------------
-@login_required
-def dashboard(request,address_id = None):
-    profileForm = UserChangeForm(instance=request.user)
-    addressForm = AddressForm()
-    Info = InformationsForTemplate(request)
-
-    if(address_id):
-        address = get_object_or_404(Address,id=address_id)
-        EditAddressForm = AddressForm(instance=address)
-        Info["EditAddressForm"] = EditAddressForm
-        Info["EditAddressId"] = address_id
-
-    
-    Info["profileForm"] = profileForm
-    Info["addressForm"] = addressForm
-
-    return render(request,'facades/dashboard.html',Info)
 #----------------------------------------------------------------------------------------------
 def contact(request):
     Info = InformationsForTemplate(request)

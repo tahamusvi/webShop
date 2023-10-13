@@ -28,7 +28,7 @@
                                                     شهر: {{address.city}}<br>
                                                     کد پستی: {{address.postal_code}}<br>
                                                     آدرس: {{address.text}}<br>
-                                                    <a href="{% url 'facades:dashboard_id' address.id %}">ویرایش <i class="icon-edit"></i></a></p>
+                                                    <a href="{% url 'administratorship:dashboard_id' address.id %}">ویرایش <i class="icon-edit"></i></a></p>
                                                     <a href="{% url 'accounts:delete_address' address.id %}" style="color: red;"> حذف <i class="icon-cog"></i></a></p>
                                             </div><!-- End .card-body -->
                                         </div><!-- End .card-dashboard -->
