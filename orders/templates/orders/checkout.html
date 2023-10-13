@@ -21,8 +21,10 @@
                             <div class="row">
                                 <div class="col-lg-9">
                                     
-
+                                    
                                     <h2 class="checkout-title">آپلود رسید پرداخت:</h2><!-- End .checkout-title -->
+                                    <p>شماره حساب : {{hesab.number}} بانک {{hesab.bank_name}} به نام {{hesab.owner}}</p>
+                                    <br>
                                     <form action="{% url 'orders:order_create_receipt' caddress.id %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
 
                                         {{receiptForm}}

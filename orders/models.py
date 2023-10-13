@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.conf import settings
 from accounts.models import Address
@@ -8,6 +9,15 @@ from facades.utils import jalali_converter
 def format(show):
     formatted_price = "{:,.0f}".format(show)
     return formatted_price
+#-----------------------------------------------------------------------------------
+class BankAccount(models.Model):
+    number = models.CharField(max_length=20)
+    bank_name = models.CharField(max_length=20)
+    owner = models.CharField(max_length=20)
+
+    def __str__(self):
+        return str(self.number) + str(self.bank_name)
+
 #-----------------------------------------------------------------------------------
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='orders')

@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from .models import Order, Address, OrderItem
+from .models import BankAccount, Order, Address, OrderItem
 from cart.cart import Cart
 from .forms import CouponForm,receiptForm
 from facades.views import InformationsForTemplate
@@ -26,6 +26,7 @@ color_messages = {
     "success" : 'background-color: rgb(0, 190, 0);',
     "gray" : 'background-color: rgb(108, 105, 105);',
 }
+
 #------------------------------------------------------------------------------------------------
 @login_required
 def detail(request,order_id):
@@ -247,6 +248,7 @@ def order_create_receipt(request,address_id):
     Info = InformationsForTemplate(request)
     Info["receiptForm"] = receiptForm()
     Info["caddress"] = request.user.addresses.filter(current=True)[0]
+    Info["hesab"] = BankAccount.objects.all()[0]
     
     return render(request,"orders/checkout.html",Info)
 #-----------------------------------------------------------------------------------
