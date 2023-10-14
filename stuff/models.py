@@ -43,8 +43,8 @@ class Color(models.Model):
         return self.name
 #-----------------------------------------------------------------------------------
 class Product(models.Model):
-    category = models.ManyToManyField(Category,related_name='products')
-    brand = models.ForeignKey(Brand,related_name='products',on_delete=models.CASCADE)
+    category = models.ManyToManyField(Category,related_name='products',blank=True)
+    brand = models.ForeignKey(Brand,related_name='products',null=True,blank=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,unique=True)
     
@@ -55,7 +55,7 @@ class Product(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
-    colors = models.ManyToManyField(Color)
+    colors = models.ManyToManyField(Color,blank=True)
     warehouse = models.IntegerField(default=0)
 
     short_description = models.TextField()
