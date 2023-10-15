@@ -358,8 +358,10 @@
                               {% elif s.discounted %} <span class="product-label label-sale">تخفیف ویژه</span> 
                               {% endif %}
                               <a href="{{s.get_absolute_url}}">
+                              {% if s.image %}
                                   <img src="{{s.image.url}}" alt="{{s.alt}}"
                                       class="product-image">
+                                {% endif %}
                               </a>
 
                               <div class="product-action-vertical">
