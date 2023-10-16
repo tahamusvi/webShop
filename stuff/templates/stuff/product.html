@@ -94,7 +94,7 @@
                                   </div><!-- End .product-price -->
 
                                    <div class="product-content">
-                                      <p> {{product.short_description}}
+                                      <p> {{product.clean_short_description|safe}}
                                       </p>
                                   </div> 
 
@@ -254,7 +254,7 @@
                               aria-labelledby="product-desc-link">
                               <div class="product-desc-content">
                                   <h3>اطلاعات محصول</h3>
-                                  <p>{{product.description}}</p>
+                                  <p>{{product.clean_description|safe}}</p>
                               </div><!-- End .product-desc-content -->
                           </div><!-- .End .tab-pane -->
 
@@ -262,7 +262,7 @@
                               aria-labelledby="product-info-link">
                               <div class="product-desc-content">
                                   <h3>اطلاعات</h3>
-                                  <p>{{product.more_info}}</p>
+                                  <p>{{product.clean_more_info|safe}}</p>
                               </div><!-- End .product-desc-content -->
                           </div><!-- .End .tab-pane -->
 

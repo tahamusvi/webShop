@@ -70,6 +70,21 @@ class Product(models.Model):
     class Meta:
         ordering = ('name',)
 
+    def clean_description(self):
+        description = self.description
+        description = description.replace('\n', '<br>')
+        return description
+
+    def clean_short_description(self):
+        description = self.short_description
+        description = description.replace('\n', '<br>')
+        return description
+    
+    def clean_more_info(self):
+        description = self.more_info
+        description = description.replace('\n', '<br>')
+        return description
+
     def get_absolute_url(self):
         return reverse('stuff:product_detail',args=[self.slug,self.id])
 
