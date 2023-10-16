@@ -19,7 +19,7 @@
           <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
               <div class="container d-flex align-items-center">
                   <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
+                      <li class="breadcrumb-item"><a href="{% url "facades:home" %}">خانه</a></li>
                       {% for cat in product.category.all %}
                       <li class="breadcrumb-item"><a href="{{cat.get_absolute_url}}">{{cat}}</a></li>
                       {% endfor %}
