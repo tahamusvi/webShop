@@ -80,6 +80,9 @@ class Article(models.Model):
     def __str__(self):
         return f"{self.title} - {self.views}"
 
+    def clean_text(self):
+        return self.text.replace('\n', '<br>')
+
     def Cover_tags(self):
         return format_html("<img width=120 style='border-radius:5px' src='{}'>".format(self.Cover.url))
 
