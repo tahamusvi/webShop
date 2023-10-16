@@ -38,6 +38,10 @@
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product product-11 mt-v3 text-center">
                             <figure class="product-media">
+                                {% if not product.available %} <span class="product-label label-out">ناموجود</span> 
+                                {% elif product.is_new %} <span class="product-label label-new">جدید</span> 
+                                {% elif product.discounted %} <span class="product-label label-sale">تخفیف ویژه</span> 
+                                {% endif %}
                             
                                 <a href="{{product.get_absolute_url}}">
 
@@ -56,7 +60,7 @@
                             <div class="product-body">
                                 <h3 class="product-title text-center"><a href="{{product.get_absolute_url}}">{{product.name}}</a></h3><!-- End .product-title -->
                                 <div class="product-price">
-                                     {{product.price}} تومان
+                                    {{product.discounted_price}}  تومان
                                 </div><!-- End .product-price -->
 
                                 <!-- <div class="product-nav product-nav-dots">
