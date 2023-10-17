@@ -57,6 +57,9 @@ class Article(models.Model):
     Category = models.ManyToManyField(Category,related_name = "articles",verbose_name="دسته بندی")
     views = models.PositiveIntegerField(default=0, verbose_name="تعداد بازدید")
 
+    reference_name = models.CharField(max_length=50,null=True,blank=True)
+    reference_link = models.CharField(max_length=50,null=True,blank=True)
+
     is_for_landing = models.BooleanField(default=False)
 
     objects = ArticleManager()

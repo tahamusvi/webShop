@@ -71,6 +71,11 @@
 
                                         <div class="pb-1"></div><!-- End .pb-1 --> {% endcomment %}
 
+                                        {% if article.reference_name %}
+                                        <blockquote>
+                                            <p>سایت مرجع: <a href="{{article.reference_link}}">{{article.reference_name}} </a></p>
+                                        </blockquote>
+                                        {% endif %}
                                         
                                     </div><!-- End .entry-content -->
 
