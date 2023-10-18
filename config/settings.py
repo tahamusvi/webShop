@@ -45,6 +45,7 @@ INSTALLED_APPS += [
     'blog',
     'django_cleanup.apps.CleanupConfig',
     'administratorship',
+    'tracking'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'tracking.middleware.UserVisitMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
