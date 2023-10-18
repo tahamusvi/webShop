@@ -63,6 +63,18 @@ class Product(models.Model):
     more_info = models.TextField()
 
 
+    length = models.IntegerField(blank=True,null=True)
+    width = models.IntegerField(blank=True,null=True)
+    height = models.IntegerField(blank=True,null=True)
+    weight = models.IntegerField(blank=True,null=True)
+
+    product_barcode = models.IntegerField(blank=True,null=True)
+
+    dirham_price = models.IntegerField(blank=True,null=True) 
+    dirham_rate = models.IntegerField(blank=True,null=True) 
+
+    
+
 
     discount = models.IntegerField(default=0)
     discounted = models.BooleanField(default=False)
