@@ -47,6 +47,7 @@ INSTALLED_APPS += [
     'administratorship',
     'tracking',
     'ipware',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [
