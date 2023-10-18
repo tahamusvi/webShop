@@ -22,27 +22,28 @@ class UserVisit(models.Model):
             super().save(*args, **kwargs)
 
     def get_user_location(self):
-        url = f"https://api.ipgeolocation.io/ipgeo?apiKey=YOUR_API_KEY&ip={self.ip_address}"  # کلید API خود را وارد کنید
+        url = f"https://api.ipgeolocation.io/ipgeo?apiKey=2c2e2adf0b9245c39fc6e563d89b4c27&ip={self.ip_address}"  # کلید API خود را وارد کنید
 
-        try:
-            response = requests.get(url)
-            data = response.json()
-            print(data)
-            if 'country_name' in data and 'city' in data:
-                self.country = data['country_name']
-                self.city = data['city']
-                self.latitude = data['latitude']
-                self.longitude = data['longitude']
-                self.save()
-                location = {
-                    'country': self.country,
-                    'city': self.city,
-                    'latitude': self.latitude,
-                    'longitude': self.longitude
-                }
-            else:
-                location = None
-        except requests.exceptions.RequestException:
-            location = None
-
-        return location
+        print(self.ip_address)
+        # try:
+        #     response = requests.get(url)
+        #     data = response.json()
+        #     print(data)
+        #     if 'country_name' in data and 'city' in data:
+        #         self.country = data['country_name']
+        #         self.city = data['city']
+        #         self.latitude = data['latitude']
+        #         self.longitude = data['longitude']
+        #         self.save()
+        #         location = {
+        #             'country': self.country,
+        #             'city': self.city,
+        #             'latitude': self.latitude,
+        #             'longitude': self.longitude
+        #         }
+        #     else:
+        #         location = None
+        # except requests.exceptions.RequestException:
+        #     location = None
+# 
+        # return location

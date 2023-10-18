@@ -19,7 +19,8 @@ class UserVisitMiddleware:
         else:
             response = self.get_response(request)
 
-        ip_address = request.META.get('REMOTE_ADDR')
+        ip_address = request.META.get('HTTP_X_FORWARDED_FOR', '')  # Get the X-Forwarded-For header value
+        ip_address = ip_address.split(',')[-1].strip() if ip_address else request.META.get('REMOTE_ADDR', '')  # Get the last IP address from the list
 
 
         # Create and save an instance of the UserVisit model
@@ -31,7 +32,7 @@ class UserVisitMiddleware:
             user_agent=request.META.get('HTTP_USER_AGENT'),
             referred_from=request.META.get('HTTP_REFERER')
         )
-        user_visit.get_user_location()
+        # user_visit.get_user_location()
         user_visit.save()
 
         return response

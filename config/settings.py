@@ -45,7 +45,8 @@ INSTALLED_APPS += [
     'blog',
     'django_cleanup.apps.CleanupConfig',
     'administratorship',
-    'tracking'
+    'tracking',
+    'ipware',
 ]
 
 MIDDLEWARE = [
