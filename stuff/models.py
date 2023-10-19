@@ -3,16 +3,22 @@ from django.urls import reverse
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 import random
+
+from django.utils.text import slugify
 #-----------------------------------------------------------------------------------
 class Brand(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200,unique=True)
+    slug = models.SlugField(max_length=200,unique=True, allow_unicode=True)
     logo = models.ImageField(upload_to='web_shop/logos/')
     description = models.TextField()
     created = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = self.name.replace(" ","-")
+        super(Brand, self).save(*args, **kwargs)
 
     # def get_absolute_url(self):
     #     return reverse('stuff:product_detail',args=[self.slug,self.id])
@@ -21,7 +27,7 @@ class Category(models.Model):
     sub_category = models.ForeignKey('self',on_delete=models.CASCADE, related_name='scategory',null=True,blank=True)
     is_sub = models.BooleanField(default=False)
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200,unique=True)
+    slug = models.SlugField(max_length=200,unique=True, allow_unicode=True)
 
     class Meta:
         ordering = ('name',)
@@ -33,6 +39,10 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('stuff:category_detail',args=[self.id,1])
+
+    def save(self, *args, **kwargs):
+        self.slug = self.name.replace(" ","-")
+        super(Category, self).save(*args, **kwargs)
 #-----------------------------------------------------------------------------------        
 class Color(models.Model):
     name = models.CharField(max_length=50)
@@ -46,7 +56,8 @@ class Product(models.Model):
     category = models.ManyToManyField(Category,related_name='products',blank=True)
     brand = models.ForeignKey(Brand,related_name='products',null=True,blank=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200,unique=True)
+    En = models.CharField(max_length=200,blank=True,null=True) 
+    slug = models.SlugField(max_length=200,unique=True, allow_unicode=True)
     
     price = models.IntegerField()
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/')
@@ -63,15 +74,12 @@ class Product(models.Model):
     more_info = models.TextField()
 
 
-    length = models.IntegerField(blank=True,null=True)
-    width = models.IntegerField(blank=True,null=True)
-    height = models.IntegerField(blank=True,null=True)
-    weight = models.IntegerField(blank=True,null=True)
-
     product_barcode = models.IntegerField(blank=True,null=True)
 
     dirham_price = models.IntegerField(blank=True,null=True) 
     dirham_rate = models.IntegerField(blank=True,null=True) 
+
+    transit_price = models.IntegerField(blank=True,null=True)
 
     
 

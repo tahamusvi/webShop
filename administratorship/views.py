@@ -5,6 +5,7 @@ from accounts.models import Address
 from facades.views import InformationsForTemplate
 from .forms import *
 from .models import ExcelStuff
+from django.utils.text import slugify
 #----------------------------------------------------------------------------------------------
 @login_required
 def dashboard(request,address_id = None):
@@ -39,26 +40,34 @@ def add_group_of_product(request):
             sheet = workbook.active
 
             for row in sheet.iter_rows(min_row=2, values_only=True):
-                name = row[0]
-                price = row[1]
-                slug = row[2]
-                alt = row[3]
-                category_names = row[4].split(',')  # نام‌های دسته بندی را از سلول اول جدا می‌کنیم
-                brand_name = row[5]
-                available = row[6]
-                colors = row[7].split(',')  # رنگ‌ها را از سلول دهم جدا می‌کنیم
-                warehouse = row[8]
-                short_description = row[9]
-                description = row[10]
-                more_info = row[11]
+                name = row[1]
+                price = row[5]
+                en = row[2]
+                slug = slugify(row[2])
+                alt = row[1]
+                category_names = row[3].split(',')  # نام‌های دسته بندی را از سلول اول جدا می‌کنیم
+                brand_name = row[4]
+                warehouse = row[6]
+                available = True if(warehouse > 0) else False
+                # colors = row[7].split(',')  # رنگ‌ها را از سلول دهم جدا می‌کنیم
+                short_description = "row[9]"
+                description = "row[10]"
+                more_info = "row[11]"
                 rating = 0
                 # image = row[13]
+
+                product_barcode = row[7]
+
+                print(row[3])
+                print("--------------------")
+
 
                 # ایجاد محصول جدید
                 product = Product.objects.create(
                     name=name,
                     slug=slug,
                     price=price,
+                    En=en,
                     image=None,
                     alt=alt,
                     available=available,
@@ -66,12 +75,15 @@ def add_group_of_product(request):
                     warehouse=warehouse,
                     short_description=short_description,
                     description=description,
-                    more_info=more_info
+                    more_info=more_info,
+                    product_barcode=product_barcode
                 )
                 
                 # افزودن دسته بندی‌ها به محصول
                 for category_name in category_names:
+                    
                     category, _ = Category.objects.get_or_create(name=category_name)
+                    
                     product.category.add(category)
                 
                 # افزودن برند به محصول
@@ -79,9 +91,9 @@ def add_group_of_product(request):
                 product.brand = brand
                 
                 # افزودن رنگ‌ها به محصول
-                for color_name in colors:
-                    color, _ = Color.objects.get_or_create(name=color_name)
-                    product.colors.add(color)
+                # for color_name in colors:
+                #     color, _ = Color.objects.get_or_create(name=color_name)
+                #     product.colors.add(color)
                 
                 product.save()
             
