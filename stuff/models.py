@@ -139,8 +139,11 @@ class Product(models.Model):
         if similar_products.count() < 6:
             remaining_count = 6 - similar_products.count()
             other_products = Product.objects.exclude(category__in=self.category.all()).exclude(id=self.id)
-            random_products = random.sample(list(other_products), remaining_count)
-            similar_products = list(similar_products) + random_products
+            if(remaining_count > other_products.count()):
+                similar_products = list(similar_products) + list(other_products)
+            else:
+                random_products = random.sample(list(other_products), remaining_count)
+                similar_products = list(similar_products) + random_products
         
         return similar_products
 #-----------------------------------------------------------------------------------
