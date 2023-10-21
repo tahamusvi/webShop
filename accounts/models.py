@@ -52,6 +52,13 @@ class User(AbstractBaseUser):
     def blog_articles(self):
         return reverse("blog:author_articles",args=[1,self.id])
 
+    def send_way(self):
+        for ch in send_ways:
+            
+            if(ch[0] == self.last_send_way):
+                return ch[1]
+        return "هیچی"
+
     def has_perm(self, perm, obj=None):
         return True
 

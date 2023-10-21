@@ -20,6 +20,8 @@ urlpatterns = [
     path('delete_address/<int:address_id>/',delete_address, name='delete_address'),
     path('edit_address/<int:address_id>/',edit_address, name='edit_address'),
 
+    path('change_send_way/',change_send_way, name='change_send_way'),
+
     path('AddComment/<int:id>/<int:type>/',AddComment, name='AddComment'),
 
     path('AddToInforming/<int:id>/',AddToInforming, name='AddToInforming'),

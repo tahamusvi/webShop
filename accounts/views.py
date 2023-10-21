@@ -37,6 +37,7 @@ messages_dict = {
     "change_main_address" : 'آدرس اصلی با موفقیت تغییر کرد.',
     "too_address" : 'برای ثبت آدرس جدید از طریق داشبورد یکی از آدرس های ثبت شده را حذف کنید.',
     "admin_validation" : "بعد از تایید ادمین نظر شما ثبت خواهد شد",
+    "change_send_way" : 'روش ارسال با موفقیت تغییر کرد.',
 
 }
 
@@ -373,4 +374,18 @@ def edit_address(request,address_id):
             return redirect('facades:dashboard')
 
     return redirect('facades:dashboard')
+#------------------------------------------------------------------------------------------------
+@login_required
+def change_send_way(request):
+    if request.method == 'POST':
+        send_way = request.POST["send_char"]
+        user = request.user
+        user.last_send_way = send_way
+        user.save()
+        
+        messages.success(request, messages_dict["change_send_way"],  color_messages['success'])
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+    
+
+    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
 #------------------------------------------------------------------------------------------------

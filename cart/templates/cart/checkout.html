@@ -65,7 +65,38 @@
                                             <i class="icon-long-arrow-left"></i>
                                         </button>
                                     </form>
+
+                                    <br><br>
+                                    <h2 class="checkout-title">انتخاب روش ارسال:</h2><!-- End .checkout-title -->
+                                    <form class="" action="{% url 'accounts:change_send_way' %}" method="post">{% csrf_token %}
                                     
+
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="p"
+                                            name="send_char" value="p">
+                                        <label class="custom-control-label rtl" for="p">ارسال از طریق پست </label>
+                                    </div><!-- End .custom-checkbox -->
+
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="b"
+                                            name="send_char" value="b">
+                                        <label class="custom-control-label rtl" for="b">ارسال از طریق اتوبوس</label>
+                                    </div><!-- End .custom-checkbox -->
+
+
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="c"
+                                            name="send_char" value="c">
+                                        <label class="custom-control-label rtl" for="c">درون شهری</label>
+                                    </div><!-- End .custom-checkbox -->
+
+                                    
+                                    <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>انتخاب روش ارسال</span>
+                                                <i class="icon-long-arrow-left"></i>
+                                            </button>
+
+                                    </form>
 
 
                                 </div><!-- End .col-lg-9 -->
@@ -95,7 +126,7 @@
                                                 </tr><!-- End .summary-subtotal -->
                                                 <tr>
                                                     <td>شیوه ارسال : </td>
-                                                    <td class="text-left">تیپاکس(پس کرایه)</td>
+                                                    <td class="text-left">{{request.user.send_way}}</td>
                                                 </tr>
                                                 
                                                 <tr class="summary-total">
