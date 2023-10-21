@@ -5,6 +5,11 @@ from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from stuff.models import Product
 from .managers import MyUserManager
+send_ways = (
+        ('c' , "درون شهری"),
+        ('b' , "اتوبوس"),
+        ('p', "پست معمولی"),
+    )
 # ----------------------------------------------------------------------------------------------------------------------------
 class ProfileUser(models.Model):
     image = models.ImageField(upload_to='web_shop/users/%Y/%m/')
@@ -30,6 +35,8 @@ class User(AbstractBaseUser):
 
     wishlist = models.ManyToManyField(Product,blank=True,related_name ="wishlist")
     informing = models.ManyToManyField(Product,blank=True,related_name ="informing")
+
+    last_send_way = models.CharField(max_length=1,choices = send_ways,default='p')
 
 
 
