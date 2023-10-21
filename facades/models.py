@@ -21,6 +21,21 @@ class ConfigShop(models.Model):
     ename = models.CharField(max_length=200)
     logo = models.ImageField(upload_to='web_shop/config/logo/')
 
+    phone = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=12)
+    email = models.EmailField()
+    description = models.CharField(max_length=200)
+
+    insta = models.URLField()
+    whatsapp = models.URLField()
+    telegram = models.URLField()
+
+    aboutUs = models.TextField()
+    address = models.CharField(max_length=100)
+
+
+    current = models.BooleanField(default=False)
+
 
 
 
