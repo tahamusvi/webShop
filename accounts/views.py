@@ -79,7 +79,7 @@ def profile(request):
         if profileForm.is_valid():
             profileForm.save()
             messages.success(request, messages_dict['profile'],color_messages['success'])
-            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
     else:
         profileForm = UserChangeForm(instance=request.user)
 
@@ -322,10 +322,10 @@ def add_address(request):
     if request.method == 'POST':
         form = AddressForm(request.POST)
 
-        if(request.user.addresses.all().count() >= 3):
-            print(request.user.addresses.all().count())
-            messages.success(request, messages_dict["too_address"], color_messages['error'])
-            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+        # if(request.user.addresses.all().count() >= 3):
+        #     print(request.user.addresses.all().count())
+        #     messages.success(request, messages_dict["too_address"], color_messages['error'])
+        #     return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
 
         if form.is_valid():
             address = form.save(commit=False)
@@ -333,10 +333,10 @@ def add_address(request):
             address.user = request.user
             address.save()
             messages.success(request, messages_dict["add_address"],  color_messages['success'])
-            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+            return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
     else:
         form = AddressForm()
-    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
 #------------------------------------------------------------------------------------------------
 @login_required
 def change_main_address(request):
@@ -350,10 +350,10 @@ def change_main_address(request):
         address.current = True
         address.save()
         messages.success(request, messages_dict["change_main_address"],  color_messages['success'])
-        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
     
 
-    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
 
 #------------------------------------------------------------------------------------------------
 @login_required
@@ -361,7 +361,7 @@ def delete_address(request,address_id):
     address = get_object_or_404(Address,id=address_id)
     address.delete()
     messages.success(request, messages_dict['remove'], color_messages['error'])
-    return redirect('facades:dashboard')
+    return redirect('administratorship:dashboard')
 #------------------------------------------------------------------------------------------------
 @login_required
 def edit_address(request,address_id):
@@ -371,9 +371,9 @@ def edit_address(request,address_id):
         if addressForms.is_valid():
             addressForms.save()
             messages.success(request, messages_dict['edit'], color_messages['gray'])
-            return redirect('facades:dashboard')
+            return redirect('administratorship:dashboard')
 
-    return redirect('facades:dashboard')
+    return redirect('administratorship:dashboard')
 #------------------------------------------------------------------------------------------------
 @login_required
 def change_send_way(request):
@@ -384,8 +384,8 @@ def change_send_way(request):
         user.save()
         
         messages.success(request, messages_dict["change_send_way"],  color_messages['success'])
-        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
     
 
-    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:dashboard')
+    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')
 #------------------------------------------------------------------------------------------------
