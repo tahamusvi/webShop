@@ -16,6 +16,17 @@ for_what_choices = (
 
 )
 #----------------------------------------------------------------------------------------------
+class ConfigShop(models.Model):
+    fname = models.CharField(max_length=200)
+    ename = models.CharField(max_length=200)
+    logo = models.ImageField(upload_to='web_shop/config/logo/')
+
+
+
+
+    def __str__(self):
+        return f"{self.fname} - {self.ename}"
+#----------------------------------------------------------------------------------------------
 class Survey(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField()
