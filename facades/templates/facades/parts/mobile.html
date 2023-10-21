@@ -46,11 +46,11 @@
                         </li>
 
                         <li {% if request.resolver_match.url_name == 'aboutUs' %} class="active" {% endif %} >
-                            <a href="{% url 'facades:aboutUs' %}">درباره ی گیزمو</a>
+                            <a href="{% url 'facades:aboutUs' %}">درباره ی {{site.fname}}</a>
                         </li>    
 
                         <li {% if request.resolver_match.url_name == 'contact' %} class="active" {% endif %} >
-                            <a href="{% url 'facades:contact' %}">ارتباط با گیزمو</a>
+                            <a href="{% url 'facades:contact' %}">ارتباط با {{site.fname}}</a>
                         </li>
 
                         <li {% if request.resolver_match.url_name == 'FAQ' %} class="active" {% endif %} >

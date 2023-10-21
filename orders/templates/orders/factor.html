@@ -8,9 +8,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Factor GizmoShop</title>
+    <title>Factor {{site.ename}}</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Factor GizmoShop">
+    <meta name="description" content="Factor {{site.ename}}">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/icons/favicon-32x32.png">
@@ -43,7 +43,7 @@
                                     <div class="header-invoice-right">
                                         <div class="brand-logo">
                                             <a href="{% url 'facades:home' %}">
-                                                <img src="{% static 'facades/images/gFactor.png' %}" alt="Logo image" width="105" height="25">
+                                                <img src="{{site.black_logo.url}}" alt="Logo image" width="105" height="25">
                                             </a>
                                         </div>
                                     </div>
@@ -52,11 +52,11 @@
                                     <div class="header-invoice-left">
                                         <ul>
                                             <li>
-                                                <h2>گیزموشاپ</h2>
+                                                <h2>{{site.ename}}</h2>
                                             </li>
-                                            <li>فروشگاه اینترنتی گیزموشاپ - تهران</li>
-                                            <li>تماس با ما : 09198000136</li>
-                                            <li>GizmoShop@gmail.com</li>
+                                            <li>فروشگاه اینترنتی {{site.fname}}</li>
+                                            <li>تماس با ما : {{site.phone_number}}</li>
+                                            <li>{{site.email}}</li>
                                         </ul>
                                     </div>
                                 </div>

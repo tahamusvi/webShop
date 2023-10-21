@@ -20,6 +20,7 @@ class ConfigShop(models.Model):
     fname = models.CharField(max_length=200)
     ename = models.CharField(max_length=200)
     logo = models.ImageField(upload_to='web_shop/config/logo/')
+    black_logo = models.ImageField(upload_to='web_shop/config/logo/')
 
     phone = models.CharField(max_length=12)
     phone_number = models.CharField(max_length=12)

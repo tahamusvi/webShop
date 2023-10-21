@@ -7,6 +7,7 @@ from cart.cart import Cart
 from .forms import CouponForm,receiptForm
 from facades.views import InformationsForTemplate
 from config.settings import merchant
+from facades.models import ConfigShop
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',
@@ -63,11 +64,12 @@ def detail(request,order_id):
 
 #-----------------------------------------------------------------------------------
 def factor(request,order_id):
+    site = ConfigShop.objects.get(current=True) 
     order = get_object_or_404(Order,id=order_id)
     if (order.user != request.user) and not(request.user.is_admin):
         return render(request,'facades/404.html',{'order':order})
     if order.paid :
-        return render(request,'orders/factor.html',{'order':order})
+        return render(request,'orders/factor.html',{'order':order,'site':site})
     return render(request,'facades/404.html',{'order':order})
 #-----------------------------------------------------------------------------------
 
