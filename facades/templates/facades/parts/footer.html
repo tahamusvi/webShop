@@ -10,16 +10,16 @@
             <div class="row" >
                 <div class="col-sm-6 col-lg-3" style="height: 25rem;">
                     <div class="widget widget-about" >
-                        <img src="{% static 'facades/images/gizmo_dark_typo01.png' %}" class="footer-logo" alt="Footer Logo"
+                        <img src="{{site.logo.url}}" class="footer-logo" alt="Footer Logo"
                             width="105" height="45" >
-                        <p>از تنوع محصولات ما لذت ببرید، با قیمت و کیفیتی که انتظار دارید خرید کنید.</p>
+                        <p>{{site.description}}</p>
 
                         <div class="social-icons" >
-                            <a href="https://www.instagram.com/gizmoshop.ir/" class="social-icon" title="اینستاگرام" target="_blank"><i
+                            <a href="{{site.insta}}" class="social-icon" title="اینستاگرام" target="_blank"><i
                                   class="icon-instagram"></i></a>
-                            <a href="#" class="social-icon" title="واتساپ" target="_blank"><i
+                            <a href="{{site.whatsapp}}" class="social-icon" title="واتساپ" target="_blank"><i
                                     class="icon-whatsapp"></i></a>
-                            <a href="#" class="social-icon" title="تلگرام" target="_blank"><i
+                            <a href="{{site.telegram}}" class="social-icon" title="تلگرام" target="_blank"><i
                                     class="icon-telegram"></i></a>
 
                             <!-- <a href="#" class="social-icon" title="فیسبوک" target="_blank"><i

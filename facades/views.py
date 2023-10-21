@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from stuff.models import Product,Category
-from .models import shop, banner, Survey, FAQGroup
+from .models import ConfigShop, shop, banner, Survey, FAQGroup
 from stuff.models import Brand
 from blog.models import Article
 from cart.cart import Cart
@@ -37,9 +37,11 @@ def InformationsForTemplate(request):
     #shops
     shops = shop.objects.all()
 
+    site = ConfigShop.objects.get(current=True)
+
 
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form
-    ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,}
+    ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,'site':site}
     Info["banners"] = banner.filter()
     Info["footer_articles"] = Article.objects.all()[::-1][0:3]
 

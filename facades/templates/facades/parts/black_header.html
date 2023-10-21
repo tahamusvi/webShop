@@ -4,7 +4,7 @@
     <div class="header-top">
         <div class="container">
                     <div class="header-left">
-                        <a href=""><i class="icon-phone"></i>تلفن تماس : 02155667788</a>
+                        <a href=""><i class="icon-phone"></i>تلفن تماس : {{site.phone}}</a>
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
@@ -37,7 +37,7 @@
                                         </div><!-- End .header-dropdown -->
                                     </li>
                                     <li><a href="#signin-modal" data-toggle="modal">ورود / ثبت نام</a></li> {% endcomment %}
-                                    <li><p> به گیزموشاپ خوش اومدید! </li></p>
+                                    <li><p> به {{site.fname}} خوش اومدید! </li></p>
                                 </ul>
                             </li>
                         </ul><!-- End .top-menu -->
@@ -56,7 +56,7 @@
                 </button>
 
                 <a href="{% url 'facades:home' %}" class="logo">
-                    <img src="{% static 'facades/images/gizmo_dark_typo01.png' %}" alt="Logo image" width="105" height="25">
+                    <img src="{{site.logo.url}}" alt="Logo image" width="105" height="25">
                 </a>
             </div><!-- End .header-left -->
 
@@ -198,8 +198,8 @@
                                 <li class="item-lead"><a href="{% url 'facades:home' %}">خانه</a></li>
                                 <li class="item-lead"><a href="{% url 'administratorship:dashboard' %}">داشبورد</a></li>
                                 <li class="item-lead"><a href="{% url 'blog:home_blog' %}">اخبار</a></li>
-                                <li class="item-lead"><a href="{% url 'facades:aboutUs' %}">درباره گیزمو</a></li>
-                                <li class="item-lead"><a href="{% url 'facades:contact' %}">ارتباط با گیزمو</a></li>
+                                <li class="item-lead"><a href="{% url 'facades:aboutUs' %}">درباره {{site.fname}}</a></li>
+                                <li class="item-lead"><a href="{% url 'facades:contact' %}">ارتباط با {{site.fname}}</a></li>
                                 <li class="item-lead"><a href="{% url 'facades:FAQ' %}">سوالات متداول</a></li>
 
                             </ul><!-- End .menu-vertical -->
