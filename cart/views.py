@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from .forms import CartAddForm
 from accounts.forms import AddressForm
+from facades.models import ConfigShop
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_logined" : 'برای افزودن به سبد خرید ابتدا وارد حساب کاربری خود شوید.',
@@ -76,6 +77,7 @@ def cart_remove(request,product_id_color):
 #-----------------------------------------------------------------------------------
 @login_required
 def checkout(request):
+    site = ConfigShop.objects.get(current=True) 
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
@@ -83,7 +85,7 @@ def checkout(request):
     # print(cart.discount)
     addressForm = AddressForm()
 
-    return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'caddress':request.user.addresses.filter(current=True)[0],"addressForm":addressForm})
+    return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'caddress':request.user.addresses.filter(current=True)[0],"addressForm":addressForm,'site':site})
 #-----------------------------------------------------------------------------------
 # @require_POST
 # def coupon_apply(request):  
