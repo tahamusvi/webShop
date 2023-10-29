@@ -2,11 +2,12 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from .settings import admin_url
 
 
 urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
-    path('youCantFindIt/', admin.site.urls),
+    path(f'{admin_url}/', admin.site.urls),
     path('', include('facades.urls')),
     path('', include('stuff.urls')),
     path('accounts/', include('accounts.urls')),
