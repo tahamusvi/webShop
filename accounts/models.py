@@ -71,7 +71,7 @@ class User(AbstractBaseUser):
 
 # ----------------------------------------------------------------------------------------------------------------------------
 class Address(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses",limit_choices_to={'addresses__count__lte': 5})
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     text = models.TextField()
     postal_code = models.CharField(max_length=10)
     city = models.CharField(max_length=50)
