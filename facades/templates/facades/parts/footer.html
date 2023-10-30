@@ -74,12 +74,17 @@
 
                 <div class="col-sm-6 col-lg-3">
                     <div class="widget">
-                        <h4 class="widget-title">آخرین مقالات</h4><!-- End .widget-title -->
+                        <h4 class="widget-title">نماد ها:</h4><!-- End .widget-title -->
 
-                        <ul class="widget-list">
-                            {% for article in footer_articles %}
-                            <li><a href="{{article.get_absolute_url}}">{{article.title}}</a></li>
-                            {% endfor %}
+                        <ul class="widget-list" style=" display: flex; flex-wrap: wrap; gap:4rem">
+                             <img src="{{site.logo.url}}" class="footer-logo" alt="Footer Logo"
+                            width="105" height="45" >
+                             <img src="{{site.logo.url}}" class="footer-logo" alt="Footer Logo"
+                            width="105" height="45" >
+                             <img src="{{site.logo.url}}" class="footer-logo" alt="Footer Logo"
+                            width="105" height="45" >
+                             <img src="{{site.logo.url}}" class="footer-logo" alt="Footer Logo"
+                            width="105" height="45" >
                             
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
