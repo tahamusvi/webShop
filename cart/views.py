@@ -30,7 +30,9 @@ def detail(request):
         wishlistAmount = request.user.wishlist.all().count()
     cart = Cart(request)
     CartAmount = cart.get_count()
-    return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount})
+
+    site = ConfigShop.objects.get(current=True)
+    return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'site':site})
 #-----------------------------------------------------------------------------------
 
 def cart_add(request,product_id):
