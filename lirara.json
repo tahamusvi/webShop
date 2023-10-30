@@ -1,8 +1,0 @@
-{
-    "disks":[
-        {
-            "name": "data",
-            "mountTo": "web_shop"
-        }
-    ]
-}

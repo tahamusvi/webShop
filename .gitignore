@@ -3,6 +3,7 @@ env
 db.sqlite3
 web_shop
 not
+liara.json
 # Django #
 *.log
 *.pot
