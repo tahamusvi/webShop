@@ -46,6 +46,8 @@ class ConfigShop(models.Model):
 
     current = models.BooleanField(default=False)
 
+    
+
 
 
 
