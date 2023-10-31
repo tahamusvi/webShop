@@ -8,6 +8,7 @@ from .forms import CouponForm,receiptForm
 from facades.views import InformationsForTemplate
 from config.settings import merchant
 from facades.models import ConfigShop
+from stuff.models import Product
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',
@@ -189,6 +190,7 @@ def verify(request):
                 order.save()
                 cart = Cart(request)
                 cart.clear()
+                #change amount of wearhouse
                 messages.success(request,messages_dict['success'],color_messages['success'])
                 return redirect('facades:dashboard')
 
@@ -233,6 +235,8 @@ def order_create_receipt(request,address_id):
                 product=item['product'],
                 price=item['price'],
                 quantity=item['quantity'])
+                product = get_object_or_404(Product,id=int(item['product_id']))
+                product.change_available(int(item['quantity']))
 
             cd = form.cleaned_data
             order.receipt = cd['receipt']
@@ -240,6 +244,7 @@ def order_create_receipt(request,address_id):
             order.save()
             
             cart.clear()
+
             messages.success(request,messages_dict['success_upload'],color_messages['success'])
             return redirect("facades:home")
         else:
