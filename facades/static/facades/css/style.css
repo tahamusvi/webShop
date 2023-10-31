@@ -1,7 +1,9 @@
 @charset "UTF-8";
+
 :root {
   --custom-color: #ff0000;  /* رنگ پیشفرض */
 }
+
 
 .custom-color {
   color: var(--custom-color);
@@ -1217,6 +1219,8 @@ blockquote.text-white cite span {
   border-bottom: 1px solid #ebebeb;
   box-shadow: none !important;
 }
+
+
 
 .cart-dropdown .product-image-container {
   position: relative;
@@ -7554,6 +7558,10 @@ a:focus {
   background-color: var(--custom-color);
 }
 
+.btn-product-gallery.active{
+  right: 0;
+}
+
 .product-gallery-item:before {
   border-color: var(--custom-color);
 }
@@ -12574,6 +12582,24 @@ a:focus {
   color: #fff;
   background-color: #333;
 }
+
+.image-container{  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+}
+
+.image-container.active {
+  right: 0;
+}
+
+
 
 .product-size a.disabled {
   color: #cccccc;

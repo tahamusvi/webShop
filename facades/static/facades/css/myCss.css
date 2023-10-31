@@ -28,3 +28,46 @@
 .activeNajla{
   top: 5rem;
 }
+
+
+.img-choosed{
+  background: #fff;
+  border: var(--border);
+  width: 40rem;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.5rem;
+  margin: 2rem;
+}
+
+.image-container{  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+}
+
+.image-container.active {
+  right: 0;
+}
+
+
+/* scrollbar  */
+html::-webkit-scrollbar{
+  width: 0.8rem;
+}
+
+html::-webkit-scrollbar-track{
+  background: transparent;
+  border-radius: 2rem;
+}
+
+html::-webkit-scrollbar-thumb{
+  background: #363636;
+  border-radius: 2rem;
+}

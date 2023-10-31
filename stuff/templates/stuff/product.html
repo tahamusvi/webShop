@@ -44,9 +44,10 @@
                                               alt="{{product.alt}}">
 
                                       </figure><!-- End .product-main-image -->
-                                      <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                      <button id="btn-product-gallery" class="btn-product-gallery" style="border:None">
                                               <i class="icon-arrows"></i>
-                                          </a>
+                                          </button>
+                                          
 
                                       <div id="product-zoom-gallery" class="product-image-gallery">
 
@@ -74,7 +75,10 @@
                                   </div><!-- End .row -->
 
                               </div><!-- End .product-gallery -->
+
+                              
                           </div><!-- End .col-md-6 -->
+                          
 
                           <div class="col-md-6">
                               <div class="product-details">
@@ -411,18 +415,61 @@
               </div><!-- End .container -->
           </div><!-- End .page-content -->
 
+        <div class="image-container" style="display: flex;align-items: center;justify-content: center;background:rgba(255, 255, 255, 0.9);position: fixed;top: 0;right:-200%;z-index: 10000;height: 100%;width: 100%;">
+            <span id="close-login-btn" style="position: absolute; top: 1.5rem; right:2.5rem; font-size: 5rem; color: #000; cursor: pointer;">X</span>
+            <img class="img-selected" src="{{product.image.url}}" alt="" style="width:55rem; height:auto;">
+        </div>
+
 
       </main>
 
 
 
 <script>
+let selectedImage = document.querySelector('.img-selected')
+let imgGallery = document.querySelector('.image-container')
 $(document).ready(function() {
-    $(".another-image-option").click(function() {
-      var clickedImageSrc = $(this).attr("src");
+    $(".another-image-option").click(function (){
+        let clickedImageSrc = $(this).attr("src");
       $(".imageNajla img").attr("src", clickedImageSrc);
+        document.querySelector('.btn-product-gallery').onclick = () => {
+            imgGallery.style.right = "0";
+            $(document).ready(function() {
+                $(".another-image-option").click(function () {
+                    let clickedImageSrc = $(this).attr("src");
+                    selectedImage.attr("src", clickedImageSrc);
+                });
+            });
+            console.log("dfgdfg");
+        }
     });
-  })
+})
+
+{% comment %} console.log(test); {% endcomment %}
+{% comment %} let imgNajla = document.querySelector('.a1').getAttribute("src") {% endcomment %}
+
+document.querySelector('.btn-product-gallery').onclick = () => {
+    imgGallery.style.right = "0";
+    selectedImage.attr("src",clickedImageSrc)
+}
+
+ document.querySelector('#close-login-btn').onclick = () => {
+    imgGallery.style.right = "-200%";
+}
+
+
+
+
+{% comment %} $(document).ready(function() {
+    $(".btn-product-gallery").click(function() {
+      var clickedImageSrc = $(this).attr("src");
+      $(".image-container img").attr("src", clickedImageSrc);
+    });
+  }) {% endcomment %}
+
+
+
+
 </script>
 
 
