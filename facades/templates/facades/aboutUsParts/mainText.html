@@ -7,7 +7,9 @@
                 <h2 class="title text-center mb-2">{{site.fname}}</h2><!-- End .title text-center mb-2 -->
                 <p class="text-center">{{site.aboutUs}}
                 <br><br>
-                <img src="{% static 'facades/images/about/aboutus.png' %}" alt="image" class="mx-auto mb-6">
+                {% for banner in banners.ay %}
+                <img src="{{banner.image.url}}" alt="image" class="mx-auto mb-6">
+                {% endfor %}
             </div><!-- End .about-text -->
         </div><!-- End .col-lg-10 offset-1 -->
     </div><!-- End .row -->

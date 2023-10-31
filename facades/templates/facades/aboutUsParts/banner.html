@@ -1,9 +1,9 @@
 {% load static %}
 
-
-<div class="page-header text-center" style="background-image: url({% static 'facades/images/about/coverAbout.jpg' %})">
+{% for banner in banners.au %}
+<div class="page-header text-center" style="background-image: url({{banner.image.url}})">
     <div class="container">
-        <h1 class="page-title" style="color:#fff">درباره {{site.fname}}</h1>
+        <h1 class="page-title" style="color:#000">درباره {{site.fname}}</h1>
     </div><!-- End .container -->
 </div><!-- End .page-header -->
 <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -14,3 +14,4 @@
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
+{% endfor %}

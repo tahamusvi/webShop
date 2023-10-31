@@ -7,7 +7,9 @@
 
 {% block main %}
 <main class="main">
-            <div class="page-header text-center" style="background-image: url({% static 'facades/images/banners/FAQBanner2.jpg' %})">
+            {% for banner in banners.ne %}
+            <div class="page-header text-center" style="background-image: url({{banner.image.url}})">
+            {% endfor %}
                 <div class="container">
                     <h1 class="page-title" style="color:#fff">اخبار و پست ها</h1>
                 </div><!-- End .container -->

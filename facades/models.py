@@ -13,6 +13,13 @@ for_what_choices = (
         ('t2',"category2"),
         ('t3',"category3"),
         ('ct',"category page"),
+        ('ds',"dashboard"),
+        ('ne',"news"),
+        ('au',"aboutUs"),
+        ('ay',"aboutUsBanner"),
+        ('co',"contact"),
+        ('fq',"FAQ"),
+        ('to',"Track Order"),
 
 )
 #----------------------------------------------------------------------------------------------

@@ -12,8 +12,9 @@
 
     
         <main class="main">
-
-            <div class="page-header text-center" style="background-image: url({% static 'facades/images/tracking.png' %})">
+            {% for banner in banners.to %}
+            <div class="page-header text-center" style="background-image: url({{banner.image.url}})">
+                {% endfor %}
                 <div class="container">
                     <h1 class="page-title" style="color:#ffffff">گزارش سفارش</h1>
                 </div><!-- End .container -->

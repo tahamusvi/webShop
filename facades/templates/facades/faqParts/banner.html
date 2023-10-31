@@ -1,7 +1,7 @@
 {% load static %}
 
-
-<div class="page-header text-center" style="background-image: url({% static 'facades/images/banners/BannerFAQ.jpg' %})">
+{% for banner in banners.fq %}
+<div class="page-header text-center" style="background-image: url({{banner.image.url}})">
     <div class="container">
         <h1 class="page-title">سوالات متداول</h1>
     </div><!-- End .container -->
@@ -14,3 +14,4 @@
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
+{% endfor %}

@@ -10,10 +10,12 @@
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
+{% for banner in banners.co %}
 <div class="container">
     <div class="page-header page-header-big text-center"
-        style="background-image: url({% static 'facades/images/contactBanner.png' %})">
-        <h1 class="page-title text-white">تماس با {{site.fname}}<span class="text-white">ارتباط خود را با {{site.fname}} حفظ
-                کنید</span></h1>
+        style="background-image: url({{banner.image.url}})">
+        {% comment %} <h1 class="page-title text-white">تماس با {{site.fname}}<span class="text-white">ارتباط خود را با {{site.fname}} حفظ
+                کنید</span></h1> {% endcomment %}
     </div><!-- End .page-header -->
 </div><!-- End .container -->
+{% endfor %}
