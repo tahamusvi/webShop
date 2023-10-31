@@ -14,6 +14,7 @@ messages_dict = {
     "not_available" : 'کالا در انبار موجود نیست!',
     "not_available_amount" : 'کالا تنها به تعداد d عدد در انبار موجود است!',
     "added_cart" : 'با موفقیت کالا به سبد خرید اضافه شد.',
+    "too_many_ordered" : 'شما تمام موجودی انبار را سفارش داده اید.'
 }
 
 color_messages = {
@@ -34,7 +35,6 @@ def detail(request):
     site = ConfigShop.objects.get(current=True)
     return render(request,'cart/detail.html',{'cart':cart,'wishlistAmount':wishlistAmount,'CartAmount':CartAmount,'site':site})
 #-----------------------------------------------------------------------------------
-
 def cart_add(request,product_id):
     if not request.user.is_authenticated:
         messages.success(request,messages_dict['not_logined'],color_messages['error'])
@@ -56,8 +56,14 @@ def cart_add(request,product_id):
                     messages.error(request,messages_dict['not_available_amount'].replace("d",str(product.warehouse)),color_messages['error'])
                 return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
 
+            print(cart.amount_product(product.id))
+            if(product.warehouse == cart.amount_product(product.id)):
+                messages.error(request,messages_dict['too_many_ordered'],color_messages['error'])
+                return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
+
             cart.add(product=product,quantity=cd['quantity'],color=request.POST.get('color'))
-            product.change_available(int(cd['quantity']))
+            # product.change_available(int(cd['quantity']))
+            product.ordered_increase(int(cd['quantity']))
             messages.success(request,messages_dict['added_cart'],color_messages['success'])
         return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
 
@@ -74,7 +80,8 @@ def cart_add(request,product_id):
 def cart_remove(request,product_id_color):
     cart = Cart(request)
     product = get_object_or_404(Product,id=product_id_color.split("-")[0])
-    product.change_available(-1 * cart.remove(product_id_color))
+    # product.change_available(-1 * cart.remove(product_id_color))
+    product.ordered_increase(-1 * cart.remove(product_id_color))
     return redirect('cart:detail')
 #-----------------------------------------------------------------------------------
 @login_required

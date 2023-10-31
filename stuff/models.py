@@ -73,6 +73,8 @@ class Product(models.Model):
     description = models.TextField()
     more_info = models.TextField()
 
+    ordered = models.IntegerField(default=0)
+
 
     product_barcode = models.IntegerField(blank=True,null=True)
 
@@ -107,6 +109,12 @@ class Product(models.Model):
     def get_comments(self):
         comments = self.comments.all().filter(valid=True)
         return comments
+
+    def ordered_increase(self,amount):
+        self.ordered += 1
+        return True
+
+        
 
     @property
     def is_new(self):

@@ -26,7 +26,7 @@ class Cart:
 
         if product_cart_id not in self.cart:
             self.cart[product_cart_id] = {'quantity':0,'price':str(product.discounted_price_int),'color':color,
-            'color_per':Color.objects.get(en=color).name,'id':product_cart_id}
+            'color_per':Color.objects.get(en=color).name,'id':product_cart_id,'product_id':str(product.id)}
         self.cart[product_cart_id]['quantity'] += quantity
         
         
@@ -38,6 +38,15 @@ class Cart:
             del self.cart[product_cart_id]
             self.save()
             return quantity
+
+    def amount_product(self,product_id):
+        amount = 0
+        for key in self.cart:
+            if(self.cart[key]['product_id'] == f"{product_id}"):
+                amount += int(self.cart[key]['quantity'])
+        return amount
+        
+
 
 
     

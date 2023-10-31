@@ -9,6 +9,7 @@ import smtplib
 import random
 from .models import User, Comment, ProductComment, Address ,ArticleComment
 from stuff.models import Product
+from facades.models import ConfigShop
 from blog.models import Article
 from .forms import (UserLoginForm, UserCreationForm, CommentForm, UserChangeForm, AddressForm, ChangePasswordForm,
                     ForgotPasswordForm, ForgotPasswordWithEmailForm, CheckForm)
@@ -68,8 +69,9 @@ def user_login(request):
                 messages.error(request,messages_dict['login_error'],color_messages['error'])
 
     Loginform = UserLoginForm()
-    Registerform = UserCreationForm()      
-    return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
+    Registerform = UserCreationForm()
+    site = ConfigShop.objects.get(current=True)     
+    return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform,'site':site})
 #------------------------------------------------------------------------------------------------
 @login_required
 def profile(request):
@@ -98,8 +100,9 @@ def forgotPasswordWithPhone(request):
             return redirect("accounts:CheckCodeForgot",user.phoneNumber)
     else:
         ForgotProfile = ForgotPasswordForm()
+        site = ConfigShop.objects.get(current=True)
 
-    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی'})
+    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی','site':site})
 #------------------------------------------------------------------------------------------------
 from config.settings import shop_email,password_email
 def forgotPasswordWithEmail(request):
@@ -127,8 +130,9 @@ def forgotPasswordWithEmail(request):
             return redirect("accounts:CheckCodeForgot",user.phoneNumber)
     else:
         ForgotProfile = ForgotPasswordWithEmailForm()
+        site = ConfigShop.objects.get(current=True)
 
-    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی'})
+    return render(request, 'accounts/forgotPassword.html', {'Form': ForgotProfile,'btn_text':'ارسال کد بازیابی','site':site})
 #------------------------------------------------------------------------------------------------
 def CheckCodeForgot(request,phoneNumber):
     user = User.objects.get(phoneNumber=phoneNumber)
@@ -147,8 +151,9 @@ def CheckCodeForgot(request,phoneNumber):
             
     else:
         CheckcodeForm = CheckForm()
+        site = ConfigShop.objects.get(current=True)
 
-    return render(request, 'accounts/forgotPassword.html', {'Form': CheckcodeForm,'btn_text':'تایید کد'})
+    return render(request, 'accounts/forgotPassword.html', {'Form': CheckcodeForm,'btn_text':'تایید کد','site':site})
 
 #------------------------------------------------------------------------------------------------
 def ChangePasswordForgot(request,phoneNumber):
@@ -189,8 +194,9 @@ def ChangePasswordForgot(request,phoneNumber):
             
     else:
         ChangeForm = ChangePasswordForm()
+        site = ConfigShop.objects.get(current=True)
 
-    return render(request, 'accounts/forgotPassword.html', {'Form': ChangeForm,'btn_text':'تغییر رمز'})
+    return render(request, 'accounts/forgotPassword.html', {'Form': ChangeForm,'btn_text':'تغییر رمز','site':site})
 #------------------------------------------------------------------------------------------------
 @login_required
 def user_logout(request):
