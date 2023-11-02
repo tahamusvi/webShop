@@ -905,7 +905,7 @@ blockquote.text-white cite span {
 
 .header-dropdown>a::after,
 .header-dropdown>span::after {
-  font-family: "molla";
+  font-family: "Gizmo";
   content: '\f110';
   position: absolute;
   left: 0;
@@ -1880,7 +1880,7 @@ blockquote.text-white cite span {
   }
 
   .top-menu:not(.top-link-menu)>li::after {
-    font-family: "molla";
+    font-family: "Gizmo";
     content: '\f110';
     position: absolute;
     left: 0;
@@ -2190,7 +2190,7 @@ blockquote.text-white cite span {
 }
 
 .menu.sf-arrows .sf-with-ul::after {
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\f110';
   position: absolute;
   left: 0;
@@ -2483,7 +2483,7 @@ blockquote.text-white cite span {
 
 .category-dropdown .dropdown-toggle:after {
   content: '\f131';
-  font-family: 'molla';
+  font-family: 'Gizmo';
   border: none;
   font-size: 2.3rem;
   line-height: 0;
@@ -2700,7 +2700,7 @@ blockquote.text-white cite span {
 
 .menu-vertical.sf-arrows .sf-with-ul::after {
   display: block;
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\f111';
   position: absolute;
   left: 1.8rem;
@@ -3058,7 +3058,7 @@ blockquote.text-white cite span {
 }
 
 .mmenu-btn::after {
-  font-family: "molla";
+  font-family: "Gizmo";
   content: '\f110';
   display: inline-block;
 }
@@ -4985,7 +4985,7 @@ p {
   display: block;
   height: auto;
   content: '';
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\f110';
   position: absolute;
   right: auto;
@@ -10510,7 +10510,7 @@ a:focus {
 .breadcrumb-item+.breadcrumb-item:before {
   color: #999999;
   content: '\f111';
-  font-family: "molla";
+  font-family: "Gizmo";
   padding-left: .7rem;
   font-size: 1.1rem;
   vertical-align: middle;
@@ -10845,7 +10845,7 @@ a:focus {
   left: 1.2rem;
   top: 50%;
   color: var(--custom-color);
-  font-family: "molla";
+  font-family: "Gizmo";
   line-height: 1;
   transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -12273,7 +12273,7 @@ a:focus {
   font-size: 1.4rem;
   letter-spacing: 0.1em;
   line-height: 1;
-  font-family: "molla";
+  font-family: "Gizmo";
 }
 
 .ratings:before,
@@ -12370,7 +12370,7 @@ a:focus {
 }
 
 .btn-product:before {
-  font-family: "molla";
+  font-family: "Gizmo";
   margin-left: .9rem;
 }
 
@@ -12444,7 +12444,7 @@ a:focus {
 }
 
 .btn-product-icon:before {
-  font-family: "molla";
+  font-family: "Gizmo";
 }
 
 .btn-product-icon span {
@@ -14487,7 +14487,7 @@ a:focus {
 /*--------------------- 4.13.Testimonials -------------------- */
 /* Testimonials */
 .testimonial-icon:before {
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\f10d';
   display: inline-block;
   font-style: normal;
@@ -14639,7 +14639,7 @@ small.form-text {
 }
 
 .select-custom::after {
-  font-family: "molla";
+  font-family: "Gizmo";
   content: '\f110';
   position: absolute;
   display: inline-block;
@@ -14722,7 +14722,7 @@ small.form-text {
   color: #fff;
   background-image: none;
   font-size: 1rem;
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\ec2d';
   line-height: 1;
   text-align: center;
@@ -15698,7 +15698,7 @@ small.form-text {
   height: 5rem;
   margin-top: -2.5rem;
   margin-left: -2.5rem;
-  font-family: "molla";
+  font-family: "Gizmo";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -16765,7 +16765,7 @@ button:focus {
   color: #333333;
   content: '\f110';
   display: block;
-  font-family: 'molla';
+  font-family: 'Gizmo';
   font-size: 1.4rem;
   line-height: 1;
   position: absolute;
@@ -16864,7 +16864,7 @@ button:focus {
 
 .filter-colors a:after {
   color: #fff;
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\ec2d';
   font-size: 1rem;
   line-height: 1;
@@ -18113,7 +18113,7 @@ button:focus {
 
 .entry-video a:after {
   content: '\ec2c';
-  font-family: "molla";
+  font-family: "Gizmo";
   display: -ms-inline-flexbox;
   display: inline-flex;
   align-items: center;
@@ -18229,7 +18229,7 @@ button:focus {
 }
 
 .read-more:after {
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\f273';
   font-size: 1.5rem;
   line-height: 1;
@@ -18395,7 +18395,7 @@ button:focus {
   color: #fff;
   position: absolute;
   content: '\f24d';
-  font-family: "molla";
+  font-family: "Gizmo";
   top: 2.6rem;
 }
 
@@ -18812,7 +18812,7 @@ button:focus {
   font-weight: normal;
   font-size: 3rem;
   line-height: 1;
-  font-family: 'molla';
+  font-family: 'Gizmo';
   position: absolute;
   right: 3rem;
   top: 4rem;
@@ -18976,7 +18976,7 @@ button:focus {
 .pager-link:after {
   color: #333;
   display: block;
-  font-family: 'molla';
+  font-family: 'Gizmo';
   font-size: 1.5rem;
   line-height: 1;
   position: absolute;
@@ -19140,7 +19140,7 @@ button:focus {
 }
 
 .comment-reply:after {
-  font-family: 'molla';
+  font-family: 'Gizmo';
   content: '\f279';
   font-size: 1.5rem;
   margin-left: .7rem;
@@ -22376,7 +22376,7 @@ button:focus {
 }
 
 .nav-dashboard .nav-link:before {
-  font-family: "molla";
+  font-family: "Gizmo";
   content: '\f273';
   display: block;
   font-size: 1.5rem;
@@ -22783,7 +22783,7 @@ button:focus {
 .trackorder-progressbar li.active .progressbar-track:before {
   background: #f1dcca;
   background: var(--custom-color);
-  font-family: "molla";
+  font-family: "Gizmo";
   content: "\e801";
   z-index: 2;
 }
@@ -24003,24 +24003,24 @@ button:focus {
 /*--------------------- 7.Font Icons -------------------- */
 /* Font Icons */
 @font-face {
-  font-family: 'molla';
-  src: url("../fonts/molla0ab2.eot");
-  src: url("../fonts/molla0ab2.eot#iefix") format("embedded-opentype"), url("../fonts/molla0ab2.woff2") format("woff2"), url("../fonts/molla0ab2.woff") format("woff"), url("../fonts/molla0ab2.ttf") format("truetype"), url("../fonts/molla0ab2.svg#molla") format("svg");
+  font-family: 'Gizmo';
+  src: url("../fonts/Gizmo0ab2.eot");
+  src: url("../fonts/Gizmo0ab2.eot#iefix") format("embedded-opentype"), url("../fonts/Gizmo0ab2.woff2") format("woff2"), url("../fonts/Gizmo0ab2.woff") format("woff"), url("../fonts/Gizmo0ab2.ttf") format("truetype"), url("../fonts/Gizmo0ab2.svg#Gizmo") format("svg");
   font-weight: normal;
   font-style: normal
 }
 
 @font-face {
-  font-family: 'molla2';
-  src: url("../fonts/molla2.eot");
-  src: url("../fonts/molla2.eot#iefix") format("embedded-opentype"), url("../fonts/molla2.ttf") format("woff2"), url("../fonts/molla2.woff") format("woff"), url("../fonts/molla2.ttf") format("truetype"), url("../fonts/molla2.svg#molla2") format("svg");
+  font-family: 'Gizmo2';
+  src: url("../fonts/Gizmo2.eot");
+  src: url("../fonts/Gizmo2.eot#iefix") format("embedded-opentype"), url("../fonts/Gizmo2.ttf") format("woff2"), url("../fonts/Gizmo2.woff") format("woff"), url("../fonts/Gizmo2.ttf") format("truetype"), url("../fonts/Gizmo2.svg#Gizmo2") format("svg");
   font-weight: normal;
   font-style: normal
 }
 
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
-  font-family: "molla";
+  font-family: "Gizmo";
   font-style: normal;
   font-weight: normal;
   speak: none;
@@ -27119,7 +27119,7 @@ table.invoice-table th {
   left: 0;
   color: #fff;
   z-index: 3;
-  font-family: "molla2";
+  font-family: "Gizmo2";
   font-size: 16px;
   content: "\e9a0";
   line-height: 1;
@@ -27220,7 +27220,7 @@ table.invoice-table th {
   display: none;
   left: 14px;
   top: 8px;
-  font-family: "molla2";
+  font-family: "Gizmo2";
   font-size: 14px;
   z-index: 1;
   padding: 5px;
@@ -27299,7 +27299,7 @@ table.invoice-table th {
 
 .lookbook .lookbook-block .lookbook-dot .dot-showbox .dot-info a::before {
   content: '\e812';
-  font-family: "molla";
+  font-family: "Gizmo";
   position: relative;
   top: -2px;
   margin-left: .4rem;
