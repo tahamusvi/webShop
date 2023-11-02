@@ -13,6 +13,7 @@ if(deploy):
     merchant = os.getenv('MERCHANT', 'LIARA_URL is not set.')
     DEBUG = os.getenv('DEBUG', 'LIARA_URL is not set.')
     admin_url = os.getenv('ADMIN', 'LIARA_URL is not set.')
+    ip_find = os.getenv('IPFIND', 'LIARA_URL is not set.')
 else:
     # local
     SECRET_KEY = config('SECRET_KEY')
@@ -20,6 +21,7 @@ else:
     password_email = config('EMAIL_HOST_PASSWORD')
     merchant = config('MERCHANT')
     admin_url = config('ADMIN')
+    ip_find = config('IPFIND')
     DEBUG = True
 
 

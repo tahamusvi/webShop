@@ -1,5 +1,6 @@
 from django.db import models
 import requests
+from config.settings import ip_find
 
 class UserVisit(models.Model):
     user_identifier = models.CharField(max_length=255)  # اضافه کردن فیلد user_identifier
@@ -22,7 +23,7 @@ class UserVisit(models.Model):
             super().save(*args, **kwargs)
 
     def get_user_location(self):
-        url = f"https://api.ipgeolocation.io/ipgeo?apiKey=2c2e2adf0b9245c39fc6e563d89b4c27&ip={self.ip_address}"  # کلید API خود را وارد کنید
+        url = f"https://api.ipgeolocation.io/ipgeo?apiKey={ip_find}&ip={self.ip_address}"  # کلید API خود را وارد کنید
 
         print(self.ip_address)
         # try:
