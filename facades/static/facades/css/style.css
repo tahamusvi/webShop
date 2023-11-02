@@ -27476,23 +27476,23 @@ table.invoice-table th {
 }
 
 /*# sourceMappingURL=style.css.map */
-
+/* Saman say delete this and i commented */
 @media(max-width:450px){
   .slide-image{
-    height: 30rem;
+    /* height: 30rem; */
       color: #fafafa;
   }
   .intro-slider-container{
-    height: 30rem;
+    /* height: 30rem; */
     background-color : #fafafa !important;
   }
 
   .slider-container-1:before, .intro-slider-1 .slide-image:before {
-    padding-top: 83.3333333333%;
+    /* padding-top: 83.3333333333%; */
     background-color: #fafafa;
   }
 
-  .avazi{
+  /* .avazi{
     width: auto !important;
     height: 30rem !important; 
   }
@@ -27505,7 +27505,7 @@ table.invoice-table th {
   .avazi3{
     width: auto !important;
     height: 55rem !important; 
-  }
+  } */
 
   
 }
