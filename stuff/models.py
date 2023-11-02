@@ -154,7 +154,7 @@ class Product(models.Model):
             #     random_products = random.sample(list(other_products), remaining_count)
             #     similar_products = list(similar_products) + random_products
         
-        return similar_products
+        return similar_products.filter(available=True)
 #-----------------------------------------------------------------------------------
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/')
