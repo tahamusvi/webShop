@@ -337,6 +337,8 @@ def add_address(request):
             address = form.save(commit=False)
             address.phone_number = request.user.phoneNumber
             address.user = request.user
+            if(request.user.addresses.all().count() == 0):
+                address.current = True
             address.save()
             messages.success(request, messages_dict["add_address"],  color_messages['success'])
             return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('administratorship:dashboard')

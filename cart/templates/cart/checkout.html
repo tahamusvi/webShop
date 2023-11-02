@@ -31,6 +31,7 @@
                             <div class="row">
 
                                 <div class="col-lg-9">
+                                {% if request.user.addresses.all.count > 0 %}
                                     <h2 class="checkout-title">آدرس انتخاب شده برای ارسال:</h2><!-- End .checkout-title -->
                                     
                                         <p class="checkout-title">{{caddress.text}} - کد پستی: {{caddress.postal_code}}</p>
@@ -38,7 +39,8 @@
 
 
                                     <h2 class="checkout-title">آدرس ها:</h2><!-- End .checkout-title -->
-                                    <form class="" action="{% url 'accounts:change_main_address' %}" method="post">{% csrf_token %}
+                                    
+                                        <form class="" action="{% url 'accounts:change_main_address' %}" method="post">{% csrf_token %}
                                     {% for address in request.user.addresses.all %}
 
                                     <div class="custom-control custom-radio">
@@ -54,6 +56,10 @@
                                             </button>
 
                                     </form>
+
+                                    {% else %}
+                                        <p class="checkout-title">هنوز آدرسی وارد نکرده اید.</p>
+                                    {% endif %}
 
                                     <h2 class="checkout-title">افزودن آدرس جدید</h2><!-- End .checkout-title -->
                                     <form action="{% url 'accounts:add_address' %}" method="post"> {% csrf_token %}
