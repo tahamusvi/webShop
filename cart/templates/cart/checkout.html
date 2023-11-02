@@ -159,7 +159,12 @@
                                                     </div><!-- End .card-header -->
                                                     <div id="collapse-3" class="collapse" aria-labelledby="heading-3"
                                                         data-parent="#accordion-payment">
-                                                        <div class="card-body"> <a href="{% url 'orders:order_create_receipt' caddress.id %}" class="btn btn-outline-primary-2 btn-order btn-block">آپلود رسید</a>
+                                                        <div class="card-body"> 
+                                                        {% if has_address == True %}
+                                                            <a href="{% url 'orders:order_create_receipt' caddress.id %}" class="btn btn-outline-primary-2 btn-order btn-block">آپلود رسید</a>
+                                                        {% else %}
+                                                        هنوز آدرس خود را وارد نکرده اید.
+                                                        {% endif %}
                                                         </div><!-- End .card-body -->
                                                     </div><!-- End .collapse -->
                                                 </div><!-- End .card -->
@@ -177,7 +182,11 @@
                                                 <div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
                                                     data-parent="#accordion-payment">
                                                     <div class="card-body">
+                                                        {% if has_address == True %}
                                                          <a href="{% url 'orders:order_create' caddress.id %}" class="btn btn-outline-primary-2 btn-order btn-block">انتقال به درگاه</a>
+                                                        {% else %}
+                                                        هنوز آدرس خود را وارد نکرده اید.
+                                                        {% endif %}
                                                     </div><!-- End .collapse -->
                                                 </div><!-- End .card -->
 

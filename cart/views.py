@@ -93,8 +93,16 @@ def checkout(request):
     cart = Cart(request)
     # print(cart.discount)
     addressForm = AddressForm()
+    print(request.user.addresses.filter(current=True).count())
+    if(request.user.addresses.filter(current=True).count() > 0):
+        has_address = True
+        current_address = request.user.addresses.filter(current=True)[0]
+    else:
+        has_address = False
+        current_address = None
+    
 
-    return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'caddress':request.user.addresses.filter(current=True)[0],"addressForm":addressForm,'site':site})
+    return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'has_address':has_address,'caddress':current_address,"addressForm":addressForm,'site':site})
 #-----------------------------------------------------------------------------------
 # @require_POST
 # def coupon_apply(request):  
