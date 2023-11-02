@@ -68,10 +68,10 @@ def factor(request,order_id):
     site = ConfigShop.objects.get(current=True) 
     order = get_object_or_404(Order,id=order_id)
     if (order.user != request.user) and not(request.user.is_admin):
-        return render(request,'facades/404.html',{'order':order})
+        return render(request,'facades/404.html',{'order':order,'site':site})
     if order.paid :
         return render(request,'orders/factor.html',{'order':order,'site':site})
-    return render(request,'facades/404.html',{'order':order})
+    return render(request,'facades/404.html',{'order':order,'site':site})
 #-----------------------------------------------------------------------------------
 
 #Zarinpal
