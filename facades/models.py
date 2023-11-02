@@ -19,6 +19,7 @@ for_what_choices = (
         ('ay',"aboutUsBanner"),
         ('co',"contact"),
         ('fq',"FAQ"),
+        ('ff',"full width FAQ"),
         ('to',"Track Order"),
 
 )
