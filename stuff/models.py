@@ -142,19 +142,21 @@ class Product(models.Model):
         return self.more_info.replace('\n', '<br>')
 
     def get_similar_products(self):
-        similar_products = Product.objects.filter(category__in=self.category.all()).exclude(id=self.id)[:6]
-        
-        if similar_products.count() < 6:
-            remaining_count = 6 - similar_products.count()
-            other_products = Product.objects.exclude(category__in=self.category.all()).exclude(id=self.id)
-            similar_products = similar_products | other_products
-            # if(remaining_count > other_products.count()):
-            #     similar_products = list(similar_products) + list(other_products)
-            # else:
-            #     random_products = random.sample(list(other_products), remaining_count)
-            #     similar_products = list(similar_products) + random_products
-        
-        return similar_products.filter(available=True)
+        product_ids = []
+        for category in self.category.all():
+            product_ids.extend(category.products.filter(available=True).exclude(id=self.id).values_list('id', flat=True)[:6])
+
+        remain = 6 - len(product_ids)
+        while(remain > 0):
+            product_ids.extend(Product.objects.filter(available=True).exclude(id=self.id).values_list('id', flat=True))
+            product_ids = list(set(product_ids))
+            remain = 6 - len(product_ids)
+
+        product_ids = product_ids[:6]
+
+        similar_products = Product.objects.filter(id__in=product_ids).distinct()
+
+        return similar_products
 #-----------------------------------------------------------------------------------
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='web_shop/products/%Y/%m/')
