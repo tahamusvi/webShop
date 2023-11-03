@@ -24004,8 +24004,8 @@ button:focus {
 /* Font Icons */
 @font-face {
   font-family: 'Gizmo';
-  src: url("../fonts/Gizmo0ab2.eot");
-  src: url("../fonts/Gizmo0ab2.eot#iefix") format("embedded-opentype"), url("../fonts/Gizmo0ab2.woff2") format("woff2"), url("../fonts/Gizmo0ab2.woff") format("woff"), url("../fonts/Gizmo0ab2.ttf") format("truetype"), url("../fonts/Gizmo0ab2.svg#Gizmo") format("svg");
+  src: url("../fonts/gizmo0ab2.eot");
+  src: url("../fonts/gizmo0ab2.eot#iefix") format("embedded-opentype"), url("../fonts/gizmo0ab2.woff2") format("woff2"), url("../fonts/gizmo0ab2.woff") format("woff"), url("../fonts/gizmo0ab2.ttf") format("truetype"), url("../fonts/gizmo0ab2.svg#Gizmo") format("svg");
   font-weight: normal;
   font-style: normal
 }

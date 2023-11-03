@@ -3,8 +3,8 @@
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>Copyright (C) 2019 by original authors @ fontello.com</metadata>
 <defs>
-<font id="molla" horiz-adv-x="1000" >
-<font-face font-family="molla" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<font id="gizmo" horiz-adv-x="1000" >
+<font-face font-family="gizmo" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
 <glyph glyph-name="google-1" unicode="&#xe800;" d="M953 339c0-277-189-473-469-473-268 0-484 216-484 484s216 484 484 484c131 0 241-47 325-126l-132-127c-172 166-493 41-493-231 0-169 135-306 300-306 192 0 264 138 275 209h-275v167h462c4-25 7-49 7-81z" horiz-adv-x="953.1" />
 
