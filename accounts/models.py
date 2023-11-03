@@ -9,6 +9,7 @@ send_ways = (
         ('c' , "درون شهری"),
         ('b' , "اتوبوس"),
         ('p', "پست معمولی"),
+        ('t',"تیپاکس (پس کرایه)"),
     )
 # ----------------------------------------------------------------------------------------------------------------------------
 class ProfileUser(models.Model):
@@ -36,7 +37,7 @@ class User(AbstractBaseUser):
     wishlist = models.ManyToManyField(Product,blank=True,related_name ="wishlist")
     informing = models.ManyToManyField(Product,blank=True,related_name ="informing")
 
-    last_send_way = models.CharField(max_length=1,choices = send_ways,default='p')
+    last_send_way = models.CharField(max_length=1,choices = send_ways,default='t')
 
 
 
