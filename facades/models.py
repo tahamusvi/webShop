@@ -27,8 +27,8 @@ for_what_choices = (
 class ConfigShop(models.Model):
     fname = models.CharField(max_length=200)
     ename = models.CharField(max_length=200)
-    logo = models.ImageField(upload_to='web_shop/config/logo/')
-    black_logo = models.ImageField(upload_to='web_shop/config/logo/')
+    logo = models.ImageField(upload_to='media/config/logo/')
+    black_logo = models.ImageField(upload_to='media/config/logo/')
 
     phone = models.CharField(max_length=12)
     phone_number = models.CharField(max_length=12)
@@ -84,7 +84,7 @@ class shop(models.Model):
     address = models.TextField()
     postal_code = models.CharField(max_length=10)
     phone = models.CharField(max_length=10)
-    image = models.ImageField(upload_to='web_shop/banners/')
+    image = models.ImageField(upload_to='media/banners/')
 
 
     def __str__(self):
@@ -93,7 +93,7 @@ class shop(models.Model):
 class banner(models.Model):
     bigTitle = models.CharField(max_length=200)
     smallTitle = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='web_shop/banners/%Y/%m/')
+    image = models.ImageField(upload_to='media/banners/%Y/%m/')
     for_what = models.CharField(max_length=2,choices=for_what_choices)
     main_link = models.CharField(max_length=200)
     out_link = models.CharField(max_length=200)

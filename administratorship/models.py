@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class ExcelStuff(models.Model):
-    file = models.FileField(upload_to='web_shop/excels/')
+    file = models.FileField(upload_to='media/excels/')
     created = models.DateField(auto_now_add=True)
 
 

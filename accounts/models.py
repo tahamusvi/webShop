@@ -13,7 +13,7 @@ send_ways = (
     )
 # ----------------------------------------------------------------------------------------------------------------------------
 class ProfileUser(models.Model):
-    image = models.ImageField(upload_to='web_shop/users/%Y/%m/')
+    image = models.ImageField(upload_to='media/users/%Y/%m/')
     bio = models.CharField(max_length=500)
 
     def __str__(self):
