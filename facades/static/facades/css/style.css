@@ -15659,14 +15659,14 @@ small.form-text {
 .intro-slider-1 .slide-image:before {
   padding-top: 56.5384615385%;
 }
-
+/* 
 @media screen and (max-width: 479px) {
 
   .slider-container-1:before,
   .intro-slider-1 .slide-image:before {
     padding-top: 83.3333333333%;
   }
-}
+} */
 
 .slider-container-ratio .intro-slider,
 .slide-image>picture,
