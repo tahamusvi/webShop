@@ -1,0 +1,42 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}
+{% include 'facades/parts/css.html' %}
+{% endblock %}
+
+
+
+{% block main %}
+
+        {% include 'facades/home_parts/banners.html' %}
+
+        <div class="mb-6"></div><!-- End .mb-6 -->
+
+        {% include 'facades/home_parts/categories.html' %}
+
+        
+        
+        
+
+        
+
+        {% include 'facades/home_parts/category.html' %}
+
+        {% if request.user.is_authenticated %}
+                {% include 'facades/home_parts/watched_products.html' %}
+        {% endif %}
+
+
+
+
+        {% include 'facades/home_parts/Slogan.html' %}
+
+        
+
+        
+
+
+        
+
+{% endblock %}

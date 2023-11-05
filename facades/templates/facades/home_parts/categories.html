@@ -1,0 +1,105 @@
+{% load static %}
+
+
+<div class="mb-6"></div><!-- End .mb-6 -->
+{% for cat in categories %}
+<div class="container">
+
+
+    <div class="heading heading-center mb-3">
+        <h2 class="title-lg">{{cat.name}}</h2><!-- End .title -->
+
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+            {% comment %} <li class="nav-item">
+                <a class="nav-link active" id="trendy-all-link" data-toggle="tab" href="#trendy-all-tab"
+                    role="tab" aria-controls="trendy-all-tab" aria-selected="true">همه</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="trendy-fur-link" data-toggle="tab" href="#trendy-fur-tab" role="tab"
+                    aria-controls="trendy-fur-tab" aria-selected="false">مبل</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="trendy-decor-link" data-toggle="tab" href="#trendy-decor-tab"
+                    role="tab" aria-controls="trendy-decor-tab" aria-selected="false">دکور</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="trendy-light-link" data-toggle="tab" href="#trendy-light-tab"
+                    role="tab" aria-controls="trendy-light-tab" aria-selected="false">روشنایی</a>
+            </li> {% endcomment %}
+        </ul>
+    </div><!-- End .heading -->
+
+    <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="trendy-all-tab" role="tabpanel"
+            aria-labelledby="trendy-all-link">
+            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
+                data-toggle="owl" data-owl-options='{
+                    "nav": false,
+                    "dots": true,
+                    "margin": 20,
+                    "loop": false,
+                    "rtl": true,
+                "responsive": {
+                        "0": {
+                            "items":2
+                        },
+                        "480": {
+                            "items":2
+                        },
+                        "768": {
+                            "items":3
+                        },
+                        "992": {
+                            "items":4
+                        },
+                        "1200": {
+                            "items":4,
+                            "nav": true,
+                            "dots": false
+                        }
+                    }
+                }'>
+
+                {% for product in cat.products.all %}
+
+                <div class="product product-11 text-center">
+                    <figure class="product-media">
+                      <span class="product-label label-sale">{{product.discount}}% </span>
+                        <a href="{{product.get_absolute_url}}">
+                            <img src="{{product.image.url}}" alt="{{product.alt}}"
+                                class="product-image">
+                            <img src="{{product.images.first.image.url}}" alt="{{product.alt}}"
+                                class="product-image-hover">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <a href="{% url 'accounts:AddToWish' product.id %}" class="btn-product-icon btn-wishlist"><span>افزودن به
+                                    لیست علاقه مندی</span></a>
+                        </div><!-- End .product-action-vertical -->
+                    </figure><!-- End .product-media -->
+
+                    <div class="product-body">
+                        <h3 class="product-title text-center"><a href="{{product.get_absolute_url}}">{{product.name}}</a>
+                        </h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">
+                            <strike>{{product.price}}  تومان</strike>
+                            </div>
+                        <div class="product-price">
+                            {{product.discounted_price}} تومان
+                        </div><!-- End .product-price -->
+                    </div><!-- End .product-body -->
+                    <div class="product-action">
+                        <a href="{% url 'cart:cart_add' product.id %}" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+                    </div><!-- End .product-action -->
+                </div><!-- End .product -->
+
+                {% endfor %}
+            </div><!-- End .owl-carousel -->
+        </div><!-- .End .tab-pane -->
+
+
+
+    </div><!-- End .tab-content -->
+</div><!-- End .container -->
+{% endfor %}
