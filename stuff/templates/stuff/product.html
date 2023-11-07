@@ -426,48 +426,28 @@
 
 
 <script>
-let selectedImage = document.querySelector('.img-selected')
-let imgGallery = document.querySelector('.image-container')
-$(document).ready(function() {
-    $(".another-image-option").click(function (){
-        let clickedImageSrc = $(this).attr("src");
-      $(".imageNajla img").attr("src", clickedImageSrc);
-        document.querySelector('.btn-product-gallery').onclick = () => {
-            imgGallery.style.right = "0";
-            $(document).ready(function() {
-                $(".another-image-option").click(function () {
-                    let clickedImageSrc = $(this).attr("src");
-                    selectedImage.attr("src", clickedImageSrc);
-                });
-            });
-            console.log("dfgdfg");
+
+
+const mainImage = document.querySelector('.a1');
+        const optionImages = document.querySelectorAll('.product-gallery-item');
+        const imageContainer = document.querySelector('.image-container')
+
+        // Add a click event listener to each option image
+        optionImages.forEach(function(anyoptionImage) {
+        anyoptionImage.addEventListener('click', function() {
+            // Replace the source of the main image with the clicked option image
+            mainImage.src = anyoptionImage.src;
+        });
+        });
+
+        document.querySelector('.btn-product-gallery').addEventListener('click', function(){
+            document.querySelector('.img-selected').src = mainImage.src;
+            imageContainer.style.right = "0";
+        })
+
+        document.querySelector('#close-login-btn').onclick = () => {
+            imageContainer.style.right = "-200%";
         }
-    });
-})
-
-{% comment %} console.log(test); {% endcomment %}
-{% comment %} let imgNajla = document.querySelector('.a1').getAttribute("src") {% endcomment %}
-
-document.querySelector('.btn-product-gallery').onclick = () => {
-    imgGallery.style.right = "0";
-    selectedImage.attr("src",clickedImageSrc)
-}
-
- document.querySelector('#close-login-btn').onclick = () => {
-    imgGallery.style.right = "-200%";
-}
-
-
-
-
-{% comment %} $(document).ready(function() {
-    $(".btn-product-gallery").click(function() {
-      var clickedImageSrc = $(this).attr("src");
-      $(".image-container img").attr("src", clickedImageSrc);
-    });
-  }) {% endcomment %}
-
-
 
 
 </script>

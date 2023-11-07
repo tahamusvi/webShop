@@ -3,9 +3,10 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from .settings import admin_url
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('608305.txt', TemplateView.as_view(template_name='608305.txt', content_type='text/plain')),
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path(f'{admin_url}/', admin.site.urls),
     path('', include('facades.urls')),
