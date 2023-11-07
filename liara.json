@@ -1,0 +1,8 @@
+{
+    "disks":[
+        {
+            "name": "data",
+            "mountTo": "media"
+        }
+    ]
+}
