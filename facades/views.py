@@ -17,7 +17,7 @@ messages_dict = {
 def InformationsForTemplate(request):
     Info = {}
     # Categories
-    allCategories = Category.objects.filter(is_sub=False)
+    allCategories = Category.objects.filter(is_sub=False)[:10]
     #wishlist
     wishlistAmount = 0
     if(request.user.is_authenticated):
@@ -47,6 +47,28 @@ def InformationsForTemplate(request):
 
     return Info
 #----------------------------------------------------------------------------------------------
+def HomePage2(request):
+    print("--------------------------")
+    # discounted stuff
+    discounted = Product.objects.filter(available=True,discounted=True)[::-1][0:6]
+    # New stuff in website
+    news = Product.objects.filter(available=True)
+    news_list = [s.id for s in news if s.is_new][0:8]
+    news = news.filter(id__in=news_list)
+    
+    
+    Info = InformationsForTemplate(request)
+    Info["productsOfDiscount"] = discounted
+    Info["products"] = news
+    Info["articles"] = Article.objects.filter(is_for_landing=True)[0:3]
+    if request.user.is_authenticated:
+        Info["watched"] = request.user.wacthed.all().order_by('timestamp')[::-1][0:4]
+    
+
+    Info["categories"] = Category.objects.all()
+
+    return render(request,'facades/category_home.html',Info)
+#----------------------------------------------------------------------------------------------
 def HomePage(request):
     print("--------------------------")
     # discounted stuff
@@ -64,6 +86,7 @@ def HomePage(request):
     if request.user.is_authenticated:
         Info["watched"] = request.user.wacthed.all().order_by('timestamp')[::-1][0:4]
     
+
 
     return render(request,'facades/landing.html',Info)
 #----------------------------------------------------------------------------------------------

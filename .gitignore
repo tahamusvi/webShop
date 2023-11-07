@@ -4,3 +4,5 @@ db.sqlite3
 web_shop
 not
 liara.json
+media
+liara_nginx.conf
