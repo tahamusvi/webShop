@@ -15,13 +15,9 @@
 
         {% include 'facades/home_parts/categories.html' %}
 
-        
-        
-        
 
+         {% include 'facades/home_parts/2col.html' %}      
         
-
-        {% include 'facades/home_parts/category.html' %}
 
         {% if request.user.is_authenticated %}
                 {% include 'facades/home_parts/watched_products.html' %}
@@ -33,10 +29,4 @@
         {% include 'facades/home_parts/Slogan.html' %}
 
         
-
-        
-
-
-        
-
 {% endblock %}
