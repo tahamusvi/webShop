@@ -23,6 +23,10 @@ for_what_choices = (
         ('to',"Track Order"),
 
 )
+home_page_choices = (
+    ('a1' , "discounted_showcase"),
+    ('a2' , "category_showcase"),
+)
 #----------------------------------------------------------------------------------------------
 class ConfigShop(models.Model):
     fname = models.CharField(max_length=200)
@@ -46,6 +50,8 @@ class ConfigShop(models.Model):
 
 
     current = models.BooleanField(default=False)
+
+    home_page = models.CharField(max_length=2,choices=home_page_choices,default="a1")
 
     
 

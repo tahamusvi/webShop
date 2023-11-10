@@ -47,8 +47,8 @@ def InformationsForTemplate(request):
 
     return Info
 #----------------------------------------------------------------------------------------------
-def HomePage2(request):
-    print("--------------------------")
+from .models import home_page_choices
+def HomePage(request):
     # discounted stuff
     discounted = Product.objects.filter(available=True,discounted=True)[::-1][0:6]
     # New stuff in website
@@ -64,31 +64,10 @@ def HomePage2(request):
     if request.user.is_authenticated:
         Info["watched"] = request.user.wacthed.all().order_by('timestamp')[::-1][0:4]
     
-
     Info["categories"] = Category.objects.all()
 
-    return render(request,'facades/category_home.html',Info)
-#----------------------------------------------------------------------------------------------
-def HomePage(request):
-    print("--------------------------")
-    # discounted stuff
-    discounted = Product.objects.filter(available=True,discounted=True)[::-1][0:6]
-    # New stuff in website
-    news = Product.objects.filter(available=True)
-    news_list = [s.id for s in news if s.is_new][0:8]
-    news = news.filter(id__in=news_list)
-    
-    
-    Info = InformationsForTemplate(request)
-    Info["productsOfDiscount"] = discounted
-    Info["products"] = news
-    Info["articles"] = Article.objects.filter(is_for_landing=True)[0:3]
-    if request.user.is_authenticated:
-        Info["watched"] = request.user.wacthed.all().order_by('timestamp')[::-1][0:4]
-    
 
-
-    return render(request,'facades/landing.html',Info)
+    return render(request,f"facades/{dict(home_page_choices)[Info['site'].home_page]}.html",Info)
 #----------------------------------------------------------------------------------------------
 def contact(request):
     Info = InformationsForTemplate(request)
