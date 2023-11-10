@@ -197,7 +197,7 @@
 
                                 <li class="item-lead"><a href="{% url 'facades:home' %}">خانه</a></li>
                                 <li class="item-lead"><a href="{% url 'administratorship:dashboard' %}">داشبورد</a></li>
-                                <li class="item-lead"><a href="{% url 'blog:home_blog' %}">اخبار</a></li>
+                                {% if site.news %} <li class="item-lead"><a href="{% url 'blog:home_blog' %}">اخبار</a></li> {% endif %}
                                 <li class="item-lead"><a href="{% url 'facades:aboutUs' %}">درباره {{site.fname}}</a></li>
                                 <li class="item-lead"><a href="{% url 'facades:contact' %}">ارتباط با {{site.fname}}</a></li>
                                 <li class="item-lead"><a href="{% url 'facades:FAQ' %}">سوالات متداول</a></li>

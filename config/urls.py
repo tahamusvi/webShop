@@ -3,6 +3,9 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from .settings import admin_url
+from facades.models import ConfigShop
+
+# news = ConfigShop.objects.get(current=True).news
 
 urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
@@ -15,6 +18,11 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('dashboard/', include('administratorship.urls')),
 ]
+
+# if(news):
+#     urlpatterns += [
+#         path('blog/', include('blog.urls')),
+#     ]
 
 if not settings.DEBUG:
     handler404 = 'facades.views.handler404'
