@@ -21,6 +21,7 @@ for_what_choices = (
         ('fq',"FAQ"),
         ('ff',"full width FAQ"),
         ('to',"Track Order"),
+        ('ru',"Rules"),
 
 )
 home_page_choices = (
@@ -85,6 +86,13 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+#----------------------------------------------------------------------------------------------
+class Rule(models.Model):
+    title = models.CharField(max_length=100)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
 #----------------------------------------------------------------------------------------------
 class shop(models.Model):
     name = models.CharField(max_length=100)

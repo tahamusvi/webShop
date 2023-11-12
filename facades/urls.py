@@ -9,4 +9,5 @@ urlpatterns = [
     path('CreateSurvey/',CreateSurvey,name="CreateSurvey"),
     path('aboutUs/',aboutUs,name="aboutUs"),
     path('FAQ/',FAQ,name="FAQ"),
+    path('rules/',rules,name="rules"),
 ]

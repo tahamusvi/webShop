@@ -1,0 +1,102 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}{% include 'facades/parts/css.html' %}{% endblock %}
+
+
+
+{% block main %}
+
+
+
+<main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url "facades:home" %}">خانه</a></li>
+                        <li class="breadcrumb-item"><a >قوانین</a></li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <figure class="entry-media"  style="Height : 50rem;overflow-y: hidden">
+                {% for banner in banners.ru %}
+                    <img class="avazi3" src="{{banner.image.url}}" alt="توضیحات عکس" style="">
+                {% endfor %}
+                </figure><!-- End .entry-media -->
+                <div class="container">
+                    <article class="entry single-entry entry-fullwidth">
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <div class="entry-body">
+                                    <div class="entry-meta">
+                                        
+                                    
+                                    </div><!-- End .entry-meta -->
+
+                                    <h2 class="entry-title entry-title-big">
+                                        قوانین سایت
+                                    </h2><!-- End .entry-title -->
+
+                                    
+
+                                    <div class="entry-content editor-content">
+
+                                        
+                                        <div class="pb-1"></div><!-- End .pb-1 -->
+                                
+
+                                        {% for rule in rules %}
+                                            <h3>{{rule.title}}</h3>
+
+                                        <div class="pb-1"></div><!-- End .pb-1 -->
+
+                                        <p>{{rule.text}}</p>
+
+
+
+                                        {% endfor %}
+                                        
+
+                                        <div class="pb-1"></div><!-- End .pb-1 -->
+
+                                        
+                                        
+                                    </div><!-- End .entry-content -->
+
+                                    
+
+                            <div class="col-lg-1 order-lg-first mb-2 mb-lg-0">
+                                <div class="sticky-content">
+                                    <div class="social-icons social-icons-colored social-icons-vertical">
+                                       {% comment %} <span class="social-label">اشتراک گذاری</span>
+                                        <a href="#" class="social-icon social-facebook" title="فیسبوک"
+                                            target="_blank"><i class="icon-facebook-f"></i></a>
+                                        <a href="#" class="social-icon social-twitter" title="توییتر" target="_blank"><i
+                                                class="icon-twitter"></i></a>
+                                        <a href="#" class="social-icon social-pinterest" title="پینترست"
+                                            target="_blank"><i class="icon-pinterest"></i></a>
+                                        <a href="#" class="social-icon social-linkedin" title="لینکدین"
+                                            target="_blank"><i class="icon-linkedin"></i></a> {% endcomment %}
+                                    </div><!-- End .soial-icons -->
+                                </div><!-- End .sticky-content -->
+                            </div><!-- End .col-lg-1 -->
+                        </div><!-- End .row -->
+
+                        
+
+                            
+
+                    
+
+                    
+
+
+                    
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+{% endblock %}

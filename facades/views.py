@@ -79,6 +79,13 @@ def aboutUs(request):
 
     return render(request,'facades/aboutUs.html',Info)
 #----------------------------------------------------------------------------------------------
+from .models import Rule
+def rules(request):  
+    Info = InformationsForTemplate(request)
+    rules = Rule.objects.all()
+    Info['rules'] = rules
+    return render(request,'facades/rules.html',Info)
+#----------------------------------------------------------------------------------------------
 def FAQ(request):
     FAQG = FAQGroup.objects.all()
     Info = InformationsForTemplate(request)

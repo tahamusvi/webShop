@@ -54,6 +54,10 @@
                             <a href="{% url 'facades:contact' %}">ارتباط با {{site.fname}}</a>
                         </li>
 
+                        <li {% if request.resolver_match.url_name == 'rules' %} class="active" {% endif %} >
+                            <a href="{% url 'facades:rules' %}">قوانین سایت</a>
+                        </li>
+
                         <li {% if request.resolver_match.url_name == 'FAQ' %} class="active" {% endif %} >
                             <a href="{% url 'facades:FAQ' %}">سوالات متداول</a>
                         </li>
