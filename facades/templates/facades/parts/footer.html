@@ -72,18 +72,21 @@
 
 
                 {% comment %} ENAMAD  {% endcomment %}
-                {% comment %} <div class="col-sm-6 col-lg-3">
+                 <div class="col-sm-6 col-lg-3">
                     <div class="widget">
-                        <h4 class="widget-title">نماد ها:</h4><!-- End .widget-title -->
+                        {% comment %} <h4 class="widget-title">نماد ها:</h4><!-- End .widget-title --> {% endcomment %}
 
-                        <ul class="widget-list" style=" display: flex; flex-wrap: wrap; gap:4rem">
+                        {% comment %} <ul class="widget-list" style=" display: flex; flex-wrap: wrap; gap:4rem">
                              <img src="{{site.logo.url}}" class="footer-logo" alt="Footer Logo"
-                            width="105" height="45" >
+                            width="105" height="45" > {% endcomment %}
+
+
+                            {{site.e_namad|safe}}
                              
                             
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
-                </div><!-- End .col-sm-6 col-lg-3 --> {% endcomment %}
+                </div><!-- End .col-sm-6 col-lg-3 --> 
 
 
 

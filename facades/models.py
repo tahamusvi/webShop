@@ -55,6 +55,8 @@ class ConfigShop(models.Model):
     home_page = models.CharField(max_length=2,choices=home_page_choices,default="a1")
     news = models.BooleanField(default=True)
 
+    e_namad = models.TextField()
+
     
 
 
