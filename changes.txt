@@ -1,0 +1,13 @@
+1.merge vahdat shop
+  Applying accounts.0040_user_link_dargah_user_redirect... OK
+  Applying accounts.0041_rename_link_dargah_user_redirect_url... OK
+  Applying accounts.0042_user_order_id... OK
+  Applying accounts.0043_user_is_active_code... OK
+  Applying facades.0035_banner_abs_link... OK
+  Applying facades.0036_configshop_active_dargah... OK
+  Applying orders.0013_order_interception_code... OK
+  Applying orders.0014_order_not_confirm... OK
+  Applying stuff.0033_product_price_bus_product_price_incity_and_more... OK
+  Applying stuff.0034_remove_product_price_bus_remove_product_price_incity_and_more... OK
+  Applying stuff.0035_alter_product_transit_price... OK
+  Applying stuff.0036_alter_product_dirham_price... OK
