@@ -13,6 +13,42 @@
                                 href="#tab-dashboard" role="tab" aria-controls="tab-dashboard"
                                 aria-selected="true">داشبورد</a>
                         </li>
+                        
+                        
+                        {% if request.user.is_admin %}
+                        <li class="nav-item">
+                            <a class="nav-link" id="add-product-group-link" data-toggle="tab" href="#tab-add-product-group"
+                                role="tab" aria-controls="add-product-group" aria-selected="false">اضافه کردن گروهی محصولات</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="orders-pending-confirmation-link" data-toggle="tab" href="#tab-orders-pending-confirmation"
+                                role="tab" aria-controls="orders-pending-confirmation" aria-selected="false">سفارشات در انتظار تایید اولیه</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="orders-pending-shipping-link" data-toggle="tab" href="#tab-orders-pending-shipping"
+                                role="tab" aria-controls="orders-pending-shipping" aria-selected="false">سفارشات در انتظار ارسال</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="orders-delivered-link" data-toggle="tab" href="#tab-orders-delivered"
+                                role="tab" aria-controls="orders-delivered" aria-selected="false">سفارشات در انتظار تایید تحویل</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="orders-final-link" data-toggle="tab" href="#tab-orders-final"
+                                role="tab" aria-controls="orders-final" aria-selected="false">سفارشات پایان یافته</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="orders-not-confirm-link" data-toggle="tab" href="#tab-orders-not-confirm"
+                                role="tab" aria-controls="orders-not-confirm" aria-selected="false">سفارشات تایید نشده</a>
+                        </li>
+
+                        {% else %}
+
                         <li class="nav-item">
                             <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"
                                 role="tab" aria-controls="tab-orders" aria-selected="false">سفارشات</a>
@@ -25,12 +61,6 @@
                             <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account"
                                 role="tab" aria-controls="tab-account" aria-selected="false">جزئیات حساب
                                 کاربری</a>
-                        </li>
-                        
-                        {% if request.user.is_admin %}
-                        <li class="nav-item">
-                            <a class="nav-link" id="add-product-group-link" data-toggle="tab" href="#tab-add-product-group"
-                                role="tab" aria-controls="add-product-group" aria-selected="false">اضافه کردن گروهی محصولات</a>
                         </li>
                         
                         {% endif %}
@@ -77,7 +107,18 @@
                         {% if request.user.is_admin %}
 
                             {% include "administratorship/dashboardPart/addProductGroup.html" %}
-                        
+
+                            {% include "administratorship/dashboardPart/OrdersPendingConfirmation.html" %}
+
+                            {% include "administratorship/dashboardPart/OrdersPendingShipping.html" %}
+
+                            {% include "administratorship/dashboardPart/OrdersDelivered.html" %}
+
+                            {% include "administratorship/dashboardPart/OrdersFinal.html" %}
+
+                            {% include "administratorship/dashboardPart/OrdersNotConfirm.html" %}
+
+
                         {% endif %}
 
 

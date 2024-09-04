@@ -9,6 +9,7 @@ from facades.views import InformationsForTemplate
 from config.settings import merchant
 from facades.models import ConfigShop
 from stuff.models import Product
+from config.settings import SMS_PASSWORD,ADMIN_PHONE
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',
@@ -38,8 +39,9 @@ def detail(request,order_id):
     Info['order'] = order
     Info['form'] = form
 
-    if (order.user != request.user) and not(request.user.is_admin):
-        return render(request,'facades/404.html', Info)
+    if order.user != request.user:
+        if not(request.user.is_admin):
+            return render(request,'facades/404.html', Info)
     
     if order.paid or order.receipt_bool:
         return render(request,'orders/trackOrders.html', Info)
@@ -79,133 +81,123 @@ from django.http import HttpResponse
 import requests
 import json
 
-if False:
-    sandbox = 'sandbox'
-else:
-    sandbox = 'www'
-
 
 MERCHANT = merchant
-ZP_API_REQUEST = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentRequest.json"
-ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentVerification.json"
-ZP_API_STARTPAY = f"https://{sandbox}.zarinpal.com/pg/StartPay/"
+gateway_send= 'https://bitpay.ir/payment/gateway-send'
+gateway_second = 'https://bitpay.ir/payment/gateway-result-second'
+
+# gateway_send_test= 'https://bitpay.ir/payment-test/gateway-send'
+# gateway_second_test = 'https://bitpay.ir/payment-test/gateway-result-second'
 # amount = 11000  # Rial / Required
 description = "گیزموشاپ"  # Required
 email = 'email@example.com'  # Optional
 # mobile = '09123456789'  # Optional
 # Important: need to edit for realy server.
-CallbackURL = 'http://localhost:8000/orders/verify/'
+CallbackURL = 'https://vahdat-sh.ir/orders/verify/'
 
 o_id = 1450
 user = None
+
+merchant_test = "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567"
+merchant2 = "03e8b-e1775-76e11-362e1-7b4f39c1867976ae3974c0170c2e"
 #-----------------------------------------------------------------------------------
 def send_request(request,order_id):
-    global o_id
-    o_id = order_id
-
-    try:
-        user_order = Order.objects.get(id=o_id)
-    except Order.DoesNotExist:
-        messages.success(request,messages_dict['not_order'],color_messages['error'])
-        return redirect('facades:home')
-
-    amount = user_order.total_price()
-
-
-    data = {
-        "MerchantID": MERCHANT,
-        "Amount": amount,
-        "Description": description,
-        "Phone": user_order.user.phoneNumber,
-        "CallbackURL": CallbackURL,
-    }
-    data = json.dumps(data)
-    # set content length by data
-    headers = {'content-type': 'application/json', 'content-length': str(len(data)) }
-    try:
-        response = requests.post(ZP_API_REQUEST, data=data,headers=headers, timeout=10)
-
-        
-        response_dict = json.loads(response.text)
-        status = response_dict['Status']
-        authority = response_dict['Authority']
-
-
-        if(status == 100):
-            redirect_url = f"{ZP_API_STARTPAY}{authority}"
-            return redirect(redirect_url)
-        
-        user_order.delete()
-        messages.success(request,messages_dict['not_connected'],color_messages['error'])
-        return redirect('cart:detail')
-
-
+    user = request.user
     
-    except requests.exceptions.Timeout:
-        messages.success(request,messages_dict['too_long'],color_messages['error'])
-        return redirect('cart:detail')
-    except requests.exceptions.ConnectionError:
-        messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
-        return redirect('cart:detail')
+    user.redirect = True
+    user.order_id = order_id
+    
+    user.save()
+    return redirect('facades:home')
+    
 #-----------------------------------------------------------------------------------
 def verify(request):
-    t_status = request.GET.get('Status')
-    t_authority = request.GET['Authority']
 
-    global o_id
+    trans_id = request.GET.get('trans_id')
+    id_get = request.GET['id_get']
+
+
+    data = {}
+
+    data['trans_id'] = trans_id
+    data['id_get'] = id_get
+    data['api'] = merchant2
+    data['json'] = 1
+
+    response = requests.post(gateway_second, data)
+
+    response_dict = response.json()
+
+
+    status = response_dict['status']
+    amount_dar = response_dict['amount']
+    cardNum = response_dict['cardNum']
+    order_id = response_dict['factorId']
+
     try:
-        user_order = Order.objects.get(id=o_id)
+        order = Order.objects.get(id=order_id)
     except Order.DoesNotExist:
         messages.success(request,messages_dict['not_order'],color_messages['error'])
         return redirect('facades:home')
 
-    amount = user_order.total_price()
+    amount = order.total_price()
 
-    
-    if(t_status == "NOK"):
+    # if(amount == amount_dar):
+    #     print("ok")
+
+    if(status in [-1,-2,-3,-4]):
         messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
         return redirect('cart:detail')
-    
-    elif(t_status == "OK"):
-        data = {
-            "MerchantID": MERCHANT,
-            "Amount": amount,
-            "Authority": t_authority,
+
+    elif(status == 1):
+        order.paid = True
+        order.ref_id = id_get
+        order.authority = trans_id
+        order.save()
+        cart = Cart(request)
+        cart.clear()
+        #change amount of wearhouse
+
+        # send sms to Customer
+        user = request.user
+        sms = Client(SMS_PASSWORD)
+
+        pattern_values = {
+            "username": str(user.full_name),
+            "order-code": str(order.get_order_number())
         }
-    
-        data = json.dumps(data)
-        # set content length by data
-        headers = {'content-type': 'application/json', 'content-length': str(len(data)) }
-        response = requests.post(ZP_API_VERIFY, data=data,headers=headers)
 
-        response_dict = json.loads(response.text)
-        status = response_dict['Status']
-        RefID = response_dict['RefID']
+        message_id = sms.send_pattern(
+            "bxve3ieo3u6ywg2",    # pattern code
+            "+983000505",      # originator
+            f"98{user.phoneNumber[1:]}",  # recipient
+            pattern_values,  # pattern values
+        )
+        print(f"message sended to customer id: {message_id}")
 
-        if status == 100:
-                order = Order.objects.get(id=o_id)
-                order.paid = True
-                order.ref_id = RefID
-                order.authority = t_authority
-                order.save()
-                cart = Cart(request)
-                cart.clear()
-                #change amount of wearhouse
-                messages.success(request,messages_dict['success'],color_messages['success'])
-                return redirect('facades:dashboard')
 
-        elif status == 101:
-            cart = Cart(request)
-            cart.clear()
-            messages.success(request,messages_dict['payed'],color_messages['gray'])
-            return redirect('facades:dashboard')
+        # send sms to Admin
+        message_id = sms.send_pattern(
+            "71hahbwqbep8qw5",    # pattern code
+            "+983000505",      # originator
+            f"98{ADMIN_PHONE[1:]}",  # recipient
+            {"order-code": str(order.get_order_number()), },  # pattern values
+        )
 
-        else:
-            messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
-            return redirect('cart:detail')
-    else:
-        messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
-        return redirect('cart:detail')
+        print(f"message sended to admin id: {message_id}")
+
+
+
+
+        
+        messages.success(request,messages_dict['success'],color_messages['success'])
+        return redirect('administratorship:dashboard')
+
+    elif status == 11:
+        cart = Cart(request)
+        cart.clear()
+        messages.success(request,messages_dict['payed'],color_messages['gray'])
+        return redirect('administratorship:dashboard')
 #-----------------------------------------------------------------------------------
 @login_required
 def order_create(request,address_id):

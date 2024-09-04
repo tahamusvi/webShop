@@ -1,0 +1,33 @@
+{% load static %}
+
+
+<div class="tab-pane fade" id="tab-orders-delivered" role="tabpanel"
+                            aria-labelledby="orders-delivered-link">
+                            
+                            <p>سفارشات در انتظار تایید تحویل :</p>
+
+
+                            {% for order in orders_deliveried %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card card-dashboard">
+                                            <div class="card-body">
+                                                <h3 class="card-title">سفارش {{order.id}} - {{order.user.full_name}}</h3><!-- End .card-title -->
+
+                                                <p>
+                                                    {{order.get_total_price}} تومان<br>
+                                                    {{order.discount_string}}<br>
+                                                    تاریخ ثبت : {{order.shamsi_date}}<br>
+                                                    
+                                                    
+                                                    <a href="{% url 'administratorship:check_product_list' order.id %}">بررسی سفارش <i class="icon-cog"></i></a>
+                                                    
+                                                    </p>
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .card-dashboard -->
+                                    </div><!-- End .col-lg-12 -->
+                                </div><!-- End .row -->
+                            {% endfor %}
+
+                            
+                        </div><!-- .End .tab-pane -->

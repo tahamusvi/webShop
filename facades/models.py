@@ -57,6 +57,8 @@ class ConfigShop(models.Model):
 
     e_namad = models.TextField()
 
+    active_dargah = models.BooleanField(default=True)
+
     
 
 
@@ -117,9 +119,13 @@ class banner(models.Model):
     button = models.CharField(max_length=200,null=True,blank=True)
     arg = models.CharField(max_length=200,null=True,blank=True)
 
+    abs_link = models.CharField(max_length=200,null=True,blank=True)
+
 
 
     def get_absolute_url(self):
+        if(self.abs_link):
+            return self.abs_link
         args = []
         if(self.arg):
             args = self.arg.split(',')

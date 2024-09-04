@@ -24,6 +24,7 @@ class User(AbstractBaseUser):
     full_name = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_active_code = models.BooleanField(default=False)
     email = models.EmailField(unique=True)
     profile = models.OneToOneField(ProfileUser,on_delete=models.SET_NULL,blank=True,null=True,related_name="user") 
     
@@ -38,6 +39,11 @@ class User(AbstractBaseUser):
     informing = models.ManyToManyField(Product,blank=True,related_name ="informing")
 
     last_send_way = models.CharField(max_length=1,choices = send_ways,default='t')
+
+
+    redirect_url = models.CharField(max_length=300,default="False")
+    order_id = models.IntegerField(default=0)
+    redirect = models.BooleanField(default=False)
 
 
 

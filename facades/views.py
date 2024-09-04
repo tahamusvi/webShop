@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from stuff.models import Product,Category
@@ -8,6 +8,8 @@ from blog.models import Article
 from cart.cart import Cart
 from accounts.views import color_messages
 from accounts.forms import UserLoginForm,UserCreationForm, UserChangeForm, AddressForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "send_success" : "سوالت رو با موفقیت ارسال شد.",
@@ -17,7 +19,7 @@ messages_dict = {
 def InformationsForTemplate(request):
     Info = {}
     # Categories
-    allCategories = Category.objects.filter(is_sub=False)[:10]
+    allCategories = Category.objects.filter(is_sub=False)[:7]
     #wishlist
     wishlistAmount = 0
     if(request.user.is_authenticated):
@@ -47,8 +49,97 @@ def InformationsForTemplate(request):
 
     return Info
 #----------------------------------------------------------------------------------------------
+from orders.models import Order
+import requests
+import json
+messages_dict = {
+    "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',
+    "not_connected" : ' اتصال به درگاه ناموفق بود. لطفا از پرداخت کارت به کارت استفاده نمایید.',
+    "too_long" : 'زمان بیش حد سپری شده برای اتصال به درگاه.',
+    "not_success_connect" : 'اتصال ناموفق.',
+    "success" : 'خرید با موفقیت انجام شد.',
+    "payed" : 'پرداخت انجام شده بوده است.',
+    "not_success_connect" : 'پرداخت ناموفق بود.',
+    "not_upload" : 'آپلود با مشکل مواجه شد.',
+    "success_upload" : "آپلود با موفقیت انجام شد. برای پیگیری سفارش به داشبورد مراجعه کنید.",
+}
+merchant2 = "03e8b-e1775-76e11-362e1-7b4f39c1867976ae3974c0170c2e"
+test_merhant = "adxcv-zzadq-polkjsad-opp13opoz-1sdf455aadzmck1244567"
+CallbackURL = 'https://vahdat-sh.ir/orders/verify/'
+gateway_send= 'https://bitpay.ir/payment/gateway-send'
+email = 'email@example.com'  # Optional
+description = "گیزموشاپ"  # Required
+#----------------------------------------------------------------------------------------------
+def Bitpay(request):
+    print("here wait for bitpay")
+    user = request.user
+
+    try:
+        user_order = Order.objects.get(id=user.order_id)
+    except Order.DoesNotExist:
+        messages.success(request,messages_dict['not_order'],color_messages['error'])
+        return redirect('facades:home')
+
+    amount = user_order.total_price() * 10
+
+
+    data = {}
+    data['api'] = merchant2
+    data['redirect'] = CallbackURL
+    data['amount'] = amount
+
+    data['factorId'] = user.order_id
+    data['name'] = user_order.user.full_name
+    data['email'] = email
+    data['description'] = description
+    # response = requests.post(gateway_send, data)
+
+    
+    
+
+    try:
+        response = requests.post(gateway_send, data)
+        response_dict2 = response.json()
+        id_get = response.text
+        print(f"response: {id_get}")
+
+
+
+        if(int(id_get) > 0):
+            user.redirect = True
+            user.save()
+            user.redirect_url = f"https://bitpay.ir/payment/gateway-{id_get}-get"
+
+            return
+        else:
+            user.redirect = False
+            user.save()
+            user.redirect_url = "false"
+            user_order.delete()
+            messages.success(request,messages_dict['not_connected'],color_messages['error'])
+            return redirect('cart:detail')
+
+
+    
+    except requests.exceptions.Timeout:
+        messages.success(request,messages_dict['too_long'],color_messages['error'])
+        return redirect('cart:detail')
+    except requests.exceptions.ConnectionError:
+        messages.success(request,messages_dict['not_success_connect'],color_messages['error'])
+        return redirect('cart:detail')
+#----------------------------------------------------------------------------------------------
 from .models import home_page_choices
 def HomePage(request):
+
+    if(request.user.is_authenticated):
+        user = request.user
+        if(user.redirect):
+            Bitpay(request)
+
+        if(user.redirect):
+            user.redirect = False
+            user.save()
+            return HttpResponseRedirect(user.redirect_url)
     # discounted stuff
     discounted = Product.objects.filter(available=True,discounted=True)[::-1][0:6]
     # New stuff in website

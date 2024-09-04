@@ -22,6 +22,7 @@
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="{{site.black_logo.url}}">
     <meta name="theme-color" content="#ffffff">
+    <meta name="enamad" content="704910"/>
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{% static 'facades/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'facades/css/bootstrap-rtl.min.css' %}">
@@ -36,6 +37,36 @@
     :root {
       --custom-color: #{{site.color}};
     }
+    
+    @media screen and (max-width: 767px){
+        .col-lg-4 .intro-banners{
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .row-sm .col-lg-12{
+            width: 50%;
+        }
+
+        .banner-display .banner-title{
+          font-size: 1rem;
+        }
+
+        .banner-subtitle {
+          padding-top: 1rem;
+        }
+
+        .btn.banner-link{
+          padding: 0.3rem 0.7rem;
+          font-size: 1rem;
+          margin-bottom:0.5rem;
+        }
+
+    }
+    
     </style>
 
 

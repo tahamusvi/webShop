@@ -73,7 +73,7 @@
                                     </form>
 
                                     <br><br>
-                                    {% comment %} <h2 class="checkout-title">انتخاب روش ارسال:</h2><!-- End .checkout-title -->
+                                    <h2 class="checkout-title">انتخاب روش ارسال:</h2><!-- End .checkout-title -->
                                     <form class="" action="{% url 'accounts:change_send_way' %}" method="post">{% csrf_token %}
                                     
 
@@ -102,7 +102,7 @@
                                                 <i class="icon-long-arrow-left"></i>
                                             </button>
 
-                                    </form> {% endcomment %}
+                                    </form>
 
 
                                 </div><!-- End .col-lg-9 -->
@@ -136,13 +136,18 @@
                                                 </tr>
 
                                                 <tr>
+                                                    <td>هزینه ارسال : </td>
+                                                    <td class="text-left">{{price_way}} تومان</td>
+                                                </tr>
+
+                                                <tr>
                                                     <td>آدرس ارسال : </td>
                                                     <td class="text-left">{{caddress.text}}</td>
                                                 </tr>
                                                 
                                                 <tr class="summary-total">
                                                     <td>مبلغ قابل پرداخت :</td>
-                                                    <td class="text-left">{{cart.get_total_price}} تومان</td>
+                                                    <td class="text-left">{{total}} تومان</td>
                                                 </tr><!-- End .summary-total -->
                                             </tbody>
                                         </table><!-- End .table table-summary -->
@@ -152,18 +157,39 @@
 
 
                                         <div class="accordion-summary" id="accordion-payment">
+                                            {% if site.active_dargah %}
+
+                                            <div class="card">
+                                                <div class="card-header" id="heading-1">
+                                                    <h2 class="card-title">
+                                                        <a  role="button" data-toggle="collapse" href="#collapse-1"
+                                                            aria-expanded="true" aria-controls="collapse-1">
+                                                            از طریق درگاه 
+                                                        </a>
+                                                    </h2>
+                                                </div><!-- End .card-header -->
+                                                <div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
+                                                    data-parent="#accordion-payment">
+                                                    <div class="card-body">
+                                                        {% if has_address == True %}
+                                                         <a href="{% url 'orders:order_create' caddress.id %}" class="btn btn-outline-primary-2 btn-order btn-block">انتقال به درگاه</a>
+                                                        {% else %}
+                                                        هنوز آدرس خود را وارد نکرده اید.
+                                                        {% endif %}
+                                                    </div><!-- End .collapse -->
+                                                </div><!-- End .card -->
                                             
                                             <div class="card">
                                                     <div class="card-header" id="heading-3">
                                                         <h2 class="card-title">
-                                                            <a  role="button" data-toggle="collapse"
-                                                                href="#collapse-3" aria-expanded="true"
+                                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                                                href="#collapse-3" aria-expanded="false"
                                                                 aria-controls="collapse-3">
                                                                کارت به کارت
                                                             </a>
                                                         </h2>
                                                     </div><!-- End .card-header -->
-                                                    <div id="collapse-3" class="collapse show" aria-labelledby="heading-3"
+                                                    <div id="collapse-3" class="collapse " aria-labelledby="heading-3"
                                                         data-parent="#accordion-payment">
                                                         <div class="card-body"> 
                                                         {% if has_address == True %}
@@ -176,25 +202,9 @@
                                                 </div><!-- End .card -->
 
 
-                                            <div class="card">
-                                                <div class="card-header" id="heading-1">
-                                                    <h2 class="card-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1"
-                                                            aria-expanded="false" aria-controls="collapse-1">
-                                                            از طریق درگاه 
-                                                        </a>
-                                                    </h2>
-                                                </div><!-- End .card-header -->
-                                                <div id="collapse-1" class="collapse " aria-labelledby="heading-1"
-                                                    data-parent="#accordion-payment">
-                                                    <div class="card-body">
-                                                        {% if has_address == True %}
-                                                         <a href="{% url 'orders:order_create' caddress.id %}" class="btn btn-outline-primary-2 btn-order btn-block">انتقال به درگاه</a>
-                                                        {% else %}
-                                                        هنوز آدرس خود را وارد نکرده اید.
-                                                        {% endif %}
-                                                    </div><!-- End .collapse -->
-                                                </div><!-- End .card -->
+                                            
+
+                                                {% endif %}
 
                                                 
                                             </div><!-- End .accordion -->

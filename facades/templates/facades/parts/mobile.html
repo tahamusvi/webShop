@@ -40,10 +40,10 @@
                             <a href="{% url 'administratorship:dashboard' %}">داشبورد</a>
                         </li>
 
-                        {% if site.news %} <li {% if request.resolver_match.url_name == 'home_blog' %} class="active" {% endif %} >
+                        {% comment %} {% if site.news %} <li {% if request.resolver_match.url_name == 'home_blog' %} class="active" {% endif %} >
                             <a href="{% url 'blog:home_blog' %}">اخبار</a>
                         </li>
-                         {% endif %}
+                         {% endif %} {% endcomment %}
                         
 
                         <li {% if request.resolver_match.url_name == 'aboutUs' %} class="active" {% endif %} >

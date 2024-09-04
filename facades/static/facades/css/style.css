@@ -12195,8 +12195,8 @@ a:focus {
 }
 
 .product-label.label-sale {
-  color: #fff;
-  background-color: #ef837b;
+  color: red;
+  background-color: transparent;
 }
 
 .product-label.label-new {
@@ -13374,6 +13374,16 @@ a:focus {
   color: var(--custom-color) ;
 }
 
+.product-11 .product-media a img{
+  max-width: 20rem;
+  max-height: fit-content;
+}
+
+.product-media a{
+  display: flex;
+  Justify-content: center;
+  background-color: #fff;
+}
 .product.product-11 .btn-product-icon {
   color: #333;
   border: .1rem solid #ebebeb;
@@ -15089,6 +15099,9 @@ small.form-text {
     justify-content: center;
   }
 }
+
+
+
 
 /*--------------------- 4.16.Tables -------------------- */
 /* Tables */

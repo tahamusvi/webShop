@@ -1,0 +1,182 @@
+{% extends 'facades/base.html' %}
+{% load static %}
+
+{% block css %}{% include 'facades/parts/css.html' %}{% endblock %}
+
+
+{% block main %}
+
+  
+<main class="main">
+
+
+    <div class="page-header text-center" style="background-image: url({% static 'cart/images/page-header-bg.jpg' %})">
+        <div class="container">
+            <h1 class="page-title">لیست محصولات <span>{{site.fname}}</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'facades:home' %}">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">لیست محصولات</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+    
+
+
+
+                <div class="page-content">
+                <div class="cart">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <table class="table table-cart table-mobile">
+                                    <thead>
+                                        <tr>
+                                            <th>محصول</th>
+                                            <th>قیمت</th>
+                                            <th>تعداد</th>
+                                            <th>مجموع با هزینه ارسال</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        
+                                     {% for item in order.items.all %}
+                                        <tr>
+                                            <td class="product-col">
+                                                <div class="product">
+                                                    <figure class="product-media">
+                                                        <a href="{{item.product.get_absolute_url}}">
+                                                            <img src="{{item.product.image.url}}"
+                                                                alt="{{item.product.alt}}">
+                                                        </a>
+                                                    </figure>
+
+                                                    <h3 class="product-title">
+                                                        <a href="{{item.product.get_absolute_url}}">{{item.product}}</a>
+                                                    </h3><!-- End .product-title -->
+                                                </div><!-- End .product -->
+                                            </td>
+                                            <td class="price-col">{{item.price}}</td>
+                                            <td class="quantity-col">
+                                                <div class="cart-product-quantity">
+                                                    {{item.quantity}}
+                                                </div><!-- End .cart-product-quantity -->
+                                            </td>
+                                            <td class="total-col">{{item.get_cost}}</td>
+                                            
+                                                    
+                
+                                        </tr>
+                                        {% endfor %}  
+                                        
+                                    </tbody>
+                                </table><!-- End .table table-wishlist -->
+
+                                <div class="cart-bottom">
+                                    
+                                    
+
+                                    
+                                </div><!-- End .cart-bottom -->
+
+
+
+                                        
+                                
+                            </div><!-- End .col-lg-9 -->
+                            <aside class="col-lg-3">
+                                <div class="summary summary-cart">
+                                    <h3 class="summary-title">جمع سفارش</h3><!-- End .summary-title -->
+
+                                    <table class="table table-summary">
+                                        <tbody>
+                                            <tr class="summary-subtotal">
+                                                <td>جمع کل مبلغ سفارش : </td>
+                                                <td class="text-left">{{order.get_total_price}} تومان</td>
+                                            </tr><!-- End .summary-subtotal -->
+                                                <tr class="summary-subtotal">
+                                                        <td>نام: </td>
+                                                        <td class="text-left">{{order.user.full_name}}</td>
+                                                </tr><!-- End .summary-address -->
+
+                                                <tr class="summary-subtotal">
+                                                        <td>نام: </td>
+                                                        <td class="text-left">{{order.user.phoneNumber}}</td>
+                                                </tr><!-- End .summary-address -->
+
+
+                                                <tr class="summary-subtotal">
+                                                        <td>کد پستی: </td>
+                                                        <td class="text-left">{{order.address.postal_code}}</td>
+                                                </tr><!-- End .summary-address -->
+
+                                                <tr class="summary-subtotal">
+                                                        <td>شهر: </td>
+                                                        <td class="text-left">{{order.address.city}}</td>
+                                                </tr><!-- End .summary-address -->
+
+                                                <tr class="summary-subtotal">
+                                                        <td>آدرس: </td>
+                                                        <td class="text-left">{{order.address.text}}</td>
+                                                </tr><!-- End .summary-address -->
+
+
+                                                {% if order.packing %}
+
+                                                <tr class="summary-subtotal">
+                                                        <td>کد رهگیری: </td>
+                                                        <td class="text-left">{{order.interception_code}}</td>
+                                                </tr><!-- End .summary-address -->
+
+                                                {% endif %}
+
+
+
+
+                                            <tr class="summary-shipping">
+                                                <td>&nbsp;</td>
+                                            </tr>
+
+                                
+                                        </tbody>
+                                    </table><!-- End .table table-summary -->
+                                {% if not order.processed %}
+                                    <a href="{% url 'administratorship:order_confirmation' order.id %}" class="btn btn-outline-primary-2 btn-order btn-block">تایید اولیه سفارش توسط ادمین</a>
+                                    
+                                    <a href="{% url 'administratorship:order_not_confirm' order.id %}" class="btn btn-outline-danger btn-order btn-block">عدم تایید سفارش</a>
+                                {% else %}
+                                    {% if not order.packing %}
+                                        {% comment %} <a href="{% url 'administratorship:order_packing_shipping_confirm' order.id %}" class="btn btn-outline-primary-2 btn-order btn-block">تایید بسته بندی و ارسال</a> {% endcomment %}
+                                        <form action="{% url 'administratorship:order_packing_shipping_confirm' order.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="check_code">کد رهگیری:</label>
+                                            <input type="text" id="check_code" name="check_code" class="form-control" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">تایید بسته بندی و ارسال</button>
+                                    </form>
+                                    
+                                    {% else %}
+                                        {% if not order.deliveried %}
+                                            <a href="{% url 'administratorship:order_delivered_confirm' order.id %}" class="btn btn-outline-primary-2 btn-order btn-block">تایید تحویل گرفته شده</a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                </div><!-- End .summary -->
+
+                            </aside><!-- End .col-lg-3 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .container -->
+                </div><!-- End .cart -->
+            </div><!-- End .page-content -->
+
+
+        
+</main><!-- End .main -->
+
+{% endblock %}

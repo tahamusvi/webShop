@@ -86,14 +86,20 @@ def cart_remove(request,product_id_color):
 #-----------------------------------------------------------------------------------
 @login_required
 def checkout(request):
+    cart = Cart(request)
+    way_optin = request.user.last_send_way
+    # print(way_ooptin)
+    price_way = 0
+    for item in cart:
+        price_way += item['product'].transit_price * item['quantity']
+
+    total = cart.get_total_price() + price_way
+
     site = ConfigShop.objects.get(current=True) 
     wishlistAmount = 0
     if(request.user.is_authenticated):
         wishlistAmount = request.user.wishlist.all().count()
-    cart = Cart(request)
-    # print(cart.discount)
     addressForm = AddressForm()
-    print(request.user.addresses.filter(current=True).count())
     if(request.user.addresses.filter(current=True).count() > 0):
         has_address = True
         current_address = request.user.addresses.filter(current=True)[0]
@@ -102,7 +108,7 @@ def checkout(request):
         current_address = None
     
 
-    return render(request,'cart/checkout.html',{'cart':cart,'wishlistAmount':wishlistAmount,'has_address':has_address,'caddress':current_address,"addressForm":addressForm,'site':site})
+    return render(request,'cart/checkout.html',{'total':total,'price_way':price_way,'cart':cart,'wishlistAmount':wishlistAmount,'has_address':has_address,'caddress':current_address,"addressForm":addressForm,'site':site})
 #-----------------------------------------------------------------------------------
 # @require_POST
 # def coupon_apply(request):  

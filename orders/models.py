@@ -32,8 +32,10 @@ class Order(models.Model):
     authority = models.CharField(max_length=100,blank=True,null=True,default=None)
 
     address = models.ForeignKey(Address,on_delete=models.CASCADE,blank=True,null=True,default=None)
-    
 
+    interception_code = models.CharField(max_length=100,blank=True,null=True)
+
+    not_confirm = models.BooleanField(default=False)
     processed = models.BooleanField(default=False)
     packing = models.BooleanField(default=False) 
     shipped = models.BooleanField(default=False)
@@ -104,7 +106,7 @@ class OrderItem(models.Model):
 
 
     def get_cost(self):
-        return self.product.discounted_price_int * self.quantity
+        return self.product.price_for_order_item * self.quantity 
 
     def get_cost_from_product(self):
         return format(self.product.discounted_price_int * self.quantity)

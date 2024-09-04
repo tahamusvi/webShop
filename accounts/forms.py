@@ -31,6 +31,14 @@ class UserCreationForm(forms.ModelForm):
         return user
 
 #------------------------------------------------------------------------------------------------
+class CheckPhoneForm(forms.ModelForm):
+    code = forms.CharField(label="کد اعتبار سنجی", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '۳۴۵۴۵'}))
+
+    class Meta:
+        model = User
+        fields = ('code', )
+
+#------------------------------------------------------------------------------------------------
 class UserChangeForm(forms.ModelForm):
     phoneNumber = forms.CharField(label="شماره تلفن", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control','readonly': True}))
     full_name = forms.CharField(label="نام شما", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'علی صالحی'}))

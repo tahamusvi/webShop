@@ -4,6 +4,7 @@
 <div class="tab-pane fade" id="tab-add-product-group" role="tabpanel"
                             aria-labelledby="add-product-group-link">
                             <h2 class="checkout-title">آپلود اکسل:</h2><!-- End .checkout-title -->
+                            <h2 class="checkout-title">آیدی اخرین محصول {{last_id}}</h2>
                                     <form action="{% url "administratorship:add_group_of_product" %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
 
                                         {{excelForm}}
@@ -15,4 +16,7 @@
                                         </button>
                                     </form>
                                     
+
+                            
+                        <a href="{% url 'administratorship:export' %}">خروجی اکسل از محصولات</a><!-- End .checkout-title -->
                         </div><!-- .End .tab-pane -->

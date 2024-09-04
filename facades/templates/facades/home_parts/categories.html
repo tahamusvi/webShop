@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load extra %}
 
 <div class="mb-6"></div><!-- End .mb-6 -->
 {% for cat in categories %}
@@ -83,10 +83,10 @@
                         </h3>
                         <!-- End .product-title -->
                         <div class="product-price">
-                            <strike>{{product.price}}  تومان</strike>
+                            <strike>{{product.discounted_price}}  تومان</strike>
                             </div>
                         <div class="product-price">
-                            {{product.discounted_price}} تومان
+                            {{product.price|convert_price}} تومان
                         </div><!-- End .product-price -->
                     </div><!-- End .product-body -->
                     <div class="product-action">

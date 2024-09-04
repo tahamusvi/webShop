@@ -41,7 +41,7 @@
                         <h4 class="widget-title">لینک های مفید</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            {% if site.news %} <li><a href="{% url 'blog:home_blog' %}">اخبار</a></li> {% endif %}
+                            {% comment %} {% if site.news %} <li><a href="{% url 'blog:home_blog' %}">اخبار</a></li> {% endif %} {% endcomment %}
                             <li><a href="{% url 'facades:aboutUs' %}">درباره ما</a></li>
                             <!-- <li><a href="#">خدمات</a></li> -->
                             <li><a href="{% url 'facades:rules' %}">قوانین سایت</a></li>

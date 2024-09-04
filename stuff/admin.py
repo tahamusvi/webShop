@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import *
 from django.utils.html import format_html
-#-------------------------------------------------------------------------
+
+
 class ProductImageItemInline(admin.TabularInline):
     model = ProductImage
     raw_id_fields = ('product',)
@@ -10,10 +11,10 @@ class ProductImageItemInline(admin.TabularInline):
 
 
     def image_tag(self, obj):
-        return format_html('<img src="{}" style="width: 50px; height: auto;" />'.format(obj.image.url))
+        return format_html('<img src="{}" style="width: 50px; height: auto;" />'.format(obj.image))
 
     image_tag.short_description = 'Image'
-#-------------------------------------------------------------------------
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name','slug')
@@ -21,13 +22,13 @@ class CategoryAdmin(admin.ModelAdmin):
 #-------------------------------------------------------------------------
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name','image_tag','price','available','updated','is_new')
+    list_display = ('id','name','image_tag','price','available','updated','is_new','get_categories')
     search_fields = ['name', 'description',]
     prepopulated_fields = {'slug':('name',)}
     list_filter = ('available','created')
     list_editable = ('price',)
     raw_id_fields = ('category',)
-    actions = ('make_available','make_unavailable','add_specific_color')
+    actions = ('make_available','make_unavailable','add_specific_color','make_default_transit')
     inlines = (ProductImageItemInline,)
 
     def make_available(self,request,queryset):
@@ -44,6 +45,10 @@ class ProductAdmin(admin.ModelAdmin):
             product.colors.add(color)
         self.message_user(request, f'The specific color has been added to selected products.')
 
+    def make_default_transit(self,request,queryset):
+        rows = queryset.update(transit_price=100000)
+        self.message_user(request,f'{rows} updated')
+
     def image_tag(self, obj):
         return format_html('<img src="{}" style="width: 50px; height: auto;" />'.format(obj.image.url))
 
@@ -51,6 +56,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     make_available.short_description = 'make all available'
     add_specific_color.short_description = 'Add specific color to selected products'
+    make_default_transit.short_description = 'change transit price to 10000'
 #-------------------------------------------------------------------------
 admin.site.register(Brand)
 admin.site.register(ProductImage)

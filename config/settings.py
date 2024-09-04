@@ -14,6 +14,8 @@ if(deploy):
     DEBUG = os.getenv('DEBUG', 'LIARA_URL is not set.')
     admin_url = os.getenv('ADMIN', 'LIARA_URL is not set.')
     ip_find = os.getenv('IPFIND', 'LIARA_URL is not set.')
+    SMS_PASSWORD = os.getenv('SMS_PASSWORD', 'LIARA_URL is not set.')
+    ADMIN_PHONE = os.getenv('ADMIN_PHONE', 'LIARA_URL is not set.')
 else:
     # local
     SECRET_KEY = config('SECRET_KEY')
@@ -22,7 +24,17 @@ else:
     merchant = config('MERCHANT')
     admin_url = config('ADMIN')
     ip_find = config('IPFIND')
+    SMS_PASSWORD = config('SMS_PASSWORD')
+    ADMIN_PHONE = config('ADMIN_PHONE')
     DEBUG = True
+
+    connect_server = config('CONNECT')
+
+    database_name = config('DB_Name')
+    database_username = config('DB_USERNAME')
+    password = config('DB_PASSWORD')
+    database_hostname_or_ip = config('DB_HOST')
+    database_port = config('DB_PORT')
 
 
 ALLOWED_HOSTS = []
@@ -102,12 +114,24 @@ if(deploy):
         }
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+    if connect_server == '0':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
         }
-    }
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': database_name,
+                'USER': database_username,
+                'PASSWORD': password,
+                'HOST': database_hostname_or_ip,
+                'PORT': database_port
+            }
+        }
 
 
 # Password validation

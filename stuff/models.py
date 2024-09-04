@@ -1,9 +1,9 @@
+from unicodedata import category
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 import random
-
 from django.utils.text import slugify
 #-----------------------------------------------------------------------------------
 class Brand(models.Model):
@@ -78,12 +78,10 @@ class Product(models.Model):
 
     product_barcode = models.IntegerField(blank=True,null=True)
 
-    dirham_price = models.IntegerField(blank=True,null=True) 
+    dirham_price = models.IntegerField(blank=True,null=True,default=17000) 
     dirham_rate = models.IntegerField(blank=True,null=True) 
 
-    transit_price = models.IntegerField(blank=True,null=True)
-
-    
+    transit_price = models.IntegerField(blank=True,null=True,default=100000)
 
 
     discount = models.IntegerField(default=0)
@@ -95,16 +93,25 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('stuff:product_detail',args=[self.slug,self.id])
 
+    def get_categories(self):
+        categories = self.category.all()
+        return "-".join([str(category) for category in categories])
+
+
     @property
     def discounted_price(self):
-        show = int(((self.price)*(100-self.discount))/100)
+        show = int(((self.price)*(100+self.discount))/100)
         formatted_price = "{:,.0f}".format(show)
         return formatted_price
-        
+
     @property
     def discounted_price_int(self):
-        show = int(((self.price)*(100-self.discount))/100)
+        show = int(((self.price)*(100+self.discount))/100)
         return show
+
+    @property
+    def price_for_order_item(self):
+        return self.discounted_price_int + self.transit_price
     
     def get_comments(self):
         comments = self.comments.all().filter(valid=True)
@@ -113,8 +120,6 @@ class Product(models.Model):
     def ordered_increase(self,amount):
         self.ordered += 1
         return True
-
-        
 
     @property
     def is_new(self):
@@ -146,11 +151,11 @@ class Product(models.Model):
         for category in self.category.all():
             product_ids.extend(category.products.filter(available=True).exclude(id=self.id).values_list('id', flat=True)[:6])
 
-        remain = 6 - len(product_ids)
-        while(remain > 0):
-            product_ids.extend(Product.objects.filter(available=True).exclude(id=self.id).values_list('id', flat=True))
-            product_ids = list(set(product_ids))
-            remain = 6 - len(product_ids)
+        # remain = 6 - len(product_ids)
+        # while(remain > 0):
+        #     product_ids.extend(Product.objects.filter(available=True).exclude(id=self.id).values_list('id', flat=True))
+        #     product_ids = list(set(product_ids))
+        #     remain = 6 - len(product_ids)
 
         product_ids = product_ids[:6]
 

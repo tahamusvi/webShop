@@ -12,7 +12,46 @@ from stuff.models import Product
 from facades.models import ConfigShop
 from blog.models import Article
 from .forms import (UserLoginForm, UserCreationForm, CommentForm, UserChangeForm, AddressForm, ChangePasswordForm,
-                    ForgotPasswordForm, ForgotPasswordWithEmailForm, CheckForm)
+                    ForgotPasswordForm, ForgotPasswordWithEmailForm, CheckForm,CheckPhoneForm)
+from config.settings import SMS_PASSWORD
+import requests
+from ippanel import Client
+from stuff.models import Category,Brand
+from cart.cart import Cart
+from facades.models import ConfigShop, shop, banner, Survey, FAQGroup
+#------------------------------------------------------------------------------------------------
+def InformationsForTemplate(request):
+    Info = {}
+    # Categories
+    allCategories = Category.objects.filter(is_sub=False)[:7]
+    #wishlist
+    wishlistAmount = 0
+    if(request.user.is_authenticated):
+        wishlistAmount = request.user.wishlist.all().count()
+    #forms
+    form = UserLoginForm
+    #cart
+    cart = Cart(request)
+    CartAmount = cart.get_count()
+    #forms
+    Loginform = UserLoginForm
+    Registerform= UserCreationForm
+
+    #brands
+    brands = Brand.objects.all()
+
+    #shops
+    shops = shop.objects.all()
+
+    site = ConfigShop.objects.get(current=True)
+
+
+    Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form
+    ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,'site':site}
+    Info["banners"] = banner.filter()
+    Info["footer_articles"] = Article.objects.all()[::-1][0:3]
+
+    return Info
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "logout" : 'بعدا باز برگرد ":)',
@@ -32,6 +71,7 @@ messages_dict = {
     "error_password" : 'گذرواژه های وارد شده یکسان نیستند.',
     "cant_change_password" : 'گذرواژه این کاربر قابل تعویض نیست.',
     "numeric_error" : 'در گذرواژه از حروف نیز استفاده کنید.',
+    "code_error" : 'کد صحیح نمی باشد.',
     "common_error" : 'این گذرواژه خیلی عمومی است.',
     "lentgh_error" : 'این گذرواژه کم تر از هشت کاراکتر دارد.',
     "add_informing" : 'به لیست موردعلاقه ها اضافه شد.', 
@@ -48,9 +88,9 @@ color_messages = {
     "gray" : 'background-color: rgb(108, 105, 105);',
 
 }
+
 #------------------------------------------------------------------------------------------------
 EMAIL_PORT_SSL = 465
-
 #------------------------------------------------------------------------------------------------
 def user_login(request):
     if request.method == 'POST':
@@ -205,8 +245,11 @@ def user_logout(request):
     return redirect('facades:home')
 #------------------------------------------------------------------------------------------------
 def user_register(request):
+    sms = Client(SMS_PASSWORD)
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+        print("hello")
         if form.is_valid():
             cd = form.cleaned_data
             try:
@@ -224,18 +267,62 @@ def user_register(request):
             
             user = form.save(commit=False)
             user.set_password(cd['password1'])
+            user.code = random.randint(10000, 99999)
             user.save()
-            messages.success(request, messages_dict['sign_up'], color_messages['success'])
+
+            # send Code to User
+            pattern_values = {
+                "verification-code": str(user.code),
+            }
+
+            message_id = sms.send_pattern(
+                "e1kymd6lq288ve4",    # pattern code
+                "+983000505",      # originator
+                f"98{user.phoneNumber[1:]}",  # recipient
+                pattern_values,  # pattern values
+            )
+
+
+            print(message_id)
+            
             user = authenticate(request, username=cd['phoneNumber'], password=cd['password1'])
             if user is not None:
                 login(request, user)
-                return redirect('facades:home')
+                return redirect('accounts:check_phone')
         else:
+            print(form.errors)
             messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
     
     Loginform = UserLoginForm()
     Registerform = UserCreationForm()
-    return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform})
+    site = ConfigShop.objects.get(current=True)   
+    return render(request, 'accounts/login.html', {'Loginform': Loginform,'Registerform': Registerform,'site':site})
+#------------------------------------------------------------------------------------------------
+def check_phone(request):
+    if request.method == 'POST':
+        form = CheckPhoneForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            
+            user = request.user
+
+            if str(user.code) == str(cd['code']):
+                user.is_active_code = True 
+                user.save()
+                login(request, user)
+                messages.success(request, messages_dict['sign_up'], color_messages['success'])
+                return redirect('facades:home')
+            else:
+                messages.error(request, messages_dict['code_error'], color_messages['error'])
+                return redirect('accounts:check_phone')
+
+        else:
+            messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
+    
+    CheckPhoneForms = CheckPhoneForm()
+    Info = InformationsForTemplate(request)
+    Info['Form']= CheckPhoneForms
+    return render(request, 'accounts/checkPhone.html', Info)
 #------------------------------------------------------------------------------------------------
 @login_required
 def AddToWish(request, id):
