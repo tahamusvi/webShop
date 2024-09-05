@@ -10,6 +10,45 @@ from django.db import IntegrityError
 from django.db.models import Q
 from orders.models import Order
 from config.settings import SMS_PASSWORD
+from .forms import ConfigShopTextInformationForm
+from facades.models import ConfigShop
+#----------------------------------------------------------------------------------------------
+def configshop_edit(request):
+    Info = InformationsForTemplate(request)
+    configshop = get_object_or_404(ConfigShop, current=True)
+
+    if request.method == 'POST':
+        form = ConfigShopForm(request.POST, request.FILES)
+        print(form)
+        if form.is_valid():
+            print(form.cleaned_data)
+            for field in form.cleaned_data:
+                value = form.cleaned_data[field]
+                if not isinstance(value, bool) and value != None and len(value) > 0 :
+                    setattr(configshop, field, value)
+
+            configshop.save()
+            print("ok boy!")
+            return redirect('facades:home')
+
+        
+    else:
+        return redirect('administratorship:config_dashboard')
+        
+
+    return render(request, 'administratorship/configDashboard.html', Info)
+#----------------------------------------------------------------------------------------------
+@login_required
+def config_dashboard(request):
+    Info = InformationsForTemplate(request)
+    configshop = get_object_or_404(ConfigShop, current=True)
+    Info['config_shop_form'] = ConfigShopTextInformationForm(instance=configshop)
+    Info['config_shop_logo_form'] = ConfigShopLogoForm(instance=configshop)
+    Info['config_shop_color_form'] = ConfigShopColorForm(instance=configshop)
+
+
+
+    return render(request,'administratorship/configDashboard.html',Info)
 #----------------------------------------------------------------------------------------------
 @login_required
 def dashboard(request,address_id = None):

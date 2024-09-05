@@ -47,7 +47,7 @@ class ConfigShop(models.Model):
     aboutUs = models.TextField()
     address = models.CharField(max_length=100)
 
-    color = models.CharField(max_length=6,default="82981a")
+    color = models.CharField(max_length=7,default="#82981a")
 
 
     current = models.BooleanField(default=False)

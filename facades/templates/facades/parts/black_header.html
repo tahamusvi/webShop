@@ -202,6 +202,7 @@
                                 <li class="item-lead"><a href="{% url 'facades:contact' %}">ارتباط با {{site.fname}}</a></li>
                                 <li class="item-lead"><a href="{% url 'facades:FAQ' %}">سوالات متداول</a></li>
                                 <li class="item-lead"><a href="{% url 'facades:rules' %}">قوانین</a></li>
+                                {% if request.user.is_admin %}<li class="item-lead"><a href="{% url 'administratorship:config_dashboard' %}">پیکربندی سایت</a></li>{% endif %}
 
                             </ul><!-- End .menu-vertical -->
                         </nav><!-- End .side-nav -->

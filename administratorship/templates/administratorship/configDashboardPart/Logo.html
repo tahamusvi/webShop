@@ -1,0 +1,55 @@
+{% load static %}
+
+<style>
+    #tab-logo {
+        direction: rtl; /* راست به چپ */
+        text-align: right; /* راست‌چین کردن متن */
+    }
+
+    
+</style>
+
+
+
+<div class="tab-pane fade" id="tab-logo" role="tabpanel" aria-labelledby="tab-logo-link">
+    <form action="{% url 'administratorship:configshop_edit' %}" method="post" enctype="multipart/form-data"> 
+        {% csrf_token %}
+
+        {% if site.logo %}
+            <div>
+                <h4>لوگوی فعلی:</h4>
+                <img src="{{ site.logo.url }}" alt="لوگوی فعلی" style="max-height: 75; max-width: 75px; margin-bottom: 10px;">
+            </div>
+        {% else %}
+            <p>لوگوی فعلی وجود ندارد.</p>
+        {% endif %}
+
+        {% if site.black_logo %}
+            <div>
+                <h4>لوگوی مشکی فعلی:</h4>
+                <img src="{{ site.black_logo.url }}" alt="لوگوی مشکی فعلی" style="direction: ltr; text-align: left; max-height: 75; max-width: 75px; margin-bottom: 10px;">
+            </div>
+        {% else %}
+            <p>لوگوی مشکی فعلی وجود ندارد.</p>
+        {% endif %}
+
+
+        <br>
+
+
+        <div>
+             {{ config_shop_logo_form.logo }}
+        </div>
+
+        <div>
+            {{ config_shop_logo_form.black_logo.label_tag }} {{ config_shop_logo_form.black_logo }}
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn btn-outline-primary-2 float-right">
+            <span>ذخیره پیکربندی</span>
+            <i class="icon-long-arrow-left"></i>
+        </button>
+    </form>
+</div><!-- .End .tab-pane -->

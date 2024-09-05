@@ -13,4 +13,8 @@ urlpatterns = [
     path('dashboard/<int:address_id>/',dashboard,name="dashboard_id"),
     path('add_group_of_product/',add_group_of_product,name="add_group_of_product"),
     path('export/',export_products_to_excel,name="export"),
+
+    path('configshop/',config_dashboard,name="config_dashboard"),
+    path('configshop/edit/', configshop_edit, name='configshop_edit'),
+
 ]

@@ -1,0 +1,16 @@
+{% load static %}
+
+
+<div class="tab-pane fade" id="tab-add-config" role="tabpanel"
+                            aria-labelledby="tab-add-config-link">
+                            <form action="{% url 'administratorship:configshop_edit' %}" method="post"> {% csrf_token %}
+
+                                {{config_shop_form}}
+                                
+
+                                <button type="submit" class="btn btn-outline-primary-2 float-right">
+                                    <span>ذخیره پیکربندی</span>
+                                    <i class="icon-long-arrow-left"></i>
+                                </button>
+                            </form>
+                        </div><!-- .End .tab-pane -->
