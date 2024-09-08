@@ -10,7 +10,7 @@ from django.db import IntegrityError
 from django.db.models import Q
 from orders.models import Order
 from config.settings import SMS_PASSWORD
-from .forms import ConfigShopTextInformationForm
+from .forms import *
 from facades.models import ConfigShop
 #----------------------------------------------------------------------------------------------
 def configshop_edit(request):
@@ -45,7 +45,6 @@ def config_dashboard(request):
     Info['config_shop_form'] = ConfigShopTextInformationForm(instance=configshop)
     Info['config_shop_logo_form'] = ConfigShopLogoForm(instance=configshop)
     Info['config_shop_color_form'] = ConfigShopColorForm(instance=configshop)
-
 
 
     return render(request,'administratorship/configDashboard.html',Info)
