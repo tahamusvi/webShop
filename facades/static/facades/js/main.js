@@ -382,15 +382,16 @@ $(document).ready(function () {
         });
 
         owlProductGallery.owlCarousel({
-            loop: false,
+            loop: true,
             margin: 0,
             responsiveClass: true,
             nav: true,
             navText: ['<i class="icon-angle-right">', '<i class="icon-angle-left">'],
             dots: false,
             smartSpeed: 400,
-            autoplay: false,
-            autoplayTimeout: 15000,
+            autoplay: true,
+            autoplayHoverPause: true,
+            autoplayTimeout: 5000,
             responsive: {
                 0: {
                     items: 1
