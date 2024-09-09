@@ -79,6 +79,8 @@ messages_dict = {
     "too_address" : 'برای ثبت آدرس جدید از طریق داشبورد یکی از آدرس های ثبت شده را حذف کنید.',
     "admin_validation" : "بعد از تایید ادمین نظر شما ثبت خواهد شد",
     "change_send_way" : 'روش ارسال با موفقیت تغییر کرد.',
+    "exists_phone": 'این شماره تلفن قبلا ثبت نام کرده است.'
+
 
 }
 
@@ -252,12 +254,17 @@ def user_register(request):
         print("hello")
         if form.is_valid():
             cd = form.cleaned_data
+
+            if cd['password1'] and cd['password2'] and cd['password1'] != cd['password2']:
+                messages.error(request,messages_dict['error_password'] ,color_messages['error'])
+                return redirect('accounts:login')
+
             try:
                 validate_password(cd['password1'])
             except ValidationError as validation_error:
                 for message in validation_error:
                     if('This password is too short. It must contain at least 8 characters.' == message):
-                        messages.error(request, messages_dict['lentgh_error'],color_messages['error'])
+                        messages.error(request, messages_dict['error_password'],color_messages['error'])
                     if('This password is too common.' == message):
                         messages.error(request, messages_dict['common_error'],color_messages['error'])
                     if('This password is entirely numeric.' == message):
@@ -291,7 +298,19 @@ def user_register(request):
                 return redirect('accounts:check_phone')
         else:
             print(form.errors)
-            messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
+            error_text = f"{form.errors}".split("li>")[2]
+
+            if('User with this PhoneNumber already exists.' in error_text):
+                messages.error(request, messages_dict['exists_phone'],color_messages['error'])
+
+            if('User with this PhoneNumber already exists.' in error_text):
+                messages.error(request, messages_dict['lentgh_error'],color_messages['error'])
+
+            if('User with this PhoneNumber already exists.' in error_text):
+                messages.error(request, messages_dict['lentgh_error'],color_messages['error'])
+
+
+            # messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
     
     Loginform = UserLoginForm()
     Registerform = UserCreationForm()
