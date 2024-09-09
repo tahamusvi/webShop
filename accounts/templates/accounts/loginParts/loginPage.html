@@ -53,6 +53,13 @@
                                     <form action="{% url 'accounts:register' %}" method="post">{% csrf_token %}
 
                                         {{Registerform}}
+
+                                        <div class="form-group">
+
+                                            <button type="button" class="btn btn-outline-primary-2" onclick="togglePasswordVisibility()">
+                                            نمایش گذرواژه</button>
+                                        </div>
+
                                         
 
                                         <div class="form-footer">
@@ -71,6 +78,20 @@
                                     </form>
                                     
                                 </div><!-- .End .tab-pane -->
+
+                                <script>
+                                    function togglePasswordVisibility() {
+                                        var input = document.getElementById('id_password1');
+                                        var input2 = document.getElementById('id_password2');
+                                        if (input.type === "password") {
+                                            input.type = "text";
+                                            input2.type = "text";
+                                        } else {
+                                            input.type = "password";
+                                            input2.type = "password";
+                                        }
+                                    }
+                                </script>
                                 
 
                             </div><!-- End .tab-content -->
