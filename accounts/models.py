@@ -25,7 +25,7 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_active_code = models.BooleanField(default=False)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True,blank=True)
     profile = models.OneToOneField(ProfileUser,on_delete=models.SET_NULL,blank=True,null=True,related_name="user") 
     
 

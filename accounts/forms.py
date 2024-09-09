@@ -9,7 +9,7 @@ class UserLoginForm(forms.Form):
 class UserCreationForm(forms.ModelForm):
     phoneNumber = forms.CharField(label="شماره تلفن", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '۰۹۱۲۳۴۵۶۷۸۹'}))
     full_name = forms.CharField(label="نام شما", max_length=40, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'علی صالحی'}))
-    email = forms.EmailField(label="ایمیل", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'AliSalehi@gmail.com'}))
+    email = forms.EmailField(label="ایمیل", required=False,  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'AliSalehi@gmail.com'}))
     password1 = forms.CharField(label="گذرواژه", max_length=40, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}))
     password2 = forms.CharField(label="تکرار گذرواژه", max_length=40, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}))
 
