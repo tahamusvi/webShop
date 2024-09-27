@@ -19,16 +19,13 @@ def configshop_edit(request):
 
     if request.method == 'POST':
         form = ConfigShopForm(request.POST, request.FILES)
-        print(form)
         if form.is_valid():
-            print(form.cleaned_data)
             for field in form.cleaned_data:
                 value = form.cleaned_data[field]
                 if not isinstance(value, bool) and value != None and len(value) > 0 :
                     setattr(configshop, field, value)
 
             configshop.save()
-            print("ok boy!")
             return redirect('facades:home')
 
         

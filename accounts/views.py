@@ -251,7 +251,6 @@ def user_register(request):
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        print("hello")
         if form.is_valid():
             cd = form.cleaned_data
 

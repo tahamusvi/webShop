@@ -19,6 +19,7 @@ messages_dict = {
 def InformationsForTemplate(request):
     Info = {}
     # Categories
+    allCategoriesForMobile = Category.objects.filter(is_sub=False) 
     allCategories = Category.objects.filter(is_sub=False)[:7]
     #wishlist
     wishlistAmount = 0
@@ -43,7 +44,8 @@ def InformationsForTemplate(request):
 
 
     Info = {'allCategories': allCategories,'wishlistAmount':wishlistAmount,'cart':cart,'form':form
-    ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,'site':site}
+    ,'Loginform':Loginform,'Registerform':Registerform,"brands":brands,"shops":shops,'site':site
+    ,'allCategoriesForMobile':allCategoriesForMobile}
     Info["banners"] = banner.filter()
     Info["footer_articles"] = Article.objects.all()[::-1][0:3]
 
