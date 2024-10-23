@@ -18,8 +18,9 @@ messages_dict = {
 #----------------------------------------------------------------------------------------------
 def InformationsForTemplate(request,auth=True):
     if auth:
-        if not request.user.is_active_code:
-            logout(request)
+        if(request.user.is_authenticated):
+            if not request.user.is_active_code:
+                logout(request)
     Info = {}
     # Categories
     allCategoriesForMobile = Category.objects.filter(is_sub=False) 

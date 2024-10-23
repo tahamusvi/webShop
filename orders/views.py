@@ -165,7 +165,7 @@ def verify(request):
 
         pattern_values = {
             "username": str(user.full_name),
-            "order-code": str(order.get_order_number())
+            "code": str(order.get_order_number())
         }
 
         message_id = sms.send_pattern(
@@ -182,7 +182,7 @@ def verify(request):
             "71hahbwqbep8qw5",    # pattern code
             "+983000505",      # originator
             f"98{ADMIN_PHONE[1:]}",  # recipient
-            {"order-code": str(order.get_order_number()), },  # pattern values
+            {"code": str(order.get_order_number()), },  # pattern values
         )
 
         print(f"message sended to admin id: {message_id}")

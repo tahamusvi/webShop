@@ -22,8 +22,10 @@ from facades.models import ConfigShop, shop, banner, Survey, FAQGroup
 #------------------------------------------------------------------------------------------------
 def InformationsForTemplate(request,auth=True):
     if auth:
-        if not request.user.is_active_code:
-            logout(request)
+        if(request.user.is_authenticated):
+            if not request.user.is_active_code:
+                logout(request)
+        
     Info = {}
     # Categories
     allCategories = Category.objects.filter(is_sub=False)[:7]
@@ -105,32 +107,36 @@ def user_login(request):
         form = UserLoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            if user.is_active_code:
-                user = authenticate(request,phoneNumber=cd['phoneNumber'],password=cd['password'])
-                if user is not None:
+            
+            user = authenticate(request,phoneNumber=cd['phoneNumber'],password=cd['password'])
+            
+            if user is not None:
+                if user.is_active_code:
                     login(request,user)
                     messages.success(request,messages_dict["login"],color_messages['success'])
                     if 'next' in request.GET:
                         return redirect(request.GET['next'])
                     else:
                         return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
-                messages.error(request,messages_dict['login_error'],color_messages['error'])
-            else:
-                user.code = random.randint(10000, 99999)
-                user.save()
-                pattern_values = {
-                    "verification-code": str(user.code),
-                }
+                else:
+                    user.code = random.randint(10000, 99999)
+                    user.save()
+                    pattern_values = {
+                        "verification-code": str(user.code),
+                    }
 
-                message_id = sms.send_pattern(
-                    "e1kymd6lq288ve4",    # pattern code
-                    "+983000505",      # originator
-                    f"98{user.phoneNumber[1:]}",  # recipient
-                    pattern_values,  # pattern values
-                )
-                messages.error(request,messages_dict['send_sms'],color_messages['success'])
+                    message_id = sms.send_pattern(
+                        "e1kymd6lq288ve4",    # pattern code
+                        "+983000505",      # originator
+                        f"98{user.phoneNumber[1:]}",  # recipient
+                        pattern_values,  # pattern values
+                    )
+                    messages.error(request,messages_dict['send_sms'],color_messages['success'])
 
-                return redirect('accounts:check_phone')
+                    return redirect('accounts:check_phone')
+            
+            messages.error(request,messages_dict['login_error'],color_messages['error'])
+
 
     Loginform = UserLoginForm()
     Registerform = UserCreationForm()
