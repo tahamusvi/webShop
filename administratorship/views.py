@@ -310,7 +310,7 @@ def export_products_to_excel(reqeust):
         sheet[f"B{row_num}"] = product.name
         sheet[f"C{row_num}"] = product.En
         sheet[f"D{row_num}"] = ",".join([str(category) for category in product.category.all()])
-        sheet[f"E{row_num}"] = product.brand.name
+        sheet[f"E{row_num}"] = product.brand.name if product.brand else ""
         sheet[f"F{row_num}"] = product.price
         sheet[f"G{row_num}"] = product.warehouse
         sheet[f"H{row_num}"] = product.product_barcode

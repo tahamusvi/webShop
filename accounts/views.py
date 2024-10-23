@@ -20,7 +20,10 @@ from stuff.models import Category,Brand
 from cart.cart import Cart
 from facades.models import ConfigShop, shop, banner, Survey, FAQGroup
 #------------------------------------------------------------------------------------------------
-def InformationsForTemplate(request):
+def InformationsForTemplate(request,auth=True):
+    if auth:
+        if not request.user.is_active_code:
+            logout(request)
     Info = {}
     # Categories
     allCategories = Category.objects.filter(is_sub=False)[:7]
@@ -79,7 +82,8 @@ messages_dict = {
     "too_address" : 'برای ثبت آدرس جدید از طریق داشبورد یکی از آدرس های ثبت شده را حذف کنید.',
     "admin_validation" : "بعد از تایید ادمین نظر شما ثبت خواهد شد",
     "change_send_way" : 'روش ارسال با موفقیت تغییر کرد.',
-    "exists_phone": 'این شماره تلفن قبلا ثبت نام کرده است.'
+    "exists_phone": 'این شماره تلفن قبلا ثبت نام کرده است.',
+    "send_sms": 'کد اعتبارسنجی ارسال شد.',
 
 
 }
@@ -95,20 +99,38 @@ color_messages = {
 EMAIL_PORT_SSL = 465
 #------------------------------------------------------------------------------------------------
 def user_login(request):
+    sms = Client(SMS_PASSWORD)
+
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(request,phoneNumber=cd['phoneNumber'],password=cd['password'])
-            if user is not None:
-                login(request,user)
-                messages.success(request,messages_dict["login"],color_messages['success'])
-                if 'next' in request.GET:
-                    return redirect(request.GET['next'])
-                else:
-                    return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
-            else:
+            if user.is_active_code:
+                user = authenticate(request,phoneNumber=cd['phoneNumber'],password=cd['password'])
+                if user is not None:
+                    login(request,user)
+                    messages.success(request,messages_dict["login"],color_messages['success'])
+                    if 'next' in request.GET:
+                        return redirect(request.GET['next'])
+                    else:
+                        return redirect(request.META.get('HTTP_REFERER')) if(request.META.get('HTTP_REFERER')) else redirect('facades:home')
                 messages.error(request,messages_dict['login_error'],color_messages['error'])
+            else:
+                user.code = random.randint(10000, 99999)
+                user.save()
+                pattern_values = {
+                    "verification-code": str(user.code),
+                }
+
+                message_id = sms.send_pattern(
+                    "e1kymd6lq288ve4",    # pattern code
+                    "+983000505",      # originator
+                    f"98{user.phoneNumber[1:]}",  # recipient
+                    pattern_values,  # pattern values
+                )
+                messages.error(request,messages_dict['send_sms'],color_messages['success'])
+
+                return redirect('accounts:check_phone')
 
     Loginform = UserLoginForm()
     Registerform = UserCreationForm()
@@ -130,6 +152,8 @@ def profile(request):
     return render(request, 'facades/dashboard.html', {'profileForm': profileForm})
 #------------------------------------------------------------------------------------------------
 def forgotPasswordWithPhone(request):
+    sms = Client(SMS_PASSWORD)
+
     if request.method == 'POST':
         ForgotProfile = ForgotPasswordForm(request.POST)
 
@@ -138,6 +162,16 @@ def forgotPasswordWithPhone(request):
             user = User.objects.get(phoneNumber=cd['phoneNumber'])
             user.code = random.randint(10000, 99999)
             user.save()
+            pattern_values = {
+                "verification-code": str(user.code),
+            }
+
+            message_id = sms.send_pattern(
+                "e1kymd6lq288ve4",    # pattern code
+                "+983000505",      # originator
+                f"98{user.phoneNumber[1:]}",  # recipient
+                pattern_values,  # pattern values
+            )
             messages.success(request, messages_dict['forgot'],color_messages['gray'])
             return redirect("accounts:CheckCodeForgot",user.phoneNumber)
     else:
@@ -338,7 +372,7 @@ def check_phone(request):
             messages.error(request, messages_dict['sign_up_error'], color_messages['error'])
     
     CheckPhoneForms = CheckPhoneForm()
-    Info = InformationsForTemplate(request)
+    Info = InformationsForTemplate(request,False)
     Info['Form']= CheckPhoneForms
     return render(request, 'accounts/checkPhone.html', Info)
 #------------------------------------------------------------------------------------------------

@@ -9,14 +9,17 @@ from cart.cart import Cart
 from accounts.views import color_messages
 from accounts.forms import UserLoginForm,UserCreationForm, UserChangeForm, AddressForm
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.contrib.auth import logout
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "send_success" : "سوالت رو با موفقیت ارسال شد.",
     "problem_in_send" : 'مشکلی تو ارسال سوالت پیش اومد.',
 }
 #----------------------------------------------------------------------------------------------
-def InformationsForTemplate(request):
+def InformationsForTemplate(request,auth=True):
+    if auth:
+        if not request.user.is_active_code:
+            logout(request)
     Info = {}
     # Categories
     allCategoriesForMobile = Category.objects.filter(is_sub=False) 

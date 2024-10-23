@@ -10,6 +10,7 @@ from config.settings import merchant
 from facades.models import ConfigShop
 from stuff.models import Product
 from config.settings import SMS_PASSWORD,ADMIN_PHONE
+from ippanel import Client
 #------------------------------------------------------------------------------------------------
 messages_dict = {
     "not_order" : 'جنین سفارشی در دیتابیس وجود ندارد.',
