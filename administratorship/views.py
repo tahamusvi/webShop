@@ -12,6 +12,7 @@ from orders.models import Order
 from config.settings import SMS_PASSWORD
 from .forms import *
 from facades.models import ConfigShop
+from ippanel import Client
 #----------------------------------------------------------------------------------------------
 def configshop_edit(request):
     Info = InformationsForTemplate(request)
