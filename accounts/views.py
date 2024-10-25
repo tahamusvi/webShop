@@ -264,6 +264,7 @@ def ChangePasswordForgot(request,phoneNumber):
                     user.set_password(cd['password1'])
                     user.can_change_password = False
                     user.save()
+                    login(request,user)
                     messages.error(request, messages_dict['password_changed'],color_messages['success'])
                     messages.error(request, messages_dict['login_again'],color_messages['gray'])         
                     return redirect('facades:home')
