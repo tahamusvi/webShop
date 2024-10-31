@@ -7,7 +7,7 @@ certifi==2023.7.22
 charset-normalizer==3.2.0
 Django==4.2.3
 django-admin-honeypot-updated-2021==1.2.0
-django-cleanup==8.0.0
+django-cleanup==9.0.0
 django-ipware==5.0.1
 et-xmlfile==1.1.0
 frozenlist==1.4.0
