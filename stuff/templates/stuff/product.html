@@ -82,6 +82,15 @@
 
                           <div class="col-md-6">
                               <div class="product-details">
+                              <meta name="product_id" content="{{product.id}}">
+                              <meta name="product_name" content="{{product.name}}">
+                              <meta name="product_price" content="{{product.price}}">
+                              <meta name="product_old_price" content="{{product.discounted_price_int}}">
+                              <meta name="availability" content="{% if product.available %}instock{% else %}outofstock{% endif %}">
+                              <meta property="og:image" content="https://vahdat-sh.ir/{{product.image.url}}">
+
+
+
                                   <h1 class="product-title">{{product.name}}</h1>
                                   <!-- End .product-title -->
 
