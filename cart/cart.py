@@ -25,7 +25,7 @@ class Cart:
         
 
         if product_cart_id not in self.cart:
-            self.cart[product_cart_id] = {'quantity':0,'price':str(product.discounted_price_int),'color':color,
+            self.cart[product_cart_id] = {'quantity':0,'price':str(product.price),'color':color,
             'color_per':Color.objects.get(en=color).name,'id':product_cart_id,'product_id':str(product.id)}
         self.cart[product_cart_id]['quantity'] += quantity
         
